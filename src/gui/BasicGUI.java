@@ -20,57 +20,60 @@ public class BasicGUI extends JFrame {
 	private JLabel display;
 	private Register model;
 	private JLabel time;
-	
-	public BasicGUI(String frameName,Register model){
+
+	public BasicGUI(String frameName, Register model) {
 		super(frameName);
 		this.model = model;
-		this.setLayout(new GridLayout(2,1));
-		
-		//DISPLAY
-		JPanel displayPanel = new JPanel(new GridLayout(2,1));
+		this.setLayout(new GridLayout(2, 1));
+
+		// DISPLAY
+		JPanel displayPanel = new JPanel(new GridLayout(2, 1));
 		this.display = new JLabel("Display");
 		this.time = new JLabel("");
 		displayPanel.add(display);
 		displayPanel.add(time);
-		
-		
-		//BUTTONS
+
+		// BUTTONS
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(1,2));
-		
+		buttonPanel.setLayout(new GridLayout(1, 2));
+
 		JButton startButton = new JButton("Start");
 		startButton.addActionListener(new StartButtonListener());
 		JButton finishButton = new JButton("Finish");
 		finishButton.addActionListener(new FinishButtonListener());
-		
-		if(frameName.equals("Start")) buttonPanel.add(startButton);
-		else buttonPanel.add(finishButton);
-		
-		//ADDS PANELS TO FRAME
+
+		if (frameName.equals("Start"))
+			buttonPanel.add(startButton);
+		else
+			buttonPanel.add(finishButton);
+
+		// ADDS PANELS TO FRAME
 		this.add(displayPanel);
 		this.add(buttonPanel);
-		
-		//FINISHING TOUCHES
+
+		// FINISHING TOUCHES
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.pack();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
-	
-	class StartButtonListener implements ActionListener{
+
+	class StartButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			if(model.startRace()){
-				Date startTime = new Date();
-				display.setText(startTime.toString());
-				time.setText("");
-			}
+
+			Date startTime = model.startRace();
+			display.setText(startTime.toString());
+			time.setText("");
+
 		}
 	}
-	class FinishButtonListener implements ActionListener{
+
+	class FinishButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			Date finishTime = new Date();
 			display.setText(finishTime.toString());
-			time.setText("Total Time Elapsed: " + String.valueOf(model.stopRace()) + "s       (Fakevärde)");
+			time.setText("Total Time Elapsed: "
+					+ String.valueOf(model.stopRace()) + "s       (Fakevärde)");
 		}
 	}
 }
