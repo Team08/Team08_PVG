@@ -23,7 +23,7 @@ public class Sorter {
 	private boolean writeResultFile() {
 		try {
 			// Create file
-			FileWriter fstream = new FileWriter("Result");
+			FileWriter fstream = new FileWriter("Result.txt");
 			BufferedWriter out = new BufferedWriter(fstream);
 			
 
@@ -33,7 +33,7 @@ public class Sorter {
 			
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
-			return false;
+			System.exit(1);
 		}
 		return true;
 	}
