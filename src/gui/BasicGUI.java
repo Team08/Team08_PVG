@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import main.Race;
 
 public class BasicGUI extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private static int WIDTH = 500;
 	private static int HEIGHT = 250;
 	private JLabel display;
@@ -41,8 +42,8 @@ public class BasicGUI extends JFrame {
 		JButton finishButton = new JButton("Finish");
 		finishButton.addActionListener(new FinishButtonListener());
 		
-		buttonPanel.add(startButton);
-		buttonPanel.add(finishButton);
+		if(frameName.equals("Start")) buttonPanel.add(startButton);
+		else buttonPanel.add(finishButton);
 		
 		//ADDS PANELS TO FRAME
 		this.add(displayPanel);
