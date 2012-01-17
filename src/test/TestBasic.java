@@ -3,7 +3,6 @@ package test;
 import static org.junit.Assert.*;
 import main.Driver;
 import main.Race;
-
 import org.junit.*;
 
 public class TestBasic {
