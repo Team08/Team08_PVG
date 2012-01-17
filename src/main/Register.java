@@ -10,10 +10,10 @@ public class Register {
 		this.driver = driver;
 	}
 
-	public Date startRace() {
+	private Date writeToFile(String name) {
 		try {
 			// Create file
-			FileWriter fstream = new FileWriter("out.txt");
+			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
 			Date startTime = new Date();
 
@@ -28,7 +28,11 @@ public class Register {
 
 	}
 
-	public double stopRace() {
-		return 1;
+	public Date startRace() {
+		return writeToFile("Start.txt");
+	}
+	
+	public Date stopRace() {
+		return writeToFile("Stop.txt");
 	}
 }

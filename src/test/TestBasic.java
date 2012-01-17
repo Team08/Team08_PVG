@@ -14,6 +14,6 @@ private Register register;
 	
 	@Test public void  testThatRaceTimeIsGreaterThanZero(){
 		register.startRace();
-		assertTrue("Time was not greater than zero", register.stopRace()>0);
+		assertTrue("Time was not greater than zero", register.stopRace().getTime()>0);
 	}
 }
