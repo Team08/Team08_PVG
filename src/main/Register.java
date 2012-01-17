@@ -1,9 +1,9 @@
 package main;
 
-public class Race {
+public class Register {
 	private Driver driver;
 
-	public Race(Driver driver){
+	public Register(Driver driver){
 		this.driver = driver;
 	}
 	
