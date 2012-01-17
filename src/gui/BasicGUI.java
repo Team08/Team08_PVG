@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -59,15 +60,17 @@ public class BasicGUI extends JFrame {
 	class StartButtonListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
 			if(model.startRace()){
-				display.setText("Started");
+				Date startTime = new Date();
+				display.setText(startTime.toString());
 				time.setText("");
 			}
 		}
 	}
 	class FinishButtonListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {
-			display.setText("Finished");
-			time.setText("Time " + String.valueOf(model.stopRace()));
+			Date finishTime = new Date();
+			display.setText(finishTime.toString());
+			time.setText("Total Time Elapsed: " + String.valueOf(model.stopRace()) + "s       (Fakevärde)");
 		}
 	}
 }
