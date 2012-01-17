@@ -10,17 +10,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.Race;
+import main.Register;
 
 public class BasicGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static int WIDTH = 500;
 	private static int HEIGHT = 250;
 	private JLabel display;
-	private Race model;
+	private Register model;
 	private JLabel time;
 	
-	public BasicGUI(String frameName,Race model){
+	public BasicGUI(String frameName,Register model){
 		super(frameName);
 		this.model = model;
 		this.setLayout(new GridLayout(2,1));
