@@ -24,7 +24,7 @@ public class TestDriver {
 	public void testAddStartTime() {
 		String time = "01.01.01";
 		driver.addStartTime(time);
-		assertEquals("01.01.01", driver.startTime());
+		assertEquals("01.01.01", driver.startTime().get(0));
 		
 	}
 	
