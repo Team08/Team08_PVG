@@ -47,10 +47,9 @@ private Sorter sorter;
 	
 	@Test public void testThatResultFileCreates(){
 		 
-		Sorter.main( new String[0]);
+		Sorter.main(new String[0]);
 		File f = new File("Result.txt");
 		assertTrue("The Resultfile was not found", f.exists()); 
 	}
-	
 	
 }
