@@ -27,15 +27,12 @@ public class Sorter {
 			// Create file
 			FileWriter fstream = new FileWriter("Result.txt");
 			BufferedWriter out = new BufferedWriter(fstream);
-			/*
-			 * treeMap
-			 * for(Driver driver:treeMap.keySet)
-			 * 
-			 * 
-			 * 
-			 */
+			
 
-			out.write("This is the results");
+			out.write("StartNr; Totaltid; Starttid; Måltid\n");
+			for (Integer i: register.keySet()){
+				out.write(i + "; --.--.--; "+ register.get(i).startTime() +"; " + register.get(i).finishTime() + "\n");
+			}
 			// Close the output stream
 			out.close();
 			

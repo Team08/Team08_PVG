@@ -8,6 +8,8 @@ import main.Sorter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.File;
 import java.util.Scanner;
 public class TestSorter extends Sorter {
 
@@ -34,9 +36,22 @@ public class TestSorter extends Sorter {
 	@Test
 	public void testFirstRow() throws Exception{
 		writeResultFile();
-		Scanner sc = new Scanner("Result.txt");
-		
+		Scanner sc = new Scanner(new File("Result.txt"));
 		assertEquals("StartNr; Totaltid; Starttid; Måltid", sc.nextLine());
+		sc.close();
+	}
+	
+	@Test
+	public void testOneDriverResult() throws Exception{
+		Integer i = new Integer(1);
+		String start = "12.00.00";
+		super.addStartTime(i, start);
+		String finish = "13.23.34";
+		super.addFinishTime(i, finish);
+		writeResultFile();
+		Scanner sc = new Scanner(new File("Result.txt"));
+		sc.nextLine();
+		assertEquals("1; --.--.--; 12.00.00; 13.23.34", sc.nextLine());
 		sc.close();
 	}
 	
