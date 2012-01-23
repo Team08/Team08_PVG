@@ -44,8 +44,11 @@ public class Sorter {
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("StartNr; Totaltid; Starttid; Måltid\n");
+
 			for (Integer i: register.keySet()){
-				out.write(i + "; --.--.--; "+ register.get(i).startTime() +"; " + register.get(i).finishTime() + "\n");
+				
+				out.write(checkError(i, register.get(i).totalTime(), register.get(i).startTime(), register.get(i).finishTime()));
+
 			}
 			// Close the output stream
 			out.close();
@@ -56,6 +59,7 @@ public class Sorter {
 		}
 		return true;
 	}
+
 	
 	public void readStartFile(String filename) throws FileNotFoundException{
 		File file = new File(filename);
@@ -70,6 +74,46 @@ public class Sorter {
 		} catch (FileNotFoundException e) {// Catch exception if any
 			throw new FileNotFoundException();
 		}
+	}
+
+
+	private String checkError(int i, String totalTime, String startTime, String finishTime) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(i + "; " + totalTime + "; ");
+		if (startTime == null) {
+			sb.append("Start?; ");
+		} else {
+			sb.append(startTime + "; ");
+		}
+		if (finishTime == null) {
+			sb.append("Slut?");
+		} else {
+			sb.append(finishTime);
+		}
+		sb.append("\n");
+		return sb.toString();
+	}
+
+	public void readFile(String filename) {
+		try {
+			FileInputStream fstream = new FileInputStream(filename);
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String strLine;
+
+			// Read File Line By Line
+			while ((strLine = br.readLine()) != null) {
+				// Print the content on the console
+				System.out.println(strLine);
+			}
+			// Close the input stream
+			in.close();
+		} catch (Exception e) {// Catch exception if any
+			System.err.println("Error: " + e.getMessage());
+		}
+
+
 	}
 	
 	public void readFinishFile(String filename) throws FileNotFoundException{
@@ -116,7 +160,6 @@ public class Sorter {
 		driver.addFinishTime(time);
 		register.put(startNumber, driver);
 	}
-
 
 	private Driver getDriver(Integer key) {
 		return register.containsKey(key) ? register.get(key) : new Driver();
