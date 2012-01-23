@@ -52,7 +52,7 @@ public class Sorter {
 			// Create file
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
-			out.write("StartNr; Namn; Totaltid; Starttid; Måltid\n");
+			out.write("StartNr; Namn; TotalTid; StartTider; Måltider\n");
 			Driver tDriver;
 
 			for (Integer i : register.keySet()) {
@@ -77,7 +77,7 @@ public class Sorter {
 		if (register.get(i).getName()==null){
 			sb.append("Namn?; ");
 		}else{
-			sb.append(register.get(i).getName());
+			sb.append(register.get(i).getName() + "; ");
 		}
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
