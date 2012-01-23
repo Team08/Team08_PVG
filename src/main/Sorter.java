@@ -94,27 +94,6 @@ public class Sorter {
 		return sb.toString();
 	}
 
-	public void readFile(String filename) {
-		try {
-			FileInputStream fstream = new FileInputStream(filename);
-			// Get the object of DataInputStream
-			DataInputStream in = new DataInputStream(fstream);
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			String strLine;
-
-			// Read File Line By Line
-			while ((strLine = br.readLine()) != null) {
-				// Print the content on the console
-				System.out.println(strLine);
-			}
-			// Close the input stream
-			in.close();
-		} catch (Exception e) {// Catch exception if any
-			System.err.println("Error: " + e.getMessage());
-		}
-
-
-	}
 	
 	public void readFinishFile() throws FileNotFoundException{
 		File file = new File(stopFile);

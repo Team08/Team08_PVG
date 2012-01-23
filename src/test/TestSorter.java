@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class TestSorter extends Sorter {
@@ -130,6 +131,7 @@ public class TestSorter extends Sorter {
 		assertEquals("1; --.--.--; 12.00.00; Slut?", sc.nextLine());
 		sc.close();
 	}
+
 	@Test
 	public void testNoStartTime() throws Exception {
 		Integer i = new Integer(1);
@@ -141,4 +143,24 @@ public class TestSorter extends Sorter {
 		assertEquals("1; --.--.--; Start?; 12.00.00", sc.nextLine());
 		sc.close();
 	}
+	
+	@Test(expected = FileNotFoundException.class)
+	public void TestReadStartFileThrowsNoSuchFileException() throws FileNotFoundException{
+		try {
+		super.readStartFile();
+		} catch (FileNotFoundException e) {
+			throw e;
+		}
+	}
+	
+	@Test(expected = FileNotFoundException.class)
+	public void TestReadFinishFileThrowsNoSuchFileException() throws FileNotFoundException{
+		try {
+		super.readFinishFile();
+		} catch (FileNotFoundException e) {
+			throw e;
+		}
+	}
+		
+		
 }
