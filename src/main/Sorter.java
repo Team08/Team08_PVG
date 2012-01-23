@@ -96,7 +96,7 @@ public class Sorter {
 		if (register.get(i).getName()==null){
 			sb.append("Namn?; ");
 		}else{
-			sb.append(register.get(i).getName());
+			sb.append(register.get(i).getName() + "; ");
 		}
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
