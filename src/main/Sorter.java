@@ -17,7 +17,7 @@ public class Sorter {
 	public Sorter(String startFileName, String stopFileName, String nameFile) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
-		rnf = new ReadNameFile(nameFile);
+		rnf = new ReadNameFile(this, nameFile);
 		register = new TreeMap<Integer, Driver>();	
 	}
 
@@ -48,7 +48,7 @@ public class Sorter {
 	protected void writeResultFile(String name) {
 		try {
 			// Names are put in the TreeMap from the name file
-			rnf.readFile(register);
+			rnf.readFile();
 			// Create file
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
@@ -68,22 +68,6 @@ public class Sorter {
 		}
 	}
 
-	public void readStartFile() throws FileNotFoundException {
-		File file = new File(startFile);
-		Scanner scan;
-		try {
-			scan = new Scanner(file);
-			String line;
-			while (scan.hasNextLine()) {
-				line = scan.nextLine();
-				String[] str = line.split("; "); 
-				Integer startNumber = Integer.parseInt(str[0]);
-				addStartTime(startNumber, str[1]);
-			}
-		} catch (FileNotFoundException e) {// Catch exception if any
-			throw new FileNotFoundException();
-		}
-	}
 
 	private String checkError(int i, List<String> startTime, List<String> finishTime) {
 
@@ -130,30 +114,6 @@ public class Sorter {
 		return sb.toString();
 	}
 
-	public void readFinishFile() throws FileNotFoundException {
-		File file = new File(stopFile);
-		Scanner scan;
-		try {
-			scan = new Scanner(file);
-			scan.useDelimiter(";");
-			String line;
-			while (scan.hasNextLine()) {
-				line = scan.nextLine();
-				String[] str = line.split("; "); 
-				Integer startNumber = Integer.parseInt(str[0]);
-				addFinishTime(startNumber, str[1]);
-				}
-
-			while (scan.hasNext()) {
-				Integer startNumber = Integer.parseInt(scan.next().trim());
-				addFinishTime(startNumber, scan.next().trim());
-			}
-
-		} catch (FileNotFoundException e) {// Catch exception if any
-			throw new FileNotFoundException();
-		}
-	}
-
 	/**
 	 * Inserts a new start time for the specified start number The current start
 	 * time is replaced by the new start time (time)
@@ -186,6 +146,16 @@ public class Sorter {
 
 	private Driver getDriver(Integer key) {
 		return register.containsKey(key) ? register.get(key) : new Driver();
+	}
+
+	public void addName(Integer startNumber, String name) {
+		Driver driver = getDriver(startNumber);
+		driver.setName(name);
+		register.put(startNumber, driver);	
+	}
+	
+	public int size() {
+		return register.size();
 	}
 
 }

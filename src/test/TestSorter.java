@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 import main.Driver;
+import main.ReadFinishFile;
+import main.ReadStartFile;
 import main.Sorter;
 
 import org.junit.After;
@@ -14,12 +16,15 @@ import java.util.Scanner;
 
 public class TestSorter extends Sorter {
 
+
 	public TestSorter() {
 		super("", "", null);
+
 	}
 
 	@Before
 	public void setUp() {
+
 	}
 
 	@After
@@ -166,25 +171,6 @@ public class TestSorter extends Sorter {
 		}
 	}
 
-	@Test(expected = FileNotFoundException.class)
-	public void TestReadStartFileThrowsNoSuchFileException()
-			throws FileNotFoundException {
-		try {
-			super.readStartFile();
-		} catch (FileNotFoundException e) {
-			throw e;
-		}
-	}
-
-	@Test(expected = FileNotFoundException.class)
-	public void TestReadFinishFileThrowsNoSuchFileException()
-			throws FileNotFoundException {
-		try {
-			super.readFinishFile();
-		} catch (FileNotFoundException e) {
-			throw e;
-		}
-	}
 
 	@Test
 	public void testMultipleStartTimes() {
