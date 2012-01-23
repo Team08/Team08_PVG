@@ -79,12 +79,12 @@ public class Sorter {
 		}
 	}
 
-	private String checkError(int i, List<String> startTime, String finishTime) {
+	private String checkError(int i, List<String> startTime, List<String> finishTime) {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(i + "; ");
 
-		if (startTime.size() == 0 || finishTime == null) {
+		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
 		} else {
 			sb.append(register.get(i).totalTime() + "; ");
@@ -97,11 +97,11 @@ public class Sorter {
 			sb.append(startTime.get(0) + "; ");
 
 		}
-		if (finishTime == null) {
+		if (finishTime.size()==0) {
 			sb.append("Slut?");
 
 		} else {
-			sb.append(finishTime);
+			sb.append(finishTime.get(0));
 
 		}
 		if (startTime.size() > 1) {
@@ -111,6 +111,15 @@ public class Sorter {
 			for (int j = 1; j <= (startTime.size() - 1); j++) {
 
 				sb.append(" " + startTime.get(j));
+			}
+		}
+		if (finishTime.size() > 1) {
+
+			sb.append("; Flera måltider?");
+
+			for (int j = 1; j <= (finishTime.size() - 1); j++) {
+
+				sb.append(" " + finishTime.get(j));
 			}
 		}
 		sb.append("\n");

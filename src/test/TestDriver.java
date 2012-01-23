@@ -32,7 +32,7 @@ public class TestDriver {
 	public void testAddFinishTime() {
 		String time = "00.00.00";
 		driver.addFinishTime(time);
-		assertEquals("00.00.00", driver.finishTime());
+		assertEquals("00.00.00", driver.finishTime().get(0));
 		
 	}
 	
