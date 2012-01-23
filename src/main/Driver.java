@@ -52,17 +52,9 @@ public class Driver {
 	}
 
 	public String totalTime() {
-<<<<<<< HEAD
 		String[] temp = startTime.get(0).split("\\.");
-		int hour = Integer.parseInt(temp[0]);
-		int minute = Integer.parseInt(temp[1]);
-		int second = Integer.parseInt(temp[2]);
-		int start = 3600 * hour + 60 * minute + second;
-=======
-
-		String[] temp = startTime.split("\\.");
 		int start = parseTime(temp);
->>>>>>> 8e7cae3a8da8a588a71e9458a254d4266e4303d7
+
 
 		temp = finishTime.split("\\.");
 		int finish = parseTime(temp);
