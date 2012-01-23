@@ -1,6 +1,7 @@
 package main;
 
 import java.io.*;
+import java.util.List;
 import java.util.TreeMap;
 
 public class Sorter {
@@ -45,8 +46,8 @@ public class Sorter {
 			out.write("StartNr; Totaltid; Starttid; Måltid\n");
 
 			for (Integer i: register.keySet()){
-				
-				out.write(checkError(i, register.get(i).totalTime(), register.get(i).startTime(), register.get(i).finishTime()));
+				System.out.println(8);
+				out.write(checkError(i, register.get(i).startTime(), register.get(i).finishTime()));
 
 			}
 			// Close the output stream
@@ -59,18 +60,40 @@ public class Sorter {
 		return true;
 	}
 
-	private String checkError(int i, String totalTime, String startTime, String finishTime) {
+	private String checkError(int i, List<String> startTime, String finishTime) {
+	
 		StringBuilder sb = new StringBuilder();
-		sb.append(i + "; " + totalTime + "; ");
-		if (startTime == null) {
+		sb.append(i + "; ");
+
+	
+		if(startTime.size()==0 || finishTime==null){
+			sb.append("--.--.--; ");
+		}else{
+			sb.append(register.get(i).totalTime()+"; ");
+			
+		}
+		if (startTime.size()==0) {
 			sb.append("Start?; ");
+		
 		} else {
-			sb.append(startTime + "; ");
+			sb.append(startTime.get(0) + "; ");
+		
 		}
 		if (finishTime == null) {
 			sb.append("Slut?");
+			
 		} else {
 			sb.append(finishTime);
+			
+		}
+		if(startTime.size()>1){
+			
+			sb.append("; Flera starttider?");
+		
+			for(int j=1; j<=(startTime.size()-1);j++){
+				
+				sb.append(" " + startTime.get(j));
+			}
 		}
 		sb.append("\n");
 		return sb.toString();

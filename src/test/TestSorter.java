@@ -82,7 +82,7 @@ public class TestSorter extends Sorter {
 		String time = "01.01.01";
 		super.addStartTime(i, time);
 		Driver driver = register.get(i);
-		assertEquals("01.01.01", driver.startTime());
+		assertEquals("01.01.01", driver.startTime().get(0));
 	}
 
 	@Test
@@ -103,7 +103,7 @@ public class TestSorter extends Sorter {
 		super.addStartTime(i, startTime);
 		super.addFinishTime(i, finishTime);
 		Driver driver = register.get(i);
-		assertEquals("Wrong start time", "01.01.01", driver.startTime());
+		assertEquals("Wrong start time", "01.01.01", driver.startTime().get(0));
 		assertEquals("Wrong finish time", "02.02.02", driver.finishTime());
 	}
 
@@ -115,18 +115,23 @@ public class TestSorter extends Sorter {
 		super.addFinishTime(i, finishTime);
 		super.addStartTime(i, startTime);
 		Driver driver = register.get(i);
-		assertEquals("Wrong start time", "01.01.01", driver.startTime());
+		assertEquals("Wrong start time", "01.01.01", driver.startTime().get(0));
 		assertEquals("Wrong finish time", "02.02.02", driver.finishTime());
 	}
 
 	@Test
 	public void testNoFinishTime() throws Exception {
 		Integer i = new Integer(1);
+		System.out.println("1");
 		String start = "12.00.00";
+		System.out.println("1");
 		super.addStartTime(i, start);
+		System.out.println("1");
 		writeResultFile("Result.txt");
+		System.out.println("1");
 		Scanner sc = new Scanner(new File("Result.txt"));
 		sc.nextLine();
+		System.out.println("1");
 		assertEquals("1; --.--.--; 12.00.00; Slut?", sc.nextLine());
 		sc.close();
 	}
@@ -139,6 +144,21 @@ public class TestSorter extends Sorter {
 		Scanner sc = new Scanner(new File("Result.txt"));
 		sc.nextLine();
 		assertEquals("1; --.--.--; Start?; 12.00.00", sc.nextLine());
+		sc.close();
+	}
+	@Test
+	public void testMultipleStartTimes() throws Exception {
+		Integer i = new Integer(1);
+		String start = "12.00.00";
+		super.addStartTime(i, start);
+		start = "12.00.30";
+		super.addStartTime(i, start);
+		String finish = "13.00.00";
+		super.addFinishTime(i, finish);
+		writeResultFile("Result.txt");
+		Scanner sc = new Scanner(new File("Result.txt"));
+		sc.nextLine();
+		assertEquals("1; 1.00.00; 12.00.00; 13.00.00; Flera starttider? 12.00.30", sc.nextLine());
 		sc.close();
 	}
 }
