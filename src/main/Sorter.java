@@ -69,10 +69,12 @@ public class Sorter {
 		Scanner scan;
 		try {
 			scan = new Scanner(file);
-			scan.useDelimiter(";");
-			while (scan.hasNext()) {
-				Integer startNumber = Integer.parseInt(scan.next().trim());
-				addStartTime(startNumber, scan.next().trim());
+			String line;
+			while (scan.hasNextLine()) {
+				line = scan.nextLine();
+				String[] str = line.split("; "); 
+				Integer startNumber = Integer.parseInt(str[0]);
+				addStartTime(startNumber, str[1]);
 			}
 		} catch (FileNotFoundException e) {// Catch exception if any
 			throw new FileNotFoundException();
@@ -136,10 +138,19 @@ public class Sorter {
 		try {
 			scan = new Scanner(file);
 			scan.useDelimiter(";");
+			String line;
+			while (scan.hasNextLine()) {
+				line = scan.nextLine();
+				String[] str = line.split("; "); 
+				Integer startNumber = Integer.parseInt(str[0]);
+				addFinishTime(startNumber, str[1]);
+				}
+
 			while (scan.hasNext()) {
 				Integer startNumber = Integer.parseInt(scan.next().trim());
 				addFinishTime(startNumber, scan.next().trim());
 			}
+
 		} catch (FileNotFoundException e) {// Catch exception if any
 			throw new FileNotFoundException();
 		}
