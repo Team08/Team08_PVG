@@ -31,8 +31,6 @@ public class TestReadFile extends Sorter {
 					line = scan.nextLine();
 					String[] str = line.split("; ");
 					Integer startNumber = Integer.parseInt(str[0]);
-					System.out.println(j.toString() + " "
-							+ register.get(j).startTime().get(0));
 					assertEquals(startNumber.toString(), j.toString());
 					assertEquals(str[1], register.get(j).startTime().get(0));
 
