@@ -1,9 +1,7 @@
 package main;
 
-
 import java.io.*;
 import java.util.TreeMap;
-
 
 public class Sorter {
 	protected TreeMap<Integer, Driver> register;
@@ -58,39 +56,37 @@ public class Sorter {
 	}
 
 	/**
-	 * Inserts a new start time for the specified start number
-	 * The current start time is replaced by the new start time (time)
-	 * @param startNumber The start number of the driver
-	 * @param time The start time
+	 * Inserts a new start time for the specified start number The current start
+	 * time is replaced by the new start time (time)
+	 * 
+	 * @param startNumber
+	 *            The start number of the driver
+	 * @param time
+	 *            The start time
 	 */
 	public void addStartTime(Integer startNumber, String time) {
-			if (register.containsKey(startNumber)) {
-				Driver driver = register.get(startNumber);
-				driver.addStartTime(time);
-			} else {
-				Driver driver = new Driver();
-				driver.addStartTime(time);
-				register.put(startNumber, driver);
-			}
+		Driver driver = getDriver(startNumber);
+		driver.addStartTime(time);
+		register.put(startNumber, driver);
 	}
 
 	/**
-	 * Inserts a new finish time for the specified start number
-	 * The current finish time is replaced by the new finish time (time)
-	 * @param startNumber The start number of the driver
-	 * @param time The finish time
+	 * Inserts a new finish time for the specified start number The current
+	 * finish time is replaced by the new finish time (time)
+	 * 
+	 * @param startNumber
+	 *            The start number of the driver
+	 * @param time
+	 *            The finish time
 	 */
 	public void addFinishTime(Integer startNumber, String time) {
-		if(register.containsKey(startNumber)) {
-			Driver driver = register.get(startNumber);
-			driver.addFinishTime(time);
-		} else {
-			Driver driver = new Driver();
-			driver.addFinishTime(time);
-			register.put(startNumber, driver);
-		}
-			
+		Driver driver = getDriver(startNumber);
+		driver.addFinishTime(time);
+		register.put(startNumber, driver);
 	}
-	
-	
+
+	private Driver getDriver(Integer key) {
+		return register.containsKey(key) ? register.get(key) : new Driver();
+	}
+
 }
