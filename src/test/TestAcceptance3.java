@@ -17,7 +17,7 @@ import org.junit.Test;
 
 public class TestAcceptance3 extends Sorter {
 	public TestAcceptance3() {
-		super("src/acceptanstest3/starttider.txt", "src/acceptanstest3/maltider.txt", "null.txt");
+		super("src/acceptanstest3/starttider.test", "src/acceptanstest3/maltider.test", "src/acceptanstest3/null.test");
 	}
 
 	@Before public void setup(){
@@ -32,7 +32,7 @@ public class TestAcceptance3 extends Sorter {
 	
 	@Test public void testThatResultatEqualsResultat(){
 		try {
-			File file1 = new File("src/acceptanstest3/resultat.txt");
+			File file1 = new File("src/acceptanstest3/resultat.test");
 			File file2 = new File("src/acceptanstest3/result.test");
 			Scanner scan1 = new Scanner(file1);
 			Scanner scan2 = new Scanner(file2);
