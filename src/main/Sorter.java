@@ -1,10 +1,12 @@
 package main;
 
 import java.io.*;
+import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Sorter {
 	protected TreeMap<Integer, Driver> register;
+
 	private String stopFile;
 	private String startFile;
 
@@ -42,8 +44,11 @@ public class Sorter {
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("StartNr; Totaltid; Starttid; Måltid\n");
+
 			for (Integer i: register.keySet()){
-				out.write(i + "; --.--.--; "+ register.get(i).startTime() +"; " + register.get(i).finishTime() + "\n");
+				
+				out.write(checkError(i, register.get(i).totalTime(), register.get(i).startTime(), register.get(i).finishTime()));
+
 			}
 			// Close the output stream
 			out.close();
@@ -54,6 +59,56 @@ public class Sorter {
 		}
 		return true;
 	}
+
+	
+	public void readStartFile() throws FileNotFoundException{
+		File file = new File(startFile);
+		Scanner scan;
+		try {
+			scan = new Scanner(file);
+			scan.useDelimiter(";");
+			while (scan.hasNext()) {
+				Integer startNumber = Integer.parseInt(scan.next().trim());
+				addStartTime(startNumber, scan.next().trim());
+			}
+		} catch (FileNotFoundException e) {// Catch exception if any
+			throw new FileNotFoundException();
+		}
+	}
+
+
+	private String checkError(int i, String totalTime, String startTime, String finishTime) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(i + "; " + totalTime + "; ");
+		if (startTime == null) {
+			sb.append("Start?; ");
+		} else {
+			sb.append(startTime + "; ");
+		}
+		if (finishTime == null) {
+			sb.append("Slut?");
+		} else {
+			sb.append(finishTime);
+		}
+		sb.append("\n");
+		return sb.toString();
+	}
+
+	
+	public void readFinishFile() throws FileNotFoundException{
+		File file = new File(stopFile);
+		Scanner scan;
+		try {
+			scan = new Scanner(file);
+			scan.useDelimiter(";");
+			while (scan.hasNext()) {
+				Integer startNumber = Integer.parseInt(scan.next().trim());
+				addFinishTime(startNumber, scan.next().trim());
+				}
+		} catch (FileNotFoundException e) {// Catch exception if any
+			throw new FileNotFoundException();
+	}
+}
 
 	/**
 	 * Inserts a new start time for the specified start number The current start
