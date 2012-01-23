@@ -20,12 +20,18 @@ public class Sorter {
 		sorter.writeResultFile();
 	}
 
-	private boolean writeResultFile() {
+	protected boolean writeResultFile() {
 		try {
 			// Create file
 			FileWriter fstream = new FileWriter("Result.txt");
 			BufferedWriter out = new BufferedWriter(fstream);
-			
+			/*
+			 * treeMap
+			 * for(Driver driver:treeMap.keySet)
+			 * 
+			 * 
+			 * 
+			 */
 
 			out.write("This is the results");
 			// Close the output stream
