@@ -52,7 +52,7 @@ public class Sorter {
 			// Create file
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
-			out.write("StartNr; Namn; Totaltid; Starttid; Måltid\n");
+			out.write("StartNr; Namn; TotalTid; StartTider; Måltider\n");
 			Driver tDriver;
 
 			for (Integer i : register.keySet()) {
