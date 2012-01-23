@@ -61,8 +61,8 @@ public class Sorter {
 	}
 
 	
-	public void readStartFile(String filename) throws FileNotFoundException{
-		File file = new File(filename);
+	public void readStartFile() throws FileNotFoundException{
+		File file = new File(startFile);
 		Scanner scan;
 		try {
 			scan = new Scanner(file);
@@ -116,8 +116,8 @@ public class Sorter {
 
 	}
 	
-	public void readFinishFile(String filename) throws FileNotFoundException{
-		File file = new File(filename);
+	public void readFinishFile() throws FileNotFoundException{
+		File file = new File(stopFile);
 		Scanner scan;
 		try {
 			scan = new Scanner(file);
