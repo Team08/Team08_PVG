@@ -3,16 +3,18 @@ package main;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.TreeMap;
 
 
 public class Sorter {
-
+	protected TreeMap<Integer, Driver> register;
 	private String stopFile;
 	private String startFile;
 
 	public Sorter(String startFileName, String stopFileName) {
 		this.startFile = startFileName;
 		this.stopFile = startFileName;
+		register = new TreeMap<Integer, Driver>();
 	}
 	
 	public static void main(String[] args) {
@@ -43,4 +45,12 @@ public class Sorter {
 		}
 		return true;
 	}
+
+	public void addStartTime(Integer startNumber, String time) {
+			Driver driver = new Driver();
+			driver.addStartTime(time);
+			register.put(startNumber, driver);
+	}
+	
+	
 }
