@@ -40,7 +40,7 @@ public class TestSorter extends Sorter {
 		try {
 			writeResultFile("Result.txt");
 			Scanner sc = new Scanner(new File("Result.txt"));
-			assertEquals("StartNr; Namn; Totaltid; Starttid; Måltid", sc.nextLine());
+			assertEquals("StartNr; Namn; TotalTid; StartTider; Måltider", sc.nextLine());
 			sc.close();
 		} catch (FileNotFoundException e) {
 
