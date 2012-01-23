@@ -1,8 +1,11 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Driver {
 	private String name;
-	private String startTime;
+	private List<String> startTime = new ArrayList<String>();
 	private String finishTime;
 
 	public Driver() {
@@ -25,11 +28,11 @@ public class Driver {
 	 *            The start time
 	 */
 	public void addStartTime(String time) {
-		startTime = time;
+		startTime.add(time);
 
 	}
 
-	public String startTime() {
+	public List<String> startTime() {
 		return startTime;
 	}
 
@@ -49,9 +52,9 @@ public class Driver {
 	}
 
 	public String totalTime() {
-
-		String[] temp = startTime.split("\\.");
+		String[] temp = startTime.get(0).split("\\.");
 		int start = parseTime(temp);
+
 
 		temp = finishTime.split("\\.");
 		int finish = parseTime(temp);
@@ -86,5 +89,9 @@ public class Driver {
 		int second = Integer.parseInt(temp[2]);
 		int start = 3600 * hour + 60 * minute + second;
 		return start;
+	}
+
+	public void setName(String name) {
+		this.name = name;		
 	}
 }

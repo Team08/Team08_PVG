@@ -1,7 +1,11 @@
 package main;
 
 import java.io.*;
+
+import java.util.List;
+
 import java.util.Scanner;
+
 import java.util.TreeMap;
 
 public class Sorter {
@@ -45,9 +49,9 @@ public class Sorter {
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("StartNr; Totaltid; Starttid; Måltid\n");
 
-			for (Integer i: register.keySet()){
-				
-				out.write(checkError(i, register.get(i).totalTime(), register.get(i).startTime(), register.get(i).finishTime()));
+			for (Integer i : register.keySet()) {
+				out.write(checkError(i, register.get(i).startTime(), register
+						.get(i).finishTime()));
 
 			}
 			// Close the output stream
@@ -60,45 +64,63 @@ public class Sorter {
 		return true;
 	}
 
-	
-	public void readStartFile() throws FileNotFoundException{
+	public void readStartFile() throws FileNotFoundException {
 		File file = new File(startFile);
 		Scanner scan;
 		try {
 			scan = new Scanner(file);
-			//scan.useDelimiter(";");
 			String line;
 			while (scan.hasNextLine()) {
 				line = scan.nextLine();
 				String[] str = line.split("; "); 
 				Integer startNumber = Integer.parseInt(str[0]);
-				addFinishTime(startNumber, str[1]);
+				addStartTime(startNumber, str[1]);
+				System.out.println(startNumber.toString() + " " + str[1]);
 			}
 		} catch (FileNotFoundException e) {// Catch exception if any
 			throw new FileNotFoundException();
 		}
 	}
 
+	private String checkError(int i, List<String> startTime, String finishTime) {
 
-	private String checkError(int i, String totalTime, String startTime, String finishTime) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(i + "; " + totalTime + "; ");
-		if (startTime == null) {
-			sb.append("Start?; ");
+		sb.append(i + "; ");
+
+		if (startTime.size() == 0 || finishTime == null) {
+			sb.append("--.--.--; ");
 		} else {
-			sb.append(startTime + "; ");
+			sb.append(register.get(i).totalTime() + "; ");
+
+		}
+		if (startTime.size() == 0) {
+			sb.append("Start?; ");
+
+		} else {
+			sb.append(startTime.get(0) + "; ");
+
 		}
 		if (finishTime == null) {
 			sb.append("Slut?");
+
 		} else {
 			sb.append(finishTime);
+
+		}
+		if (startTime.size() > 1) {
+
+			sb.append("; Flera starttider?");
+
+			for (int j = 1; j <= (startTime.size() - 1); j++) {
+
+				sb.append(" " + startTime.get(j));
+			}
 		}
 		sb.append("\n");
 		return sb.toString();
 	}
 
-	
-	public void readFinishFile() throws FileNotFoundException{
+	public void readFinishFile() throws FileNotFoundException {
 		File file = new File(stopFile);
 		Scanner scan;
 		try {
@@ -111,10 +133,16 @@ public class Sorter {
 				Integer startNumber = Integer.parseInt(str[0]);
 				addFinishTime(startNumber, str[1]);
 				}
+
+			while (scan.hasNext()) {
+				Integer startNumber = Integer.parseInt(scan.next().trim());
+				addFinishTime(startNumber, scan.next().trim());
+			}
+
 		} catch (FileNotFoundException e) {// Catch exception if any
 			throw new FileNotFoundException();
+		}
 	}
-}
 
 	/**
 	 * Inserts a new start time for the specified start number The current start
