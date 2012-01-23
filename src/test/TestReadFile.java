@@ -19,29 +19,25 @@ public class TestReadFile extends Sorter {
 	public void TestReadStartFile() {
 		try {
 			super.readStartFile();
+			File file = new File("TestStart.test");
 			Set<Integer> driverSet = register.keySet();
 			Scanner scan;
-			String line;
-			File file = new File("TestStart.test");
-			Iterator<Integer> itr = driverSet.iterator();
+			String[] str;
 			try {
+				String line;
 				scan = new Scanner(file);
+				Iterator<Integer> itr = driverSet.iterator();
 				for (int i = 0; i < driverSet.size(); i++) {
-					Integer j = itr.next();
 					line = scan.nextLine();
-					String[] str = line.split("; ");
+					str = line.split("; ");
+					Integer j = itr.next();
 					Integer startNumber = Integer.parseInt(str[0]);
-					System.out.println(j.toString() + " "
-							+ register.get(j).startTime().get(0));
 					assertEquals(startNumber.toString(), j.toString());
 					assertEquals(str[1], register.get(j).startTime().get(0));
-
 				}
 
 			} catch (FileNotFoundException e) {
-				//
 			}
-
 		} catch (FileNotFoundException e) {
 		}
 	}
@@ -50,24 +46,23 @@ public class TestReadFile extends Sorter {
 	public void TestReadFinishFile() {
 		try {
 			super.readFinishFile();
+			File file = new File("TestStart.test");
 			Set<Integer> driverSet = register.keySet();
 			Scanner scan;
-			File file = new File("TestStart.test");
+			String[] str;
 			try {
 				String line;
 				scan = new Scanner(file);
 				Iterator<Integer> itr = driverSet.iterator();
-				for (int i = 0; i < register.size(); i++) {
+				for (int i = 0; i < driverSet.size(); i++) {
 					line = scan.nextLine();
-					String[] str = line.split("; ");
-					Integer startNumber = Integer.parseInt(str[0]);
+					str = line.split("; ");
 					Integer j = itr.next();
+					Integer startNumber = Integer.parseInt(str[0]);
 					assertEquals(startNumber.toString(), j.toString());
 					assertEquals(str[1], register.get(j).finishTime().get(0));
-
 				}
 			} catch (FileNotFoundException e) {
-				//
 			}
 
 		} catch (FileNotFoundException e) {
