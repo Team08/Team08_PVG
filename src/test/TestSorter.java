@@ -62,5 +62,17 @@ public class TestSorter extends Sorter {
 		assertEquals("Wrong start time", "01.01.01", driver.startTime());
 		assertEquals("Wrong finish time", "02.02.02", driver.finishTime());
 	}
+	
+	@Test
+	public void testAddFirstFinishThenStartTimes() {
+		Integer i = new Integer(1);
+		String startTime = "01.01.01";
+		String finishTime = "02.02.02";
+		super.addFinishTime(i, finishTime);
+		super.addStartTime(i, startTime);
+		Driver driver = register.get(i);
+		assertEquals("Wrong start time", "01.01.01", driver.startTime());
+		assertEquals("Wrong finish time", "02.02.02", driver.finishTime());
+	}
 
 }
