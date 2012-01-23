@@ -41,10 +41,8 @@ public class Sorter {
 	protected boolean writeResultFile(String name) {
 		try {
 			// Create file
-			
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
-
 			out.write("StartNr; Totaltid; Starttid; Måltid\n");
 			for (Integer i: register.keySet()){
 				out.write(i + "; --.--.--; "+ register.get(i).startTime() +"; " + register.get(i).finishTime() + "\n");

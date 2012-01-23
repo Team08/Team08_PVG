@@ -34,10 +34,9 @@ public class TestSorter extends Sorter {
 	}
 
 	@Test
-	public void testFirstRow() throws Exception{
+	public void testFirstRowAndFileWasCreated() throws Exception{
 		writeResultFile("Result.txt");
-		Scanner sc = new Scanner(new File("Result.txt"
-				));
+		Scanner sc = new Scanner(new File("Result.txt"));
 		assertEquals("StartNr; Totaltid; Starttid; Måltid", sc.nextLine());
 		sc.close();
 	}
@@ -75,6 +74,7 @@ public class TestSorter extends Sorter {
 		assertEquals("2; --.--.--; 12.01.00; 13.15.16", sc.nextLine());
 		sc.close();
 	}
+	
 	
 	@Test
 	public void testAddStartTime() {
