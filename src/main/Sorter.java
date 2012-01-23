@@ -10,7 +10,6 @@ import java.util.TreeMap;
 
 public class Sorter {
 	protected TreeMap<Integer, Driver> register;
-
 	private String stopFile;
 	private String startFile;
 	private ReadNameFile rnf;
@@ -19,8 +18,7 @@ public class Sorter {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
 		rnf = new ReadNameFile(nameFile);
-		register = new TreeMap<Integer, Driver>();
-		
+		register = new TreeMap<Integer, Driver>();	
 	}
 
 	public static void main(String[] args) {
@@ -47,19 +45,19 @@ public class Sorter {
 		sorter.writeResultFile(result);
 	}
 
-	protected boolean writeResultFile(String name) {
+	protected void writeResultFile(String name) {
 		try {
 			// Names are put in the TreeMap from the name file
 			rnf.readFile(register);
 			// Create file
-			
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("StartNr; Namn; Totaltid; Starttid; Måltid\n");
+			Driver tDriver;
 
 			for (Integer i : register.keySet()) {
-				out.write(checkError(i, register.get(i).startTime(), register
-						.get(i).finishTime()));
+				tDriver = register.get(i);
+				out.write(checkError(i, tDriver.startTime(), tDriver.finishTime()));
 			}
 			// Close the output stream
 			out.close();
@@ -68,7 +66,6 @@ public class Sorter {
 			System.err.println("Error: " + e.getMessage());
 			System.exit(1);
 		}
-		return true;
 	}
 
 	public void readStartFile() throws FileNotFoundException {
