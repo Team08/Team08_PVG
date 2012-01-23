@@ -39,5 +39,16 @@ public class TestSorter extends Sorter {
 		Driver driver = register.get(i);
 		assertEquals(driver.startTime(), "01.01.01");
 	}
+	
+	@Test
+	public void testAddFinishTime() {
+		Integer i = new Integer(1);
+		String time = "02.02.00";
+		super.addFinishTime(i, time);
+		Driver driver = register.get(i);
+		assertEquals(driver.finishTime(), "02.02.00");
+		
+		
+	}
 
 }

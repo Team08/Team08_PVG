@@ -21,10 +21,18 @@ public class TestDriver {
 	}
 	
 	@Test
-	public void testAddStartTimeToList() {
+	public void testAddStartTime() {
 		String time = "01.01.01";
 		driver.addStartTime(time);
 		assertEquals(driver.startTime(), "01.01.01");
+		
+	}
+	
+	@Test
+	public void testAddFinishTime() {
+		String time = "00.00.00";
+		driver.addFinishTime(time);
+		assertEquals(driver.finishTime(), "00.00.00");
 		
 	}
 
