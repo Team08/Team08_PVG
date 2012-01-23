@@ -48,15 +48,17 @@ public class TestReadFile extends Sorter {
 			Set<Integer> driverSet = register.keySet();
 			Scanner scan;
 			File file = new File("TestStart.test");
+			String line;
 			for (int i = 0; i < register.size(); i++) {
 				try {
 					scan = new Scanner(file);
-					scan.useDelimiter(";");
+					line = scan.nextLine();
+					String[] str = line.split("; "); 
+					Integer startNumber = Integer.parseInt(str[0]);
 					Iterator<Integer> itr = driverSet.iterator();
 					Integer j = itr.next();
-					assertEquals(scan.next().trim(), j.toString());
-					assertEquals(scan.next().trim(), register.get(j)
-							.finishTime());
+					assertEquals(startNumber, j.toString());
+					assertEquals(str[1], register.get(j).finishTime());
 				} catch (FileNotFoundException e) {// Catch exception if any
 					//
 
