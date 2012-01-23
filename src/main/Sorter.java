@@ -1,6 +1,7 @@
 package main;
 
 import java.io.*;
+import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Sorter {
@@ -56,26 +57,35 @@ public class Sorter {
 		return true;
 	}
 	
-	public void readFile(String filename){
-		try{
-			  FileInputStream fstream = new FileInputStream(filename);
-			  // Get the object of DataInputStream
-			  DataInputStream in = new DataInputStream(fstream);
-			  BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			  String strLine;
-			  
-			  //Read File Line By Line
-			  while ((strLine = br.readLine()) != null)   {
-			  // Print the content on the console
-			  System.out.println (strLine);
-			  }
-			  //Close the input stream
-			  in.close();
-			    }catch (Exception e){//Catch exception if any
-			  System.err.println("Error: " + e.getMessage());
-			  }
-		
+	public void readStartFile(String filename) throws FileNotFoundException{
+		File file = new File(filename);
+		Scanner scan;
+		try {
+			scan = new Scanner(file);
+			scan.useDelimiter(";");
+			while (scan.hasNext()) {
+				Integer startNumber = Integer.parseInt(scan.next().trim());
+				addStartTime(startNumber, scan.next().trim());
+			}
+		} catch (FileNotFoundException e) {// Catch exception if any
+			throw new FileNotFoundException();
+		}
 	}
+	
+	public void readFinishFile(String filename) throws FileNotFoundException{
+		File file = new File(filename);
+		Scanner scan;
+		try {
+			scan = new Scanner(file);
+			scan.useDelimiter(";");
+			while (scan.hasNext()) {
+				Integer startNumber = Integer.parseInt(scan.next().trim());
+				addFinishTime(startNumber, scan.next().trim());
+				}
+		} catch (FileNotFoundException e) {// Catch exception if any
+			throw new FileNotFoundException();
+	}
+}
 
 	/**
 	 * Inserts a new start time for the specified start number The current start
