@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import main.Register;
 
@@ -20,36 +24,29 @@ public class BasicGUI extends JFrame {
 	private JLabel display;
 	private Register model;
 	private JLabel time;
+	private JLabel latest;
+	private JTextArea textArea;
+	private JTextField driverID;
+	private JButton registerButton;
+	private JPanel displayPanel;
+	private JPanel buttonPanel;
 
 	public BasicGUI(String frameName, Register model) {
 		super(frameName);
 		this.model = model;
 		this.setLayout(new GridLayout(2, 1));
+		init();
 
-		// DISPLAY
-		JPanel displayPanel = new JPanel(new GridLayout(2, 1));
-		this.display = new JLabel("Display");
-		this.time = new JLabel("");
-		displayPanel.add(display);
-		displayPanel.add(time);
+		addComponents();
 
-		// BUTTONS
-		JPanel buttonPanel = new JPanel();
+		setupLayout();
+	}
+
+	private void setupLayout() {
 		buttonPanel.setLayout(new GridLayout(1, 2));
 
-		JButton startButton = new JButton("Start");
-		startButton.addActionListener(new StartButtonListener());
-		JButton finishButton = new JButton("Finish");
-		finishButton.addActionListener(new FinishButtonListener());
-
-		if (frameName.equals("Start"))
-			buttonPanel.add(startButton);
-		else
-			buttonPanel.add(finishButton);
-
-		// ADDS PANELS TO FRAME
-		this.add(displayPanel);
-		this.add(buttonPanel);
+		// add register
+		registerButton.addActionListener(new RegisterButtonListener());
 
 		// FINISHING TOUCHES
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -58,22 +55,51 @@ public class BasicGUI extends JFrame {
 		this.setVisible(true);
 	}
 
-	class StartButtonListener implements ActionListener {
+	// Add components
+	private void addComponents() {
+		displayPanel.add(latest);
+		displayPanel.add(textArea);
+
+		buttonPanel.add(driverID);
+		buttonPanel.add(registerButton);
+
+		// ADDS PANELS TO FRAME
+		this.add(buttonPanel);
+		this.add(displayPanel);
+	}
+
+	// Initialize the componnets
+	private void init() {
+		displayPanel = new JPanel(new GridLayout(2, 1));
+		buttonPanel = new JPanel();
+		latest = new JLabel("Senast registerade tider");
+		textArea = new JTextArea(10, 30);
+		driverID = new JTextField("#");
+		registerButton = new JButton("Start");
+		setFonts();
+	}
+
+	// Sets the bigger fonts for all components
+	private void setFonts() {
+		Font newTextFont = new Font(textArea.getFont().getName(), textArea
+				.getFont().getStyle(), 50);
+		Font newSmallTextFont = new Font(textArea.getFont().getName(), textArea
+				.getFont().getStyle(), 70);
+		Font newBigTextFont = new Font(textArea.getFont().getName(), textArea
+				.getFont().getStyle(), 20);
+		textArea.setFont(newSmallTextFont);
+		registerButton.setFont(newTextFont);
+		driverID.setFont(newBigTextFont);
+		latest.setFont(newTextFont);
+	}
+
+	class RegisterButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 
 			Date startTime = model.startRace();
-			display.setText(startTime.toString());
-			time.setText("");
+			textArea.setText(startTime.toString());
 
 		}
 	}
 
-	class FinishButtonListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-			Date finishTime = new Date();
-			display.setText(finishTime.toString());
-			time.setText("Total Time Elapsed: "
-					+ String.valueOf(model.stopRace()) + "s       (Fakevärde)");
-		}
-	}
 }

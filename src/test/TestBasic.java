@@ -45,11 +45,5 @@ private Sorter sorter;
 		assertTrue("The Stopfile was not found", f.exists()); 
 	}
 	
-	@Test public void testThatResultFileCreates(){
-		 
-		Sorter.main(new String[0]);
-		File f = new File("Result.txt");
-		assertTrue("The Resultfile was not found", f.exists()); 
-	}
 	
 }

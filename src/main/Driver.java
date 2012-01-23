@@ -62,23 +62,22 @@ public class Driver {
 		second = Integer.parseInt(temp[2]);
 		int finish = 3600 * hour + 60 * minute + second;
 		int totalInt = finish - start;
-		
+
 		String min;
-		if(((totalInt % 3600) / 60) < 10){
+		if (((totalInt % 3600) / 60) < 10) {
 			min = "0" + (totalInt % 3600) / 60;
-		}else{
+		} else {
 			min = Integer.toString((totalInt % 3600) / 60);
 		}
+
 		String sec;
-		if(((totalInt % 3600) % 60) < 10){
+		if (((totalInt % 3600) % 60) < 10) {
 			sec = "0" + (totalInt % 3600) % 60;
-		}else{
+		} else {
 			sec = Integer.toString((totalInt % 3600) % 60);
 		}
-		
-		
-		String total = totalInt / 3600 + "." + min + "."
-				+ sec;
+
+		String total = totalInt / 3600 + "." + min + "." + sec;
 
 		return total;
 	}
