@@ -26,7 +26,8 @@ public class ReadNameFile {
 	 * @param tm
 	 *            The TreeMap with Drivers to put names in
 	 */
-	public void readFile(TreeMap<Integer, Driver> tm) {
+	public void readFile(TreeMap<Integer, Driver> tm) throws IOException{
+		if (fileName != null) {
 		try {
 			Scanner scanner = new Scanner(new File(fileName));
 			if (scanner.hasNextLine()) {
@@ -48,7 +49,11 @@ public class ReadNameFile {
 			}
 		} catch (IOException e) {
 			System.err.println("Error: " + e.getMessage());
+			throw new IOException();
 		}
 
+	} else {
+		return;
+	}
 	}
 }
