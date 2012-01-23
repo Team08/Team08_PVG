@@ -165,4 +165,24 @@ public class TestSorter extends Sorter {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test(expected = FileNotFoundException.class)
+	public void TestReadStartFileThrowsNoSuchFileException() throws FileNotFoundException{
+		try {
+		super.readStartFile();
+		} catch (FileNotFoundException e) {
+			throw e;
+		}
+	}
+	
+	@Test(expected = FileNotFoundException.class)
+	public void TestReadFinishFileThrowsNoSuchFileException() throws FileNotFoundException{
+		try {
+		super.readFinishFile();
+		} catch (FileNotFoundException e) {
+			throw e;
+		}
+	}
+		
+		
 }
