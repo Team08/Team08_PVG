@@ -6,7 +6,7 @@ import java.util.List;
 public class Driver {
 	private String name;
 	private List<String> startTime = new ArrayList<String>();
-	private String finishTime;
+	private List<String> finishTime = new ArrayList<String>();;
 
 	public Driver() {
 
@@ -36,7 +36,7 @@ public class Driver {
 		return startTime;
 	}
 
-	public String finishTime() {
+	public List<String> finishTime() {
 		return finishTime;
 	}
 
@@ -47,7 +47,7 @@ public class Driver {
 	 * @param time
 	 */
 	public void addFinishTime(String time) {
-		finishTime = time;
+		finishTime.add(time);
 
 	}
 
@@ -56,7 +56,7 @@ public class Driver {
 		int start = parseTime(temp);
 
 
-		temp = finishTime.split("\\.");
+		temp = finishTime.get(0).split("\\.");
 		int finish = parseTime(temp);
 
 		int totalInt = finish - start;

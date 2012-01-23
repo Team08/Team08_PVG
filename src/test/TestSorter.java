@@ -106,7 +106,7 @@ public class TestSorter extends Sorter {
 		String time = "02.02.00";
 		super.addFinishTime(i, time);
 		Driver driver = register.get(i);
-		assertEquals("02.02.00", driver.finishTime());
+		assertEquals("02.02.00", driver.finishTime().get(0));
 
 	}
 
@@ -119,7 +119,7 @@ public class TestSorter extends Sorter {
 		super.addFinishTime(i, finishTime);
 		Driver driver = register.get(i);
 		assertEquals("Wrong start time", "01.01.01", driver.startTime().get(0));
-		assertEquals("Wrong finish time", "02.02.02", driver.finishTime());
+		assertEquals("Wrong finish time", "02.02.02", driver.finishTime().get(0));
 	}
 
 	@Test
@@ -131,7 +131,7 @@ public class TestSorter extends Sorter {
 		super.addStartTime(i, startTime);
 		Driver driver = register.get(i);
 		assertEquals("Wrong start time", "01.01.01", driver.startTime().get(0));
-		assertEquals("Wrong finish time", "02.02.02", driver.finishTime());
+		assertEquals("Wrong finish time", "02.02.02", driver.finishTime().get(0));
 	}
 
 	@Test
@@ -187,7 +187,7 @@ public class TestSorter extends Sorter {
 	}
 
 	@Test
-	public void testMultipleStartTimes() throws Exception {
+	public void testMultipleStartTimes() {
 		try {
 			Integer i = new Integer(1);
 			String start = "12.00.00";
@@ -209,6 +209,26 @@ public class TestSorter extends Sorter {
 	}
 	
 	
-	
+	@Test
+	public void testMultipleFinishTimes() throws Exception {
+		try {
+			Integer i = new Integer(1);
+			String start = "12.00.00";
+			super.addStartTime(i, start);
+			String finish = "13.00.00";
+			super.addFinishTime(i, finish);
+			finish = "13.00.30";
+			super.addFinishTime(i, finish);
+			writeResultFile("Result.txt");
+			Scanner sc = new Scanner(new File("Result.txt"));
+			sc.nextLine();
+			assertEquals(
+					"1; 1.00.00; 12.00.00; 13.00.00; Flera måltider? 13.00.30",
+					sc.nextLine());
+			sc.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
