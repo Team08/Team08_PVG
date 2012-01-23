@@ -17,6 +17,11 @@ public class Driver {
 		return name;
 	}
 
+	/**
+	 * Inserts a new start time
+	 * The current start time is replaced by the new time
+	 * @param time The start time
+	 */
 	public void addStartTime(String time) {
 		startTime = time;
 		
@@ -30,6 +35,11 @@ public class Driver {
 		return finishTime;
 	}
 
+	/**
+	 * Inserts a new finish time
+	 * The current finish time is replaced by the new time
+	 * @param time
+	 */
 	public void addFinishTime(String time) {
 		finishTime = time;
 		

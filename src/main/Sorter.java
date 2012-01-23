@@ -59,6 +59,12 @@ public class Sorter {
 		return true;
 	}
 
+	/**
+	 * Inserts a new start time for the specified start number
+	 * The current start time is replaced by the new start time (time)
+	 * @param startNumber The start number of the driver
+	 * @param time The start time
+	 */
 	public void addStartTime(Integer startNumber, String time) {
 			if (register.containsKey(startNumber)) {
 				Driver driver = register.get(startNumber);
@@ -70,6 +76,12 @@ public class Sorter {
 			}
 	}
 
+	/**
+	 * Inserts a new finish time for the specified start number
+	 * The current finish time is replaced by the new finish time (time)
+	 * @param startNumber The start number of the driver
+	 * @param time The finish time
+	 */
 	public void addFinishTime(Integer startNumber, String time) {
 		if(register.containsKey(startNumber)) {
 			Driver driver = register.get(startNumber);
