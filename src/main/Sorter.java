@@ -23,7 +23,6 @@ public class Sorter {
 
 	public static void main(String[] args) {
 		// Choose Files
-
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				System.in));
 		String start = "defaultStart";
@@ -92,7 +91,7 @@ public class Sorter {
 		sb.append(i + "; ");
 		String totalCheck = "";
 		if (register.get(i).getName()==null){
-			sb.append("--.--.--; ");
+			sb.append("Namn?; ");
 		}else{
 			sb.append(register.get(i).getName());
 		}
