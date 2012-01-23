@@ -45,6 +45,7 @@ public class Sorter {
 	protected boolean writeResultFile(String name) {
 		try {
 			// Create file
+			
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("StartNr; Namn; Totaltid; Starttid; Måltid\n");
@@ -85,6 +86,7 @@ public class Sorter {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(i + "; ");
+		String totalCheck = "";
 		if (register.get(i).getName()==null){
 			sb.append("--.--.--; ");
 		}else{
@@ -94,40 +96,33 @@ public class Sorter {
 			sb.append("--.--.--; ");
 		} else {
 			sb.append(register.get(i).totalTime() + "; ");
-
+			if(register.get(i).totalTime().compareTo("0.15.00")<0){
+				totalCheck = "; Omöjlig Totaltid?";
+			}
 		}
 		if (startTime.size() == 0) {
 			sb.append("Start?; ");
-
 		} else {
 			sb.append(startTime.get(0) + "; ");
-
 		}
 		if (finishTime.size()==0) {
 			sb.append("Slut?");
-
 		} else {
 			sb.append(finishTime.get(0));
-
 		}
 		if (startTime.size() > 1) {
-
 			sb.append("; Flera starttider?");
-
 			for (int j = 1; j <= (startTime.size() - 1); j++) {
-
 				sb.append(" " + startTime.get(j));
 			}
 		}
 		if (finishTime.size() > 1) {
-
 			sb.append("; Flera måltider?");
-
 			for (int j = 1; j <= (finishTime.size() - 1); j++) {
-
 				sb.append(" " + finishTime.get(j));
 			}
 		}
+		sb.append(totalCheck);
 		sb.append("\n");
 		return sb.toString();
 	}
