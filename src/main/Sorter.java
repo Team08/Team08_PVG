@@ -46,7 +46,7 @@ public class Sorter {
 
 			for (Integer i: register.keySet()){
 				
-				out.write(checkError(i, register.get(i).startTime(), register.get(i).finishTime()));
+				out.write(checkError(i, register.get(i).totalTime(), register.get(i).startTime(), register.get(i).finishTime()));
 
 			}
 			// Close the output stream
@@ -58,18 +58,18 @@ public class Sorter {
 		}
 		return true;
 	}
-	
-	private String checkError(int i, String startTime, String finishTime){
+
+	private String checkError(int i, String totalTime, String startTime, String finishTime) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(i + "; --.--.--; ");
-		if(startTime == null){
+		sb.append(i + "; " + totalTime + "; ");
+		if (startTime == null) {
 			sb.append("Start?; ");
-		}else{
+		} else {
 			sb.append(startTime + "; ");
 		}
-		if(finishTime == null){
+		if (finishTime == null) {
 			sb.append("Slut?");
-		}else{
+		} else {
 			sb.append(finishTime);
 		}
 		sb.append("\n");

@@ -51,7 +51,7 @@ public class TestSorter extends Sorter {
 		writeResultFile("Result.txt");
 		Scanner sc = new Scanner(new File("Result.txt"));
 		sc.nextLine();
-		assertEquals("1; --.--.--; 12.00.00; 13.23.34", sc.nextLine());
+		assertEquals("1; 1.23.34; 12.00.00; 13.23.34", sc.nextLine());
 		sc.close();
 	}
 
@@ -72,7 +72,7 @@ public class TestSorter extends Sorter {
 		Scanner sc = new Scanner(new File("Result.txt"));
 		sc.nextLine();
 		sc.nextLine();
-		assertEquals("2; --.--.--; 12.01.00; 13.15.16", sc.nextLine());
+		assertEquals("2; 1.14.16; 12.01.00; 13.15.16", sc.nextLine());
 		sc.close();
 	}
 
