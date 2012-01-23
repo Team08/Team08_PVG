@@ -6,7 +6,7 @@ import java.util.List;
 public class Driver {
 	private String name;
 	private List<String> startTime = new ArrayList<String>();
-	private List<String> finishTime = new ArrayList<String>();;
+	private List<String> finishTime = new ArrayList<String>();
 
 	public Driver() {
 

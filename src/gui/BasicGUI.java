@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -17,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants.*;
 
 import main.Register;
 
@@ -87,13 +85,47 @@ public class BasicGUI extends JFrame {
 	private void setFonts() {
 		Font newTextFont = new Font(textArea.getFont().getName(), textArea
 				.getFont().getStyle(), 70);
-		
+
 		Font newBigTextFont = new Font(textArea.getFont().getName(), textArea
 				.getFont().getStyle(), 90);
-		
+
 		textArea.setFont(newTextFont);
 		registerButton.setFont(newBigTextFont);
 		driverID.setFont(newTextFont);
+	}
+
+	private void writeToFile(int hours, int minutes, int seconds) {
+		try {
+			// Create file
+
+			FileWriter fstream = new FileWriter("register", true);
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(driverID.getText() + "; " + hours + "." + minutes + "."
+					+ seconds + "\n");
+
+			// Close the output stream
+			out.close();
+
+		} catch (Exception e) {// Catch exception if any
+			System.err.println("Error: " + e.getMessage());
+			System.exit(1);
+		}
+	}
+
+	private void writeInScrollPane(int hours, int minutes, int seconds) {
+		String stringMinutes = new String(minutes + "");
+		String stringSeconds = new String(seconds + "");
+		if (minutes < 10) {
+			stringMinutes = 0 + stringMinutes;
+		}
+		if (seconds < 10) {
+			stringSeconds = 0 + stringSeconds;
+		}
+		register.startRace();
+		lastRegisteredRiders = lastRegisteredRiders + "\n" + driverID.getText()
+				+ "; " + hours + "." + stringMinutes + "." + stringSeconds;
+		textArea.setText(lastRegisteredRiders);
+		driverID.setText("");
 	}
 
 	class RegisterButtonListener implements ActionListener {
@@ -104,40 +136,10 @@ public class BasicGUI extends JFrame {
 				int hours = calendar.get(Calendar.HOUR_OF_DAY);
 				int minutes = calendar.get(Calendar.MINUTE);
 				int seconds = calendar.get(Calendar.SECOND);
-				
-				
-				try {
-					// Create file
 
-					FileWriter fstream = new FileWriter("register", true);
-					BufferedWriter out = new BufferedWriter(fstream);
-					out.write(driverID.getText() + "; "
-							+ hours + "."
-							+ minutes + "." + seconds + "\n");
+				writeToFile(hours, minutes, seconds);
+				writeInScrollPane(hours, minutes, seconds);
 
-					// Close the output stream
-					out.close();
-
-				} catch (Exception e) {// Catch exception if any
-					System.err.println("Error: " + e.getMessage());
-					System.exit(1);
-				}
-				String stringMinutes = new String(minutes
-						+ "");
-				String stringSeconds = new String(seconds + "");
-				if (minutes < 10) {
-					stringMinutes = 0 + stringMinutes;
-				}
-				if (seconds < 10) {
-					stringSeconds = 0 + stringSeconds;
-				}
-				register.startRace();
-				lastRegisteredRiders = lastRegisteredRiders + "\n"
-						+ driverID.getText() + "; "
-						+ hours + "."
-						+ stringMinutes + "." + stringSeconds;
-				textArea.setText(lastRegisteredRiders);
-				driverID.setText("");
 			}
 
 		}

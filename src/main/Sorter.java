@@ -10,50 +10,54 @@ import java.util.TreeMap;
 
 public class Sorter {
 	protected TreeMap<Integer, Driver> register;
-
 	private String stopFile;
 	private String startFile;
+	private ReadNameFile rnf;
 
-	public Sorter(String startFileName, String stopFileName) {
+	public Sorter(String startFileName, String stopFileName, String nameFile) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
-		register = new TreeMap<Integer, Driver>();
+		rnf = new ReadNameFile(nameFile);
+		register = new TreeMap<Integer, Driver>();	
 	}
 
 	public static void main(String[] args) {
 		// Choose Files
-
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				System.in));
 		String start = "defaultStart";
 		String stop = "defaultStop";
+		String name = "defaultName";
 		String result = "defaultResult";
 		try {
 			System.out.println("Välj startfil:");
 			start = reader.readLine();
 			System.out.println("Välj målfil:");
 			stop = reader.readLine();
+			System.out.println("Välj namnfil:");
+			name = reader.readLine();
 			System.out.println("Välj resultatfil:");
 			result = reader.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Sorter sorter = new Sorter(start, stop);
+		Sorter sorter = new Sorter(start, stop, name);
 		sorter.writeResultFile(result);
 	}
 
-	protected boolean writeResultFile(String name) {
+	protected void writeResultFile(String name) {
 		try {
+			// Names are put in the TreeMap from the name file
+			rnf.readFile(register);
 			// Create file
-			
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("StartNr; Namn; Totaltid; Starttid; Måltid\n");
+			Driver tDriver;
 
 			for (Integer i : register.keySet()) {
-				out.write(checkError(i, register.get(i).startTime(), register
-						.get(i).finishTime()));
-
+				tDriver = register.get(i);
+				out.write(checkError(i, tDriver.startTime(), tDriver.finishTime()));
 			}
 			// Close the output stream
 			out.close();
@@ -62,7 +66,6 @@ public class Sorter {
 			System.err.println("Error: " + e.getMessage());
 			System.exit(1);
 		}
-		return true;
 	}
 
 	public void readStartFile() throws FileNotFoundException {
@@ -88,9 +91,9 @@ public class Sorter {
 		sb.append(i + "; ");
 		String totalCheck = "";
 		if (register.get(i).getName()==null){
-			sb.append("--.--.--; ");
+			sb.append("Namn?; ");
 		}else{
-			sb.append(register.get(i).getName());
+			sb.append(register.get(i).getName() + "; ");
 		}
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");

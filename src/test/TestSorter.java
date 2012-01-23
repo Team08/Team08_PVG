@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class TestSorter extends Sorter {
 
 	public TestSorter() {
-		super("", "");
+		super("", "", null);
 	}
 
 	@Before
@@ -60,7 +60,7 @@ public class TestSorter extends Sorter {
 			writeResultFile("Result.txt");
 			Scanner sc = new Scanner(new File("Result.txt"));
 			sc.nextLine();
-			assertEquals("1; --.--.--; 1.23.34; 12.00.00; 13.23.34", sc.nextLine());
+			assertEquals("1; Namn?; 1.23.34; 12.00.00; 13.23.34", sc.nextLine());
 			sc.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -84,7 +84,7 @@ public class TestSorter extends Sorter {
 			Scanner sc = new Scanner(new File("Result.txt"));
 			sc.nextLine();
 			sc.nextLine();
-			assertEquals("2; --.--.--; 1.14.16; 12.01.00; 13.15.16", sc.nextLine());
+			assertEquals("2; Namn?; 1.14.16; 12.01.00; 13.15.16", sc.nextLine());
 			sc.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -143,7 +143,7 @@ public class TestSorter extends Sorter {
 			writeResultFile("Result.txt");
 			Scanner sc = new Scanner(new File("Result.txt"));
 			sc.nextLine();
-			assertEquals("1; --.--.--; --.--.--; 12.00.00; Slut?", sc.nextLine());
+			assertEquals("1; Namn?; --.--.--; 12.00.00; Slut?", sc.nextLine());
 			sc.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -159,7 +159,7 @@ public class TestSorter extends Sorter {
 			writeResultFile("Result.txt");
 			Scanner sc = new Scanner(new File("Result.txt"));
 			sc.nextLine();
-			assertEquals("1; --.--.--; --.--.--; Start?; 12.00.00", sc.nextLine());
+			assertEquals("1; Namn?; --.--.--; Start?; 12.00.00", sc.nextLine());
 			sc.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -200,7 +200,7 @@ public class TestSorter extends Sorter {
 			Scanner sc = new Scanner(new File("Result.txt"));
 			sc.nextLine();
 			assertEquals(
-					"1; --.--.--; 1.00.00; 12.00.00; 13.00.00; Flera starttider? 12.00.30",
+					"1; Namn?; 1.00.00; 12.00.00; 13.00.00; Flera starttider? 12.00.30",
 					sc.nextLine());
 			sc.close();
 		} catch (FileNotFoundException e) {
@@ -223,7 +223,7 @@ public class TestSorter extends Sorter {
 			Scanner sc = new Scanner(new File("Result.txt"));
 			sc.nextLine();
 			assertEquals(
-					"1; --.--.--; 1.00.00; 12.00.00; 13.00.00; Flera måltider? 13.00.30",
+					"1; Namn?; 1.00.00; 12.00.00; 13.00.00; Flera måltider? 13.00.30",
 					sc.nextLine());
 			sc.close();
 		} catch (FileNotFoundException e) {
@@ -242,7 +242,7 @@ public class TestSorter extends Sorter {
 			Scanner sc = new Scanner(new File("Result.txt"));
 			sc.nextLine();
 			assertEquals(
-					"1; --.--.--; 0.14.00; 12.00.00; 12.14.00; Omöjlig Totaltid?",
+					"1; Namn?; 0.14.00; 12.00.00; 12.14.00; Omöjlig Totaltid?",
 					sc.nextLine());
 			sc.close();
 		} catch (FileNotFoundException e) {
@@ -261,7 +261,71 @@ public class TestSorter extends Sorter {
 			Scanner sc = new Scanner(new File("Result.txt"));
 			sc.nextLine();
 			assertEquals(
-					"1; --.--.--; 0.15.00; 12.00.00; 12.15.00",
+					"1; Namn?; 0.15.00; 12.00.00; 12.15.00",
+					sc.nextLine());
+			sc.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testNoName(){
+		try {
+			Integer i = new Integer(1);
+			String start = "12.00.00";
+			super.addStartTime(i, start);
+			String finish = "12.15.00";
+			super.addFinishTime(i, finish);
+			writeResultFile("Result.txt");
+			Scanner sc = new Scanner(new File("Result.txt"));
+			sc.nextLine();
+			assertEquals(
+					"1; Namn?; 0.15.00; 12.00.00; 12.15.00",
+					sc.nextLine());
+			sc.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testDriverWithNameWithoutTimes(){
+		try {
+			Integer i = new Integer(1);
+			String name = "Test";
+			Driver d=  new Driver(name);
+			register.put(i, d);
+			writeResultFile("Result.txt");
+			Scanner sc = new Scanner(new File("Result.txt"));
+			sc.nextLine();
+			assertEquals(
+					"1; Test; --.--.--; Start?; Slut?",
+					sc.nextLine());
+			sc.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testMultipleStartAndMultipleFinishTimes(){
+		try {
+			Integer i = new Integer(1);
+			String name = "Test";
+			Driver d=  new Driver(name);
+			register.put(i, d);
+			String start = "12.00.00";
+			super.addStartTime(i, start);
+			start = "12.00.01";
+			super.addStartTime(i, start);
+			String finish = "12.00.01";
+			super.addFinishTime(i, finish);
+			finish = "13.00.30";
+			super.addFinishTime(i, finish);
+			writeResultFile("Result.txt");
+			Scanner sc = new Scanner(new File("Result.txt"));
+			sc.nextLine();
+			assertEquals(
+					"1; Test; 0.00.01; 12.00.00; 12.00.01; Flera starttider? 12.00.01; Flera måltider? 13.00.30; Omöjlig Totaltid?",
 					sc.nextLine());
 			sc.close();
 		} catch (FileNotFoundException e) {
@@ -269,3 +333,4 @@ public class TestSorter extends Sorter {
 		}
 	}
 }
+
