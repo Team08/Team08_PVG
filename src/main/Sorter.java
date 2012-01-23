@@ -13,13 +13,14 @@ public class Sorter {
 
 	private String stopFile;
 	private String startFile;
-	private String nameFile;
+	private ReadNameFile rnf;
 
 	public Sorter(String startFileName, String stopFileName, String nameFile) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
-		this.nameFile = nameFile;
+		rnf = new ReadNameFile(nameFile);
 		register = new TreeMap<Integer, Driver>();
+		
 	}
 
 	public static void main(String[] args) {
@@ -50,7 +51,6 @@ public class Sorter {
 	protected boolean writeResultFile(String name) {
 		try {
 			// Names are put in the TreeMap from the name file
-			ReadNameFile rnf = new ReadNameFile(nameFile);
 			rnf.readFile(register);
 			// Create file
 			
@@ -86,6 +86,7 @@ public class Sorter {
 				addStartTime(startNumber, str[1]);
 			}
 		} catch (FileNotFoundException e) {// Catch exception if any
+			System.err.println("Error: " + e.getMessage());
 			throw new FileNotFoundException();
 		}
 	}
@@ -155,6 +156,7 @@ public class Sorter {
 			}
 
 		} catch (FileNotFoundException e) {// Catch exception if any
+			System.err.println("Error: " + e.getMessage());
 			throw new FileNotFoundException();
 		}
 	}
