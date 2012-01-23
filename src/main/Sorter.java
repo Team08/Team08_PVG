@@ -86,7 +86,6 @@ public class Sorter {
 				addStartTime(startNumber, str[1]);
 			}
 		} catch (FileNotFoundException e) {// Catch exception if any
-			System.err.println("Error: " + e.getMessage());
 			throw new FileNotFoundException();
 		}
 	}
@@ -156,7 +155,6 @@ public class Sorter {
 			}
 
 		} catch (FileNotFoundException e) {// Catch exception if any
-			System.err.println("Error: " + e.getMessage());
 			throw new FileNotFoundException();
 		}
 	}
