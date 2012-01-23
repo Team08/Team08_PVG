@@ -19,31 +19,34 @@ public class Sorter {
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				System.in));
-		String start = new String();
-		String stop = new String();
+		String start = "defaultStart";
+		String stop = "defaultStop";
+		String result = "defaultResult";
 		try {
 			System.out.println("Välj startfil:");
 			start = reader.readLine();
 			System.out.println("Välj målfil:");
 			stop = reader.readLine();
+			System.out.println("Välj resultatfil:");
+			result = reader.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		Sorter sorter = new Sorter(start, stop);
-		sorter.writeResultFile();
+		sorter.writeResultFile(result);
 	}
 
-	private boolean writeResultFile() {
+	protected boolean writeResultFile(String name) {
 		try {
 			// Create file
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					System.in));
-			System.out.println("Välj resultatfil:");
-			String result = reader.readLine();
-			FileWriter fstream = new FileWriter(result);
+			
+			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
 
-			out.write("This is the results");
+			out.write("StartNr; Totaltid; Starttid; Måltid\n");
+			for (Integer i: register.keySet()){
+				out.write(i + "; --.--.--; "+ register.get(i).startTime() +"; " + register.get(i).finishTime() + "\n");
+			}
 			// Close the output stream
 			out.close();
 
