@@ -96,7 +96,7 @@ public class Sorter {
 			sb.append("--.--.--; ");
 		} else {
 			sb.append(register.get(i).totalTime() + "; ");
-			if(register.get(i).totalTime().compareTo("00.15.00")<0){
+			if(register.get(i).totalTime().compareTo("0.15.00")<0){
 				totalCheck = "; Omöjlig Totaltid?";
 			}
 		}

@@ -210,7 +210,7 @@ public class TestSorter extends Sorter {
 	
 	
 	@Test
-	public void testMultipleFinishTimes() throws Exception {
+	public void testMultipleFinishTimes(){
 		try {
 			Integer i = new Integer(1);
 			String start = "12.00.00";
@@ -231,7 +231,7 @@ public class TestSorter extends Sorter {
 		}
 	}
 	@Test
-	public void testImpossibleFinishTime() throws Exception {
+	public void testImpossibleFinishTimeSmaller(){
 		try {
 			Integer i = new Integer(1);
 			String start = "12.00.00";
@@ -243,6 +243,25 @@ public class TestSorter extends Sorter {
 			sc.nextLine();
 			assertEquals(
 					"1; --.--.--; 0.14.00; 12.00.00; 12.14.00; Omöjlig Totaltid?",
+					sc.nextLine());
+			sc.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testOkeyFinishTime(){
+		try {
+			Integer i = new Integer(1);
+			String start = "12.00.00";
+			super.addStartTime(i, start);
+			String finish = "12.15.00";
+			super.addFinishTime(i, finish);
+			writeResultFile("Result.txt");
+			Scanner sc = new Scanner(new File("Result.txt"));
+			sc.nextLine();
+			assertEquals(
+					"1; --.--.--; 0.15.00; 12.00.00; 12.15.00",
 					sc.nextLine());
 			sc.close();
 		} catch (FileNotFoundException e) {
