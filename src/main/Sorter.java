@@ -43,7 +43,8 @@ public class Sorter {
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("StartNr; Totaltid; Starttid; Måltid\n");
 			for (Integer i: register.keySet()){
-				out.write(i + "; --.--.--; "+ register.get(i).startTime() +"; " + register.get(i).finishTime() + "\n");
+				
+				out.write(checkError(i, register.get(i).startTime(), register.get(i).finishTime()));
 			}
 			// Close the output stream
 			out.close();
@@ -53,6 +54,23 @@ public class Sorter {
 			System.exit(1);
 		}
 		return true;
+	}
+	
+	private String checkError(int i, String startTime, String finishTime){
+		StringBuilder sb = new StringBuilder();
+		sb.append(i + "; --.--.--; ");
+		if(startTime == null){
+			sb.append("Start?; ");
+		}else{
+			sb.append(startTime + "; ");
+		}
+		if(finishTime == null){
+			sb.append("Slut?");
+		}else{
+			sb.append(finishTime);
+		}
+		sb.append("\n");
+		return sb.toString();
 	}
 
 	/**
