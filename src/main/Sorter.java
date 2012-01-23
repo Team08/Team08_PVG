@@ -6,16 +6,24 @@ import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+
 import java.io.InputStreamReader;
 
 
+
+import java.util.TreeMap;
+
+
 public class Sorter {
+	protected TreeMap<Integer, Driver> register;
+
 	private String stopFile;
 	private String startFile;
 
 	public Sorter(String startFileName, String stopFileName) {
 		this.startFile = startFileName;
 		this.stopFile = startFileName;
+		register = new TreeMap<Integer, Driver>();
 	}
 	
 	public static void main(String[] args) {
@@ -40,6 +48,7 @@ public class Sorter {
 		}
 		return true;
 	}
+
 	
 	public void readFile(String filename){
 		try{
@@ -61,4 +70,20 @@ public class Sorter {
 			  }
 		
 	}
+
+
+	public void addStartTime(Integer startNumber, String time) {
+			Driver driver = new Driver();
+			driver.addStartTime(time);
+			register.put(startNumber, driver);
+	}
+
+	public void addFinishTime(Integer startNumber, String time) {
+			Driver driver = new Driver();
+			driver.addFinishTime(time);
+			register.put(startNumber, driver);	
+	}
+	
+	
+
 }
