@@ -49,18 +49,13 @@ public class Driver {
 	}
 
 	public String totalTime() {
-		String[] temp = startTime.split("\\.");
 
-		int hour = Integer.parseInt(temp[0]);
-		int minute = Integer.parseInt(temp[1]);
-		int second = Integer.parseInt(temp[2]);
-		int start = 3600 * hour + 60 * minute + second;
+		String[] temp = startTime.split("\\.");
+		int start = parseTime(temp);
 
 		temp = finishTime.split("\\.");
-		hour = Integer.parseInt(temp[0]);
-		minute = Integer.parseInt(temp[1]);
-		second = Integer.parseInt(temp[2]);
-		int finish = 3600 * hour + 60 * minute + second;
+		int finish = parseTime(temp);
+
 		int totalInt = finish - start;
 
 		String min;
@@ -80,5 +75,13 @@ public class Driver {
 		String total = totalInt / 3600 + "." + min + "." + sec;
 
 		return total;
+	}
+
+	private int parseTime(String[] temp) {
+		int hour = Integer.parseInt(temp[0]);
+		int minute = Integer.parseInt(temp[1]);
+		int second = Integer.parseInt(temp[2]);
+		int start = 3600 * hour + 60 * minute + second;
+		return start;
 	}
 }
