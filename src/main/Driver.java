@@ -44,4 +44,8 @@ public class Driver {
 		finishTime = time;
 		
 	}
+
+	public void setName(String name) {
+		this.name = name;		
+	}
 }

@@ -35,5 +35,12 @@ public class TestDriver {
 		assertEquals("00.00.00", driver.finishTime());
 		
 	}
+	
+	@Test
+	public void testSetName() {
+		String name = "Test";
+		driver.setName(name);
+		assertEquals("Test", driver.getName());
+	}
 
 }
