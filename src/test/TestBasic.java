@@ -20,7 +20,7 @@ private Sorter sorter;
 	@Before public void setup(){
 		this.driver = new Driver("Team08");
 		this.register = new Register(driver);
-		this.sorter = new Sorter("Start.txt","Stop.txt");
+		this.sorter = new Sorter("Start.txt","Stop.txt", "");
 	}
 	
 	@Test public void  testThatRaceTimeIsGreaterThanZero(){

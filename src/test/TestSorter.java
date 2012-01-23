@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class TestSorter extends Sorter {
 
 	public TestSorter() {
-		super("", "");
+		super("", "", "");
 	}
 
 	@Before

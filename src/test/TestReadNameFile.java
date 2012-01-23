@@ -15,14 +15,26 @@ import org.junit.Test;
 
 public class TestReadNameFile {
 	private ReadNameFile rnf;
+	private TreeMap<Integer, Driver> tm;
 	
 	@Before
 	public void setUp() throws Exception {
-		
+		tm = new TreeMap<Integer, Driver>();
+		tm.put(new Integer(1), new Driver());
+		tm.put(new Integer(4), new Driver());
+		tm.put(new Integer(9), new Driver());
 	}
 
 	@After
 	public void tearDown() throws Exception {
+	}
+	
+	@Test
+	public void testCorrectNumberOfDrivers() {
+		String filename = "src/namnfil.test";
+		rnf = new ReadNameFile(filename);
+		rnf.readFile(tm);
+		assertEquals("Incorrect number of drivers", 6, tm.size());
 	}
 	
 	@Test

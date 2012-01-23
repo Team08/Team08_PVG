@@ -12,7 +12,7 @@ import org.junit.Test;
 public class TestReadFile extends Sorter {
 
 	public TestReadFile() {
-		super("TestStart.test", "TestStart.test");
+		super("TestStart.test", "TestStart.test", "");
 	}
 
 	@Test

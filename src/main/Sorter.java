@@ -13,10 +13,12 @@ public class Sorter {
 
 	private String stopFile;
 	private String startFile;
+	private String nameFile;
 
-	public Sorter(String startFileName, String stopFileName) {
+	public Sorter(String startFileName, String stopFileName, String nameFile) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
+		this.nameFile = nameFile;
 		register = new TreeMap<Integer, Driver>();
 	}
 
@@ -27,23 +29,29 @@ public class Sorter {
 				System.in));
 		String start = "defaultStart";
 		String stop = "defaultStop";
+		String name = "defaultName";
 		String result = "defaultResult";
 		try {
 			System.out.println("Välj startfil:");
 			start = reader.readLine();
 			System.out.println("Välj målfil:");
 			stop = reader.readLine();
+			System.out.println("Välj namnfil:");
+			name = reader.readLine();
 			System.out.println("Välj resultatfil:");
 			result = reader.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Sorter sorter = new Sorter(start, stop);
+		Sorter sorter = new Sorter(start, stop, name);
 		sorter.writeResultFile(result);
 	}
 
 	protected boolean writeResultFile(String name) {
 		try {
+			// Names are put in the TreeMap from the name file
+			ReadNameFile rnf = new ReadNameFile(nameFile);
+			rnf.readFile(register);
 			// Create file
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
