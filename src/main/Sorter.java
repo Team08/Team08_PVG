@@ -75,7 +75,6 @@ public class Sorter {
 				String[] str = line.split("; "); 
 				Integer startNumber = Integer.parseInt(str[0]);
 				addStartTime(startNumber, str[1]);
-				System.out.println(startNumber.toString() + " " + str[1]);
 			}
 		} catch (FileNotFoundException e) {// Catch exception if any
 			throw new FileNotFoundException();

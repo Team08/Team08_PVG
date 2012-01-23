@@ -25,27 +25,26 @@ public class TestReadFile extends Sorter {
 			File file = new File("TestStart.test");
 			Iterator<Integer> itr = driverSet.iterator();
 			try {
-			scan = new Scanner(file);
-			for (int i = 0; i < driverSet.size(); i++) {
+				scan = new Scanner(file);
+				for (int i = 0; i < driverSet.size(); i++) {
 					Integer j = itr.next();
 					line = scan.nextLine();
-					String[] str = line.split("; "); 
+					String[] str = line.split("; ");
 					Integer startNumber = Integer.parseInt(str[0]);
-					System.out.println(j.toString() + " "+ register.get(j).startTime().get(0));
+					System.out.println(j.toString() + " "
+							+ register.get(j).startTime().get(0));
 					assertEquals(startNumber.toString(), j.toString());
 					assertEquals(str[1], register.get(j).startTime().get(0));
-				
+
 				}
-			
+
+			} catch (FileNotFoundException e) {
+				//
+			}
+
 		} catch (FileNotFoundException e) {
-			//
 		}
-			
-		}	catch (FileNotFoundException e) {
-		}
-		}
-		
-	
+	}
 
 	@Test
 	public void TestReadFinishFile() {
@@ -55,29 +54,24 @@ public class TestReadFile extends Sorter {
 			Scanner scan;
 			File file = new File("TestStart.test");
 			try {
-			String line;
-			scan = new Scanner(file);
-			Iterator<Integer> itr = driverSet.iterator();
-			for (int i = 0; i < register.size(); i++) {
+				String line;
+				scan = new Scanner(file);
+				Iterator<Integer> itr = driverSet.iterator();
+				for (int i = 0; i < register.size(); i++) {
 					line = scan.nextLine();
-					String[] str = line.split("; "); 
+					String[] str = line.split("; ");
 					Integer startNumber = Integer.parseInt(str[0]);
 					Integer j = itr.next();
 					assertEquals(startNumber.toString(), j.toString());
-					assertEquals(str[1], register.get(j).finishTime());
-				
+					assertEquals(str[1], register.get(j).finishTime().get(0));
 
-				
+				}
+			} catch (FileNotFoundException e) {
+				//
 			}
+
 		} catch (FileNotFoundException e) {
-			//
 		}
-		
-	}	catch (FileNotFoundException e) {
 	}
+
 }
-	
-	
-}
-		
-	
