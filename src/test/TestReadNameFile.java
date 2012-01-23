@@ -28,7 +28,7 @@ public class TestReadNameFile {
 	@Test
 	public void testReadNameFile()  {
 		try {
-			String filename = "namnfil.txt";
+			String filename = "src/namnfil.test";
 			rnf = new ReadNameFile(filename);
 			TreeMap<Integer, Driver> tm = new TreeMap<Integer, Driver>();
 			tm.put(new Integer(1), new Driver());
