@@ -44,7 +44,7 @@ public class Sorter {
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("StartNr; Totaltid; Starttid; Måltid\n");
 			for (Integer i : register.keySet()) {
-				out.write(i + "; --.--.--; " + register.get(i).startTime()
+				out.write(i + "; " + register.get(i).totalTime() + "; " + register.get(i).startTime()
 						+ "; " + register.get(i).finishTime() + "\n");
 			}
 			// Close the output stream
