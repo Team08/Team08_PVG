@@ -52,35 +52,50 @@ public class Driver {
 	}
 
 	public String totalTime() {
+<<<<<<< HEAD
 		String[] temp = startTime.get(0).split("\\.");
 		int hour = Integer.parseInt(temp[0]);
 		int minute = Integer.parseInt(temp[1]);
 		int second = Integer.parseInt(temp[2]);
 		int start = 3600 * hour + 60 * minute + second;
+=======
+
+		String[] temp = startTime.split("\\.");
+		int start = parseTime(temp);
+>>>>>>> 8e7cae3a8da8a588a71e9458a254d4266e4303d7
 
 		temp = finishTime.split("\\.");
-		hour = Integer.parseInt(temp[0]);
-		minute = Integer.parseInt(temp[1]);
-		second = Integer.parseInt(temp[2]);
-		int finish = 3600 * hour + 60 * minute + second;
+		int finish = parseTime(temp);
+
 		int totalInt = finish - start;
-
-		String min;
-		if (((totalInt % 3600) / 60) < 10) {
-			min = "0" + (totalInt % 3600) / 60;
-		} else {
-			min = Integer.toString((totalInt % 3600) / 60);
-		}
-
-		String sec;
-		if (((totalInt % 3600) % 60) < 10) {
-			sec = "0" + (totalInt % 3600) % 60;
-		} else {
-			sec = Integer.toString((totalInt % 3600) % 60);
-		}
-
+		
+		int minutes = (totalInt % 3600) / 60;
+		String min  = addZero(minutes);
+		
+		int seconds = (totalInt % 3600) % 60;
+		String sec = addZero(seconds);
+		
+		
 		String total = totalInt / 3600 + "." + min + "." + sec;
 
 		return total;
+	}
+
+	private String addZero(int minutes) {
+		String min;
+		if (minutes < 10) {
+			min = "0" + minutes;
+		} else {
+			min = Integer.toString(minutes);
+		}
+		return min;
+	}
+
+	private int parseTime(String[] temp) {
+		int hour = Integer.parseInt(temp[0]);
+		int minute = Integer.parseInt(temp[1]);
+		int second = Integer.parseInt(temp[2]);
+		int start = 3600 * hour + 60 * minute + second;
+		return start;
 	}
 }

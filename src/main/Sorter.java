@@ -1,7 +1,11 @@
 package main;
 
 import java.io.*;
+
 import java.util.List;
+
+import java.util.Scanner;
+
 import java.util.TreeMap;
 
 public class Sorter {
@@ -45,9 +49,9 @@ public class Sorter {
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("StartNr; Totaltid; Starttid; Måltid\n");
 
-			for (Integer i: register.keySet()){
-				System.out.println(8);
-				out.write(checkError(i, register.get(i).startTime(), register.get(i).finishTime()));
+			for (Integer i : register.keySet()) {
+				out.write(checkError(i, register.get(i).startTime(), register
+						.get(i).finishTime()));
 
 			}
 			// Close the output stream
@@ -60,38 +64,52 @@ public class Sorter {
 		return true;
 	}
 
+	public void readStartFile() throws FileNotFoundException {
+		File file = new File(startFile);
+		Scanner scan;
+		try {
+			scan = new Scanner(file);
+			scan.useDelimiter(";");
+			while (scan.hasNext()) {
+				Integer startNumber = Integer.parseInt(scan.next().trim());
+				addStartTime(startNumber, scan.next().trim());
+			}
+		} catch (FileNotFoundException e) {// Catch exception if any
+			throw new FileNotFoundException();
+		}
+	}
+
 	private String checkError(int i, List<String> startTime, String finishTime) {
-	
+
 		StringBuilder sb = new StringBuilder();
 		sb.append(i + "; ");
 
-	
-		if(startTime.size()==0 || finishTime==null){
+		if (startTime.size() == 0 || finishTime == null) {
 			sb.append("--.--.--; ");
-		}else{
-			sb.append(register.get(i).totalTime()+"; ");
-			
+		} else {
+			sb.append(register.get(i).totalTime() + "; ");
+
 		}
-		if (startTime.size()==0) {
+		if (startTime.size() == 0) {
 			sb.append("Start?; ");
-		
+
 		} else {
 			sb.append(startTime.get(0) + "; ");
-		
+
 		}
 		if (finishTime == null) {
 			sb.append("Slut?");
-			
+
 		} else {
 			sb.append(finishTime);
-			
+
 		}
-		if(startTime.size()>1){
-			
+		if (startTime.size() > 1) {
+
 			sb.append("; Flera starttider?");
-		
-			for(int j=1; j<=(startTime.size()-1);j++){
-				
+
+			for (int j = 1; j <= (startTime.size() - 1); j++) {
+
 				sb.append(" " + startTime.get(j));
 			}
 		}
@@ -99,25 +117,19 @@ public class Sorter {
 		return sb.toString();
 	}
 
-	public void readFile(String filename) {
+	public void readFinishFile() throws FileNotFoundException {
+		File file = new File(stopFile);
+		Scanner scan;
 		try {
-			FileInputStream fstream = new FileInputStream(filename);
-			// Get the object of DataInputStream
-			DataInputStream in = new DataInputStream(fstream);
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			String strLine;
-
-			// Read File Line By Line
-			while ((strLine = br.readLine()) != null) {
-				// Print the content on the console
-				System.out.println(strLine);
+			scan = new Scanner(file);
+			scan.useDelimiter(";");
+			while (scan.hasNext()) {
+				Integer startNumber = Integer.parseInt(scan.next().trim());
+				addFinishTime(startNumber, scan.next().trim());
 			}
-			// Close the input stream
-			in.close();
-		} catch (Exception e) {// Catch exception if any
-			System.err.println("Error: " + e.getMessage());
+		} catch (FileNotFoundException e) {// Catch exception if any
+			throw new FileNotFoundException();
 		}
-
 	}
 
 	/**
