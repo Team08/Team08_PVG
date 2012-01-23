@@ -187,7 +187,7 @@ public class TestSorter extends Sorter {
 	}
 
 	@Test
-	public void testMultipleStartTimes() throws Exception {
+	public void testMultipleStartTimes() {
 		try {
 			Integer i = new Integer(1);
 			String start = "12.00.00";
