@@ -1,8 +1,7 @@
 package main;
 
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.TreeMap;
 
 
@@ -13,21 +12,38 @@ public class Sorter {
 
 	public Sorter(String startFileName, String stopFileName) {
 		this.startFile = startFileName;
-		this.stopFile = startFileName;
+		this.stopFile = stopFileName;
 		register = new TreeMap<Integer, Driver>();
 	}
-	
+
 	public static void main(String[] args) {
-		Sorter sorter = new Sorter("Start.txt","Stop.txt");
+		// Choose Files
+
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				System.in));
+		String start = new String();
+		String stop = new String();
+		try {
+			System.out.println("Välj startfil:");
+			start = reader.readLine();
+			System.out.println("Välj målfil:");
+			stop = reader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Sorter sorter = new Sorter(start, stop);
 		sorter.writeResultFile();
 	}
 
 	protected boolean writeResultFile() {
 		try {
 			// Create file
-			FileWriter fstream = new FileWriter("Result.txt");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					System.in));
+			System.out.println("Välj resultatfil:");
+			String result = reader.readLine();
+			FileWriter fstream = new FileWriter(result);
 			BufferedWriter out = new BufferedWriter(fstream);
-			
 
 			out.write("StartNr; Totaltid; Starttid; Måltid\n");
 			for (Integer i: register.keySet()){
@@ -35,7 +51,7 @@ public class Sorter {
 			}
 			// Close the output stream
 			out.close();
-			
+
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
 			System.exit(1);
@@ -50,9 +66,15 @@ public class Sorter {
 	}
 
 	public void addFinishTime(Integer startNumber, String time) {
+		if(register.containsKey(startNumber)) {
+			Driver driver = register.get(startNumber);
+			driver.addFinishTime(time);
+		} else {
 			Driver driver = new Driver();
 			driver.addFinishTime(time);
-			register.put(startNumber, driver);	
+			register.put(startNumber, driver);
+		}
+			
 	}
 	
 	

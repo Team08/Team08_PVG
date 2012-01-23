@@ -30,7 +30,7 @@ public class TestSorter extends Sorter {
 		Integer i = new Integer(1);
 		String time = "01.01.01";
 		super.addStartTime(i, time);
-		assertEquals(register.size(), 1);
+		assertEquals(1, register.size());
 	}
 
 	@Test
@@ -61,7 +61,7 @@ public class TestSorter extends Sorter {
 		String time = "01.01.01";
 		super.addStartTime(i, time);
 		Driver driver = register.get(i);
-		assertEquals(driver.startTime(), "01.01.01");
+		assertEquals("01.01.01", driver.startTime());
 	}
 	
 	@Test
@@ -70,10 +70,22 @@ public class TestSorter extends Sorter {
 		String time = "02.02.00";
 		super.addFinishTime(i, time);
 		Driver driver = register.get(i);
-		assertEquals(driver.finishTime(), "02.02.00");
+		assertEquals("02.02.00", driver.finishTime());
 		
 		
 
+	}
+	
+	@Test
+	public void testAddFirstStartThenFinishTimes() {
+		Integer i = new Integer(1);
+		String startTime = "01.01.01";
+		String finishTime = "02.02.02";
+		super.addStartTime(i, startTime);
+		super.addFinishTime(i, finishTime);
+		Driver driver = register.get(i);
+		assertEquals("Wrong start time", "01.01.01", driver.startTime());
+		assertEquals("Wrong finish time", "02.02.02", driver.finishTime());
 	}
 
 }
