@@ -57,24 +57,27 @@ public class Driver {
 		int finish = parseTime(temp);
 
 		int totalInt = finish - start;
-
-		String min;
-		if (((totalInt % 3600) / 60) < 10) {
-			min = "0" + (totalInt % 3600) / 60;
-		} else {
-			min = Integer.toString((totalInt % 3600) / 60);
-		}
-
-		String sec;
-		if (((totalInt % 3600) % 60) < 10) {
-			sec = "0" + (totalInt % 3600) % 60;
-		} else {
-			sec = Integer.toString((totalInt % 3600) % 60);
-		}
-
+		
+		int minutes = (totalInt % 3600) / 60;
+		String min  = addZero(minutes);
+		
+		int seconds = (totalInt % 3600) % 60;
+		String sec = addZero(seconds);
+		
+		
 		String total = totalInt / 3600 + "." + min + "." + sec;
 
 		return total;
+	}
+
+	private String addZero(int minutes) {
+		String min;
+		if (minutes < 10) {
+			min = "0" + minutes;
+		} else {
+			min = Integer.toString(minutes);
+		}
+		return min;
 	}
 
 	private int parseTime(String[] temp) {
