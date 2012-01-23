@@ -98,4 +98,8 @@ public class Driver {
 		int start = 3600 * hour + 60 * minute + second;
 		return start;
 	}
+
+	public void setName(String name) {
+		this.name = name;		
+	}
 }

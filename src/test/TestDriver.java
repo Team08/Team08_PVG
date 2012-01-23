@@ -35,6 +35,15 @@ public class TestDriver {
 		assertEquals("00.00.00", driver.finishTime());
 		
 	}
+	
+	@Test
+	public void testSetName() {
+		String name = "Test";
+		driver.setName(name);
+		assertEquals("Test", driver.getName());
+	}
+
+
 	@Test
 	public void testTotalTime(){
 		String startTime = "00.00.00";
@@ -43,4 +52,5 @@ public class TestDriver {
 		driver.addFinishTime(finishTime);
 		assertEquals("1.02.03", driver.totalTime());
 	}
+
 }
