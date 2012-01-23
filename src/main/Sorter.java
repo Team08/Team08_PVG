@@ -63,9 +63,15 @@ public class Sorter {
 	}
 
 	public void addFinishTime(Integer startNumber, String time) {
+		if(register.containsKey(startNumber)) {
+			Driver driver = register.get(startNumber);
+			driver.addFinishTime(time);
+		} else {
 			Driver driver = new Driver();
 			driver.addFinishTime(time);
-			register.put(startNumber, driver);	
+			register.put(startNumber, driver);
+		}
+			
 	}
 	
 	
