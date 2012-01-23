@@ -51,6 +51,12 @@ public class Sorter {
 			driver.addStartTime(time);
 			register.put(startNumber, driver);
 	}
+
+	public void addFinishTime(Integer startNumber, String time) {
+			Driver driver = new Driver();
+			driver.addFinishTime(time);
+			register.put(startNumber, driver);	
+	}
 	
 	
 }

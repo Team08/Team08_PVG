@@ -3,6 +3,7 @@ package main;
 public class Driver {
 	private String name;
 	private String startTime;
+	private String finishTime;
 	
 	public Driver() {
 		
@@ -23,5 +24,14 @@ public class Driver {
 
 	public String startTime() {
 		return startTime;
+	}
+
+	public String finishTime() {
+		return finishTime;
+	}
+
+	public void addFinishTime(String time) {
+		finishTime = time;
+		
 	}
 }
