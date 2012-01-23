@@ -1,40 +1,43 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants.*;
 
 import main.Register;
 
 public class BasicGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private static int WIDTH = 500;
-	private static int HEIGHT = 250;
-	private JLabel display;
-	private Register model;
-	private JLabel time;
-	private JLabel latest;
+	private static int WIDTH = 1920;
+	private static int HEIGHT = 1080;
+	private Register register;
 	private JTextArea textArea;
 	private JTextField driverID;
 	private JButton registerButton;
 	private JPanel displayPanel;
-	private JPanel buttonPanel;
+	private JPanel topPanel;
+	private JScrollPane scrollPane;
+	private String lastRegisteredRiders;
 
-	public BasicGUI(String frameName, Register model) {
+	public BasicGUI(String frameName, Register register) {
 		super(frameName);
-		this.model = model;
-		this.setLayout(new GridLayout(2, 1));
+		this.register = register;
+		this.setLayout(new BorderLayout());
 		init();
 
 		addComponents();
@@ -43,9 +46,7 @@ public class BasicGUI extends JFrame {
 	}
 
 	private void setupLayout() {
-		buttonPanel.setLayout(new GridLayout(1, 2));
-
-		// add register
+		topPanel.setLayout(new GridLayout(1, 2));
 		registerButton.addActionListener(new RegisterButtonListener());
 
 		// FINISHING TOUCHES
@@ -57,47 +58,87 @@ public class BasicGUI extends JFrame {
 
 	// Add components
 	private void addComponents() {
-		displayPanel.add(latest);
-		displayPanel.add(textArea);
-
-		buttonPanel.add(driverID);
-		buttonPanel.add(registerButton);
+		displayPanel.add(scrollPane);
+		topPanel.add(driverID);
+		topPanel.add(registerButton);
 
 		// ADDS PANELS TO FRAME
-		this.add(buttonPanel);
-		this.add(displayPanel);
+		this.add(topPanel, BorderLayout.NORTH);
+		this.add(displayPanel, BorderLayout.CENTER);
 	}
 
-	// Initialize the componnets
+	// Initialize the components
 	private void init() {
-		displayPanel = new JPanel(new GridLayout(2, 1));
-		buttonPanel = new JPanel();
-		latest = new JLabel("Senast registerade tider");
+		displayPanel = new JPanel(new GridLayout(1, 1));
+		topPanel = new JPanel();
 		textArea = new JTextArea(10, 30);
-		driverID = new JTextField("#");
-		registerButton = new JButton("Start");
+		driverID = new JTextField("");
+		scrollPane = new JScrollPane(textArea);
+		textArea.setEditable(false);
+
+		lastRegisteredRiders = new String("Senaste registerade tider");
+		textArea.setText(lastRegisteredRiders);
+
+		registerButton = new JButton("Registrera förare");
 		setFonts();
 	}
 
 	// Sets the bigger fonts for all components
 	private void setFonts() {
 		Font newTextFont = new Font(textArea.getFont().getName(), textArea
-				.getFont().getStyle(), 50);
-		Font newSmallTextFont = new Font(textArea.getFont().getName(), textArea
 				.getFont().getStyle(), 70);
+		
 		Font newBigTextFont = new Font(textArea.getFont().getName(), textArea
-				.getFont().getStyle(), 20);
-		textArea.setFont(newSmallTextFont);
-		registerButton.setFont(newTextFont);
-		driverID.setFont(newBigTextFont);
-		latest.setFont(newTextFont);
+				.getFont().getStyle(), 90);
+		
+		textArea.setFont(newTextFont);
+		registerButton.setFont(newBigTextFont);
+		driverID.setFont(newTextFont);
 	}
 
 	class RegisterButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+			if (driverID.getText().length() != 0) {
+				GregorianCalendar calendar = new GregorianCalendar();
 
-			Date startTime = model.startRace();
-			textArea.setText(startTime.toString());
+				int hours = calendar.get(Calendar.HOUR_OF_DAY);
+				int minutes = calendar.get(Calendar.MINUTE);
+				int seconds = calendar.get(Calendar.SECOND);
+				
+				
+				try {
+					// Create file
+
+					FileWriter fstream = new FileWriter("register", true);
+					BufferedWriter out = new BufferedWriter(fstream);
+					out.write(driverID.getText() + "; "
+							+ hours + "."
+							+ minutes + "." + seconds + "\n");
+
+					// Close the output stream
+					out.close();
+
+				} catch (Exception e) {// Catch exception if any
+					System.err.println("Error: " + e.getMessage());
+					System.exit(1);
+				}
+				String stringMinutes = new String(minutes
+						+ "");
+				String stringSeconds = new String(seconds + "");
+				if (minutes < 10) {
+					stringMinutes = 0 + stringMinutes;
+				}
+				if (seconds < 10) {
+					stringSeconds = 0 + stringSeconds;
+				}
+				register.startRace();
+				lastRegisteredRiders = lastRegisteredRiders + "\n"
+						+ driverID.getText() + "; "
+						+ hours + "."
+						+ stringMinutes + "." + stringSeconds;
+				textArea.setText(lastRegisteredRiders);
+				driverID.setText("");
+			}
 
 		}
 	}
