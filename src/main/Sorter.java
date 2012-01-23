@@ -47,7 +47,7 @@ public class Sorter {
 			// Create file
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
-			out.write("StartNr; Totaltid; Starttid; Måltid\n");
+			out.write("StartNr; Namn; Totaltid; Starttid; Måltid\n");
 
 			for (Integer i : register.keySet()) {
 				out.write(checkError(i, register.get(i).startTime(), register
@@ -83,7 +83,11 @@ public class Sorter {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(i + "; ");
-
+		if (register.get(i).getName()==null){
+			sb.append("--.--.--; ");
+		}else{
+			sb.append(register.get(i).getName());
+		}
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
 		} else {
