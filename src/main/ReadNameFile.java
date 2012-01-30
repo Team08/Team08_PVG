@@ -17,24 +17,6 @@ public class ReadNameFile extends FileIO {
 	protected void add() {
 		sorter.addName(riderID, name);	
 	}
-				while (scanner.hasNextLine()) {
-					line = scanner.nextLine();
-					String[] strArr = line.split("; ");
-					Integer startNumber = Integer.parseInt(strArr[0]);
-					String name = strArr[1];
-					
-					if (tm.containsKey(startNumber)) {
-						tm.get(startNumber).setName(name);
-					} else {
-						tm.put(startNumber, new Driver(name));
-					}
-				}
-			}
-		} catch (IOException e) {
-			System.err.println("Error: " + e.getMessage());
-			throw new IOException();
-		}
-
-
+			
 }
 
