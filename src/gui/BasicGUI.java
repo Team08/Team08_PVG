@@ -33,6 +33,14 @@ public class BasicGUI extends JFrame {
 	private JScrollPane scrollPane;
 	private String lastRegisteredDrivers;
 
+	/**
+	 * The constructor which creates the GUI
+	 * 
+	 * @param frameName
+	 *            the name of the frame and the register object
+	 * @param register
+	 * 			  the target register           
+	 */
 	public BasicGUI(String frameName, Register register) {
 		super(frameName);
 		this.register = register;
@@ -92,6 +100,18 @@ public class BasicGUI extends JFrame {
 		driverID.setFont(newTextFont);
 	}
 
+	/**
+	 * Add text to the ScrollPane
+	 * 
+	 * @param hours
+	 *              the actual hours
+	 * @param minutes
+	 * 				the actual minutes
+	 * @param seconds
+	 * 				the actual seconds
+	 * @param driver       
+	 * 				the actual driver   
+	 */
 	public void writeInScrollPane(String hours, String minutes, String seconds, String driver) {
 		lastRegisteredDrivers = lastRegisteredDrivers + "\n"
 				+ driver + "; " + hours + "." + minutes + "."
