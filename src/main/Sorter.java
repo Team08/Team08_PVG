@@ -128,15 +128,19 @@ public class Sorter {
 						.get(finishTime.size() - 1));
 			} else {
 				totalTime = Time.timeDiff(startTime.get(0), finishTime.get(0));
-				if (totalTime.compareTo("0.15.00") < 0) {
-					totalCheck = "; Omöjlig Totaltid?";
-				}
+			}
+			if (totalTime.compareTo("0.15.00") < 0) {
+				totalCheck = "; Omöjlig Totaltid?";
 			}
 			sb.append(totalTime + "; ");
 			
 		}
 		if(raceType==2){
-			for()
+			
+				for (int j = 0; j < laps; j++) {
+					
+				
+			}
 		}
 		if (startTime.size() == 0) {
 			sb.append("Start?; ");
