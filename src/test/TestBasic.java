@@ -16,11 +16,10 @@ import org.junit.Test;
 
 public class TestBasic {
 private Register register;
-private Driver driver;
+
 
 	@Before public void setup(){
-		this.driver = new Driver("Team08");
-		this.register = new Register(driver);
+		this.register = new Register();
 	}
 	
 	@Test public void  testThatRaceTimeIsGreaterThanZero(){
