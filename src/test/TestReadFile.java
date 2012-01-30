@@ -14,20 +14,22 @@ import main.Sorter;
 import org.junit.Test;
 
 public class TestReadFile extends Sorter {
-	private FileIO fileIO;
-	private ReadStartFile rsf;
-	private ReadFinishFile rff;
+
+	private ReadStartFile startfFile;
+	private ReadFinishFile finishFile;
 
 	public TestReadFile() {
 		super("TestStart.test", "TestStart.test", "");
-		 rsf = new ReadStartFile(new Sorter("TestStart.test", "TestStart.test", ""), "TestStart.test");
-		 rff = new ReadFinishFile(new Sorter("TestStart.test", "TestStart.test", ""), "TestStart.test");
+		 startfFile = new ReadStartFile(new Sorter("TestStart.test", "TestStart.test", ""), "TestStart.test");
+		 finishFile = new ReadFinishFile(new Sorter("TestStart.test", "TestStart.test", ""), "TestStart.test");
 	}
 
 	@Test
 	public void TestReadStartFile() {
 		try {
-			rsf.read();
+
+			startfFile.readFile();
+
 			File file = new File("TestStart.test");
 			Set<Integer> driverSet = register.keySet();
 			Scanner scan;
@@ -54,7 +56,8 @@ public class TestReadFile extends Sorter {
 	@Test
 	public void TestReadFinishFile() {
 		try {
-			rff.read();
+			finishFile.readFile();
+
 			File file = new File("TestStart.test");
 			Set<Integer> driverSet = register.keySet();
 			Scanner scan;

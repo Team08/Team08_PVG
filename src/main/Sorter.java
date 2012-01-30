@@ -50,11 +50,11 @@ public class Sorter {
 	protected void writeResultFile(String name) {
 		try {
 			// Names are put in the TreeMap from the name file
-			rnf.read();
+			rnf.readFile();
 			// Start file is read, and start times are put in the register
-			rsf.read();
+			rsf.readFile();
 			// Finish file is read, and finish times are put in the register
-			rff.read();
+			rff.readFile();
 			// Create file
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
@@ -75,16 +75,16 @@ public class Sorter {
 		}
 	}
 
-	private String checkError(int i, List<String> startTime,
-			List<String> finishTime) {
 
+	private String checkError(int i, List<String> startTime, List<String> finishTime) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(i + "; ");
 		String totalCheck = "";
 		String name = register.get(i).getName();
-		if (name == null) {
+
+		if (name==null){
 			sb.append("Namn?; ");
-		} else {
+		}else{
 			sb.append(name + "; ");
 		}
 		if (startTime.size() == 0 || finishTime.size() == 0) {
@@ -92,7 +92,8 @@ public class Sorter {
 		} else {
 			String totalTime = time.totalTime(startTime, finishTime);
 			sb.append(totalTime + "; ");
-			if (totalTime.compareTo("0.15.00") < 0) {
+
+			if(totalTime.compareTo("0.15.00") < 0){
 				totalCheck = "; Omöjlig Totaltid?";
 			}
 		}

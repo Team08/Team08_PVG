@@ -7,6 +7,8 @@ import java.util.Scanner;
 public abstract class FileIO {
 	protected Sorter sorter;
 	protected String fileName;
+	protected int riderID;
+	protected String name;
 
 	protected FileIO(Sorter sorter, String fileName) {
 		this.sorter = sorter;
@@ -14,31 +16,44 @@ public abstract class FileIO {
 	}
 
 	/**
-	 * Reads file specified in constructor and updates the Driver-database. If
-	 * the driver doesn't exist it is added to the database
+	 * Reads file specified in constructor and puts the name in the specified
+	 * TreeMap If Driver doesn't exist in TreeMap the Driver is added
+	 * 
+	 * @param tm
+	 *            The TreeMap with Drivers to put names in
+	 * @throws IOException
 	 */
-	public void read() throws FileNotFoundException {
+	public void readFile() throws FileNotFoundException {
 		if (fileName != null) {
 			File file = new File(fileName);
-			Scanner scan;
+			Scanner scanner;
 			try {
-				scan = new Scanner(file);
+				scanner = new Scanner(file);
 				String line;
-				while (scan.hasNextLine()) {
-					line = scan.nextLine();
-					String[] data = line.split("; ");
-					Integer startNumber = Integer.parseInt(data[0]);
-
-					// What happens if more than 1 start time?
-					// A for-loop should be added to make sure that the entire
-					// vector is added
-					add(startNumber, data[1]);
+				while (scanner.hasNextLine()) {
+					line = scanner.nextLine();
+					String[] str = line.split("; ");
+					name = str[1];
+					riderID = Integer.parseInt(str[0]);
+					add(); // What happens
+					// if more than
+					// one finish
+					// time?
+					// A for-loop
+					// should be
+					// added to make
+					// sure that the
+					// entire
+					// vector is
+					// added.
 				}
+
 			} catch (FileNotFoundException e) {// Catch exception if any
 				throw new FileNotFoundException();
 			}
 		}
 	}
+	
+	protected abstract void add();
 
-	protected abstract void add(Integer startNbr, String value);
 }

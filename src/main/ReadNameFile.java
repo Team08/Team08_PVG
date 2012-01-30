@@ -12,9 +12,12 @@ public class ReadNameFile extends FileIO {
 		super(sorter, fileName);
 	}
 
-	@Override
-	protected void add(Integer startNbr, String value) {
-		sorter.addName(startNbr, value);
+	protected void add() {
+		sorter.addName(riderID, name);
+		
 	}
 
+
+
 }
+

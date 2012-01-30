@@ -32,7 +32,7 @@ public class TestReadFileFromFile {
 	public void TestReadStartFileThrowsNoSuchFileException()
 			throws FileNotFoundException {
 		try {
-			rsf.read();
+			rsf.readFile();
 		} catch (FileNotFoundException e) {
 			throw e;
 		}
@@ -42,7 +42,7 @@ public class TestReadFileFromFile {
 	public void TestReadFinishFileThrowsNoSuchFileException()
 			throws FileNotFoundException {
 		try {
-			rff.read();
+			rff.readFile();
 		} catch (FileNotFoundException e) {
 			throw e;
 		}

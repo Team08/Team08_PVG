@@ -3,10 +3,11 @@ package main;
 import java.util.List;
 
 public class Time {
-
+	
 	public Time() {
-
+		
 	}
+	
 
 	public String totalTime(List<String> startTime, List<String> finishTime) {
 		String[] temp = startTime.get(0).split("\\.");
@@ -45,5 +46,4 @@ public class Time {
 		int start = 3600 * hour + 60 * minute + second;
 		return start;
 	}
-
 }
