@@ -2,6 +2,10 @@ package test;
 
 
 import static org.junit.Assert.*;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import main.Driver;
 import main.Time;
 
@@ -95,4 +99,19 @@ public class TestTime {
 		Time.timeDiff("36.00", "00.00.00");
 		
 	}
+	
+	@Test
+	public void testGetCurrentTime() {
+		String[] currTime = Time.makeTimeList();
+		GregorianCalendar calendar = new GregorianCalendar();
+		int hours = calendar.get(Calendar.HOUR_OF_DAY);
+		int minutes = calendar.get(Calendar.MINUTE);
+		int seconds = calendar.get(Calendar.SECOND);
+		String[] currTime2 = {Integer.toString(hours), Time.addZero(minutes), Time.addZero(seconds)};
+		
+		assertArrayEquals(currTime, currTime2);
+		
+		
+	}
+	
 }
