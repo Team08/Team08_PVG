@@ -43,6 +43,7 @@ public class RegisterButton extends JButton implements ActionListener {
 								+ " \n Förarnummer: ");
 
 				if (!driverID.equals(JOptionPane.OK_OPTION)) {
+					if (driverID.length() > 0)
 					regDriverToFile(driverID, times);
 				}
 			} catch (NullPointerException e) {
