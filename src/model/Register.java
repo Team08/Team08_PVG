@@ -30,8 +30,14 @@ public class Register {
 			System.exit(1);
 		}
 	}
-
-
+	
+	
+	/**
+	 * Writes driver to file
+	 * 
+	 * @param name
+	 * 				name of driver
+	 */			
 	public void registerDriver(String name) {
 		String[] times = Time.makeTimeList(); 
 		writeToFile(name, times[0], times[1], times[2]);

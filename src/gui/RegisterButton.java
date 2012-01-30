@@ -12,6 +12,12 @@ public class RegisterButton extends JButton implements ActionListener {
 	private BasicGUI gui;
 	private Register register;
 
+	/**
+	 * The constructor which creates a RegisterButton
+	 * 
+	 * @param gui, register
+	 *            the basicGUI and register
+	 */	
 	public RegisterButton(BasicGUI gui, Register register) {
 		super("Registrera förare");
 		this.gui = gui;
@@ -19,6 +25,12 @@ public class RegisterButton extends JButton implements ActionListener {
 		addActionListener(this);
 	}
 
+	/**
+	 * The Actionlistener of the RegisterButton
+	 * 
+	 * @param arg0
+	 *            ActionEvent
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 		String name = gui.getDriverText();
 		String[] times = Time.makeTimeList();

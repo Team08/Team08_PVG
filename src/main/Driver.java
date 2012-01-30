@@ -13,6 +13,12 @@ public class Driver {
 
 	}
 	
+	/**
+	 * The constructor which creates the Driver
+	 * 
+	 * @param name
+	 *            the drivers name
+	 */
 	public Driver(String name) {
 		this.name = name;
 	}
@@ -112,7 +118,6 @@ public class Driver {
 	 * 
 	 * @return The number of laps as an integer
 	 */
-
 	public int getNumberOfLaps() {
 		return finishTime.size();
 	}
