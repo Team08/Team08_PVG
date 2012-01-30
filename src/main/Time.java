@@ -1,5 +1,9 @@
 package main;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+
 public class Time {
 
 	/**
@@ -74,4 +78,22 @@ public class Time {
 		int start = 3600 * hour + 60 * minute + second;
 		return start;
 	}
+	public static String[] makeTimeList(){
+		GregorianCalendar calendar = new GregorianCalendar();
+
+		int hours = calendar.get(Calendar.HOUR_OF_DAY);
+		int minutes = calendar.get(Calendar.MINUTE);
+		int seconds = calendar.get(Calendar.SECOND);
+		String[] times = new String[3];
+		String stringMinutes = Time.addZero(minutes);
+		String stringSeconds = Time.addZero(seconds);
+
+
+		times[0] = Integer.toString(hours);
+		times[1] = stringMinutes;
+		times[2] = stringSeconds;
+
+		return times;
+	}
+	
 }

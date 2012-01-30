@@ -4,7 +4,9 @@ import gui.BasicGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
+import main.Time;
 import model.Register;
 
 public class RegisterButton extends JButton implements ActionListener {
@@ -20,10 +22,24 @@ public class RegisterButton extends JButton implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 		String name = gui.getDriverText();
+		String[] times = Time.makeTimeList();
 		if (gui.getDriverText().length() != 0) {
-			String[] times = register.registerDriver(name);
-			gui.writeInScrollPane(times[0], times[1], times[2]);
+			register.registerDriver(name);
+			gui.writeInScrollPane(times[0], times[1], times[2], gui
+					.getDriverText());
 
+		} else {
+			String driverID;
+
+			driverID = JOptionPane.showInputDialog(null,
+					"Den registrerade tiden är :" + times[0] + "." + times[1]
+							+ "." + times[2] + " \n Förarnummer: ");
+
+			if (!driverID.equals(JOptionPane.OK_OPTION)) {
+				register.registerDriver(driverID);
+				gui.writeInScrollPane(times[0], times[1], times[2], driverID);
+			}
+			
 		}
 	}
 

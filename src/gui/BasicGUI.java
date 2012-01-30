@@ -93,9 +93,9 @@ public class BasicGUI extends JFrame {
 		driverID.setFont(newTextFont);
 	}
 
-	public void writeInScrollPane(String hours, String minutes, String seconds) {
+	public void writeInScrollPane(String hours, String minutes, String seconds, String driver) {
 		lastRegisteredDrivers = lastRegisteredDrivers + "\n"
-				+ driverID.getText() + "; " + hours + "." + minutes + "."
+				+ driver + "; " + hours + "." + minutes + "."
 				+ seconds;
 		textArea.setText(lastRegisteredDrivers);
 		driverID.setText("");
