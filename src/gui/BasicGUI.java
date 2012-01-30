@@ -17,7 +17,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import control.RegisterButton;
 
 import model.Register;
 
@@ -101,8 +100,10 @@ public class BasicGUI extends JFrame {
 		driverID.setText("");
 	}
 
-	public String getDriverText() {
+	protected String getDriverText() {
 		return driverID.getText();
 	}
+	
+	
 
 }
