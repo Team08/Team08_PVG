@@ -7,7 +7,7 @@ public class Driver {
 	private String name;
 	private List<String> startTime = new ArrayList<String>();
 	private List<String> finishTime = new ArrayList<String>();
-	
+
 	public Driver() {
 
 	}
@@ -21,12 +21,12 @@ public class Driver {
 	}
 
 	/**
-     * Inserts a new start time The current start time is replaced by the new
-     * time
-     *
-     * @param time
-     *            The start time
-     */
+	 * Inserts a new start time The current start time is replaced by the new
+	 * time
+	 * 
+	 * @param time
+	 *            The start time
+	 */
 	public void addStartTime(String time) {
 		startTime.add(time);
 
@@ -41,38 +41,46 @@ public class Driver {
 	}
 
 	/**
-     * Inserts a new finish time
-     *
-     * @param time    The new time that replaces the old one
-     */
+	 * Inserts a new finish time
+	 * 
+	 * @param time
+	 *            The new time that replaces the old one
+	 */
 	public void addFinishTime(String time) {
 		finishTime.add(time);
 
 	}
 
 	public void setName(String name) {
-		this.name = name;		
+		this.name = name;
 	}
-	
-	
+
 	/**
 	 * Returns the time from last registered time to the lap i
-	 * @param i    The lapnumber, starting from 0
-	 * @return    The time as a String
+	 * 
+	 * @param i
+	 *            The lapnumber, starting from 0
+	 * @return The time as a String
 	 */
 	public String getLapTime(int i) {
-		if(i == 0){}
-		return " ";
+		String laptime;
+		if (i == 0) {
+			laptime = Time.timeDiff(startTime.get(0), finishTime.get(0));
+		}else if (finishTime.size() > i){
+			laptime = Time.timeDiff(finishTime.get(i-1), finishTime.get(i));
+		}else{
+			laptime = "";
+		}
+		return laptime;
 	}
-	
+
 	/**
-	 * Converts a time represented as a string into a time represented as an integer
-	 * @param temp    The time as a string vector
-	 * @return    The time as an integer
+	 * Returns the number of laps
+	 * 
+	 * @return The number of laps as an integer
 	 */
-	
+
 	public int getNumberOfLaps() {
-		// TODO Auto-generated method stub
-		return 0;
+		return finishTime.size();
 	}
 }
