@@ -24,23 +24,29 @@ public class RegisterButton extends JButton implements ActionListener {
 		String name = gui.getDriverText();
 		String[] times = Time.makeTimeList();
 		if (gui.getDriverText().length() != 0) {
-			register.registerDriver(name);
-			gui.writeInScrollPane(times[0], times[1], times[2], gui
-					.getDriverText());
+			regDriverToFile(name, times);
 
 		} else {
-			String driverID;
+			try {
+				String driverID = JOptionPane.showInputDialog(null,
+						"Den registrerade tiden är : " + times[0] + "."
+								+ times[1] + "." + times[2]
+								+ " \n Förarnummer: ");
 
-			driverID = JOptionPane.showInputDialog(null,
-					"Den registrerade tiden är :" + times[0] + "." + times[1]
-							+ "." + times[2] + " \n Förarnummer: ");
-
-			if (!driverID.equals(JOptionPane.OK_OPTION)) {
-				register.registerDriver(driverID);
-				gui.writeInScrollPane(times[0], times[1], times[2], driverID);
+				if (!driverID.equals(JOptionPane.OK_OPTION)) {
+					regDriverToFile(driverID, times);
+				}
+			} catch (NullPointerException e) {
 			}
-			
+
 		}
+	}
+
+	private void regDriverToFile(String name, String[] times) {
+		register.registerDriver(name);
+		gui
+				.writeInScrollPane(times[0], times[1], times[2], gui
+						.getDriverText());
 	}
 
 }
