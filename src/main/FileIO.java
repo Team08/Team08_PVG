@@ -16,12 +16,9 @@ public abstract class FileIO {
 	}
 
 	/**
-	 * Reads file specified in constructor and puts the name in the specified
-	 * TreeMap If Driver doesn't exist in TreeMap the Driver is added
+	 * Reads a file and add it to sorter
 	 * 
-	 * @param tm
-	 *            The TreeMap with Drivers to put names in
-	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
 	public void readFile() throws FileNotFoundException {
 		if (fileName != null) {

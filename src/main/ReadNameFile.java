@@ -10,8 +10,10 @@ public class ReadNameFile extends FileIO {
 	/**
 	 * The constructor which takes the file name of the name file as argument
 	 * 
-	 * @param sorter, fileName
-	 *            target sorter object and the startfile name
+	 * @param sorter
+	 *            the target sorter
+	 * @param fileName
+	 * 			  the namefiles name
 	 */
 	public ReadNameFile(Sorter sorter, String fileName) {
 		super(sorter, fileName);

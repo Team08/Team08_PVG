@@ -15,8 +15,10 @@ public class RegisterButton extends JButton implements ActionListener {
 	/**
 	 * The constructor which creates a RegisterButton
 	 * 
-	 * @param gui, register
-	 *            the basicGUI and register
+	 * @param gui
+	 *          the basicGUI
+	 * @param register
+	 * 			the target register
 	 */	
 	public RegisterButton(BasicGUI gui, Register register) {
 		super("Registrera förare");
