@@ -157,8 +157,14 @@ public class Sorter {
 		driver.setName(name);
 		register.put(startNumber, driver);
 	}
+	
+	public void addClass(Integer startNumber, String c) {
+		Driver driver = getDriver(startNumber);
+		driver.addClass(c);
+		register.put(startNumber, driver);
+	}
 
-	private Driver getDriver(Integer key) {
+	public Driver getDriver(Integer key) {
 		return register.containsKey(key) ? register.get(key) : new Driver();
 	}
 
