@@ -3,6 +3,7 @@ package main;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class ReadNameFile extends FileIO {
 
@@ -59,11 +60,8 @@ public class ReadNameFile extends FileIO {
 	}
 	
 	protected void add() {
-		sorter.addName(riderID, name);
-		
+		sorter.addName(riderID, name);	
 	}
-
-
-
+			
 }
 
