@@ -21,7 +21,8 @@ public class RegisterButton extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		String name = gui.getDriverText();
 		if (gui.getDriverText().length() != 0) {
-			String[] times = register.registerDriver(name);
+			register.registerDriver(name);
+			String[] times = register.writeToGUI(name);
 			gui.writeInScrollPane(times[0], times[1], times[2]);
 
 		}

@@ -25,7 +25,7 @@ private Sorter sorter;
 	
 	@Test public void  testThatRaceTimeIsGreaterThanZero(){
 		register.registerDriver("Hanna");
-		assertTrue("Time was not greater than zero", register.registerDriver("Hanna").length > 0);
+		assertTrue("Time was not greater than zero", register.writeToGUI("Hanna").length > 0);
 	}
 	
 	@Test public void testDriversName(){
