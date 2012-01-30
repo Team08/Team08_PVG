@@ -11,7 +11,6 @@ public class Sorter {
 	private ReadNameFile rnf;
 	private ReadStartFile rsf;
 	private ReadFinishFile rff;
-	private Time time;
 
 	public Sorter(String startFileName, String stopFileName, String nameFile) {
 		this.startFile = startFileName;
@@ -20,7 +19,6 @@ public class Sorter {
 		rsf = new ReadStartFile(this, startFile);
 		rff = new ReadFinishFile(this, stopFile);
 		register = new TreeMap<Integer, Driver>();
-		time = new Time();
 	}
 
 	public static void main(String[] args) {
@@ -90,7 +88,7 @@ public class Sorter {
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
 		} else {
-			String totalTime = time.totalTime(startTime, finishTime);
+			String totalTime = Time.timeDiff(startTime.get(0), finishTime.get(0));
 			sb.append(totalTime + "; ");
 
 			if(totalTime.compareTo("0.15.00") < 0){
