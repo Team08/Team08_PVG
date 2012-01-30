@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 import main.Driver;
+import main.ReadFinishFile;
+import main.ReadStartFile;
 import main.Sorter;
 
 import org.junit.After;

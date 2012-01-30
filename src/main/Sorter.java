@@ -2,8 +2,6 @@ package main;
 
 import java.io.*;
 import java.util.List;
-
-
 import java.util.TreeMap;
 
 public class Sorter {
@@ -21,7 +19,7 @@ public class Sorter {
 		rnf = new ReadNameFile(this, nameFile);
 		rsf = new ReadStartFile(this, startFile);
 		rff = new ReadFinishFile(this, stopFile);
-		register = new TreeMap<Integer, Driver>();	
+		register = new TreeMap<Integer, Driver>();
 		time = new Time();
 	}
 
@@ -65,7 +63,8 @@ public class Sorter {
 
 			for (Integer i : register.keySet()) {
 				tDriver = register.get(i);
-				out.write(checkError(i, tDriver.startTime(), tDriver.finishTime()));
+				out.write(checkError(i, tDriver.startTime(),
+						tDriver.finishTime()));
 			}
 			// Close the output stream
 			out.close();
@@ -78,11 +77,11 @@ public class Sorter {
 
 
 	private String checkError(int i, List<String> startTime, List<String> finishTime) {
-
 		StringBuilder sb = new StringBuilder();
 		sb.append(i + "; ");
 		String totalCheck = "";
 		String name = register.get(i).getName();
+
 		if (name==null){
 			sb.append("Namn?; ");
 		}else{
@@ -93,7 +92,8 @@ public class Sorter {
 		} else {
 			String totalTime = time.totalTime(startTime, finishTime);
 			sb.append(totalTime + "; ");
-			if(totalTime.compareTo("0.15.00")<0){
+
+			if(totalTime.compareTo("0.15.00") < 0){
 				totalCheck = "; Omöjlig Totaltid?";
 			}
 		}
@@ -102,7 +102,7 @@ public class Sorter {
 		} else {
 			sb.append(startTime.get(0) + "; ");
 		}
-		if (finishTime.size()==0) {
+		if (finishTime.size() == 0) {
 			sb.append("Slut?");
 		} else {
 			sb.append(finishTime.get(0));
@@ -154,16 +154,16 @@ public class Sorter {
 		register.put(startNumber, driver);
 	}
 
+	public void addName(Integer startNumber, String name) {
+		Driver driver = getDriver(startNumber);
+		driver.setName(name);
+		register.put(startNumber, driver);
+	}
+
 	private Driver getDriver(Integer key) {
 		return register.containsKey(key) ? register.get(key) : new Driver();
 	}
 
-	public void addName(Integer startNumber, String name) {
-		Driver driver = getDriver(startNumber);
-		driver.setName(name);
-		register.put(startNumber, driver);	
-	}
-	
 	public int size() {
 		return register.size();
 	}

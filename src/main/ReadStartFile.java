@@ -1,6 +1,5 @@
 package main;
 
-
 public class ReadStartFile extends FileIO {
 
 	public ReadStartFile(Sorter sorter, String fileName) {
@@ -11,5 +10,5 @@ public class ReadStartFile extends FileIO {
 		sorter.addStartTime(riderID, name);
 		
 	}
-	
+
 }

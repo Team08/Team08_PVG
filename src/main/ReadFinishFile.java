@@ -11,5 +11,4 @@ public class ReadFinishFile extends FileIO {
 		sorter.addFinishTime(riderID, name);
 		
 	}
-	
 }

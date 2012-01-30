@@ -14,6 +14,7 @@ import main.Sorter;
 import org.junit.Test;
 
 public class TestReadFile extends Sorter {
+
 	private ReadStartFile startfFile;
 	private ReadFinishFile finishFile;
 
@@ -26,7 +27,9 @@ public class TestReadFile extends Sorter {
 	@Test
 	public void TestReadStartFile() {
 		try {
+
 			startfFile.readFile();
+
 			File file = new File("TestStart.test");
 			Set<Integer> driverSet = register.keySet();
 			Scanner scan;
@@ -54,6 +57,7 @@ public class TestReadFile extends Sorter {
 	public void TestReadFinishFile() {
 		try {
 			finishFile.readFile();
+
 			File file = new File("TestStart.test");
 			Set<Integer> driverSet = register.keySet();
 			Scanner scan;

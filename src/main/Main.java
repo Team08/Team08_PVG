@@ -1,4 +1,5 @@
 package main;
+import model.Register;
 import gui.BasicGUI;
 
 public class Main {
