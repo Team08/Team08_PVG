@@ -51,5 +51,31 @@ public class TestReadNameFile extends Sorter {
 		}
 		assertEquals("Incorrect number of drivers, should be 5, was" + sorter.size(), 5, sorter.size());
 	}
+	
+	
+
+	
+	@Test
+	public void testCorrectClass() {
+		try {
+				namefile.readFile();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		assertEquals("Incorrect class should be SENIOR, was" + sorter.getDriver(2).classes().get(0), "SENIOR", sorter.getDriver(2).classes().get(0));
+		assertEquals("Incorrect class should be JUNIOR, was" + sorter.getDriver(103).classes().get(0), "JUNIOR", sorter.getDriver(103).classes().get(0));
+	}
+	
+	@Test
+	public void testCorrectName() {
+		try {
+				namefile.readFile();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		assertEquals("Incorrect name of driver, should be Bengt Bsson, was" + sorter.size(), "Bengt Bsson", sorter.getDriver(2).getName());
+		assertEquals("Incorrect name of driver, should be Erik Esson, was" + sorter.size(), "Erik Esson", sorter.getDriver(103).getName());
+	}
+	
 
 }

@@ -100,5 +100,12 @@ public class TestDriver {
 		Time t = new Time();
 		assertEquals("0.22.00", Time.timeDiff(driver.startTime().get(0), driver.finishTime().get(0)));
 	}
-
+	
+	@Test
+	public void testAddClassToDriverAndFetch() {
+		String specClass = "KLASS";
+		driver.addClass(specClass);
+		assertEquals(specClass, driver.classes().get(0));
+	}
+	
 }

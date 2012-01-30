@@ -39,8 +39,20 @@ private Register register;
 		assertTrue("The Registerfile was not found", sc.hasNext()); 
 		sc.close();
 	}
-	
-
-	
-	
+	@Test public void testThatRegisterFileContainsCorrectName(){
+		register.registerDriver("Hanna");
+		File file = new File("Register.txt");
+		try {
+		Scanner sc = new Scanner(file);
+		String[] firstLine = new String[3];
+		if(sc.hasNext()){
+		String string = sc.nextLine();
+		firstLine = string.split("; ");
+		}
+		assertEquals("The Registerfile was not found", "Hanna", firstLine[0]); 
+		sc.close();
+	} catch (Exception e){
+		e.printStackTrace();
+	}
+	}
 }
