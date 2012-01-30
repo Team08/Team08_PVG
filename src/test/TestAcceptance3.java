@@ -1,12 +1,11 @@
 package test;
 
 import static org.junit.Assert.*;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
 import main.Sorter;
-
 import org.junit.Before;
 import org.junit.Test;
 

@@ -8,29 +8,28 @@ public class Time {
 		
 	}
 	
+
 	public String totalTime(List<String> startTime, List<String> finishTime) {
 		String[] temp = startTime.get(0).split("\\.");
 		int start = parseTime(temp);
-
 
 		temp = finishTime.get(0).split("\\.");
 		int finish = parseTime(temp);
 
 		int totalInt = finish - start;
-		
+
 		int minutes = (totalInt % 3600) / 60;
-		String min  = addZero(minutes);
-		
+		String min = addZero(minutes);
+
 		int seconds = (totalInt % 3600) % 60;
 		String sec = addZero(seconds);
-		
-		
+
 		String total = totalInt / 3600 + "." + min + "." + sec;
 
 		return total;
 	}
 
-	private String addZero(int minutes) {
+	public String addZero(int minutes) {
 		String min;
 		if (minutes < 10) {
 			min = "0" + minutes;
@@ -47,7 +46,4 @@ public class Time {
 		int start = 3600 * hour + 60 * minute + second;
 		return start;
 	}
-	
-	
-
 }
