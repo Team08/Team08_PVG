@@ -67,7 +67,7 @@ public class Time {
 		return total;
 
 	}
-
+	
 	private static int parseTime(String[] temp) throws NumberFormatException {
 		int hour = Integer.parseInt(temp[0]);
 		int minute = Integer.parseInt(temp[1]);
@@ -79,7 +79,12 @@ public class Time {
 		return start;
 	}
 	
-	
+	/**
+	 * Returns a list of three strings, [0]hours, [1]minutes and [2]seconds
+	 * 
+	 * @return the list with strings
+	 *
+	 */
 	public static String[] makeTimeList(){
 		GregorianCalendar calendar = new GregorianCalendar();
 
@@ -89,8 +94,6 @@ public class Time {
 		String[] times = new String[3];
 		String stringMinutes = Time.addZero(minutes);
 		String stringSeconds = Time.addZero(seconds);
-
-
 		times[0] = Integer.toString(hours);
 		times[1] = stringMinutes;
 		times[2] = stringSeconds;
