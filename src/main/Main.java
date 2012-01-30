@@ -9,6 +9,6 @@ public class Main {
      * @param args
      */
 	public static void main(String[] args) {
-		new BasicGUI("Start",new Register());
+		new BasicGUI("Registrering",new Register());
 	}
 }
