@@ -4,23 +4,23 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.util.Scanner;
 
 import main.Driver;
 import model.Register;
 import main.Sorter;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class TestBasic {
 private Register register;
 private Driver driver;
-private Sorter sorter;
 
 	@Before public void setup(){
 		this.driver = new Driver("Team08");
 		this.register = new Register(driver);
-		this.sorter = new Sorter("Start.txt","Stop.txt", "");
 	}
 	
 	@Test public void  testThatRaceTimeIsGreaterThanZero(){
@@ -33,17 +33,14 @@ private Sorter sorter;
 		assertEquals("Joe",driver.getName());
 	}
 	
-	@Test public void testThatStartFileCreates(){
+	@Test public void testThatRegisterFileCreates(){
 		register.registerDriver("Joe");
-		File f = new File("Start.txt");
-		assertTrue("The Startfile was not found", f.exists()); 
+		Scanner sc = new Scanner("Register.txt");
+		assertTrue("The Registerfile was not found", sc.hasNext()); 
+		sc.close();
 	}
 	
-	@Test public void testThatStopFileCreates(){
-		register.registerDriver("Joe");
-		File f = new File("Stop.txt");
-		assertTrue("The Stopfile was not found", f.exists()); 
-	}
+
 	
 	
 }
