@@ -1,10 +1,8 @@
 package main;
 
 import java.io.*;
-
 import java.util.List;
 
-import java.util.Scanner;
 
 import java.util.TreeMap;
 
@@ -13,12 +11,18 @@ public class Sorter {
 	private String stopFile;
 	private String startFile;
 	private ReadNameFile rnf;
+	private ReadStartFile rsf;
+	private ReadFinishFile rff;
+	private Time time;
 
 	public Sorter(String startFileName, String stopFileName, String nameFile) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
-		rnf = new ReadNameFile(nameFile);
+		rnf = new ReadNameFile(this, nameFile);
+		rsf = new ReadStartFile(this, startFile);
+		rff = new ReadFinishFile(this, stopFile);
 		register = new TreeMap<Integer, Driver>();	
+		time = new Time();
 	}
 
 	public static void main(String[] args) {
@@ -48,7 +52,11 @@ public class Sorter {
 	protected void writeResultFile(String name) {
 		try {
 			// Names are put in the TreeMap from the name file
-			rnf.readFile(register);
+			rnf.readFile();
+			// Start file is read, and start times are put in the register
+			rsf.readFile();
+			// Finish file is read, and finish times are put in the register
+			rff.readFile();
 			// Create file
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
@@ -68,38 +76,24 @@ public class Sorter {
 		}
 	}
 
-	public void readStartFile() throws FileNotFoundException {
-		File file = new File(startFile);
-		Scanner scan;
-		try {
-			scan = new Scanner(file);
-			String line;
-			while (scan.hasNextLine()) {
-				line = scan.nextLine();
-				String[] str = line.split("; "); 
-				Integer startNumber = Integer.parseInt(str[0]);
-				addStartTime(startNumber, str[1]);
-			}
-		} catch (FileNotFoundException e) {// Catch exception if any
-			throw new FileNotFoundException();
-		}
-	}
 
 	private String checkError(int i, List<String> startTime, List<String> finishTime) {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(i + "; ");
 		String totalCheck = "";
-		if (register.get(i).getName()==null){
+		String name = register.get(i).getName();
+		if (name==null){
 			sb.append("Namn?; ");
 		}else{
-			sb.append(register.get(i).getName() + "; ");
+			sb.append(name + "; ");
 		}
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
 		} else {
-			sb.append(register.get(i).totalTime() + "; ");
-			if(register.get(i).totalTime().compareTo("0.15.00")<0){
+			String totalTime = time.totalTime(startTime, finishTime);
+			sb.append(totalTime + "; ");
+			if(totalTime.compareTo("0.15.00")<0){
 				totalCheck = "; Omöjlig Totaltid?";
 			}
 		}
@@ -128,30 +122,6 @@ public class Sorter {
 		sb.append(totalCheck);
 		sb.append("\n");
 		return sb.toString();
-	}
-
-	public void readFinishFile() throws FileNotFoundException {
-		File file = new File(stopFile);
-		Scanner scan;
-		try {
-			scan = new Scanner(file);
-			scan.useDelimiter(";");
-			String line;
-			while (scan.hasNextLine()) {
-				line = scan.nextLine();
-				String[] str = line.split("; "); 
-				Integer startNumber = Integer.parseInt(str[0]);
-				addFinishTime(startNumber, str[1]);
-				}
-
-			while (scan.hasNext()) {
-				Integer startNumber = Integer.parseInt(scan.next().trim());
-				addFinishTime(startNumber, scan.next().trim());
-			}
-
-		} catch (FileNotFoundException e) {// Catch exception if any
-			throw new FileNotFoundException();
-		}
 	}
 
 	/**
@@ -186,6 +156,16 @@ public class Sorter {
 
 	private Driver getDriver(Integer key) {
 		return register.containsKey(key) ? register.get(key) : new Driver();
+	}
+
+	public void addName(Integer startNumber, String name) {
+		Driver driver = getDriver(startNumber);
+		driver.setName(name);
+		register.put(startNumber, driver);	
+	}
+	
+	public int size() {
+		return register.size();
 	}
 
 }

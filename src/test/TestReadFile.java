@@ -6,19 +6,27 @@ import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
+
+import main.FileIO;
+import main.ReadFinishFile;
+import main.ReadStartFile;
 import main.Sorter;
 import org.junit.Test;
 
 public class TestReadFile extends Sorter {
+	private ReadStartFile startfFile;
+	private ReadFinishFile finishFile;
 
 	public TestReadFile() {
 		super("TestStart.test", "TestStart.test", "");
+		 startfFile = new ReadStartFile(new Sorter("TestStart.test", "TestStart.test", ""), "TestStart.test");
+		 finishFile = new ReadFinishFile(new Sorter("TestStart.test", "TestStart.test", ""), "TestStart.test");
 	}
 
 	@Test
 	public void TestReadStartFile() {
 		try {
-			super.readStartFile();
+			startfFile.readFile();
 			File file = new File("TestStart.test");
 			Set<Integer> driverSet = register.keySet();
 			Scanner scan;
@@ -45,7 +53,7 @@ public class TestReadFile extends Sorter {
 	@Test
 	public void TestReadFinishFile() {
 		try {
-			super.readFinishFile();
+			finishFile.readFile();
 			File file = new File("TestStart.test");
 			Set<Integer> driverSet = register.keySet();
 			Scanner scan;

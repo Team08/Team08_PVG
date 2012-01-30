@@ -3,6 +3,7 @@ package test;
 
 import static org.junit.Assert.*;
 import main.Driver;
+import main.Time;
 
 import org.junit.After;
 import org.junit.Before;
@@ -66,7 +67,8 @@ public class TestDriver {
 		driver.addStartTime(startTime);
 		String finishTime = "01.02.03";
 		driver.addFinishTime(finishTime);
-		assertEquals("1.02.03", driver.totalTime());
+		Time t = new Time();
+		assertEquals("1.02.03", t.totalTime(driver.startTime(), driver.finishTime()));
 	}
 	
 	@Test
@@ -77,7 +79,8 @@ public class TestDriver {
 		driver.addStartTime(startTime);
 		String finishTime = "01.02.03";
 		driver.addFinishTime(finishTime);
-		assertEquals("1.02.03", driver.totalTime());
+		Time t = new Time();
+		assertEquals("1.02.03", t.totalTime(driver.startTime(), driver.finishTime()));
 	}
 	
 	@Test
@@ -88,7 +91,8 @@ public class TestDriver {
 		driver.addFinishTime(finishTime);
 		finishTime = "01.02.10";
 		driver.addFinishTime(finishTime);
-		assertEquals("1.02.03", driver.totalTime());
+		Time t = new Time();
+		assertEquals("1.02.03", t.totalTime(driver.startTime(), driver.finishTime()));
 	}
 	@Test
 	public void testTotalTimeIfMoreMinutesInStartTime(){
@@ -96,7 +100,8 @@ public class TestDriver {
 		driver.addStartTime(startTime);
 		String finishTime = "02.02.01";
 		driver.addFinishTime(finishTime);
-		assertEquals("0.22.00", driver.totalTime());
+		Time t = new Time();
+		assertEquals("0.22.00", t.totalTime(driver.startTime(), driver.finishTime()));
 	}
 
 }

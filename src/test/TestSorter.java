@@ -14,12 +14,15 @@ import java.util.Scanner;
 
 public class TestSorter extends Sorter {
 
+
 	public TestSorter() {
-		super("", "", null);
+		super(null, null, null);
+
 	}
 
 	@Before
 	public void setUp() {
+
 	}
 
 	@After
@@ -166,25 +169,6 @@ public class TestSorter extends Sorter {
 		}
 	}
 
-	@Test(expected = FileNotFoundException.class)
-	public void TestReadStartFileThrowsNoSuchFileException()
-			throws FileNotFoundException {
-		try {
-			super.readStartFile();
-		} catch (FileNotFoundException e) {
-			throw e;
-		}
-	}
-
-	@Test(expected = FileNotFoundException.class)
-	public void TestReadFinishFileThrowsNoSuchFileException()
-			throws FileNotFoundException {
-		try {
-			super.readFinishFile();
-		} catch (FileNotFoundException e) {
-			throw e;
-		}
-	}
 
 	@Test
 	public void testMultipleStartTimes() {
@@ -333,4 +317,3 @@ public class TestSorter extends Sorter {
 		}
 	}
 }
-
