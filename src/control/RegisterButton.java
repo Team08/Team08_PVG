@@ -28,6 +28,7 @@ public class RegisterButton extends JButton implements ActionListener {
 
 		} else {
 			try {
+
 				String driverID = JOptionPane.showInputDialog(null,
 						"Den registrerade tiden är : " + times[0] + "."
 								+ times[1] + "." + times[2]
@@ -44,9 +45,7 @@ public class RegisterButton extends JButton implements ActionListener {
 
 	private void regDriverToFile(String name, String[] times) {
 		register.registerDriver(name);
-		gui
-				.writeInScrollPane(times[0], times[1], times[2], gui
-						.getDriverText());
+		gui.writeInScrollPane(times[0], times[1], times[2], name);
 	}
 
 }
