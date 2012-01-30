@@ -1,12 +1,18 @@
 package main;
 
-import java.util.List;
-
 public class Time {
-		
 
+	/**
+	 * Adds a leading zero to input if input is less than 10
+	 * 
+	 * @param minutes
+	 *            The number to add a zero to if needed
+	 * @return A string with a leading zero if input less than 10
+	 * @throws NumberFormatException
+	 *             If illegal number format
+	 */
 	public static String addZero(int minutes) throws NumberFormatException {
-		if (minutes < 0) 
+		if (minutes < 0)
 			throw new NumberFormatException("No negative numbers are allowed");
 		String min;
 		if (minutes < 10) {
@@ -16,10 +22,23 @@ public class Time {
 		}
 		return min;
 	}
-	
-	public static String timeDiff(String startTime, String finishTime) throws NumberFormatException {
+
+	/**
+	 * Returns the difference between two times. finishTime must be greater than
+	 * startTime
+	 * 
+	 * @param startTime
+	 *            The start time
+	 * @param finishTime
+	 *            The finish time
+	 * @return Time difference as a string
+	 * @throws NumberFormatException
+	 *             Thrown if illegal number format
+	 */
+	public static String timeDiff(String startTime, String finishTime)
+			throws NumberFormatException {
 		String[] temp = startTime.split("\\.");
-		
+
 		if (temp.length != 3) {
 			throw new NumberFormatException();
 		}
@@ -29,7 +48,7 @@ public class Time {
 		int finish = parseTime(temp);
 
 		int totalInt = finish - start;
-		
+
 		if (totalInt < 0) {
 			throw new NumberFormatException();
 		}
@@ -42,7 +61,7 @@ public class Time {
 		String total = totalInt / 3600 + "." + min + "." + sec;
 
 		return total;
-	
+
 	}
 
 	private static int parseTime(String[] temp) throws NumberFormatException {
