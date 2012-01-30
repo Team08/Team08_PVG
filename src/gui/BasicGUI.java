@@ -36,8 +36,10 @@ public class BasicGUI extends JFrame {
 	/**
 	 * The constructor which creates the GUI
 	 * 
-	 * @param frameName, register
+	 * @param frameName
 	 *            the name of the frame and the register object
+	 * @param register
+	 * 			  the target register           
 	 */
 	public BasicGUI(String frameName, Register register) {
 		super(frameName);
@@ -101,8 +103,14 @@ public class BasicGUI extends JFrame {
 	/**
 	 * Add text to the ScrollPane
 	 * 
-	 * @param hours, minutes, seconds, driver
-	 *            the actually hour, minutes, seconds, and target driver
+	 * @param hours
+	 *              the actual hours
+	 * @param minutes
+	 * 				the actual minutes
+	 * @param seconds
+	 * 				the actual seconds
+	 * @param driver       
+	 * 				the actual driver   
 	 */
 	public void writeInScrollPane(String hours, String minutes, String seconds, String driver) {
 		lastRegisteredDrivers = lastRegisteredDrivers + "\n"

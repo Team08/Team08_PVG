@@ -6,8 +6,10 @@ public class ReadFinishFile extends FileIO {
 	/**
 	 * The constructor which takes the file name of the finishfile as argument
 	 * 
-	 * @param sorter, fileName
-	 *            target sorter object and the finishfile name
+	 * @param sorter
+	 *            	the target sorter
+	 * @param fileName
+	 * 				the name of finishfile           
 	 */
 	public ReadFinishFile(Sorter sorter, String fileName) {
 		super(sorter, fileName);
