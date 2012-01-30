@@ -40,7 +40,7 @@ public class Time {
 	 *             Thrown if illegal number format
 	 */
 	public static String timeDiff(String startTime, String finishTime)
-			throws NumberFormatException {
+	throws NumberFormatException {
 		String[] temp = startTime.split("\\.");
 
 		if (temp.length != 3) {
@@ -78,9 +78,13 @@ public class Time {
 		int start = 3600 * hour + 60 * minute + second;
 		return start;
 	}
-	
-	
-	public static String[] makeTimeList(){
+
+	/**
+	 * Returns the current time: hours.minutes.seconds
+	 * 
+	 * @return Current time as a string vector
+	 */
+	public static String[] makeTimeList() {
 		GregorianCalendar calendar = new GregorianCalendar();
 
 		int hours = calendar.get(Calendar.HOUR_OF_DAY);
@@ -90,12 +94,11 @@ public class Time {
 		String stringMinutes = Time.addZero(minutes);
 		String stringSeconds = Time.addZero(seconds);
 
-
 		times[0] = Integer.toString(hours);
 		times[1] = stringMinutes;
 		times[2] = stringSeconds;
 
 		return times;
 	}
-	
+
 }
