@@ -67,7 +67,7 @@ public class Time {
 		return total;
 
 	}
-
+	
 	private static int parseTime(String[] temp) throws NumberFormatException {
 		int hour = Integer.parseInt(temp[0]);
 		int minute = Integer.parseInt(temp[1]);
@@ -78,13 +78,14 @@ public class Time {
 		int start = 3600 * hour + 60 * minute + second;
 		return start;
 	}
-
+	
 	/**
-	 * Returns the current time: hours.minutes.seconds
+	 * Returns a list of three strings, [0]hours, [1]minutes and [2]seconds
 	 * 
-	 * @return Current time as a string vector
+	 * @return the list with strings
+	 *
 	 */
-	public static String[] makeTimeList() {
+	public static String[] makeTimeList(){
 		GregorianCalendar calendar = new GregorianCalendar();
 
 		int hours = calendar.get(Calendar.HOUR_OF_DAY);
