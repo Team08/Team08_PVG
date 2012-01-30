@@ -12,11 +12,15 @@ public class Driver {
 	public Driver() {
 
 	}
-
+	
 	public Driver(String name) {
 		this.name = name;
 	}
-
+	/**
+	 * return driver name
+	 * 
+	 * @return returns name
+	 */
 	public String getName() {
 		return name;
 	}
@@ -32,11 +36,17 @@ public class Driver {
 		startTime.add(time);
 
 	}
-
+	/**
+	 * returns a list of starttimes
+	 * 
+	 * @return returns a list of starttimes
+	 */
 	public List<String> startTime() {
 		return startTime;
 	}
-
+	/**
+	 * returns a list of finishtimes
+	 */
 	public List<String> finishTime() {
 		return finishTime;
 	}
@@ -51,7 +61,12 @@ public class Driver {
 		finishTime.add(time);
 
 	}
-
+	/**
+	 * Inserts a new name
+	 * 
+	 * @param name
+	 *            The new name that replaces the old one
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -74,7 +89,12 @@ public class Driver {
 		}
 		return laptime;
 	}
-
+	/**
+	 * Inserts a new class to the list classes
+	 * 
+	 * @param c
+	 *            
+	 */
 	public void addClass(String c) {
 		classes.add(c);
 	}
