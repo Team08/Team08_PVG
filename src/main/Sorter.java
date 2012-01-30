@@ -141,9 +141,9 @@ public class Sorter {
 			for(int b = finishTime.size() - 1; b < laps-1; b++){
 				sb.append("; ");
 			}
-			
+
 			if(Time.timeDiff(startTime.get(0), finishTime
-						.get(finishTime.size() - 1)).compareTo("3.00.00")>=0){
+						.get(finishTime.size() - 1)).compareTo(raceTime + ".00.00")>=0){
 				sb.append(finishTime.get(finishTime.size() - 1));
 				
 			}else{
