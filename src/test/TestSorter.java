@@ -18,7 +18,7 @@ public class TestSorter extends Sorter {
 
 
 	public TestSorter() {
-		super(null, null, null,1,0,0);
+		super(null, null, null,"maraton",0,0);
 
 	}
 

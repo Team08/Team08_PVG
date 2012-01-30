@@ -8,7 +8,7 @@ public class Sorter {
 	protected TreeMap<Integer, Driver> register;
 	private String stopFile;
 	private String startFile;
-	private int raceType;
+	private String raceType;
 	private int raceTime;
 	private int laps;
 	private ReadNameFile rnf;
@@ -16,7 +16,7 @@ public class Sorter {
 	private ReadFinishFile rff;
 
 	public Sorter(String startFileName, String stopFileName, String nameFile,
-			int raceType, int raceTime, int laps) {
+			String raceType, int raceTime, int laps) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
 		this.raceType = raceType;
@@ -29,36 +29,24 @@ public class Sorter {
 	}
 
 	public static void main(String[] args) {
-		// Choose Files
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				System.in));
+
 		String start = "defaultStart";
 		String stop = "defaultStop";
 		String name = "defaultName";
 		String result = "defaultResult";
 		int raceTime = 0;
-		int raceType = 0;
+		String raceType = "";
 		int laps = 0;
-
-		try {
-			System.out.println("Ange startfilens namn:");
-			start = reader.readLine();
-			System.out.println("Ange målfilens namn:");
-			stop = reader.readLine();
-			System.out.println("Ange personuppgiftsfilens namn:");
-			name = reader.readLine();
-			System.out.println("Ange resultatfilens namn:");
-			result = reader.readLine();
-			System.out.println("Välj typ av lopp (1 = maraton, 2 = varvlopp):");
-			raceType = reader.read();
-			if (raceType == 2) {
-				System.out.println("Skriv in lopptid i timmar:");
-				raceTime = reader.read();
-				System.out.println("Skriv in antal varv som ska visas:");
-				laps = reader.read();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		start = args[0];
+		stop = args[1];
+		name = args[2];
+		result = args[3];
+		raceType = args[4];
+		raceType = raceType.toLowerCase();
+		if(raceType.equals("varv")){
+			raceTime = Integer.parseInt(args[5]);
+			laps = Integer.parseInt(args[6]);
+			
 		}
 		Sorter sorter = new Sorter(start, stop, name, raceType, raceTime, laps);
 		sorter.writeResultFile(result);
@@ -76,17 +64,17 @@ public class Sorter {
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("StartNr; Namn; ");
-			if (raceType == 2) {
+			if (raceType.equals("varv")) {
 				out.write("#Varv; ");
 			}
 			out.write("Totaltid; ");
-			if (raceType == 2) {
+			if (raceType.equals("varv")) {
 				for (int i = 0; i < laps; i++) {
 					out.write("Varv" + (i + 1) + "; ");
 				}
 			}
 			out.write("Start; ");
-			if (raceType == 2) {
+			if (raceType.equals("varv")) {
 				for (int i = 0; i < laps - 1; i++) {
 					out.write("Varvning" + (i + 1) + "; ");
 				}
@@ -111,26 +99,23 @@ public class Sorter {
 	private String checkError(int i, List<String> startTime,
 			List<String> finishTime) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(i + "; ");
 		String totalTimeCheck = "";
-		String name = register.get(i).getName();
-		checkName(sb, name);
-		if (raceType == 2) {
+		sb.append(i + "; ");
+		checkName(sb, register.get(i).getName());
+		if (raceType.equals("varv")) {
 			sb.append(register.get(i).getNumberOfLaps() + "; ");
 		}
 		totalTimeCheck = checkTotaltime(startTime, finishTime, sb,
 				totalTimeCheck);
-		if (raceType == 2 && (laps != 0)) {
+		if (raceType.equals("varv") && (laps != 0)) {
 			if (!(startTime.size() == 0 || finishTime.size() == 0)) {
-			for (int j = 0; j < laps; j++) {
-				sb.append(register.get(i).getLapTime(j)
-						+ "; ");
-			}
+				for (int j = 0; j < laps; j++) {
+					sb.append(register.get(i).getLapTime(j) + "; ");
+				}
 			}
 		}
-		
 		checkStartTime(startTime, sb);
-		if (raceType == 2 && finishTime.size() != 0) {
+		if (raceType.equals("varv") && finishTime.size() != 0) {
 			int check = finishTime.size() - 1;
 			if (check > laps - 1) {
 				check = laps - 1;
@@ -154,7 +139,7 @@ public class Sorter {
 			checkFinishTime(finishTime, sb);
 		}
 		checkIfManyStartTime(startTime, sb);
-		if (raceType == 1) {
+		if (raceType.equals("maraton")) {
 			checkIfManyFinishTime(finishTime, sb);
 		}
 		sb.append(totalTimeCheck);
@@ -203,7 +188,7 @@ public class Sorter {
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
 		} else {
-			if (raceType == 2) {
+			if (raceType.equals("varv")) {
 				totalTime = Time.timeDiff(startTime.get(0), finishTime
 						.get(finishTime.size() - 1));
 			} else {
