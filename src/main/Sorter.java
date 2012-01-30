@@ -41,13 +41,13 @@ public class Sorter {
 		int laps = 0;
 
 		try {
-			System.out.println("Välj startfil:");
+			System.out.println("Ange startfilens namn:");
 			start = reader.readLine();
-			System.out.println("Välj målfil:");
+			System.out.println("Ange målfilens namn:");
 			stop = reader.readLine();
-			System.out.println("Välj namnfil:");
+			System.out.println("Ange personuppgiftsfilens namn:");
 			name = reader.readLine();
-			System.out.println("Välj resultatfil:");
+			System.out.println("Ange resultatfilens namn:");
 			result = reader.readLine();
 			System.out.println("Välj typ av lopp (1 = maraton, 2 = varvlopp):");
 			raceType = reader.read();
@@ -75,7 +75,11 @@ public class Sorter {
 			// Create file
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
-			out.write("StartNr; Namn; #Varv; TotalTid; ");
+			out.write("StartNr; Namn; ");
+			if (raceType == 2) {
+				out.write("#Varv; ");
+			}
+			out.write("Totaltid; ");
 			if (raceType == 2) {
 				for (int i = 0; i < laps; i++) {
 					out.write("Varv" + (i + 1) + "; ");
@@ -87,7 +91,7 @@ public class Sorter {
 					out.write("Varvning" + (i + 1) + "; ");
 				}
 			}
-			out.write("Mål; \n");
+			out.write("Mål\n");
 			Driver tDriver;
 
 			for (Integer i : register.keySet()) {
@@ -98,7 +102,7 @@ public class Sorter {
 			// Close the output stream
 			out.close();
 
-		} catch (Exception e) {// Catch exception if any
+		} catch (Exception e) {
 			System.err.println("Error: " + e.getMessage());
 			System.exit(1);
 		}
@@ -108,18 +112,94 @@ public class Sorter {
 			List<String> finishTime) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(i + "; ");
-		String totalCheck = "";
+		String totalTimeCheck = "";
 		String name = register.get(i).getName();
-		String totalTime = "";
-
-		if (name == null) {
-			sb.append("Namn?; ");
-		} else {
-			sb.append(name + "; ");
-		}
+		checkName(sb, name);
 		if (raceType == 2) {
 			sb.append(register.get(i).getNumberOfLaps() + "; ");
 		}
+		totalTimeCheck = checkTotaltime(startTime, finishTime, sb,
+				totalTimeCheck);
+		if (raceType == 2 && (laps != 0)) {
+			if (!(startTime.size() == 0 || finishTime.size() == 0)) {
+			for (int j = 0; j < laps; j++) {
+				sb.append(register.get(i).getLapTime(j)
+						+ "; ");
+			}
+			}
+		}
+		
+		checkStartTime(startTime, sb);
+		if (raceType == 2 && finishTime.size() != 0) {
+			int check = finishTime.size() - 1;
+			if (check > laps - 1) {
+				check = laps - 1;
+			}
+			for (int e = 0; e < check; e++) {
+				sb.append(finishTime.get(e) + "; ");
+			}
+			for(int b = finishTime.size() - 1; b < laps-1; b++){
+				sb.append("; ");
+			}
+			
+			if(Time.timeDiff(startTime.get(0), finishTime
+						.get(finishTime.size() - 1)).compareTo("3.00.00")>=0){
+				sb.append(finishTime.get(finishTime.size() - 1));
+				
+			}else{
+				sb.append("Slut?");
+			}
+			
+		} else {
+			checkFinishTime(finishTime, sb);
+		}
+		checkIfManyStartTime(startTime, sb);
+		if (raceType == 1) {
+			checkIfManyFinishTime(finishTime, sb);
+		}
+		sb.append(totalTimeCheck);
+		sb.append("\n");
+		return sb.toString();
+	}
+
+	private void checkIfManyFinishTime(List<String> finishTime, StringBuilder sb) {
+		if (finishTime.size() > 1) {
+			sb.append("; Flera måltider?");
+			for (int j = 1; j <= (finishTime.size() - 1); j++) {
+				sb.append(" " + finishTime.get(j));
+			}
+		}
+	}
+
+	private void checkIfManyStartTime(List<String> startTime, StringBuilder sb) {
+		if (startTime.size() > 1) {
+			sb.append("; Flera starttider?");
+			for (int j = 1; j <= (startTime.size() - 1); j++) {
+				sb.append(" " + startTime.get(j));
+			}
+		}
+
+	}
+
+	private void checkFinishTime(List<String> finishTime, StringBuilder sb) {
+		if (finishTime.size() == 0) {
+			sb.append("Slut?");
+		} else {
+			sb.append(finishTime.get(0));
+		}
+	}
+
+	private void checkStartTime(List<String> startTime, StringBuilder sb) {
+		if (startTime.size() == 0) {
+			sb.append("Start?; ");
+		} else {
+			sb.append(startTime.get(0) + "; ");
+		}
+	}
+
+	private String checkTotaltime(List<String> startTime,
+			List<String> finishTime, StringBuilder sb, String totalCheck) {
+		String totalTime = "";
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
 		} else {
@@ -129,44 +209,20 @@ public class Sorter {
 			} else {
 				totalTime = Time.timeDiff(startTime.get(0), finishTime.get(0));
 			}
+			sb.append(totalTime + "; ");
 			if (totalTime.compareTo("0.15.00") < 0) {
 				totalCheck = "; Omöjlig Totaltid?";
 			}
-			sb.append(totalTime + "; ");
-			
 		}
-		if(raceType==2){
-			
-				for (int j = 0; j < laps; j++) {
-					
-				
-			}
-		}
-		if (startTime.size() == 0) {
-			sb.append("Start?; ");
+		return totalCheck;
+	}
+
+	private void checkName(StringBuilder sb, String name) {
+		if (name == null) {
+			sb.append("Namn?; ");
 		} else {
-			sb.append(startTime.get(0) + "; ");
+			sb.append(name + "; ");
 		}
-		if (finishTime.size() == 0) {
-			sb.append("Slut?");
-		} else {
-			sb.append(finishTime.get(0));
-		}
-		if (startTime.size() > 1) {
-			sb.append("; Flera starttider?");
-			for (int j = 1; j <= (startTime.size() - 1); j++) {
-				sb.append(" " + startTime.get(j));
-			}
-		}
-		if (finishTime.size() > 1) {
-			sb.append("; Flera måltider?");
-			for (int j = 1; j <= (finishTime.size() - 1); j++) {
-				sb.append(" " + finishTime.get(j));
-			}
-		}
-		sb.append(totalCheck);
-		sb.append("\n");
-		return sb.toString();
 	}
 
 	/**
@@ -204,7 +260,7 @@ public class Sorter {
 		driver.setName(name);
 		register.put(startNumber, driver);
 	}
-	
+
 	public void addClass(Integer startNumber, String c) {
 		Driver driver = getDriver(startNumber);
 		driver.addClass(c);

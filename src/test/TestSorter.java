@@ -18,7 +18,7 @@ public class TestSorter extends Sorter {
 
 
 	public TestSorter() {
-		super(null, null, null);
+		super(null, null, null,1,0,0);
 
 	}
 
@@ -45,7 +45,7 @@ public class TestSorter extends Sorter {
 		try {
 			writeResultFile("Result.txt");
 			Scanner sc = new Scanner(new File("Result.txt"));
-			assertEquals("StartNr; Namn; TotalTid; StartTider; Måltider", sc.nextLine());
+			assertEquals("StartNr; Namn; Totaltid; Start; Mål", sc.nextLine());
 			sc.close();
 		} catch (FileNotFoundException e) {
 
@@ -319,41 +319,5 @@ public class TestSorter extends Sorter {
 		}
 	}
 	
-	@Test
-	public void testHeadLineOneLap(){
-		addStartTime(3, "0.00.01");
-		addFinishTime(3, "1.00.00");
-		Scanner sc = new Scanner("Result.txt");
-		assertEquals("StartNr;Namn;#Varv;Totaltid;Varv1;Start;Varvning1;Mål", sc.nextLine());
-		sc.close();
-	}
-	@Test
-	public void testHeadLineThreeLaps(){
-		addStartTime(3, "0.00.01");
-		addFinishTime(3, "1.00.00");
-		addFinishTime(3, "1.22.00");
-		Scanner sc = new Scanner("Result.txt");
-		assertEquals("StartNr;Namn;#Varv;Totaltid;Varv1;Varv2;Start;Varvning1;Varvning2;Mål", sc.nextLine());
-		sc.close();
-	}
-	@Test
-	public void testResultOneLap(){
-		addStartTime(3, "0.00.01");
-		addFinishTime(3, "1.00.00");
-		Scanner sc = new Scanner("Result.txt");
-		sc.nextLine();
-		assertEquals("1;--.--.--;#1;0.59.59;0.59.59;0.00.01;1.00.00;", sc.nextLine());
-		sc.close();
-	}
-	@Test
-	public void testResultThreeLaps(){
-		addStartTime(3, "0.00.01");
-		addFinishTime(3, "1.00.00");
-		addFinishTime(3, "1.22.00");
-		writeResultFile("Result.txt");
-		Scanner sc = new Scanner("Result.txt");
-		sc.nextLine();
-		assertEquals("1;--.--.--;#3;0.59.59;0.59.59;0.22.00;0.00.01;1.00.00;1.22.00;", sc.nextLine());
-		sc.close();
-	}
+
 }

@@ -19,9 +19,9 @@ public class TestReadFile extends Sorter {
 	private ReadFinishFile finishFile;
 
 	public TestReadFile() {
-		super("TestStart.test", "TestStart.test", "");
-		 startfFile = new ReadStartFile(new Sorter("TestStart.test", "TestStart.test", ""), "TestStart.test");
-		 finishFile = new ReadFinishFile(new Sorter("TestStart.test", "TestStart.test", ""), "TestStart.test");
+		super("TestStart.test", "TestStart.test", "",1,0,0);
+		 startfFile = new ReadStartFile(new Sorter("TestStart.test", "TestStart.test", "",1,0,0), "TestStart.test");
+		 finishFile = new ReadFinishFile(new Sorter("TestStart.test", "TestStart.test", "",1,0,0), "TestStart.test");
 	}
 
 	@Test
