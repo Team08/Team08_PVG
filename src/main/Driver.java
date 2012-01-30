@@ -12,7 +12,13 @@ public class Driver {
 	public Driver() {
 
 	}
-
+	
+	/**
+	 * The constructor which creates the Driver
+	 * 
+	 * @param name
+	 *            the drivers name
+	 */
 	public Driver(String name) {
 		this.name = name;
 	}
@@ -45,6 +51,7 @@ public class Driver {
 		return startTime;
 	}
 
+
 	/**
 	 * Returns the driver's finish times as a list
 	 * @return The finish times as a list
@@ -63,6 +70,7 @@ public class Driver {
 		finishTime.add(time);
 
 	}
+
 
 	/**
 	 * Set the name of the driver. The current name is replaced.
@@ -91,9 +99,12 @@ public class Driver {
 		return laptime;
 	}
 
+	
 	/**
-	 * Add a class to the driver
+	 * Inserts a new class to the list classes
+	 * 
 	 * @param c
+	 *            
 	 */
 	public void addClass(String c) {
 		classes.add(c);
@@ -112,7 +123,6 @@ public class Driver {
 	 * 
 	 * @return The number of laps as an integer
 	 */
-
 	public int getNumberOfLaps() {
 		return finishTime.size();
 	}

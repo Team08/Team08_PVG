@@ -10,13 +10,18 @@ public class ReadNameFile extends FileIO {
 	/**
 	 * The constructor which takes the file name of the name file as argument
 	 * 
-	 * @param file
-	 *            The file with the start numbers and names
+	 * @param sorter, fileName
+	 *            target sorter object and the startfile name
 	 */
 	public ReadNameFile(Sorter sorter, String fileName) {
 		super(sorter, fileName);
 	}
 
+	/**
+	 * Reads a namefile and add it to the treemap, if file not found throws exception.
+	 * 
+	 * @throws FileNotFoundException
+	 */
 	public void readFile() throws FileNotFoundException {
 		if (fileName != null) {
 			File file = new File(fileName);

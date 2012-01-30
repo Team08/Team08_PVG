@@ -151,7 +151,7 @@ public class Sorter {
 		driver.addFinishTime(time);
 		register.put(startNumber, driver);
 	}
-
+	
 	public void addName(Integer startNumber, String name) {
 		Driver driver = getDriver(startNumber);
 		driver.setName(name);

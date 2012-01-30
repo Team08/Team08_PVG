@@ -46,5 +46,4 @@ public class RegisterButton extends JButton implements ActionListener {
 		register.registerDriver(name);
 		gui.writeInScrollPane(times[0], times[1], times[2], name);
 	}
-
 }
