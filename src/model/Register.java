@@ -8,17 +8,16 @@ import main.Driver;
 import main.Time;
 
 public class Register {
-	private Driver driver; // Behövs ej?
 
-	public Register(Driver driver) {
-		this.driver = driver; // Behövs ej?
+	public Register() {
+		
 	}
 
 	private void writeToFile(String name, String hours, String minutes,
 			String seconds) {
 		try {
 			// Create file
-			FileWriter fstream = new FileWriter("Start.txt", true);
+			FileWriter fstream = new FileWriter("Register.txt", true);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(name + "; " + hours + "." + minutes + "." + seconds
 					+ "\n");
