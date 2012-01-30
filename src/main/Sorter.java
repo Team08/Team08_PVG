@@ -29,6 +29,7 @@ public class Sorter {
 		String stop = "defaultStop";
 		String name = "defaultName";
 		String result = "defaultResult";
+		String raceTime = "defaultRaceTime";
 		try {
 			System.out.println("Välj startfil:");
 			start = reader.readLine();
@@ -37,6 +38,8 @@ public class Sorter {
 			System.out.println("Välj namnfil:");
 			name = reader.readLine();
 			System.out.println("Välj resultatfil:");
+			result = reader.readLine();
+			System.out.println("Skriv in lopptid:");
 			result = reader.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -165,5 +168,6 @@ public class Sorter {
 	public int size() {
 		return register.size();
 	}
+	
 
 }
