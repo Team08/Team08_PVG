@@ -18,7 +18,7 @@ public class Register {
 			String seconds) {
 		try {
 			// Create file
-			FileWriter fstream = new FileWriter("Start.txt", true);
+			FileWriter fstream = new FileWriter("Register.txt", true);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(name + "; " + hours + "." + minutes + "." + seconds
 					+ "\n");
