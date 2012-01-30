@@ -43,9 +43,6 @@ public class Driver {
 	/**
      * Inserts a new finish time
      *
-     * [The current finish time is replaced by the new
-     * time]
-     *
      * @param time    The new time that replaces the old one
      */
 	public void addFinishTime(String time) {

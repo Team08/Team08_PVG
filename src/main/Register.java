@@ -6,8 +6,8 @@ import java.util.Date;
 public class Register {
 	private Driver driver;
 	/**
-	 * Creates a registration of the designat
-	 * @param driver The driver that is registrated
+	 * Creates a registration of the chosen driver
+	 * @param driver The driver that is registered
 	 */
 	public Register(Driver driver) {
 		this.driver = driver;
