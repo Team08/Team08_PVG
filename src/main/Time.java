@@ -40,7 +40,7 @@ public class Time {
 	 *             Thrown if illegal number format
 	 */
 	public static String timeDiff(String startTime, String finishTime)
-			throws NumberFormatException {
+	throws NumberFormatException {
 		String[] temp = startTime.split("\\.");
 
 		if (temp.length != 3) {
@@ -94,11 +94,12 @@ public class Time {
 		String[] times = new String[3];
 		String stringMinutes = Time.addZero(minutes);
 		String stringSeconds = Time.addZero(seconds);
+
 		times[0] = Integer.toString(hours);
 		times[1] = stringMinutes;
 		times[2] = stringSeconds;
 
 		return times;
 	}
-	
+
 }
