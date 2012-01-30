@@ -10,22 +10,21 @@ public class ReadNameFile {
 	private String fileName;
 
 	/**
-	 * The constructor which takes the file name of the name file as argument
-	 * 
-	 * @param file
-	 *            The file with the start numbers and names
-	 */
+     * The constructor which takes the file name of the name file as argument
+     *
+     * @param file The file with the start numbers and names
+     */
 	public ReadNameFile(String file) {
 		fileName = file;
 	}
 
 	/**
-	 * Reads file specified in constructor and puts the name in the specified
-	 * TreeMap If Driver doesn't exist in TreeMap the Driver is added
-	 * 
-	 * @param tm
-	 *            The TreeMap with Drivers to put names in
-	 */
+     * Reads file specified in constructor and puts the name in the specified
+     * TreeMap If Driver doesn't exist in TreeMap the Driver is added
+     *
+     * @param tm The TreeMap with Drivers to put names in
+     * @throws IOException
+     */
 	public void readFile(TreeMap<Integer, Driver> tm) throws IOException{
 		if (fileName != null) {
 		try {
