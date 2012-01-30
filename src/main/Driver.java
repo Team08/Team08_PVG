@@ -112,4 +112,26 @@ public class Driver {
 	public void setName(String name) {
 		this.name = name;		
 	}
+	
+	
+	/**
+	 * Returns the time from last registered time to the lap i
+	 * @param i    The lapnumber, starting from 0
+	 * @return    The time as a String
+	 */
+	public String getLapTime(int i) {
+		if(i == 0){}
+		return " ";
+	}
+	
+	/**
+	 * Converts a time represented as a string into a time represented as an integer
+	 * @param temp    The time as a string vector
+	 * @return    The time as an integer
+	 */
+	
+	public int getNumberOfLaps() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
