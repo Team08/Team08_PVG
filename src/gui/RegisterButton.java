@@ -28,6 +28,12 @@ public class RegisterButton extends JButton implements ActionListener {
 		addActionListener(this);
 	}
 
+	/**
+	 * The actionlistener of RegisterButton
+	 * 
+	 * @param arg0
+	 * 			the ActionEvent
+	 */	
 	public void actionPerformed(ActionEvent arg0) {
 		String name = gui.getDriverText();
 		String[] times = Time.makeTimeList();
