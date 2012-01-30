@@ -1,3 +1,4 @@
 #IgnoreList
+*.txt
 *.class
 *.metadata
