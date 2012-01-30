@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 
 import main.Driver;
+import main.Time;
 import model.Register;
 import main.Sorter;
 
@@ -25,7 +26,7 @@ private Sorter sorter;
 	
 	@Test public void  testThatRaceTimeIsGreaterThanZero(){
 		register.registerDriver("Hanna");
-		assertTrue("Time was not greater than zero", register.writeToGUI("Hanna").length > 0);
+		assertTrue("Time was not greater than zero", Time.makeTimeList().length > 0);
 	}
 	
 	@Test public void testDriversName(){

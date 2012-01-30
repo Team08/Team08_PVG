@@ -32,32 +32,12 @@ public class Register {
 		}
 	}
 
-	private String[] makeTimeList(){
-		GregorianCalendar calendar = new GregorianCalendar();
-		Time time = new Time();
 
-		int hours = calendar.get(Calendar.HOUR_OF_DAY);
-		int minutes = calendar.get(Calendar.MINUTE);
-		int seconds = calendar.get(Calendar.SECOND);
-		String[] times = new String[3];
-
-		String stringMinutes = time.addZero(minutes);
-		String stringSeconds = time.addZero(seconds);
-
-		times[0] = Integer.toString(hours);
-		times[1] = stringMinutes;
-		times[2] = stringSeconds;
-		return times;
-	}
 	public void registerDriver(String name) {
-		String[] times = makeTimeList(); 
+		String[] times = Time.makeTimeList(); 
+
+
 		writeToFile(name, times[0], times[1], times[2]);
 	}
-	
-	public String[] writeToGUI(String name) {
-		String[] times = makeTimeList(); 
-		return times;
-	}
-	
 
 }
