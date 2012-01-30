@@ -350,6 +350,7 @@ public class TestSorter extends Sorter {
 		addStartTime(3, "0.00.01");
 		addFinishTime(3, "1.00.00");
 		addFinishTime(3, "1.22.00");
+		writeResultFile("Result.txt");
 		Scanner sc = new Scanner("Result.txt");
 		sc.nextLine();
 		assertEquals("1;--.--.--;#3;0.59.59;0.59.59;0.22.00;0.00.01;1.00.00;1.22.00;", sc.nextLine());

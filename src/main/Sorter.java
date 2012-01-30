@@ -8,13 +8,20 @@ public class Sorter {
 	protected TreeMap<Integer, Driver> register;
 	private String stopFile;
 	private String startFile;
+	private int raceType;
+	private int raceTime;
+	private int laps;
 	private ReadNameFile rnf;
 	private ReadStartFile rsf;
 	private ReadFinishFile rff;
 
-	public Sorter(String startFileName, String stopFileName, String nameFile) {
+	public Sorter(String startFileName, String stopFileName, String nameFile,
+			int raceType, int raceTime, int laps) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
+		this.raceType = raceType;
+		this.raceTime = raceTime;
+		this.laps = laps;
 		rnf = new ReadNameFile(this, nameFile);
 		rsf = new ReadStartFile(this, startFile);
 		rff = new ReadFinishFile(this, stopFile);
@@ -29,7 +36,10 @@ public class Sorter {
 		String stop = "defaultStop";
 		String name = "defaultName";
 		String result = "defaultResult";
-		String raceTime = "defaultRaceTime";
+		int raceTime = 0;
+		int raceType = 0;
+		int laps = 0;
+
 		try {
 			System.out.println("Välj startfil:");
 			start = reader.readLine();
@@ -39,12 +49,18 @@ public class Sorter {
 			name = reader.readLine();
 			System.out.println("Välj resultatfil:");
 			result = reader.readLine();
-			System.out.println("Skriv in lopptid:");
-			result = reader.readLine();
+			System.out.println("Välj typ av lopp (1 = maraton, 2 = varvlopp):");
+			raceType = reader.read();
+			if (raceType == 2) {
+				System.out.println("Skriv in lopptid i timmar:");
+				raceTime = reader.read();
+				System.out.println("Skriv in antal varv som ska visas:");
+				laps = reader.read();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Sorter sorter = new Sorter(start, stop, name);
+		Sorter sorter = new Sorter(start, stop, name, raceType, raceTime, laps);
 		sorter.writeResultFile(result);
 	}
 
@@ -59,13 +75,25 @@ public class Sorter {
 			// Create file
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
-			out.write("StartNr; Namn; TotalTid; StartTider; Måltider\n");
+			out.write("StartNr; Namn; #Varv; TotalTid; ");
+			if (raceType == 2) {
+				for (int i = 0; i < laps; i++) {
+					out.write("Varv" + (i + 1) + "; ");
+				}
+			}
+			out.write("Start; ");
+			if (raceType == 2) {
+				for (int i = 0; i < laps - 1; i++) {
+					out.write("Varvning" + (i + 1) + "; ");
+				}
+			}
+			out.write("Mål; \n");
 			Driver tDriver;
 
 			for (Integer i : register.keySet()) {
 				tDriver = register.get(i);
-				out.write(checkError(i, tDriver.startTime(),
-						tDriver.finishTime()));
+				out.write(checkError(i, tDriver.startTime(), tDriver
+						.finishTime()));
 			}
 			// Close the output stream
 			out.close();
@@ -76,27 +104,39 @@ public class Sorter {
 		}
 	}
 
-
-	private String checkError(int i, List<String> startTime, List<String> finishTime) {
+	private String checkError(int i, List<String> startTime,
+			List<String> finishTime) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(i + "; ");
 		String totalCheck = "";
 		String name = register.get(i).getName();
+		String totalTime = "";
 
-		if (name==null){
+		if (name == null) {
 			sb.append("Namn?; ");
-		}else{
+		} else {
 			sb.append(name + "; ");
+		}
+		if (raceType == 2) {
+			sb.append(register.get(i).getNumberOfLaps() + "; ");
 		}
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
 		} else {
-			String totalTime = Time.timeDiff(startTime.get(0), finishTime.get(0));
-			sb.append(totalTime + "; ");
-
-			if(totalTime.compareTo("0.15.00") < 0){
-				totalCheck = "; Omöjlig Totaltid?";
+			if (raceType == 2) {
+				totalTime = Time.timeDiff(startTime.get(0), finishTime
+						.get(finishTime.size() - 1));
+			} else {
+				totalTime = Time.timeDiff(startTime.get(0), finishTime.get(0));
+				if (totalTime.compareTo("0.15.00") < 0) {
+					totalCheck = "; Omöjlig Totaltid?";
+				}
 			}
+			sb.append(totalTime + "; ");
+			
+		}
+		if(raceType==2){
+			for()
 		}
 		if (startTime.size() == 0) {
 			sb.append("Start?; ");
@@ -168,6 +208,5 @@ public class Sorter {
 	public int size() {
 		return register.size();
 	}
-	
 
 }
