@@ -44,7 +44,7 @@ public class TestReadNameFile extends Sorter {
 	@Test
 	public void testCorrectNumberOfDrivers() {
 		try {
-			rnf.readFile();
+			rnf.read();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		

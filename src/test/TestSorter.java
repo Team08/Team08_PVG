@@ -18,7 +18,7 @@ public class TestSorter extends Sorter {
 
 
 	public TestSorter() {
-		super("", "", null);
+		super(null, null, null);
 
 	}
 
@@ -319,4 +319,3 @@ public class TestSorter extends Sorter {
 		}
 	}
 }
-

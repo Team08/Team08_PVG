@@ -1,7 +1,7 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import main.Driver;
-import main.Register;
+import model.Register;
 import main.Sorter;
 
 import org.junit.Before;
@@ -20,14 +20,8 @@ public class TestAcceptance3 extends Sorter {
 		super("src/acceptanstest3/starttider.test", "src/acceptanstest3/maltider.test", "src/acceptanstest3/null.test");
 	}
 
-	@Before public void setup(){
-		try {
-			readStartFile();
-			readFinishFile();
-			writeResultFile("src/acceptanstest3/result.test");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+	@Before public void setup() {
+		writeResultFile("src/acceptanstest3/result.test");
 	}
 	
 	@Test public void testThatResultatEqualsResultat(){

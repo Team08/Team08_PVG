@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 
 import main.Driver;
-import main.Register;
+import model.Register;
 import main.Sorter;
 
 import org.junit.Before;
@@ -24,8 +24,8 @@ private Sorter sorter;
 	}
 	
 	@Test public void  testThatRaceTimeIsGreaterThanZero(){
-		register.startRace();
-		assertTrue("Time was not greater than zero", register.stopRace().getTime()>0);
+		register.registerDriver("Hanna");
+		assertTrue("Time was not greater than zero", register.registerDriver("Hanna").length > 0);
 	}
 	
 	@Test public void testDriversName(){
@@ -34,13 +34,13 @@ private Sorter sorter;
 	}
 	
 	@Test public void testThatStartFileCreates(){
-		register.startRace();
+		register.registerDriver("Joe");
 		File f = new File("Start.txt");
 		assertTrue("The Startfile was not found", f.exists()); 
 	}
 	
 	@Test public void testThatStopFileCreates(){
-		register.stopRace();
+		register.registerDriver("Joe");
 		File f = new File("Stop.txt");
 		assertTrue("The Stopfile was not found", f.exists()); 
 	}

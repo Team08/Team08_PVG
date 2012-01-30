@@ -1,11 +1,7 @@
 package main;
 
 import java.io.*;
-
 import java.util.List;
-
-import java.util.Scanner;
-
 import java.util.TreeMap;
 
 public class Sorter {
@@ -13,12 +9,18 @@ public class Sorter {
 	private String stopFile;
 	private String startFile;
 	private ReadNameFile rnf;
+	private ReadStartFile rsf;
+	private ReadFinishFile rff;
+	private Time time;
 
 	public Sorter(String startFileName, String stopFileName, String nameFile) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
 		rnf = new ReadNameFile(this, nameFile);
-		register = new TreeMap<Integer, Driver>();	
+		rsf = new ReadStartFile(this, startFile);
+		rff = new ReadFinishFile(this, stopFile);
+		register = new TreeMap<Integer, Driver>();
+		time = new Time();
 	}
 
 	public static void main(String[] args) {
@@ -48,7 +50,11 @@ public class Sorter {
 	protected void writeResultFile(String name) {
 		try {
 			// Names are put in the TreeMap from the name file
-			rnf.readFile();
+			rnf.read();
+			// Start file is read, and start times are put in the register
+			rsf.read();
+			// Finish file is read, and finish times are put in the register
+			rff.read();
 			// Create file
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
@@ -57,7 +63,8 @@ public class Sorter {
 
 			for (Integer i : register.keySet()) {
 				tDriver = register.get(i);
-				out.write(checkError(i, tDriver.startTime(), tDriver.finishTime()));
+				out.write(checkError(i, tDriver.startTime(),
+						tDriver.finishTime()));
 			}
 			// Close the output stream
 			out.close();
@@ -68,22 +75,24 @@ public class Sorter {
 		}
 	}
 
-
-	private String checkError(int i, List<String> startTime, List<String> finishTime) {
+	private String checkError(int i, List<String> startTime,
+			List<String> finishTime) {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(i + "; ");
 		String totalCheck = "";
-		if (register.get(i).getName()==null){
+		String name = register.get(i).getName();
+		if (name == null) {
 			sb.append("Namn?; ");
-		}else{
-			sb.append(register.get(i).getName() + "; ");
+		} else {
+			sb.append(name + "; ");
 		}
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
 		} else {
-			sb.append(register.get(i).totalTime() + "; ");
-			if(register.get(i).totalTime().compareTo("0.15.00")<0){
+			String totalTime = time.totalTime(startTime, finishTime);
+			sb.append(totalTime + "; ");
+			if (totalTime.compareTo("0.15.00") < 0) {
 				totalCheck = "; Omöjlig Totaltid?";
 			}
 		}
@@ -92,7 +101,7 @@ public class Sorter {
 		} else {
 			sb.append(startTime.get(0) + "; ");
 		}
-		if (finishTime.size()==0) {
+		if (finishTime.size() == 0) {
 			sb.append("Slut?");
 		} else {
 			sb.append(finishTime.get(0));
@@ -144,16 +153,16 @@ public class Sorter {
 		register.put(startNumber, driver);
 	}
 
+	public void addName(Integer startNumber, String name) {
+		Driver driver = getDriver(startNumber);
+		driver.setName(name);
+		register.put(startNumber, driver);
+	}
+
 	private Driver getDriver(Integer key) {
 		return register.containsKey(key) ? register.get(key) : new Driver();
 	}
 
-	public void addName(Integer startNumber, String name) {
-		Driver driver = getDriver(startNumber);
-		driver.setName(name);
-		register.put(startNumber, driver);	
-	}
-	
 	public int size() {
 		return register.size();
 	}
