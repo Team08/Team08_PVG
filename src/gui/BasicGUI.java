@@ -31,7 +31,12 @@ public class BasicGUI extends JFrame {
 	private JPanel topPanel;
 	private JScrollPane scrollPane;
 	private String lastRegisteredRiders;
-
+	/**
+	 * Creates a simple GUI.
+	 *
+	 * @param frameName    What will be written at the top of the main window of the GUI
+	 * @param register    A register/A registration?
+	 */
 	public BasicGUI(String frameName, Register register) {
 		super(frameName);
 		this.register = register;
@@ -42,7 +47,9 @@ public class BasicGUI extends JFrame {
 
 		setupLayout();
 	}
-
+	/**
+	 * Makes the GUI look the way we want it
+	 */
 	private void setupLayout() {
 		topPanel.setLayout(new GridLayout(1, 2));
 		registerButton.addActionListener(new RegisterButtonListener());
@@ -54,7 +61,9 @@ public class BasicGUI extends JFrame {
 		this.setVisible(true);
 	}
 
-	// Add components
+	/**
+	 * Adds the components and adds panels to the frame
+	 */
 	private void addComponents() {
 		displayPanel.add(scrollPane);
 		topPanel.add(driverID);
@@ -65,7 +74,9 @@ public class BasicGUI extends JFrame {
 		this.add(displayPanel, BorderLayout.CENTER);
 	}
 
-	// Initialize the components
+	/**
+	 * Initializes the components
+	 */
 	private void init() {
 		displayPanel = new JPanel(new GridLayout(1, 1));
 		topPanel = new JPanel();
@@ -81,7 +92,9 @@ public class BasicGUI extends JFrame {
 		setFonts();
 	}
 
-	// Sets the bigger fonts for all components
+	/**
+	 * Sets the bigger fonts for all components
+	 */
 	private void setFonts() {
 		Font newTextFont = new Font(textArea.getFont().getName(), textArea
 				.getFont().getStyle(), 70);
@@ -93,7 +106,13 @@ public class BasicGUI extends JFrame {
 		registerButton.setFont(newBigTextFont);
 		driverID.setFont(newTextFont);
 	}
-
+	/**
+	 * Creates a new file (with a drivers starting time?)
+	 *
+	 * @param hours    The starting hour(?)
+	 * @param minutes    The starting minute(?)   
+	 * @param seconds    The starting second(?)
+	 */
 	private void writeToFile(int hours, int minutes, int seconds) {
 		try {
 			// Create file
@@ -111,7 +130,15 @@ public class BasicGUI extends JFrame {
 			System.exit(1);
 		}
 	}
-
+	/**
+	 * Writes in scroll pane.
+	 *
+	 * [Makes sure the format is correct. Ex. Time: 1.03.06 instead of Time: 1.3.6]
+	 *
+	 * @param hours Hours
+	 * @param minutes Minutes
+	 * @param seconds Seconds
+	 */
 	private void writeInScrollPane(int hours, int minutes, int seconds) {
 		String stringMinutes = new String(minutes + "");
 		String stringSeconds = new String(seconds + "");
@@ -127,7 +154,13 @@ public class BasicGUI extends JFrame {
 		textArea.setText(lastRegisteredRiders);
 		driverID.setText("");
 	}
-
+	/**
+	 *
+	 * @author Team08
+	 *
+	 * Does writeToFile and writeInSrollPane if the selected driver has a name/exists. ?
+	 *
+	 */
 	class RegisterButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			if (driverID.getText().length() != 0) {

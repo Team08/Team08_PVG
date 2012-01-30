@@ -3,8 +3,10 @@ import gui.BasicGUI;
 
 public class Main {
 	/**
-	 * @param args
-	 */
+     * Main program that initiates the GUI
+     *
+     * @param args
+     */
 	public static void main(String[] args) {
 		new BasicGUI("Start",new Register(new Driver("Team08")));
 	}
