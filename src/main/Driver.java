@@ -7,6 +7,7 @@ public class Driver {
 	private String name;
 	private List<String> startTime = new ArrayList<String>();
 	private List<String> finishTime = new ArrayList<String>();
+	private List<String> classes = new ArrayList<String>();
 
 	public Driver() {
 
@@ -74,6 +75,18 @@ public class Driver {
 		return laptime;
 	}
 
+	public void addClass(String c) {
+		classes.add(c);
+	}
+	
+	/**
+	 * Returns a list with all classes
+	 * @return A list with classes
+	 */
+	public List<String> classes() {
+		return classes;
+	}
+	
 	/**
 	 * Returns the number of laps
 	 * 

@@ -78,6 +78,8 @@ public class Time {
 		int start = 3600 * hour + 60 * minute + second;
 		return start;
 	}
+	
+	
 	public static String[] makeTimeList(){
 		GregorianCalendar calendar = new GregorianCalendar();
 

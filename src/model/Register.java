@@ -34,8 +34,6 @@ public class Register {
 
 	public void registerDriver(String name) {
 		String[] times = Time.makeTimeList(); 
-
-
 		writeToFile(name, times[0], times[1], times[2]);
 	}
 
