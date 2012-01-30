@@ -7,7 +7,7 @@ public class Driver {
 	private String name;
 	private List<String> startTime = new ArrayList<String>();
 	private List<String> finishTime = new ArrayList<String>();
-
+	
 	public Driver() {
 
 	}
@@ -49,7 +49,7 @@ public class Driver {
 		finishTime.add(time);
 
 	}
-
+	
 	/**
 	 * Returns the total time
 	 *
