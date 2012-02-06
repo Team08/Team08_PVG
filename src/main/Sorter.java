@@ -164,7 +164,6 @@ public class Sorter {
 			e.printStackTrace();
 			//System.err.println("Error: " + e.printStackTrace());
 			System.exit(1);
-
 		}
 	}
 
