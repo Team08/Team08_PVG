@@ -3,7 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Driver {
+public class Driver implements Comparable {
 	private String name;
 	private List<String> startTime = new ArrayList<String>();
 	private List<String> finishTime = new ArrayList<String>();
@@ -128,5 +128,25 @@ public class Driver {
 	 */
 	public int getNumberOfLaps() {
 		return finishTime.size();
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		if (arg0 instanceof Driver) {
+			int temp = Time.timeDiff(
+					startTime().get(0),
+					finishTime().get(finishTime().size() - 1)).compareTo(
+					Time.timeDiff(((Driver)arg0).startTime().get(0), ((Driver)arg0).finishTime().get(
+							((Driver)arg0).finishTime().size() - 1)));
+			if ( temp < 0) {
+				return -1;
+			}else if (temp == 0){
+				return 0;
+			}else{
+				return -1;
+			}
+		}else{
+			throw new ClassCastException();
+		}
 	}
 }
