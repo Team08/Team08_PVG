@@ -9,7 +9,7 @@ public class Sorter {
 	private String stopFile;
 	private String startFile;
 	private String raceType;
-	private int raceTime;
+	private String raceTime;
 	private int laps;
 	private String startType;
 	private ReadNameFile rnf;
@@ -32,7 +32,7 @@ public class Sorter {
 	 * @param laps
 	 *            The maximum number of laps
 	 */
-	public Sorter(String startFileName, String stopFileName, String nameFile, String raceType, int raceTime, int laps, String startType) {
+	public Sorter(String startFileName, String stopFileName, String nameFile, String raceType, String raceTime, int laps, String startType) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
 		this.raceType = raceType;
@@ -57,7 +57,7 @@ public class Sorter {
 		String stop = "defaultStop";
 		String name = "defaultName";
 		String result = "defaultResult";
-		int raceTime = 0;
+		String raceTime = "";
 		String raceType = "";
 		int laps = 0;
 		String startType = "";
@@ -71,7 +71,7 @@ public class Sorter {
 			startType = args[5];
 			raceType = raceType.toLowerCase();
 			if(raceType.equals("varv")){
-				raceTime = Integer.parseInt(args[6]);
+				raceTime = args[6];
 				laps = Integer.parseInt(args[7]);
 			}
 		} catch (Exception e) {
@@ -165,7 +165,7 @@ public class Sorter {
 
 			if (Time.timeDiff(startTime.get(0),
 					finishTime.get(finishTime.size() - 1)).compareTo(
-							raceTime + ".00.00") >= 0) {
+							raceTime + ".00") >= 0) {
 				sb.append(finishTime.get(finishTime.size() - 1));
 
 			} else {

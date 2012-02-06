@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class TestMassStart extends Sorter {
 
 	public TestMassStart() {
-		super("TestMassStart.test", "TestMassFinish.test", "TestMassName.test", "", 0, 0, "Masstart");
+		super("TestMassStart.test", "TestMassFinish.test", "TestMassName.test", "", "0.00", 0, "Masstart");
 	}
 
 	@Test

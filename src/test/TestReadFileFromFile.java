@@ -16,8 +16,8 @@ public class TestReadFileFromFile {
 	private ReadFinishFile rff;
 	
 	public TestReadFileFromFile() {
-		 rsf = new ReadStartFile(new Sorter("Unknown", "Unknown", "Unknown","maraton",0,0,"Enkelstart"), "Unknown");
-		 rff = new ReadFinishFile(new Sorter("Unknown", "Unknown", "Unknown","maraton",0,0,"Enkelstart"), "Unknown");
+		 rsf = new ReadStartFile(new Sorter("Unknown", "Unknown", "Unknown","maraton","0.00",0,"Enkelstart"), "Unknown");
+		 rff = new ReadFinishFile(new Sorter("Unknown", "Unknown", "Unknown","maraton","0.00",0,"Enkelstart"), "Unknown");
 	}
 
 	@Before

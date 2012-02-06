@@ -68,39 +68,37 @@ StartNr; Namn
 1; Anders Asson
 2; Berit Bsson
 </pre>
-
+<a href="#Topp">Återvänd till topp</A><br>
 
 <A NAME="StartaReg"><h2> 1.2 Starta Registreringsprogrammet </h2></A>
 Starta programmet genom att dubbelklicka på EnduroRegister.jar-filen. Programmet ska se ut ungefär som bild 1.0.
-<p> 1.0 - En bild på registreringsprogrammet</p>
+<p> Figur 1.0 - En bild på registreringsprogrammet</p>
 <img src="pic/ScreenshotRegister.png" alt="GUI" width="600" height="400"/><br>
 
 <br>
 <h2> Enkelstart/Masstart </h2>
 <h1> Enkelstart </h1>
 Skriv in startnummret på föraren och tryck Registrera förare eller tryck enter. Tillåtna startnummer är alla tal större/lika med 0.z Enligt bild 1.0 (på bilden är föraren 1 och 2 registrerade och 3 påväg att bli registrerad.) <br><br>
-Om man vill spara tiden och skriva in förarens startnummer lite senare så trycker man på Registrera förare utan att skriva in något startnummer. Då kommer det upp en dialogruta där förarens nummer kan skrivas in (se bilden nedan), tiden från då Registrera förare-knappen trycktes lagras då i filen. Parametern Starttyp ska i det här fallet vara given som "Enkelstart". <br><br>
+Om man vill spara tiden och skriva in förarens startnummer lite senare så trycker man på Registrera förare utan att skriva in något startnummer. Då kommer det upp en dialogruta där förarens nummer kan skrivas in (se bilden nedan), tiden från då Registrera förare-knappen trycktes lagras då i filen. Parametern Starttyp ska i det här fallet vara given som "Enkelstart". <br>
+<p> Figur 2.0 - En bild på registreringsprogrammet när man ska fylla i startnummer senare                 </p>
+<img src="pic/ScreenshotRegister2.png" alt="GUI" width="600" height="400"/><br><br>
 <h1> Masstart </h1>
-Masstart fungerar på så sätt att du i fältet uppe till vänster anger hur många deltagare som startar och klickar på Registrera förare.  Man måste då i sorteringsprogrammet ange "Masstart" som parameter.
-<br><br>
-<img src="pic/ScreenshotRegister2.png" alt="GUI" width="600" height="400"/><br>
-<br>
-
- 
+Masstart fungerar på så sätt att man precis som vanligt fyller i en siffra, men den står nu för hur många deltagare som startar istället för deltagarnas nummer. Sen klickar man på Registrera förare.  Man måste då i sorteringsprogrammet ange "Masstart" som parameter.
+<br><br> 
 
 När du har registrerat färdigt så har det skapats en fil som heter Register.txt. Denna bör döpas om till förslagsvis starttid/måltid, annars kommer filen fyllas på med fler tider om du startar programmet och registrerar fler förare. 
 <br>
+<a href="#Topp">Återvänd till topp</A><br>
 
 
-
-<A NAME="Starta"><h2> 1.3 Starta Sorteringsringsprogrammet </h2></A>
+<A NAME="Starta"><h2> 1.3 Starta Sorteringsprogrammet </h2></A>
 <p>
-Starta Terminalen och navigera till mappen där Sorteringsprogrammet finns. När Sorteringsprogrammet startas från terminalen behöver den åtta parametrar. Namnet på starttidsfilen, måltidsfilen, namnfilen, resultatsfilen, tävlingsformen, starttyp (Enkelstart eller Masstart), stipulerade tiden i timmar som ska överstigas samt antalet varv som ska visas i resultatfilen.<br>
+Starta Terminalen och navigera till mappen där Sorteringsprogrammet finns. När Sorteringsprogrammet startas från terminalen behöver den åtta parametrar. Namnet på starttidsfilen, måltidsfilen, namnfilen, resultatsfilen, tävlingsformen, starttyp (Enkelstart eller Masstart), stipulerade tiden i timmar och minuter skiljt av en punkt (t ex 3.02) som ska överstigas samt antalet varv som ska visas i resultatfilen.<br>
 <br>
-Tävlingsformerna bestäms genom att skriva in namnet på tävlingsformen (Existerande tävlingsformer: Varv (maraton är en sorts varvlopp)).
+Tävlingsformerna bestäms genom att skriva in namnet på tävlingsformen (Existerande tävlingsformer: Varv (maraton är en sorts varvlopp)).<br>
 <br>
 Exempel på hur man startar sorteringsprogrammet vid enkelstart:
-java -jar EnduroSorter.jar starttider.txt maltider.txt namnfil.txt result.txt Varv 3 Enkelstart 
+java -jar Sorter.jar starttider.txt maltider.txt namnfil.txt result.txt Varv Enkelstart 3.00 3
 <br>
 
 
@@ -124,7 +122,7 @@ Sorteringsprogrammet har nu skapat en resultatsfil med namnet du tidigare angett
 <li>7 - GUI för registrering</li>
 <li>8 - Registrering av tider</li>
 <li>9 - Varvlopp</li>
-<li>11 - Enkel masstart<li/>
+<li>11 - Enkel masstart</li>
 <li>12 - Målgång där nummerplåten inte kan läsas i förväg</li>
 <li>14 - Användarmanual</li>
 <li>E1 - Refaktorisering av Sorteringsprogrammet</li>

@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class TestSorter extends Sorter {
 
 	public TestSorter() {
-		super(null, null, null,"maraton",0,0,"Enkelstart");
+		super(null, null, null,"maraton","0.00",0,"Enkelstart");
 	}
 
 	@Before
