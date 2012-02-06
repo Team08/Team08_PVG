@@ -5,7 +5,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import main.Time;
+import util.Time;
+
 import model.Register;
 
 public class RegisterButton extends JButton implements ActionListener {
@@ -29,7 +30,7 @@ public class RegisterButton extends JButton implements ActionListener {
 	}
 
 	/**
-	 * The actionlistener of RegisterButton, updates the GUI
+	 * The actionlistener of RegisterButton
 	 * 
 	 * @param arg0
 	 * 			the ActionEvent
@@ -47,14 +48,15 @@ public class RegisterButton extends JButton implements ActionListener {
 						"Den registrerade tiden är : " + times[0] + "."
 								+ times[1] + "." + times[2]
 								+ " \n Förarnummer: ");
+
 				if (!driverID.equals(JOptionPane.OK_OPTION)) {
+					if (driverID.length() > 0)
 					regDriverToFile(driverID, times);
 				}
-			
 			} catch (NullPointerException e) {
 			}
-		}
 
+		}
 	}
 
 	private void regDriverToFile(String name, String[] times) {

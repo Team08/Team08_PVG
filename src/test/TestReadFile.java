@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
-import main.FileIO;
+import reader.FileIO;
 import main.ReadFinishFile;
 import main.ReadStartFile;
 import main.Sorter;

@@ -2,9 +2,9 @@ package test;
 
 import static org.junit.Assert.*;
 import main.Driver;
-import main.ReadFinishFile;
-import main.ReadStartFile;
-import main.Sorter;
+import reader.ReadFinishFile;
+import reader.ReadStartFile;
+
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,11 +14,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class TestSorter extends Sorter {
+public class TestSorter{
 
 
 	public TestSorter() {
-		super(null, null, null,"maraton",0,0);
+		//super(null, null, null,"maraton",0,0);
 
 	}
 
