@@ -112,9 +112,16 @@ public class Sorter {
 			for (Integer i : register.keySet()) {
 				tDriver = register.get(i);
 				List<String> classes = tDriver.classes();
-				for (String className : classes) {
-					mapOfDiffRaceClasses.put(className, addTreeMap(className, i, tDriver));
-				}
+				
+//				if(classes.isEmpty()) {
+//					mapOfDiffRaceClasses.put("", addTreeMap("", i, tDriver));
+//				} else {
+					for (String className : classes) {
+						mapOfDiffRaceClasses.put(className, addTreeMap(className, i, tDriver));
+					}
+//				}
+				
+				
 			}
 			
 //			for (Integer i : register.keySet()) {

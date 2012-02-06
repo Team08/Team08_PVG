@@ -15,22 +15,29 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class TestSorter extends Sorter {
-	private String testFile = "testFile.test";
+	private String testFile = "expectedResult.test";
+	private static String testPath = "src/test/testfiles/";
+	private static int nbrOfLaps = 5;			//Fördefinierat i testfilen expectedResult.test
+	private static String pathToResultFile = testPath + "Result.test";
+	private File resultFileFromProg;
 	
 	
 // src/acceptanstest3/starttider.test src/acceptanstest3/maltider.test src/namnfil.test src/acceptanstest3/resultat.test varv 90 90
 	public TestSorter() {
-		super("src/acceptanstest3/starttider.test", "src/acceptanstest3/maltider.test", "src/namnfil.test","varv",0,0);
+		super(testPath + "starttimes.test", testPath + "finishtimes.test", testPath + "namefile.test","varv", nbrOfLaps, 0);
 
 	}
 
 	@Before
 	public void setUp() {
-
+		resultFileFromProg = new File(pathToResultFile);
 	}
 
 	@After
 	public void tearDown() {
+		if(resultFileFromProg.exists()) {
+			resultFileFromProg.delete();
+		}
 	}
 
 	@Test
@@ -45,14 +52,13 @@ public class TestSorter extends Sorter {
 	public void testFirstRowAndFileWasCreated() {
 
 		try {
-			writeResultFile("Result.txt");
-			Scanner sc = new Scanner(new File("Result.txt"));
-			Scanner testFileScanner = new Scanner(new File(testFile));
-			
-			assertEquals("JUNIOR", sc.nextLine());
-			sc.close();
+			writeResultFile(pathToResultFile);
+			Scanner testResScanner = new Scanner(new File(testPath + "Result.test"));
+			Scanner testFileScanner = new Scanner(new File(testPath + testFile));
+			assertEquals(testFileScanner.nextLine(), testResScanner.nextLine());
+			testResScanner.close();
+			testFileScanner.close();
 		} catch (FileNotFoundException e) {
-
 			e.printStackTrace();
 		}
 
@@ -61,19 +67,39 @@ public class TestSorter extends Sorter {
 	@Test
 	public void testOneDriverResult() {
 		try {
-			Integer i = new Integer(1);
-			String start = "12.00.00";
-			super.addStartTime(i, start);
-			String finish = "13.23.34";
-			super.addFinishTime(i, finish);
-			writeResultFile("Result.txt");
-			File file = new File("Result.txt");
-			Scanner sc = new Scanner(file);
-			sc.nextLine();
-			sc.nextLine();
-			sc.nextLine();
-			assertEquals("102; David Dsson; 0; --.--.--; Start?; Slut?", sc.nextLine());
-			sc.close();
+//			Integer i = new Integer(1);
+//			String start = "12.00.00";
+//			super.addStartTime(i, start);
+//			String finish = "13.23.34";
+//			super.addFinishTime(i, finish);
+			writeResultFile(testPath + "Result.test");
+			//File file = new File(testPath + "Result.test");
+			Scanner readFile = new Scanner(new File(testPath + "Result.test"));
+			Scanner readExpRes = new Scanner(new File(testPath + testFile));
+						
+			String resReadFile = "2";
+			boolean stop = false;
+			while(readFile.hasNextLine() && !stop){
+				resReadFile = readFile.nextLine();	
+				char first = resReadFile.charAt(0);
+				if(Character.isDigit(first)) {
+					stop = true;			
+				}
+			}
+			
+			String resExpFile = "1";
+			stop = false;
+			while(readExpRes.hasNextLine() && !stop){
+				resExpFile = readExpRes.nextLine();	
+				char first = resExpFile.charAt(0);
+				if(Character.isDigit(first)) {
+					stop = true;			
+				}
+			}
+			
+			assertEquals(resReadFile, resExpFile);
+			readFile.close();
+			readExpRes.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
