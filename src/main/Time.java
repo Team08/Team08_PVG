@@ -55,6 +55,7 @@ public class Time {
 		int totalInt = finish - start;
 
 		if (totalInt < 0) {
+			System.out.println(totalInt +"");
 			throw new NumberFormatException();
 		}
 		int minutes = (totalInt % 3600) / 60;
