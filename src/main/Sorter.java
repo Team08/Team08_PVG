@@ -1,6 +1,7 @@
 package main;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -14,7 +15,8 @@ public class Sorter {
 	private ReadNameFile rnf;
 	private ReadStartFile rsf;
 	private ReadFinishFile rff;
-
+	private HashMap<String, TreeMap<Integer, Driver>> mapOfDiffRaceClasses;
+	
 	/**
 	 * Create a new Sorter from its arguments
 	 * 
@@ -86,39 +88,75 @@ public class Sorter {
 			// Create file
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
-			out.write("StartNr; Namn; ");
+			StringBuilder sb = new StringBuilder();
+			sb.append("StartNr; Namn; ");
 			if (raceType.equals("varv")) {
-				out.write("#Varv; ");
+				sb.append("#Varv; ");
 			}
-			out.write("Totaltid; ");
+			sb.append("Totaltid; ");
 			if (raceType.equals("varv")) {
 				for (int i = 0; i < laps; i++) {
-					out.write("Varv" + (i + 1) + "; ");
+					sb.append("Varv" + (i + 1) + "; ");
 				}
 			}
-			out.write("Start; ");
+			sb.append("Start; ");
 			if (raceType.equals("varv")) {
 				for (int i = 0; i < laps - 1; i++) {
-					out.write("Varvning" + (i + 1) + "; ");
+					sb.append("Varvning" + (i + 1) + "; ");
 				}
 			}
-			out.write("Mål\n");
-			Driver tDriver;
+			sb.append("Mål\n");
 
+			Driver tDriver;
+			mapOfDiffRaceClasses =  new HashMap<String, TreeMap<Integer, Driver>>();
 			for (Integer i : register.keySet()) {
 				tDriver = register.get(i);
-				out.write(checkError(i, tDriver.startTime(),
-						tDriver.finishTime()));
+				List<String> classes = tDriver.classes();
+				for (String className : classes) {
+					mapOfDiffRaceClasses.put(className, addTreeMap(className, i, tDriver));
+				}
 			}
+			
+//			for (Integer i : register.keySet()) {
+//				tDriver = register.get(i);
+//				out.write(checkError(i, tDriver.startTime(),
+//						tDriver.finishTime()));
+//			}
+			
+			for (String className : mapOfDiffRaceClasses.keySet()) {
+				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses.get(className);
+				out.write(className + "\n");
+				out.write(sb.toString());
+				for (Integer i : tm.keySet()) {
+					tDriver = tm.get(i);
+					out.write(checkError(i, tDriver.startTime(), tDriver
+							.finishTime()));
+				}
+				
+			}
+			
 			// Close the output stream
 			out.close();
 
 		} catch (Exception e) {
-			System.err.println("Error: " + e.getMessage());
+			e.printStackTrace();
+			//System.err.println("Error: " + e.printStackTrace());
 			System.exit(1);
 		}
 	}
 
+	private TreeMap<Integer, Driver> addTreeMap(String className, Integer i, Driver tDriver) {
+		TreeMap<Integer, Driver> tm;
+		if (mapOfDiffRaceClasses.containsKey(className)) {
+			tm = mapOfDiffRaceClasses.get(className);
+			tm.put(i, tDriver);
+		} else {
+			tm = new TreeMap<Integer, Driver>();
+			tm.put(i, tDriver);
+		}
+		return tm;
+	}
+	
 	private String checkError(int i, List<String> startTime,
 			List<String> finishTime) {
 		StringBuilder sb = new StringBuilder();
@@ -138,7 +176,8 @@ public class Sorter {
 			}
 		}
 		checkStartTime(startTime, sb);
-		if (raceType.equals("varv") && finishTime.size() != 0) {
+		if (raceType.equals("varv")) {
+			if(finishTime.size() != 0){
 			int check = finishTime.size() - 1;
 			if (check > laps - 1) {
 				check = laps - 1;
@@ -149,15 +188,21 @@ public class Sorter {
 			for (int b = finishTime.size() - 1; b < laps - 1; b++) {
 				sb.append("; ");
 			}
+				if (Time.timeDiff(startTime.get(0),
+						finishTime.get(finishTime.size() - 1)).compareTo(
+								raceTime + ".00.00") >= 0) {
+					sb.append(finishTime.get(finishTime.size() - 1));
 
-			if (Time.timeDiff(startTime.get(0),
-					finishTime.get(finishTime.size() - 1)).compareTo(
-							raceTime + ".00.00") >= 0) {
-				sb.append(finishTime.get(finishTime.size() - 1));
-
-			} else {
-				sb.append("Slut?");
+				} else {
+					sb.append("Slut?");
+				}
+			}else{
+				for (int c=0; c < laps - 1; c++) {
+					sb.append("; ");
 			}
+				sb.append("Slut?");}
+
+			
 
 		} else {
 			checkFinishTime(finishTime, sb);

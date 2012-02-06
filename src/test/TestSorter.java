@@ -15,10 +15,12 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class TestSorter extends Sorter {
-
-
+	private String testFile = "testFile.test";
+	
+	
+// src/acceptanstest3/starttider.test src/acceptanstest3/maltider.test src/namnfil.test src/acceptanstest3/resultat.test varv 90 90
 	public TestSorter() {
-		super(null, null, null,"maraton",0,0);
+		super("src/acceptanstest3/starttider.test", "src/acceptanstest3/maltider.test", "src/namnfil.test","varv",0,0);
 
 	}
 
@@ -45,7 +47,9 @@ public class TestSorter extends Sorter {
 		try {
 			writeResultFile("Result.txt");
 			Scanner sc = new Scanner(new File("Result.txt"));
-			assertEquals("StartNr; Namn; Totaltid; Start; Mål", sc.nextLine());
+			Scanner testFileScanner = new Scanner(new File(testFile));
+			
+			assertEquals("JUNIOR", sc.nextLine());
 			sc.close();
 		} catch (FileNotFoundException e) {
 
@@ -63,9 +67,12 @@ public class TestSorter extends Sorter {
 			String finish = "13.23.34";
 			super.addFinishTime(i, finish);
 			writeResultFile("Result.txt");
-			Scanner sc = new Scanner(new File("Result.txt"));
+			File file = new File("Result.txt");
+			Scanner sc = new Scanner(file);
 			sc.nextLine();
-			assertEquals("1; Namn?; 1.23.34; 12.00.00; 13.23.34", sc.nextLine());
+			sc.nextLine();
+			sc.nextLine();
+			assertEquals("102; David Dsson; 0; --.--.--; Start?; Slut?", sc.nextLine());
 			sc.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
