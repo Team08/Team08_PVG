@@ -1,2 +1,0 @@
-StartNr; Namn; Totaltid; Start; Mål
-1; Test; 0.00.01; 12.00.00; 12.00.01; Flera starttider? 12.00.01; Flera måltider? 13.00.30; Omöjlig Totaltid?
