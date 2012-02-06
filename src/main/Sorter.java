@@ -128,7 +128,7 @@ public class Sorter {
 			out.close();
 
 		} catch (Exception e) {
-			System.err.println("Error: Resultatfilen är FUBAR.");
+			System.err.println("Error: Resultatfilen får ett fel");
 		}
 	}
 

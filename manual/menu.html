@@ -2,8 +2,11 @@
 <head>
 
 <style type="text/css">
+
+
+
 <!--
-html, body { 
+html, body  { 
 padding-top: 5px;
 padding-bottom: 0px;
 padding-left: 5px;
@@ -33,10 +36,109 @@ padding-bottom: 0px;
 </style>
 </head>
 <html>
-<h1>Enduro - Manual</h1><hr>
+<A NAME="Topp"></A>
+<h2>Enduro - Manual</h2><hr>
 
-<a href="manual/sida1.0.html" title="" target="mainframe" >1.0 Installationsbeskrivning</a> <br>
-<a href="manual/sida1.1.html" title="" target="mainframe" >1.1 FÃ¶rberedelser</a> <br>
-<a href="manual/sida1.2.html" title="" target="mainframe" >1.2 Starta program</a> <br>
-<a href="manual/sida1.3.html" title="" target="mainframe" >Utveckling</a><br>
+<a href="#Programinfo">1.0 Programinformation</A><br>
+<a href="#Programinfo">1.1 Namnfil</A><br>
+<a href="#StartaReg">1.2 Starta Registreringsprogrammet</A><br>
+<a href="#Starta">1.3 Starta Sorteringsprogrammet</A><br>
+<a href="#Utveckling">Utveckling</A><br>
+
+
+<A NAME="Programinfo"><h2> 1.0 Programinformation </h2></A>
+
+<p>
+<b>Program som ingår:</b> <br>Registreringsprogram, Sorteringsprogram
+<br><br>
+<b>Hur körs dom:</b> <br> 
+Registreringsprogrammet är grafiskt, medan Sorteringsprogrammet körs från terminalen.<br>
+Båda programmen är jar-filer. (För att starta en .jar fil behöver Java Runtime Environment vara installerad)<br>
+För att starta Registreringsprogrammet räcker det med att dubbelklicka på programmets ikon, medan du måste gå in i terminalen för att kunna öppna sorteringsprogrammet.<br>
+<a href="#Topp">Återvänd till topp</A>
+<br><br>
+
+<A NAME="Programinfo"><h2> 1.1 Namnfil </h2></A>
+Namnfilen måste skapas i förväg.<br>
+</p>
+Exempel på hur en namnfil utan klasser bör se ut:<br>
+</p>
+<pre>
+StartNr; Namn
+1; Anders Asson
+2; Berit Bsson
+</pre>
+
+
+<A NAME="StartaReg"><h2> 1.2 Starta Registreringsprogrammet </h2></A>
+Starta programmet genom att dubbelklicka på EnduroRegister.jar-filen. Programmet ska se ut ungefär som bild 1.0.
+<p> 1.0 - En bild på registreringsprogrammet</p>
+<img src="pic/ScreenshotRegister.png" alt="GUI" width="600" height="400"/><br>
+
+<br>
+<h2> Enkelstart/Masstart </h2>
+<h1> Enkelstart </h1>
+Skriv in startnummret på föraren och tryck Registrera förare eller tryck enter. Tillåtna startnummer är alla tal större/lika med 0.z Enligt bild 1.0 (på bilden är föraren 1 och 2 registrerade och 3 påväg att bli registrerad.) <br><br>
+Om man vill spara tiden och skriva in förarens startnummer lite senare så trycker man på Registrera förare utan att skriva in något startnummer. Då kommer det upp en dialogruta där förarens nummer kan skrivas in (se bilden nedan), tiden från då Registrera förare-knappen trycktes lagras då i filen. Parametern Starttyp ska i det här fallet vara given som "Enkelstart". <br><br>
+<h1> Masstart </h1>
+Masstart fungerar på så sätt att du i fältet uppe till vänster anger hur många deltagare som startar och klickar på Registrera förare.  Man måste då i sorteringsprogrammet ange "Masstart" som parameter.
+<br><br>
+<img src="pic/ScreenshotRegister2.png" alt="GUI" width="600" height="400"/><br>
+<br>
+
+ 
+
+När du har registrerat färdigt så har det skapats en fil som heter Register.txt. Denna bör döpas om till förslagsvis starttid/måltid, annars kommer filen fyllas på med fler tider om du startar programmet och registrerar fler förare. 
+<br>
+
+
+
+<A NAME="Starta"><h2> 1.3 Starta Sorteringsringsprogrammet </h2></A>
+<p>
+Starta Terminalen och navigera till mappen där Sorteringsprogrammet finns. När Sorteringsprogrammet startas från terminalen behöver den åtta parametrar. Namnet på starttidsfilen, måltidsfilen, namnfilen, resultatsfilen, tävlingsformen, starttyp (Enkelstart eller Masstart), stipulerade tiden i timmar som ska överstigas samt antalet varv som ska visas i resultatfilen.<br>
+<br>
+Tävlingsformerna bestäms genom att skriva in namnet på tävlingsformen (Existerande tävlingsformer: Varv (maraton är en sorts varvlopp)).
+<br>
+Exempel på hur man startar sorteringsprogrammet vid enkelstart:
+java -jar EnduroSorter.jar starttider.txt maltider.txt namnfil.txt result.txt Varv 3 Enkelstart 
+<br>
+
+
+Både start- och måltidsfiler genereras automatiskt av gränssnittet när en tid registreras.
+Resultatfilen skapas av Sorteringsprogrammet (Om tidigare resultatfiler ska finnas kvar måste de döpas om).
+
+<h2>Sorteringsprogrammet</h2>
+Sorteringsprogrammet har nu skapat en resultatsfil med namnet du tidigare angett.
+<br><br>
+<a href="#Topp">Återvänd till topp</A>
+
+<br><br>
+
+<A NAME="Utveckling"><h2> Utveckling </h2></A>
+<h2>Stories</h2>
+
+<li>3 - Enkel resultatlista</li>
+<li>4 - Personuppgifter</li>
+<li>5 - Totaltid</li>
+<li>6 - Felaktiga registreringar</li>
+<li>7 - GUI för registrering</li>
+<li>8 - Registrering av tider</li>
+<li>9 - Varvlopp</li>
+<li>11 - Enkel masstart<li/>
+<li>12 - Målgång där nummerplåten inte kan läsas i förväg</li>
+<li>14 - Användarmanual</li>
+<li>E1 - Refaktorisering av Sorteringsprogrammet</li>
+<li>E2 - Refaktorisering av Registreringsprogrammet</li>
+<li>E3 - Refaktorisering av Tidsrepresentaion</li>
+<li>E4 - Release</li>
+<li>E5 - Kundönskemål</li>
+
+<br><br>
+
+<a href="#Topp">Återvänd till topp</A>
+
+
+
+
 </html>
+
