@@ -3,4 +3,5 @@
 *.class
 *.metadata
 bin/
-
+Release/
+*.zip
