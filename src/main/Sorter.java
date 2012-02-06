@@ -8,15 +8,31 @@ public class Sorter {
 	protected TreeMap<Integer, Driver> register;
 	private String stopFile;
 	private String startFile;
-	private int raceType;
+	private String raceType;
 	private int raceTime;
 	private int laps;
 	private ReadNameFile rnf;
 	private ReadStartFile rsf;
 	private ReadFinishFile rff;
 
+	/**
+	 * Create a new Sorter from its arguments
+	 * 
+	 * @param startFileName
+	 *            The file name of the start file
+	 * @param stopFileName
+	 *            The file name of the stop/finish file
+	 * @param nameFile
+	 *            The file name of the name file
+	 * @param raceType
+	 *            The race type (e.g. "varv")
+	 * @param raceTime
+	 *            ?
+	 * @param laps
+	 *            The maximum number of laps
+	 */
 	public Sorter(String startFileName, String stopFileName, String nameFile,
-			int raceType, int raceTime, int laps) {
+			String raceType, int raceTime, int laps) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
 		this.raceType = raceType;
@@ -28,37 +44,31 @@ public class Sorter {
 		register = new TreeMap<Integer, Driver>();
 	}
 
+	/**
+	 * The main method for the Sorter program
+	 * 
+	 * @param args
+	 *            The arguments to the sorter
+	 */
 	public static void main(String[] args) {
-		// Choose Files
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				System.in));
+
 		String start = "defaultStart";
 		String stop = "defaultStop";
 		String name = "defaultName";
 		String result = "defaultResult";
 		int raceTime = 0;
-		int raceType = 0;
+		String raceType = "";
 		int laps = 0;
+		start = args[0];
+		stop = args[1];
+		name = args[2];
+		result = args[3];
+		raceType = args[4];
+		raceType = raceType.toLowerCase();
+		if (raceType.equals("varv")) {
+			raceTime = Integer.parseInt(args[5]);
+			laps = Integer.parseInt(args[6]);
 
-		try {
-			System.out.println("Ange startfilens namn:");
-			start = reader.readLine();
-			System.out.println("Ange målfilens namn:");
-			stop = reader.readLine();
-			System.out.println("Ange personuppgiftsfilens namn:");
-			name = reader.readLine();
-			System.out.println("Ange resultatfilens namn:");
-			result = reader.readLine();
-			System.out.println("Välj typ av lopp (1 = maraton, 2 = varvlopp):");
-			raceType = reader.read();
-			if (raceType == 2) {
-				System.out.println("Skriv in lopptid i timmar:");
-				raceTime = reader.read();
-				System.out.println("Skriv in antal varv som ska visas:");
-				laps = reader.read();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		Sorter sorter = new Sorter(start, stop, name, raceType, raceTime, laps);
 		sorter.writeResultFile(result);
@@ -76,17 +86,17 @@ public class Sorter {
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("StartNr; Namn; ");
-			if (raceType == 2) {
+			if (raceType.equals("varv")) {
 				out.write("#Varv; ");
 			}
 			out.write("Totaltid; ");
-			if (raceType == 2) {
+			if (raceType.equals("varv")) {
 				for (int i = 0; i < laps; i++) {
 					out.write("Varv" + (i + 1) + "; ");
 				}
 			}
 			out.write("Start; ");
-			if (raceType == 2) {
+			if (raceType.equals("varv")) {
 				for (int i = 0; i < laps - 1; i++) {
 					out.write("Varvning" + (i + 1) + "; ");
 				}
@@ -96,8 +106,8 @@ public class Sorter {
 
 			for (Integer i : register.keySet()) {
 				tDriver = register.get(i);
-				out.write(checkError(i, tDriver.startTime(), tDriver
-						.finishTime()));
+				out.write(checkError(i, tDriver.startTime(),
+						tDriver.finishTime()));
 			}
 			// Close the output stream
 			out.close();
@@ -111,26 +121,23 @@ public class Sorter {
 	private String checkError(int i, List<String> startTime,
 			List<String> finishTime) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(i + "; ");
 		String totalTimeCheck = "";
-		String name = register.get(i).getName();
-		checkName(sb, name);
-		if (raceType == 2) {
+		sb.append(i + "; ");
+		checkName(sb, register.get(i).getName());
+		if (raceType.equals("varv")) {
 			sb.append(register.get(i).getNumberOfLaps() + "; ");
 		}
 		totalTimeCheck = checkTotaltime(startTime, finishTime, sb,
 				totalTimeCheck);
-		if (raceType == 2 && (laps != 0)) {
+		if (raceType.equals("varv") && (laps != 0)) {
 			if (!(startTime.size() == 0 || finishTime.size() == 0)) {
-			for (int j = 0; j < laps; j++) {
-				sb.append(register.get(i).getLapTime(j)
-						+ "; ");
-			}
+				for (int j = 0; j < laps; j++) {
+					sb.append(register.get(i).getLapTime(j) + "; ");
+				}
 			}
 		}
-		
 		checkStartTime(startTime, sb);
-		if (raceType == 2 && finishTime.size() != 0) {
+		if (raceType.equals("varv") && finishTime.size() != 0) {
 			int check = finishTime.size() - 1;
 			if (check > laps - 1) {
 				check = laps - 1;
@@ -138,23 +145,24 @@ public class Sorter {
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
 			}
-			for(int b = finishTime.size() - 1; b < laps-1; b++){
+			for (int b = finishTime.size() - 1; b < laps - 1; b++) {
 				sb.append("; ");
 			}
 
-			if(Time.timeDiff(startTime.get(0), finishTime
-						.get(finishTime.size() - 1)).compareTo(raceTime + ".00.00")>=0){
+			if (Time.timeDiff(startTime.get(0),
+					finishTime.get(finishTime.size() - 1)).compareTo(
+							raceTime + ".00.00") >= 0) {
 				sb.append(finishTime.get(finishTime.size() - 1));
-				
-			}else{
+
+			} else {
 				sb.append("Slut?");
 			}
-			
+
 		} else {
 			checkFinishTime(finishTime, sb);
 		}
 		checkIfManyStartTime(startTime, sb);
-		if (raceType == 1) {
+		if (raceType.equals("maraton")) {
 			checkIfManyFinishTime(finishTime, sb);
 		}
 		sb.append(totalTimeCheck);
@@ -203,9 +211,9 @@ public class Sorter {
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
 		} else {
-			if (raceType == 2) {
-				totalTime = Time.timeDiff(startTime.get(0), finishTime
-						.get(finishTime.size() - 1));
+			if (raceType.equals("varv")) {
+				totalTime = Time.timeDiff(startTime.get(0),
+						finishTime.get(finishTime.size() - 1));
 			} else {
 				totalTime = Time.timeDiff(startTime.get(0), finishTime.get(0));
 			}
@@ -226,8 +234,7 @@ public class Sorter {
 	}
 
 	/**
-	 * Inserts a new start time for the specified start number The current start
-	 * time is replaced by the new start time (time)
+	 * Adds a new start time for the specified start number
 	 * 
 	 * @param startNumber
 	 *            The start number of the driver
@@ -241,8 +248,7 @@ public class Sorter {
 	}
 
 	/**
-	 * Inserts a new finish time for the specified start number The current
-	 * finish time is replaced by the new finish time (time)
+	 * Adds a new finish time for the specified start number
 	 * 
 	 * @param startNumber
 	 *            The start number of the driver
@@ -255,22 +261,51 @@ public class Sorter {
 		register.put(startNumber, driver);
 	}
 
+	/**
+	 * Add a name for the specified start number. The current name is replaced.
+	 * 
+	 * @param startNumber
+	 *            Start number
+	 * @param name
+	 *            Name of the driver
+	 */
 	public void addName(Integer startNumber, String name) {
 		Driver driver = getDriver(startNumber);
 		driver.setName(name);
 		register.put(startNumber, driver);
 	}
 
+	/**
+	 * Add a class for the specified start number
+	 * 
+	 * @param startNumber
+	 *            The start number
+	 * @param c
+	 *            The class
+	 */
 	public void addClass(Integer startNumber, String c) {
 		Driver driver = getDriver(startNumber);
 		driver.addClass(c);
 		register.put(startNumber, driver);
 	}
 
+	/**
+	 * Returns the driver corresponding to the specified start number. If no
+	 * driver exists with the specified start number a new Driver is returned.
+	 * 
+	 * @param key
+	 *            The start number
+	 * @return A driver
+	 */
 	public Driver getDriver(Integer key) {
 		return register.containsKey(key) ? register.get(key) : new Driver();
 	}
 
+	/**
+	 * Returns the number of drivers
+	 * 
+	 * @return The number of drivers
+	 */
 	public int size() {
 		return register.size();
 	}
