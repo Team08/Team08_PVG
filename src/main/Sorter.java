@@ -2,7 +2,9 @@ package main;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Sorter {
@@ -12,6 +14,7 @@ public class Sorter {
 	private String raceType;
 	private int raceTime;
 	private int laps;
+	private String startType;
 	private ReadNameFile rnf;
 	private ReadStartFile rsf;
 	private ReadFinishFile rff;
@@ -33,13 +36,13 @@ public class Sorter {
 	 * @param laps
 	 *            The maximum number of laps
 	 */
-	public Sorter(String startFileName, String stopFileName, String nameFile,
-			String raceType, int raceTime, int laps) {
+	public Sorter(String startFileName, String stopFileName, String nameFile, String raceType, int raceTime, int laps, String startType) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
 		this.raceType = raceType;
 		this.raceTime = raceTime;
 		this.laps = laps;
+		this.startType = startType;
 		rnf = new ReadNameFile(this, nameFile);
 		rsf = new ReadStartFile(this, startFile);
 		rff = new ReadFinishFile(this, stopFile);
@@ -61,19 +64,25 @@ public class Sorter {
 		int raceTime = 0;
 		String raceType = "";
 		int laps = 0;
-		start = args[0];
-		stop = args[1];
-		name = args[2];
-		result = args[3];
-		raceType = args[4];
-		raceType = raceType.toLowerCase();
+		String startType = "";
 
-		if(raceType.equals("varv")){
-			raceTime = Integer.parseInt(args[5]);
-			laps = Integer.parseInt(args[6]);
-			
+		try {
+			start = args[0];
+			stop = args[1];
+			name = args[2];
+			result = args[3];
+			raceType = args[4];
+			startType = args[5];
+			raceType = raceType.toLowerCase();
+			if(raceType.equals("varv")){
+				raceTime = Integer.parseInt(args[6]);
+				laps = Integer.parseInt(args[7]);
+			}
+		} catch (Exception e) {
+			System.out.println("Error: Fel argument");
+
 		}
-		Sorter sorter = new Sorter(start, stop, name, raceType, raceTime, laps);
+		Sorter sorter = new Sorter(start, stop, name, raceType, raceTime, laps, startType);
 		sorter.writeResultFile(result);
 	}
 
@@ -82,10 +91,17 @@ public class Sorter {
 			// Names are put in the TreeMap from the name file
 			rnf.readFile();
 			// Start file is read, and start times are put in the register
+			
+			//1 = MassStart
+			if(startType.equals("Masstart")){
+			rsf.readFileMassStart();
+			}else{
 			rsf.readFile();
+			}
 			// Finish file is read, and finish times are put in the register
 			rff.readFile();
 			// Create file
+
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
 			StringBuilder sb = new StringBuilder();
@@ -113,17 +129,16 @@ public class Sorter {
 				tDriver = register.get(i);
 				List<String> classes = tDriver.classes();
 				
-//				if(classes.isEmpty()) {
-//					mapOfDiffRaceClasses.put("", addTreeMap("", i, tDriver));
-//				} else {
+				if(classes.isEmpty()) {
+					mapOfDiffRaceClasses.put("", addTreeMap("", i, tDriver));
+				} else {
 					for (String className : classes) {
 						mapOfDiffRaceClasses.put(className, addTreeMap(className, i, tDriver));
 					}
-//				}
+				}
 				
-				
-			}
-			
+			}	
+
 //			for (Integer i : register.keySet()) {
 //				tDriver = register.get(i);
 //				out.write(checkError(i, tDriver.startTime(),
@@ -149,6 +164,7 @@ public class Sorter {
 			e.printStackTrace();
 			//System.err.println("Error: " + e.printStackTrace());
 			System.exit(1);
+
 		}
 	}
 
@@ -295,10 +311,12 @@ public class Sorter {
 	 *            The start time
 	 */
 	public void addStartTime(Integer startNumber, String time) {
-		Driver driver = getDriver(startNumber);
-		driver.addStartTime(time);
-		register.put(startNumber, driver);
+			Driver driver = getDriver(startNumber);
+			driver.addStartTime(time);
+			register.put(startNumber, driver);
+
 	}
+
 
 	/**
 	 * Adds a new finish time for the specified start number

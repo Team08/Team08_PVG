@@ -44,6 +44,7 @@ public class Time {
 		String[] temp = startTime.split("\\.");
 
 		if (temp.length != 3) {
+			System.out.println(startTime + "Fler argument behövs.... : " + temp.length);
 			throw new NumberFormatException();
 		}
 		int start = parseTime(temp);

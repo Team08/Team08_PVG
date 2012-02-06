@@ -22,7 +22,7 @@ public class TestReadNameFile extends Sorter {
 	private Sorter sorter;
 	
 	public TestReadNameFile() {
-		super("", "", "src/namnfil.test","maraton",0,0);
+		super("", "", "src/namnfil.test","maraton",0,0, "Enkelstart");
 	}
 
 	
@@ -33,7 +33,7 @@ public class TestReadNameFile extends Sorter {
 		driverTreeMap.put(new Integer(1), new Driver());
 		driverTreeMap.put(new Integer(4), new Driver());
 		driverTreeMap.put(new Integer(9), new Driver());
-		sorter = new Sorter("", "", "src/namnfil.test","maraton",0,0);
+		sorter = new Sorter("", "", "src/namnfil.test","maraton",0,0,"Enkelstart");
 		namefile = new ReadNameFile(sorter, "src/namnfil.test");
 
 	}

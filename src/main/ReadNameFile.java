@@ -69,6 +69,6 @@ public class ReadNameFile extends FileIO {
 	protected void add() {
 		sorter.addName(riderID, name);	
 	}
-			
+
 }
 
