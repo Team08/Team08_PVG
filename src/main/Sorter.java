@@ -78,7 +78,6 @@ public class Sorter {
 			}
 		} catch (Exception e) {
 			System.out.println("Error: Fel argument");
-
 		}
 		Sorter sorter = new Sorter(start, stop, name, raceType, raceTime, laps, startType);
 		sorter.writeResultFile(result);
