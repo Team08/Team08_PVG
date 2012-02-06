@@ -27,12 +27,16 @@ public abstract class FileIO {
 			try {
 				scanner = new Scanner(file);
 				String line;
+
 				while (scanner.hasNextLine()) {
 					line = scanner.nextLine();
 					String[] str = line.split("; ");
 					name = str[1];
 					riderID = Integer.parseInt(str[0]);
-					add(); // What happens
+					add(); 
+					
+					
+					// What happens
 					// if more than
 					// one finish
 					// time?
@@ -51,6 +55,7 @@ public abstract class FileIO {
 		}
 	}
 	
+	public abstract void readFileMassStart();
 	protected abstract void add();
 
 }

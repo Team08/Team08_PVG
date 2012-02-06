@@ -69,6 +69,12 @@ public class ReadNameFile extends FileIO {
 	protected void add() {
 		sorter.addName(riderID, name);	
 	}
+
+	@Override
+	public void readFileMassStart() {
+		// TODO Auto-generated method stub
+		
+	}
 			
 }
 

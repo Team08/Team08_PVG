@@ -1,7 +1,9 @@
 package main;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Sorter {
@@ -11,17 +13,19 @@ public class Sorter {
 	private int raceType;
 	private int raceTime;
 	private int laps;
+	private int startType;
 	private ReadNameFile rnf;
 	private ReadStartFile rsf;
 	private ReadFinishFile rff;
 
 	public Sorter(String startFileName, String stopFileName, String nameFile,
-			int raceType, int raceTime, int laps) {
+			int raceType, int raceTime, int laps, int startType) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
 		this.raceType = raceType;
 		this.raceTime = raceTime;
 		this.laps = laps;
+		this.startType = startType;
 		rnf = new ReadNameFile(this, nameFile);
 		rsf = new ReadStartFile(this, startFile);
 		rff = new ReadFinishFile(this, stopFile);
@@ -39,6 +43,7 @@ public class Sorter {
 		int raceTime = 0;
 		int raceType = 0;
 		int laps = 0;
+		int startType = 0;
 
 		try {
 			System.out.println("Ange startfilens namn:");
@@ -60,7 +65,7 @@ public class Sorter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Sorter sorter = new Sorter(start, stop, name, raceType, raceTime, laps);
+		Sorter sorter = new Sorter(start, stop, name, raceType, raceTime, laps, startType);
 		sorter.writeResultFile(result);
 	}
 
@@ -69,10 +74,15 @@ public class Sorter {
 			// Names are put in the TreeMap from the name file
 			rnf.readFile();
 			// Start file is read, and start times are put in the register
+			if(startType == 1){
+			rsf.readFileMassStart();
+			}else{
 			rsf.readFile();
+			}
 			// Finish file is read, and finish times are put in the register
 			rff.readFile();
 			// Create file
+
 			FileWriter fstream = new FileWriter(name);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write("StartNr; Namn; ");
@@ -94,10 +104,12 @@ public class Sorter {
 			out.write("Mål\n");
 			Driver tDriver;
 
+			
 			for (Integer i : register.keySet()) {
 				tDriver = register.get(i);
 				out.write(checkError(i, tDriver.startTime(), tDriver
-						.finishTime()));
+							.finishTime()));
+				
 			}
 			// Close the output stream
 			out.close();
@@ -235,10 +247,12 @@ public class Sorter {
 	 *            The start time
 	 */
 	public void addStartTime(Integer startNumber, String time) {
-		Driver driver = getDriver(startNumber);
-		driver.addStartTime(time);
-		register.put(startNumber, driver);
+			Driver driver = getDriver(startNumber);
+			driver.addStartTime(time);
+			register.put(startNumber, driver);
+
 	}
+
 
 	/**
 	 * Inserts a new finish time for the specified start number The current

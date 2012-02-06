@@ -19,4 +19,10 @@ public class ReadFinishFile extends FileIO {
 		sorter.addFinishTime(riderID, name);
 		
 	}
+
+	@Override
+	public void readFileMassStart() {
+		// TODO Auto-generated method stub
+		
+	}
 }
