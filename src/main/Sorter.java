@@ -37,16 +37,19 @@ public class Sorter {
 		int raceTime = 0;
 		String raceType = "";
 		int laps = 0;
-		start = args[0];
-		stop = args[1];
-		name = args[2];
-		result = args[3];
-		raceType = args[4];
-		raceType = raceType.toLowerCase();
-		if(raceType.equals("varv")){
-			raceTime = Integer.parseInt(args[5]);
-			laps = Integer.parseInt(args[6]);
-			
+		try {
+			start = args[0];
+			stop = args[1];
+			name = args[2];
+			result = args[3];
+			raceType = args[4];
+			raceType = raceType.toLowerCase();
+			if(raceType.equals("varv")){
+				raceTime = Integer.parseInt(args[5]);
+				laps = Integer.parseInt(args[6]);
+			}
+		} catch (Exception e) {
+			System.out.println("Error: Fel argument");
 		}
 		Sorter sorter = new Sorter(start, stop, name, raceType, raceTime, laps);
 		sorter.writeResultFile(result);
