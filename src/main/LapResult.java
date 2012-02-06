@@ -11,16 +11,18 @@ public class LapResult implements Result{
 	private TreeMap<Integer, Driver> index;
 	int laps;
 	int raceTime;
+	String result;
 	
-	public LapResult(TreeMap<Integer, Driver> index, int laps, int raceTime){
+	public LapResult(TreeMap<Integer, Driver> index, int laps, int raceTime,String result){
 		this.index = index;
 		this.laps = laps;
+		this.result = result;
 	}
 	
-	public void writeResultFile(String name){
+	public void writeResultFile(){
 		try{
 			
-		FileWriter fstream = new FileWriter(name);
+		FileWriter fstream = new FileWriter(result);
 		BufferedWriter out = new BufferedWriter(fstream);
 		out.write("StartNr; Namn; ");
 		

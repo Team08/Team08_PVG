@@ -6,22 +6,27 @@ import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeMap;
 
 import reader.FileIO;
-import main.ReadFinishFile;
-import main.ReadStartFile;
+import reader.ReadFinishFile;
+import reader.ReadStartFile;
+import main.Driver;
+import main.Race;
 import main.Sorter;
+import main.Varvrace;
+
 import org.junit.Test;
 
-public class TestReadFile extends Sorter {
+public class TestReadFile extends Varvrace {
 
 	private ReadStartFile startfFile;
 	private ReadFinishFile finishFile;
 
 	public TestReadFile() {
 		super("TestStart.test", "TestStart.test", "","maraton",0,0);
-		 startfFile = new ReadStartFile(new Sorter("TestStart.test", "TestStart.test", "","maraton",0,0), "TestStart.test");
-		 finishFile = new ReadFinishFile(new Sorter("TestStart.test", "TestStart.test", "","maraton",0,0), "TestStart.test");
+		 startfFile = new ReadStartFile(new Varvrace("TestStart.test", "TestStart.test", "","maraton",0,0), "TestStart.test");
+		 finishFile = new ReadFinishFile(new Varvrace("TestStart.test", "TestStart.test", "","maraton",0,0), "TestStart.test");
 	}
 
 	@Test
@@ -31,7 +36,7 @@ public class TestReadFile extends Sorter {
 			startfFile.readFile();
 
 			File file = new File("TestStart.test");
-			Set<Integer> driverSet = register.keySet();
+			Set<Integer> driverSet = index.keySet();
 			Scanner scan;
 			String[] str;
 			try {
@@ -44,7 +49,7 @@ public class TestReadFile extends Sorter {
 					Integer j = itr.next();
 					Integer startNumber = Integer.parseInt(str[0]);
 					assertEquals(startNumber.toString(), j.toString());
-					assertEquals(str[1], register.get(j).startTime().get(0));
+					assertEquals(str[1], index.get(j).startTime().get(0));
 				}
 
 			} catch (FileNotFoundException e) {
@@ -59,7 +64,7 @@ public class TestReadFile extends Sorter {
 			finishFile.readFile();
 
 			File file = new File("TestStart.test");
-			Set<Integer> driverSet = register.keySet();
+			Set<Integer> driverSet = index.keySet();
 			Scanner scan;
 			String[] str;
 			try {
@@ -73,7 +78,7 @@ public class TestReadFile extends Sorter {
 					Integer startNumber = Integer.parseInt(str[0]);
 					assertEquals(startNumber.toString(), j.toString());
 					
-					assertEquals(str[1], register.get(j).finishTime().get(0));
+					assertEquals(str[1], index.get(j).finishTime().get(0));
 				}
 			} catch (FileNotFoundException e) {
 			}
@@ -87,7 +92,7 @@ public class TestReadFile extends Sorter {
 			finishFile.readFile();
 
 			File file = new File("TestStart.test");
-			Set<Integer> driverSet = register.keySet();
+			Set<Integer> driverSet = index.keySet();
 			Scanner scan;
 			String[] str;
 			try {
@@ -98,8 +103,8 @@ public class TestReadFile extends Sorter {
 					line = scan.nextLine();
 					str = line.split("; ");
 					Integer j = itr.next();
-					for(int x = 0; x < register.get(j).finishTime().size();x++){
-						assertEquals(str[x + 1], register.get(j).finishTime().get(x));
+					for(int x = 0; x < index.get(j).finishTime().size();x++){
+						assertEquals(str[x + 1], index.get(j).finishTime().get(x));
 					}
 				}
 			} catch (FileNotFoundException e) {
@@ -108,5 +113,6 @@ public class TestReadFile extends Sorter {
 		} catch (FileNotFoundException e) {
 		}
 	}
+
 
 }
