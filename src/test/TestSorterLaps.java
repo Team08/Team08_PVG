@@ -22,7 +22,7 @@ import java.util.Scanner;
 
 public class TestSorterLaps extends Sorter{
 	public TestSorterLaps() {
-		super(null, null, null,"varv",3,3, 0);
+		super(null, null, null,"varv",3,3, "Enkelstart");
 
 	}
 

@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class TestAcceptance3 extends Sorter {
 	public TestAcceptance3() {
-		super("src/acceptanstest3/starttider.test", "src/acceptanstest3/maltider.test", "src/acceptanstest3/null.test","varv",0,3, 0);
+		super("src/acceptanstest3/starttider.test", "src/acceptanstest3/maltider.test", "src/acceptanstest3/null.test","varv",0,3, "Enkelstart");
 	}
 
 	@Before public void setup() {
