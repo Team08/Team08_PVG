@@ -11,16 +11,18 @@ public class LapResult implements Result{
 	private TreeMap<Integer, Driver> index;
 	int laps;
 	int raceTime;
+	String resultFile;
 	
-	public LapResult(TreeMap<Integer, Driver> index, int laps, int raceTime){
+	public LapResult(TreeMap<Integer, Driver> index, int laps, int raceTime, String resultFile){
 		this.index = index;
 		this.laps = laps;
+		this.raceTime = raceTime;
+		this.resultFile = resultFile;
 	}
 	
-	public void writeResultFile(String name){
+	public void writeResultFile(){
 		try{
-			
-		FileWriter fstream = new FileWriter(name);
+		FileWriter fstream = new FileWriter(resultFile);
 		BufferedWriter out = new BufferedWriter(fstream);
 		out.write("StartNr; Namn; ");
 		
@@ -87,7 +89,10 @@ public class LapResult implements Result{
 			for(int b = finishTime.size() - 1; b < laps-1; b++){
 				sb.append("; ");
 			}
-
+			System.out.println(raceTime);
+			System.out.println(raceTime + ".00.00");
+			System.out.println(Time.timeDiff(startTime.get(0), finishTime
+						.get(finishTime.size() - 1)).compareTo(raceTime + ".00.00")>=0);
 			if(Time.timeDiff(startTime.get(0), finishTime
 						.get(finishTime.size() - 1)).compareTo(raceTime + ".00.00")>=0){
 				sb.append(finishTime.get(finishTime.size() - 1));

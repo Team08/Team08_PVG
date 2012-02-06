@@ -8,20 +8,23 @@ import java.io.IOException;
 import java.util.TreeMap;
 
 import main.Driver;
-import main.ReadNameFile;
+import main.Varvrace;
+import reader.ReadNameFile;
 import main.Sorter;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestReadNameFile extends Sorter {
+public class TestReadNameFile {
 	private ReadNameFile namefile;
 	private TreeMap<Integer, Driver> driverTreeMap;
+	private Varvrace race;
 
 	private Sorter sorter;
 	
 	public TestReadNameFile() {
+		race = new VarvRace("", "", "src/namnfil.test",0,0);
 		super("", "", "src/namnfil.test","maraton",0,0);
 	}
 

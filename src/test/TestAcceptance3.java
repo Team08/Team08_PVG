@@ -23,7 +23,7 @@ public class TestAcceptance3{
 		args[2]= "/h/dk/r/ada10dlu/Desktop/pvg_projekt/PVG/null.test";
 		args[3]= "/h/dk/r/ada10dlu/Desktop/pvg_projekt/PVG/result.test";
 		args[4]= "varv";
-		args[5]= "90";
+		args[5]= "1";
 		args[6]= "3";
 		
 		new Enduro(args);

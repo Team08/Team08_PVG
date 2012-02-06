@@ -38,7 +38,7 @@ public abstract class Race {
 	public abstract void getResult(TreeMap<Integer, Driver> index);
 	
 	public void computeTotalTime() {
-		System.out.println("Syns jag h�r");
+		
 		// Names are put in the TreeMap from the name file
 					try {
 						rnf.readFile();

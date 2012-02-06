@@ -21,8 +21,8 @@ public class Varvrace extends Race{
 
 	@Override
 	public void getResult(TreeMap<Integer, Driver> index) {
-		result = new LapResult(index, laps, raceTime);
-		result.writeResultFile(resultat);
+		result = new LapResult(index, laps, raceTime,resultat);
+		result.writeResultFile();
 		
 	}
 

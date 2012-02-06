@@ -8,18 +8,19 @@ import java.util.Scanner;
 import java.util.Set;
 
 import reader.FileIO;
-import main.ReadFinishFile;
-import main.ReadStartFile;
+import reader.ReadFinishFile;
+import reader.ReadStartFile;
 import main.Sorter;
 import org.junit.Test;
 
-public class TestReadFile extends Sorter {
+public class TestReadFile{
 
 	private ReadStartFile startfFile;
 	private ReadFinishFile finishFile;
 
 	public TestReadFile() {
 		super("TestStart.test", "TestStart.test", "","maraton",0,0);
+		race = new VarvRace();
 		 startfFile = new ReadStartFile(new Sorter("TestStart.test", "TestStart.test", "","maraton",0,0), "TestStart.test");
 		 finishFile = new ReadFinishFile(new Sorter("TestStart.test", "TestStart.test", "","maraton",0,0), "TestStart.test");
 	}

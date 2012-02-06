@@ -32,7 +32,6 @@ public class Enduro {
 	
 		raceType = raceType.toLowerCase();
 		if (raceType.equals("varv")) {
-			System.out.println("Hit borde jag komma");
 			int raceTime = Integer.parseInt(args[5]);
 			int laps = Integer.parseInt(args[6]);
 			race = new Varvrace(start, stop, name, result, raceTime, laps);
