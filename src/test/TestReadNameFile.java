@@ -19,11 +19,13 @@ import org.junit.Test;
 public class TestReadNameFile extends Varvrace {
 	private ReadNameFile namefile;
 	private TreeMap<Integer, Driver> driverTreeMap;
+	private static String testNamePath = "src/test/testfiles/namnfil.test";
+
 
 	private Varvrace varvrace;
 	
 	public TestReadNameFile() {
-		super("", "", "namnfil.test","maraton",0,0);
+		super("", "", testNamePath,"maraton",0,0);
 	}
 
 	
@@ -34,8 +36,8 @@ public class TestReadNameFile extends Varvrace {
 		driverTreeMap.put(new Integer(1), new Driver());
 		driverTreeMap.put(new Integer(4), new Driver());
 		driverTreeMap.put(new Integer(9), new Driver());
-		varvrace = new Varvrace("", "", "namnfil.test","maraton",0,0);
-		namefile = new ReadNameFile(varvrace , "namnfil.test");
+		varvrace = new Varvrace("", "", testNamePath,"maraton",0,0);
+		namefile = new ReadNameFile(varvrace , testNamePath);
 
 	}
 

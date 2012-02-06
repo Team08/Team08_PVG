@@ -19,14 +19,17 @@ import main.Varvrace;
 import org.junit.Test;
 
 public class TestReadFile extends Varvrace {
+	
+	private static String testStartPath = "src/test/testfiles/TestStart.test";
+	private static String testFinishPath = "src/test/testfiles/TestFinish.test";
 
 	private ReadStartFile startfFile;
 	private ReadFinishFile finishFile;
 
 	public TestReadFile() {
 		super("TestStart.test", "TestStart.test", "","maraton",0,0);
-		 startfFile = new ReadStartFile(new Varvrace("TestStart.test", "TestStart.test", "","maraton",0,0), "TestStart.test");
-		 finishFile = new ReadFinishFile(new Varvrace("TestStart.test", "TestStart.test", "","maraton",0,0), "TestStart.test");
+		 startfFile = new ReadStartFile(new Varvrace(testStartPath, testFinishPath, "","maraton",0,0), testStartPath);
+		 finishFile = new ReadFinishFile(new Varvrace(testStartPath, testFinishPath, "","maraton",0,0), testFinishPath);
 	}
 
 	@Test
@@ -35,7 +38,7 @@ public class TestReadFile extends Varvrace {
 
 			startfFile.readFile();
 
-			File file = new File("TestStart.test");
+			File file = new File(testStartPath);
 			Set<Integer> driverSet = index.keySet();
 			Scanner scan;
 			String[] str;
@@ -63,7 +66,7 @@ public class TestReadFile extends Varvrace {
 		try {
 			finishFile.readFile();
 
-			File file = new File("TestStart.test");
+			File file = new File(testFinishPath);
 			Set<Integer> driverSet = index.keySet();
 			Scanner scan;
 			String[] str;
@@ -91,7 +94,7 @@ public class TestReadFile extends Varvrace {
 		try {
 			finishFile.readFile();
 
-			File file = new File("TestStart.test");
+			File file = new File(testFinishPath);
 			Set<Integer> driverSet = index.keySet();
 			Scanner scan;
 			String[] str;
