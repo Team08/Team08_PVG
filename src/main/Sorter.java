@@ -65,10 +65,11 @@ public class Sorter {
 		result = args[3];
 		raceType = args[4];
 		raceType = raceType.toLowerCase();
-		if (raceType.equals("varv")) {
+
+		if(raceType.equals("varv")){
 			raceTime = Integer.parseInt(args[5]);
 			laps = Integer.parseInt(args[6]);
-
+			
 		}
 		Sorter sorter = new Sorter(start, stop, name, raceType, raceTime, laps);
 		sorter.writeResultFile(result);
@@ -212,8 +213,8 @@ public class Sorter {
 			sb.append("--.--.--; ");
 		} else {
 			if (raceType.equals("varv")) {
-				totalTime = Time.timeDiff(startTime.get(0),
-						finishTime.get(finishTime.size() - 1));
+				totalTime = Time.timeDiff(startTime.get(0), finishTime
+						.get(finishTime.size() - 1));
 			} else {
 				totalTime = Time.timeDiff(startTime.get(0), finishTime.get(0));
 			}
