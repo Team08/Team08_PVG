@@ -10,13 +10,12 @@ public class Varvrace extends Race{
 	String nameFile;
 	String resultat;
 
-	public Varvrace(String start, String stop, String nameFile,String resultFile, int raceTime, int laps) {
-		super(start, stop, nameFile, raceTime, laps);
+	public Varvrace(String start, String stop, String nameFile,String resultFile, int raceTime, int laps, String startType) {
+		super(start, stop, nameFile, raceTime, laps, startType);
 		this.raceTime = raceTime;
 		this.laps = laps;
 		this.nameFile = nameFile;
 		this.resultat = resultFile;
-		
 	}
 
 	@Override

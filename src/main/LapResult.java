@@ -22,6 +22,8 @@ public class LapResult implements Result{
 	
 	public void writeResultFile(){
 		try{
+			System.out.println("hej");
+			System.out.println(resultFile);
 		FileWriter fstream = new FileWriter(resultFile);
 		BufferedWriter out = new BufferedWriter(fstream);
 		out.write("StartNr; Namn; ");
@@ -104,6 +106,7 @@ public class LapResult implements Result{
 		}
 		sb.append(totalTimeCheck);
 		sb.append("\n");
+		System.out.println(sb.toString());
 		return sb.toString();
 	}
 

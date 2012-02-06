@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import main.Race;
 
-
 public class ReadNameFile extends FileIO {
 
 	/**
@@ -16,20 +15,21 @@ public class ReadNameFile extends FileIO {
 	 * @param sorter
 	 *            the target sorter
 	 * @param fileName
-	 * 			  the namefiles name
+	 * 			  the name files name
 	 */
 	public ReadNameFile(Race race, String fileName) {
 		super(race, fileName);
 	}
 
 	/**
-	 * Reads a namefile and add it to the treemap, if file not found throws exception.
+	 * Reads a name file and adds it to the internal structure, if file not found throws exception.
 	 * 
 	 * @throws FileNotFoundException
 	 */
 	public void readFile() throws FileNotFoundException {
 		if (fileName != null) {
 			File file = new File(fileName);
+			System.out.println(fileName);
 			Scanner scanner;
 			try {
 				scanner = new Scanner(file);
@@ -72,6 +72,6 @@ public class ReadNameFile extends FileIO {
 	protected void add() {
 		race.addName(riderID, name);	
 	}
-			
+
 }
 

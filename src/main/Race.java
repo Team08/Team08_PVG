@@ -17,16 +17,22 @@ public abstract class Race {
 	//Sorter
 	
 	// Variables
-	private String stopFile;
-	private String startFile;
-	
+	protected String stopFile;
+	protected String startFile;
+	protected String startType;
+	protected String nameFile;
 
 	// Readers
 	private ReadNameFile rnf;
 	private ReadStartFile rsf;
 	private ReadFinishFile rff;
 	
-	public Race(String startFile, String stopFile, String nameFile, int raceTime, int laps){
+	public Race(String startFile, String stopFile, String nameFile, int raceTime, int laps, String startType){
+		this.startFile= startFile;
+		this.stopFile=stopFile;
+		this.startType=startType;
+		this.nameFile = nameFile;
+		
 		rnf = new ReadNameFile(this, nameFile);
 		rsf = new ReadStartFile(this, startFile);
 		rff = new ReadFinishFile(this, stopFile);
@@ -38,11 +44,15 @@ public abstract class Race {
 	public abstract void getResult(TreeMap<Integer, Driver> index);
 	
 	public void computeTotalTime() {
-		
 		// Names are put in the TreeMap from the name file
 					try {
 						rnf.readFile();
+						//1 = MassStart
+						if(startType.equals("Masstart")){
+						rsf.readFileMassStart();
+						}else{
 						rsf.readFile();
+						}
 						rff.readFile();
 					} catch (FileNotFoundException e) {
 						// TODO Auto-generated catch block

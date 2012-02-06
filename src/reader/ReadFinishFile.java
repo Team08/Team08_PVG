@@ -3,17 +3,15 @@ package reader;
 import main.Race;
 
 
-
-
 public class ReadFinishFile extends FileIO {
 	
 	/**
-	 * The constructor which takes the file name of the finishfile as argument
+	 * The constructor which takes the file name of the finish file as argument
 	 * 
 	 * @param sorter
 	 *            	the target sorter
 	 * @param fileName
-	 * 				the name of finishfile           
+	 * 				the name of finish file           
 	 */
 	public ReadFinishFile(Race race, String fileName) {
 		super(race, fileName);
@@ -23,4 +21,5 @@ public class ReadFinishFile extends FileIO {
 		race.addFinishTime(riderID, name);
 		
 	}
+
 }

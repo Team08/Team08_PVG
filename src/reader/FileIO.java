@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import main.Race;
 
-
 public abstract class FileIO {
 	protected Race race;
 	protected String fileName;
@@ -30,12 +29,16 @@ public abstract class FileIO {
 			try {
 				scanner = new Scanner(file);
 				String line;
+
 				while (scanner.hasNextLine()) {
 					line = scanner.nextLine();
 					String[] str = line.split("; ");
 					name = str[1];
 					riderID = Integer.parseInt(str[0]);
-					add(); // What happens
+					add(); 
+					
+					
+					// What happens
 					// if more than
 					// one finish
 					// time?
@@ -49,6 +52,7 @@ public abstract class FileIO {
 				}
 
 			} catch (FileNotFoundException e) {// Catch exception if any
+				System.err.print("Fel filnamn");
 				throw new FileNotFoundException();
 			}
 		}
