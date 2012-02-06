@@ -27,6 +27,7 @@ public class Register {
 
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: Fel filnamn");
+			
 			System.exit(1);
 		}
 	}

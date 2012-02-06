@@ -49,18 +49,18 @@ public class RegisterButton extends JButton implements ActionListener {
 								+ times[1] + "." + times[2]
 								+ " \n Förarnummer: ");
 				if (!driverID.equals(JOptionPane.OK_OPTION)) {
-					if(gui.getDriverID().length() == 0){
+					if(driverID.length() == 0){
 						wrongID();
 					}else {
 					try {
-						int idcheck = Integer.parseInt(id);
-						if (idcheck<0){
+						int idcheck = Integer.parseInt(driverID);
+						if (idcheck < 0){
 							wrongID();
 						}else{
-						if (gui.getDriverID().length() != 0) {
+						
 							regDriverToFile(driverID, times);
 
-						}
+						
 						}
 					} catch (NumberFormatException e) {
 						wrongID();
