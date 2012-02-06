@@ -9,7 +9,7 @@ import reader.ReadStartFile;
 
 
 public abstract class Race {
-	protected TreeMap<Integer, Driver> index;
+	public TreeMap<Integer, Driver> index;
 	
 	//Result
 	Result result;
