@@ -4,12 +4,12 @@ package main;
 public class ReadFinishFile extends FileIO {
 	
 	/**
-	 * The constructor which takes the file name of the finishfile as argument
+	 * The constructor which takes the file name of the finish file as argument
 	 * 
 	 * @param sorter
 	 *            	the target sorter
 	 * @param fileName
-	 * 				the name of finishfile           
+	 * 				the name of finish file           
 	 */
 	public ReadFinishFile(Sorter sorter, String fileName) {
 		super(sorter, fileName);
@@ -20,9 +20,4 @@ public class ReadFinishFile extends FileIO {
 		
 	}
 
-	@Override
-	public void readFileMassStart() {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -13,14 +13,14 @@ public class ReadNameFile extends FileIO {
 	 * @param sorter
 	 *            the target sorter
 	 * @param fileName
-	 * 			  the namefiles name
+	 * 			  the name files name
 	 */
 	public ReadNameFile(Sorter sorter, String fileName) {
 		super(sorter, fileName);
 	}
 
 	/**
-	 * Reads a namefile and add it to the treemap, if file not found throws exception.
+	 * Reads a name file and adds it to the internal structure, if file not found throws exception.
 	 * 
 	 * @throws FileNotFoundException
 	 */
@@ -70,11 +70,5 @@ public class ReadNameFile extends FileIO {
 		sorter.addName(riderID, name);	
 	}
 
-	@Override
-	public void readFileMassStart() {
-		// TODO Auto-generated method stub
-		
-	}
-			
 }
 

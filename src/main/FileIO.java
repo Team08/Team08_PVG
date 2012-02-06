@@ -55,7 +55,6 @@ public abstract class FileIO {
 		}
 	}
 	
-	public abstract void readFileMassStart();
 	protected abstract void add();
 
 }
