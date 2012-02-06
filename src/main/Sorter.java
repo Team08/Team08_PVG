@@ -15,6 +15,22 @@ public class Sorter {
 	private ReadStartFile rsf;
 	private ReadFinishFile rff;
 
+	/**
+	 * Create a new Sorter from its arguments
+	 * 
+	 * @param startFileName
+	 *            The file name of the start file
+	 * @param stopFileName
+	 *            The file name of the stop/finish file
+	 * @param nameFile
+	 *            The file name of the name file
+	 * @param raceType
+	 *            The race type (e.g. "varv")
+	 * @param raceTime
+	 *            ?
+	 * @param laps
+	 *            The maximum number of laps
+	 */
 	public Sorter(String startFileName, String stopFileName, String nameFile,
 			String raceType, int raceTime, int laps) {
 		this.startFile = startFileName;
@@ -28,6 +44,12 @@ public class Sorter {
 		register = new TreeMap<Integer, Driver>();
 	}
 
+	/**
+	 * The main method for the Sorter program
+	 * 
+	 * @param args
+	 *            The arguments to the sorter
+	 */
 	public static void main(String[] args) {
 
 		String start = "defaultStart";
@@ -37,6 +59,7 @@ public class Sorter {
 		int raceTime = 0;
 		String raceType = "";
 		int laps = 0;
+
 		try {
 			start = args[0];
 			stop = args[1];
@@ -50,6 +73,7 @@ public class Sorter {
 			}
 		} catch (Exception e) {
 			System.out.println("Error: Fel argument");
+
 		}
 		Sorter sorter = new Sorter(start, stop, name, raceType, raceTime, laps);
 		sorter.writeResultFile(result);
@@ -87,8 +111,8 @@ public class Sorter {
 
 			for (Integer i : register.keySet()) {
 				tDriver = register.get(i);
-				out.write(checkError(i, tDriver.startTime(), tDriver
-						.finishTime()));
+				out.write(checkError(i, tDriver.startTime(),
+						tDriver.finishTime()));
 			}
 			// Close the output stream
 			out.close();
@@ -126,18 +150,19 @@ public class Sorter {
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
 			}
-			for(int b = finishTime.size() - 1; b < laps-1; b++){
+			for (int b = finishTime.size() - 1; b < laps - 1; b++) {
 				sb.append("; ");
 			}
 
-			if(Time.timeDiff(startTime.get(0), finishTime
-						.get(finishTime.size() - 1)).compareTo(raceTime + ".00.00")>=0){
+			if (Time.timeDiff(startTime.get(0),
+					finishTime.get(finishTime.size() - 1)).compareTo(
+							raceTime + ".00.00") >= 0) {
 				sb.append(finishTime.get(finishTime.size() - 1));
-				
-			}else{
+
+			} else {
 				sb.append("Slut?");
 			}
-			
+
 		} else {
 			checkFinishTime(finishTime, sb);
 		}
@@ -214,8 +239,7 @@ public class Sorter {
 	}
 
 	/**
-	 * Inserts a new start time for the specified start number The current start
-	 * time is replaced by the new start time (time)
+	 * Adds a new start time for the specified start number
 	 * 
 	 * @param startNumber
 	 *            The start number of the driver
@@ -229,8 +253,7 @@ public class Sorter {
 	}
 
 	/**
-	 * Inserts a new finish time for the specified start number The current
-	 * finish time is replaced by the new finish time (time)
+	 * Adds a new finish time for the specified start number
 	 * 
 	 * @param startNumber
 	 *            The start number of the driver
@@ -243,22 +266,51 @@ public class Sorter {
 		register.put(startNumber, driver);
 	}
 
+	/**
+	 * Add a name for the specified start number. The current name is replaced.
+	 * 
+	 * @param startNumber
+	 *            Start number
+	 * @param name
+	 *            Name of the driver
+	 */
 	public void addName(Integer startNumber, String name) {
 		Driver driver = getDriver(startNumber);
 		driver.setName(name);
 		register.put(startNumber, driver);
 	}
 
+	/**
+	 * Add a class for the specified start number
+	 * 
+	 * @param startNumber
+	 *            The start number
+	 * @param c
+	 *            The class
+	 */
 	public void addClass(Integer startNumber, String c) {
 		Driver driver = getDriver(startNumber);
 		driver.addClass(c);
 		register.put(startNumber, driver);
 	}
 
+	/**
+	 * Returns the driver corresponding to the specified start number. If no
+	 * driver exists with the specified start number a new Driver is returned.
+	 * 
+	 * @param key
+	 *            The start number
+	 * @return A driver
+	 */
 	public Driver getDriver(Integer key) {
 		return register.containsKey(key) ? register.get(key) : new Driver();
 	}
 
+	/**
+	 * Returns the number of drivers
+	 * 
+	 * @return The number of drivers
+	 */
 	public int size() {
 		return register.size();
 	}

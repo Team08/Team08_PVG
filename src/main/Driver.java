@@ -12,7 +12,7 @@ public class Driver {
 	public Driver() {
 
 	}
-	
+
 	/**
 	 * The constructor which creates the Driver
 	 * 
@@ -25,6 +25,7 @@ public class Driver {
 
 	/**
 	 * Returns the name of the driver
+	 * 
 	 * @return The name
 	 */
 	public String getName() {
@@ -32,8 +33,7 @@ public class Driver {
 	}
 
 	/**
-	 * Inserts a new start time The current start time is replaced by the new
-	 * time
+	 * Adds a new start time
 	 * 
 	 * @param time
 	 *            The start time
@@ -44,16 +44,17 @@ public class Driver {
 	}
 
 	/**
-	 * Returns the driver's classes as a list 
+	 * Returns the driver's classes as a list
+	 * 
 	 * @return The classes as a list
 	 */
 	public List<String> startTime() {
 		return startTime;
 	}
 
-
 	/**
 	 * Returns the driver's finish times as a list
+	 * 
 	 * @return The finish times as a list
 	 */
 	public List<String> finishTime() {
@@ -61,20 +62,21 @@ public class Driver {
 	}
 
 	/**
-	 * Inserts a new finish time
+	 * Adds a new finish time
 	 * 
 	 * @param time
-	 *            The new time that replaces the old one
+	 *            The new time
 	 */
 	public void addFinishTime(String time) {
 		finishTime.add(time);
 
 	}
 
-
 	/**
 	 * Set the name of the driver. The current name is replaced.
-	 * @param name The new name of the driver
+	 * 
+	 * @param name
+	 *            The new name of the driver
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -84,40 +86,41 @@ public class Driver {
 	 * Returns the time from last registered time to the lap i
 	 * 
 	 * @param i
-	 *            The lapnumber, starting from 0
+	 *            The lap number, starting from 0
 	 * @return The time as a String
 	 */
 	public String getLapTime(int i) {
 		String laptime;
 		if (i == 0) {
 			laptime = Time.timeDiff(startTime.get(0), finishTime.get(0));
-		}else if (finishTime.size() > i){
-			laptime = Time.timeDiff(finishTime.get(i-1), finishTime.get(i));
-		}else{
+		} else if (finishTime.size() > i) {
+			laptime = Time.timeDiff(finishTime.get(i - 1), finishTime.get(i));
+		} else {
 			laptime = "";
 		}
 		return laptime;
 	}
 
-	
 	/**
-	 * Inserts a new class to the list classes
+	 * Adds a new class to the list classes
 	 * 
 	 * @param c
-	 *            
+	 *            The class
+	 * 
 	 */
 	public void addClass(String c) {
 		classes.add(c);
 	}
-	
+
 	/**
 	 * Returns a list with all classes
+	 * 
 	 * @return A list with classes
 	 */
 	public List<String> classes() {
 		return classes;
 	}
-	
+
 	/**
 	 * Returns the number of laps
 	 * 
