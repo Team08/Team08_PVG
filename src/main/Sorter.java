@@ -1,9 +1,7 @@
 package main;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Sorter {
@@ -78,7 +76,6 @@ public class Sorter {
 			}
 		} catch (Exception e) {
 			System.out.println("Error: Fel argument");
-
 		}
 		Sorter sorter = new Sorter(start, stop, name, raceType, raceTime, laps, startType);
 		sorter.writeResultFile(result);
