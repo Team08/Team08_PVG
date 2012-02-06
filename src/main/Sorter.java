@@ -13,7 +13,7 @@ public class Sorter {
 	private String raceType;
 	private int raceTime;
 	private int laps;
-	private int startType;
+	private String startType;
 	private ReadNameFile rnf;
 	private ReadStartFile rsf;
 	private ReadFinishFile rff;
@@ -34,7 +34,7 @@ public class Sorter {
 	 * @param laps
 	 *            The maximum number of laps
 	 */
-	public Sorter(String startFileName, String stopFileName, String nameFile, String raceType, int raceTime, int laps, int startType) {
+	public Sorter(String startFileName, String stopFileName, String nameFile, String raceType, int raceTime, int laps, String startType) {
 		this.startFile = startFileName;
 		this.stopFile = stopFileName;
 		this.raceType = raceType;
@@ -62,7 +62,7 @@ public class Sorter {
 		int raceTime = 0;
 		String raceType = "";
 		int laps = 0;
-		int startType = 0;
+		String startType = "";
 
 		try {
 			start = args[0];
@@ -70,10 +70,11 @@ public class Sorter {
 			name = args[2];
 			result = args[3];
 			raceType = args[4];
+			startType = args[5];
 			raceType = raceType.toLowerCase();
 			if(raceType.equals("varv")){
-				raceTime = Integer.parseInt(args[5]);
-				laps = Integer.parseInt(args[6]);
+				raceTime = Integer.parseInt(args[6]);
+				laps = Integer.parseInt(args[7]);
 			}
 		} catch (Exception e) {
 			System.out.println("Error: Fel argument");
@@ -90,7 +91,7 @@ public class Sorter {
 			// Start file is read, and start times are put in the register
 			
 			//1 = MassStart
-			if(startType == 1){
+			if(startType.equals("Masstart")){
 			rsf.readFileMassStart();
 			}else{
 			rsf.readFile();
