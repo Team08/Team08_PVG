@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 import main.Driver;
+import main.Varvrace;
 import reader.ReadFinishFile;
 import reader.ReadStartFile;
 
@@ -14,11 +15,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class TestSorter{
+public class TestSorter extends Varvrace{
 
 
 	public TestSorter() {
-		//super(null, null, null,"maraton",0,0);
+		super(null, null, null,"maraton",0,0);
 
 	}
 
@@ -36,7 +37,7 @@ public class TestSorter{
 		Integer i = new Integer(1);
 		String time = "01.01.01";
 		super.addStartTime(i, time);
-		assertEquals(1, register.size());
+		assertEquals(1, index.size());
 	}
 
 	@Test
@@ -101,7 +102,7 @@ public class TestSorter{
 		Integer i = new Integer(1);
 		String time = "01.01.01";
 		super.addStartTime(i, time);
-		Driver driver = register.get(i);
+		Driver driver = index.get(i);
 		assertEquals("01.01.01", driver.startTime().get(0));
 	}
 
@@ -110,7 +111,7 @@ public class TestSorter{
 		Integer i = new Integer(1);
 		String time = "02.02.00";
 		super.addFinishTime(i, time);
-		Driver driver = register.get(i);
+		Driver driver = index.get(i);
 		assertEquals("02.02.00", driver.finishTime().get(0));
 
 	}
@@ -122,7 +123,7 @@ public class TestSorter{
 		String finishTime = "02.02.02";
 		super.addStartTime(i, startTime);
 		super.addFinishTime(i, finishTime);
-		Driver driver = register.get(i);
+		Driver driver = index.get(i);
 		assertEquals("Wrong start time", "01.01.01", driver.startTime().get(0));
 		assertEquals("Wrong finish time", "02.02.02", driver.finishTime().get(0));
 	}
@@ -134,7 +135,7 @@ public class TestSorter{
 		String finishTime = "02.02.02";
 		super.addFinishTime(i, finishTime);
 		super.addStartTime(i, startTime);
-		Driver driver = register.get(i);
+		Driver driver = index.get(i);
 		assertEquals("Wrong start time", "01.01.01", driver.startTime().get(0));
 		assertEquals("Wrong finish time", "02.02.02", driver.finishTime().get(0));
 	}
@@ -280,7 +281,7 @@ public class TestSorter{
 			Integer i = new Integer(1);
 			String name = "Test";
 			Driver d=  new Driver(name);
-			register.put(i, d);
+			index.put(i, d);
 			writeResultFile("Result.txt");
 			Scanner sc = new Scanner(new File("Result.txt"));
 			sc.nextLine();
@@ -298,7 +299,7 @@ public class TestSorter{
 			Integer i = new Integer(1);
 			String name = "Test";
 			Driver d=  new Driver(name);
-			register.put(i, d);
+			index.put(i, d);
 			String start = "12.00.00";
 			super.addStartTime(i, start);
 			start = "12.00.01";
