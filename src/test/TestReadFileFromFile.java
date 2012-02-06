@@ -27,7 +27,7 @@ public class TestReadFileFromFile {
 	@After
 	public void tearDown() throws Exception {
 	}
-	
+
 	@Test(expected = FileNotFoundException.class)
 	public void TestReadStartFileThrowsNoSuchFileException()
 			throws FileNotFoundException {

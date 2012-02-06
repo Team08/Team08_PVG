@@ -128,7 +128,7 @@ public class Sorter {
 			out.close();
 
 		} catch (Exception e) {
-			System.err.println("Error: Resultatfilen får ett fel");
+			System.err.println("Error: Möjligtvis fel på filnamn");
 		}
 	}
 
