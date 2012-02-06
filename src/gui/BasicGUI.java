@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 
 import model.Register;
 
-public class BasicGUI extends JFrame {
+public class BasicGUI extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private static int WIDTH = 1920;
 	private static int HEIGHT = 1080;
@@ -46,7 +46,6 @@ public class BasicGUI extends JFrame {
 		this.register = register;
 		this.setLayout(new BorderLayout());
 		init();
-
 		addComponents();
 		setupLayout();
 	}
@@ -80,6 +79,7 @@ public class BasicGUI extends JFrame {
 		driverID = new JTextField("");
 		scrollPane = new JScrollPane(textArea);
 		textArea.setEditable(false);
+		driverID.addActionListener(this);
 
 		lastRegisteredDrivers = new String("Senaste registrerade tider");
 		textArea.setText(lastRegisteredDrivers);
@@ -117,11 +117,21 @@ public class BasicGUI extends JFrame {
 				+ driver + "; " + hours + "." + minutes + "."
 				+ seconds;
 		textArea.setText(lastRegisteredDrivers);
+		makeTextFieldEmpty();
+	}
+
+	public void makeTextFieldEmpty() {
 		driverID.setText("");
 	}
 
-	protected String getDriverText() {
+	protected String getDriverID() {
 		return driverID.getText();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		registerButton.pushedButton();
+		
 	}
 	
 	
