@@ -50,7 +50,7 @@ public abstract class FileIO {
 				}
 
 			} catch (FileNotFoundException e) {// Catch exception if any
-				System.err.print("Fel filnamn");
+				System.err.print("Fel filen finns inte");
 				e.printStackTrace();
 				throw new FileNotFoundException();
 			}
