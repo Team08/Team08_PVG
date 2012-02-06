@@ -49,25 +49,47 @@ public class RegisterButton extends JButton implements ActionListener {
 								+ times[1] + "." + times[2]
 								+ " \n Förarnummer: ");
 				if (!driverID.equals(JOptionPane.OK_OPTION)) {
-					regDriverToFile(driverID, times);
-				}
+					if(gui.getDriverID().length() == 0){
+						wrongID();
+					}else {
+					try {
+						int idcheck = Integer.parseInt(id);
+						if (idcheck<0){
+							wrongID();
+						}else{
+						if (gui.getDriverID().length() != 0) {
+							regDriverToFile(driverID, times);
+
+						}
+						}
+					} catch (NumberFormatException e) {
+						wrongID();
+					}
+					
+				}}
 
 			} catch (NullPointerException e) {
 			}
 		} else {
 			try {
-				Integer.parseInt(id);
+				int idcheck = Integer.parseInt(id);
+				if (idcheck<0){
+					wrongID();
+				}else{
 				if (gui.getDriverID().length() != 0) {
 					regDriverToFile(id, times);
 
 				}
-
+				}
 			} catch (NumberFormatException e) {
-				gui.makeTextFieldEmpty();
-				JOptionPane.showMessageDialog(null,
-						"IDnumret får bara bestå av siffror");
+				wrongID();
 			}
 		}
+	}
+	private void wrongID(){
+		gui.makeTextFieldEmpty();
+		JOptionPane.showMessageDialog(null,
+				"IDnumret får bara vara positiva heltal");
 	}
 	
 	private void regDriverToFile(String name, String[] times) {
