@@ -21,7 +21,7 @@ public class TestReadNameFile extends LapRace {
 	private LapRace varvrace;
 	
 	public TestReadNameFile() {
-		super("", "", testNamePath,"","",0,"");
+		super("", "", testNamePath,"","",0,"", null);
 	}
 
 	
@@ -32,7 +32,8 @@ public class TestReadNameFile extends LapRace {
 		driverTreeMap.put(new Integer(1), new Driver());
 		driverTreeMap.put(new Integer(4), new Driver());
 		driverTreeMap.put(new Integer(9), new Driver());
-		varvrace = new LapRace("", "", testNamePath,"","",0,"");
+
+		varvrace = new LapRace("", "", testNamePath,"","",0,"", null);
 		namefile = new ReadNameFile(varvrace, testNamePath);
 	}
 

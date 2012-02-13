@@ -1,5 +1,6 @@
 package race;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import result.LapResult;
@@ -14,8 +15,8 @@ public class StageRace extends Race{
 	String resultat;
 	
 	public StageRace(String startFile, String stopFile, String nameFile, String resultFile, int stages,
-			String startType) {
-		super(startFile, stopFile, nameFile, startType);
+			String startType, ArrayList<String> driverAttributes) {
+		super(startFile, stopFile, nameFile, startType, driverAttributes);
 		this.nameFile = nameFile;
 		this.resultat = resultFile;
 		this.stages = stages;
