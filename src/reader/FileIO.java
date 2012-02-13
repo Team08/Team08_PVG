@@ -59,12 +59,19 @@ public abstract class FileIO {
 				}
 
 			} catch (FileNotFoundException e) {// Catch exception if any
-				System.err.print("Fel filnamn");
+				printErrorText();
 				throw new FileNotFoundException();
 			}
 		}
 	}
 
+
+	/**
+	 * Prints the error text if file not found.
+	 */
+	protected abstract void printErrorText();
+	
+	
 	/**
 	 * Method is called by readFile() and used to add the time to the race
 	 * object.

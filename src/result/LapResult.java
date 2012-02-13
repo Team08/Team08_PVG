@@ -14,14 +14,14 @@ import util.Time;
 
 
 /**
- * An sub class of Result which is used when a Lap Race has been used a parameter
- * to the main class in Enduro.
+ * An sub class of Result which is used when a Lap Race has been used a
+ * parameter to the main class in Enduro.
  * 
- * This class creates the result file after having tested the input files for 
- * invalid parameters. If this is the case the result file still is created,
- * but the file will contain appropriate error messages.
+ * This class creates the result file after having tested the input files for
+ * invalid parameters. If this is the case the result file still is created, but
+ * the file will contain appropriate error messages.
  * 
- *  @author Team08
+ * @author Team08
  */
 public class LapResult extends Result {
 	private Sorter sorter;
@@ -90,10 +90,13 @@ public class LapResult extends Result {
 			
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
+
 				if(tDriver.getName() == null) {								//
 					tDriver.addClass(nonExistingNbr);						//
+
 				}
 				String classes = tDriver.getClasses();						//
+
 
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,	//Lägger in en treemap
 						tDriver));											//(treemap innehåller idnummer mappade till respektive förare) 
@@ -102,14 +105,19 @@ public class LapResult extends Result {
 			ArrayList<Driver> unsortedListOfDriversInAClass;			//arraylist som används för att plocka ut alla förare i en viss klass för att skickas in till sortern.
 			ArrayList<Driver> sortedListOfDriversInAClass;			
 			List<Driver> nonExistingNbrList = null;
+
+			
+
 			for (String className : mapOfDiffRaceClasses.keySet()) {
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses			
 						.get(className);
+
 				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());
 				sortedListOfDriversInAClass=sorter.lapSort(unsortedListOfDriversInAClass);	//	//Nu har vi en sorterad arraylist med alla förarna i en klass
 				
 				if(className.equals(nonExistingNbr)) {
 					nonExistingNbrList = sortedListOfDriversInAClass;
+
 				} else {
 					out.write(className + "\n");								//Skriver ut klassnamn
 					out.write(sb.toString());									//Skriver ut "linjal"
@@ -121,6 +129,7 @@ public class LapResult extends Result {
 			}
 			
 			if(nonExistingNbrList != null) {
+
 				out.write(nonExistingNbr + "\n");
 				out.write(sb.toString());
 
@@ -129,7 +138,7 @@ public class LapResult extends Result {
 							.finishTime()));
 				}
 			}
-			
+
 			// Close the output stream
 			out.close();
 
@@ -156,7 +165,11 @@ public class LapResult extends Result {
 	/**
 	 * Check if there are any invalid parameter and returns a result string line
 	 * that contains error-notations if any invalid parameter found.
+<<<<<<< HEAD
+	 * 
+=======
 	 *
+>>>>>>> 12106fdeee7b939e25042887df0290a492e1b4da
 	 * @param i
 	 *            The current index
 	 * @param startTime
@@ -168,7 +181,6 @@ public class LapResult extends Result {
 	 */
 	@Override
 	public String checkError(int i, List<Time> startTime, List<Time> finishTime) {
-
 		StringBuilder sb = new StringBuilder();
 		String totalTimeCheck = "";
 		String totalLapCheck = "";
@@ -179,24 +191,19 @@ public class LapResult extends Result {
 
 		totalTimeCheck = checkTotaltime(startTime, finishTime, sb,
 				totalTimeCheck);
-		if (laps != 0) {
-			if (!(startTime.size() == 0 || finishTime.size() == 0)) {
-				String lapTime = "";
-				for (int j = 0; j < laps; j++) {
-					lapTime = index.get(i).getLapTime(j);
-					Time lap = new Time(lapTime);
-					if(lap.lesserThan(new Time("00.15.00"))){
-						if(!lap.equals(new Time(0))){
-							totalLapCheck = " Omöjlig varvtid ";
-						}
+		if (!(startTime.size() == 0 || finishTime.size() == 0)) {
+			String lapTime = "";
+			for (int j = 0; j < laps; j++) {
+				lapTime = index.get(i).getLapTime(j);
+				Time lap = new Time(lapTime);
+				if (lap.lesserThan(new Time("00.15.00"))) {
+					if (!lap.equals(new Time(0))) {
+						totalLapCheck = " Omöjlig varvtid ";
 					}
-					sb.append(lapTime + "; ");
 				}
+				sb.append(lapTime + "; ");
 			}
 		}
-//		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
-//			sb.append("; ");
-//		}
 		checkStartTime(startTime, sb);
 		Time timeTemp = new Time(0);
 		if (finishTime.size() != 0 && startTime.size() != 0) {
@@ -211,9 +218,7 @@ public class LapResult extends Result {
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
 			}
-
-			
-			if ((!timeTemp.greaterThan(raceTime))&&check<=laps) {
+			if ((!timeTemp.greaterThan(raceTime)) && check <= laps) {
 				sb.append(finishTime.get(finishTime.size() - 1) + "; ");
 
 			}
@@ -230,7 +235,7 @@ public class LapResult extends Result {
 		}
 
 		sb.append(totalLapCheck);
-		checkIfManyStartTime(startTime ,sb);
+		checkIfManyStartTime(startTime, sb);
 		sb.append(totalTimeCheck);
 		sb.append("\n");
 		System.out.println(sb.toString());
