@@ -10,11 +10,24 @@ import race.Race;
 import race.Varvrace;
 
 import util.Time;
-
+/**
+ * The main class which initiates the Sorter program.
+ * @author Team08
+ *
+ */
 public class Enduro {
 	protected TreeMap<Integer, Driver> register;
 	private Race race;
-
+	
+	/**
+	 * The constructor which creates an Enduro object.
+	 * Enter a config file in order to make the sorter function
+	 * as wanted. E.g. if there has been a lap race or a stage race
+	 * 
+	 * @param config file which the user creates before starting the
+	 * 				 sorter program in order for it to produce the
+	 * 				 wanted result
+	 */
 	public Enduro(String[] args) {
 		String start = "defaultStart";
 		String stop = "defaultStop";
@@ -69,7 +82,7 @@ public class Enduro {
 	/**
      * Main program that initiates the Sorter program.
      *
-     * @param args
+     * @param the config file
      */
 	public static void main(String[] args) {
 		if (args.length == 0){

@@ -5,7 +5,9 @@ package util;
  * string.
  */
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Time implements Comparable{
@@ -38,13 +40,16 @@ public class Time implements Comparable{
 		time = parseTime(temp);
 	}
 
-	// BORDE EJ BEHÖVAS MEN FINNS FÖR ATT DE ÄR SÅ LÄTT ATT IMPLEMENTERA
+
+	// BORDE EJ BEH�VAS MEN FINNS F�R ATT DE �R S� L�TT ATT IMPLEMENTERA
+
 	/**
 	 * Sets the time in milliseconds.
 	 * 
 	 * @param time
 	 *            the time in milliseconds
 	 */
+
 	public void setTime(int time) {
 		this.time = time;
 	}
@@ -56,6 +61,7 @@ public class Time implements Comparable{
 	 * @param time
 	 *            the time in string
 	 */
+
 	public void setTime(String time) {
 		String[] temp = time.split("\\.");
 		this.time = parseTime(temp);
@@ -198,6 +204,29 @@ public class Time implements Comparable{
 	public ArrayList<Time> sortArrayInOrder(List<Time> times) {
 		Collections.sort(times);
 		return (ArrayList<Time>) times;
+	}
+	
+	/**
+	 * Returns a list of three strings, [0]hours, [1]minutes and [2]seconds
+	 * 
+	 * @return the list with strings
+	 *
+	 */
+	public static String[] makeTimeList(){
+		GregorianCalendar calendar = new GregorianCalendar();
+
+		int hours = calendar.get(Calendar.HOUR_OF_DAY);
+		int minutes = calendar.get(Calendar.MINUTE);
+		int seconds = calendar.get(Calendar.SECOND);
+		String[] times = new String[3];
+		String stringMinutes = Time2.addZero(minutes);
+		String stringSeconds = Time2.addZero(seconds);
+
+		times[0] = Integer.toString(hours);
+		times[1] = stringMinutes;
+		times[2] = stringSeconds;
+
+		return times;
 	}
 
 }

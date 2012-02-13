@@ -105,16 +105,16 @@ public class Driver {
 	 *            The lap number, starting from 0
 	 * @return A time object which represents the lap time
 	 */
-	public Time getLapTime(int i) {
+	public String getLapTime(int i) {
 		int laptime;
 		if (i == 0) {
 			laptime = startTime.get(0).timeDiff(finishTime.get(0));
 		} else if (finishTime.size() > i) {
 			laptime = finishTime.get(i - 1).timeDiff(finishTime.get(i));
 		} else {
-			laptime = 0;
+			return "";
 		}
-		return new Time(laptime);
+		return new Time(laptime).toString();
 	}
 
 	/**
