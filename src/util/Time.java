@@ -21,12 +21,12 @@ public class Time implements Comparable{
 		time = parseTime(temp);
 	}
 
-	// BORDE EJ BEHÖVAS MEN FINNS FÖR ATT DE ÄR SÅ LÄTT ATT IMPLEMENTERA
+	// BORDE EJ BEHï¿½VAS MEN FINNS Fï¿½R ATT DE ï¿½R Sï¿½ Lï¿½TT ATT IMPLEMENTERA
 	public void setTime(int time) {
 		this.time = time;
 	}
 
-	// BORDE EJ BEHÖVAS MEN FINNS FÖR ATT DE ÄR SÅ LÄTT ATT IMPLEMENTERA
+	// BORDE EJ BEHï¿½VAS MEN FINNS Fï¿½R ATT DE ï¿½R Sï¿½ Lï¿½TT ATT IMPLEMENTERA
 	public void setTime(String time) {
 		String[] temp = time.split("\\.");
 		this.time = parseTime(temp);
@@ -116,9 +116,8 @@ public class Time implements Comparable{
 		return BIGGER;
 	}
 
-	public ArrayList<Time> sortArrayInOrder(List<Time> times) {
+	public void sortArrayInOrder(List<Time> times) {
 		Collections.sort(times);
-		return (ArrayList<Time>) times;
 	}
 
 }

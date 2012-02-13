@@ -70,6 +70,7 @@ public abstract class Race {
 
 	public void addStartTime(Integer startNumber, Time time) {
 		Driver driver = getDriver(startNumber);
+		driver.setId(startNumber);
 		driver.addStartTime(time);
 		index.put(startNumber, driver);
 

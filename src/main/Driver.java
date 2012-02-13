@@ -11,6 +11,7 @@ public class Driver {
 	private List<Time> startTime = new ArrayList<Time>();
 	private List<Time> finishTime = new ArrayList<Time>();
 	private String classes = "";
+	private Integer id;
 
 	public Driver() {
 
@@ -44,7 +45,7 @@ public class Driver {
 	 */
 	public void addStartTime(Time time) {
 		startTime.add(time);
-
+		time.sortArrayInOrder(startTime);
 	}
 
 	/**
@@ -55,7 +56,7 @@ public class Driver {
 	 */
 	public void addFinishTime(Time time) {
 		finishTime.add(time);
-
+		time.sortArrayInOrder(finishTime);
 	}
 
 	/**
@@ -132,5 +133,23 @@ public class Driver {
 	 */
 	public int getNumberOfLaps() {
 		return finishTime.size();
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	public int totalTime() {
+		return startTime.get(0).timeDiff(finishTime.get(finishTime.size()-1));
 	}
 }
