@@ -18,8 +18,8 @@ public class TestReadFileFromFile {
 	private ReadFinishFile rff;
 	
 	public TestReadFileFromFile() {
-		 rsf = new ReadStartFile(new Varvrace("Unknown", "Unknown", "Unknown","","",0,""), "Unknown");
-		 rff = new ReadFinishFile(new Varvrace("Unknown", "Unknown", "Unknown","","",0,""), "Unknown");
+		 rsf = new ReadStartFile(new Varvrace("Unknown", "Unknown", "Unknown","","",0,"", null), "Unknown");
+		 rff = new ReadFinishFile(new Varvrace("Unknown", "Unknown", "Unknown","","",0,"", null), "Unknown");
 		
 	}
 

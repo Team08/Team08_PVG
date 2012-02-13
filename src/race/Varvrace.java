@@ -1,5 +1,6 @@
 package race;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import result.LapResult;
@@ -34,8 +35,8 @@ public class Varvrace extends Race {
 	 * @param startType the type of start (masstart e.g.)
 	 */
 	public Varvrace(String start, String stop, String nameFile,
-			String resultFile, String raceTime, int laps, String startType) {
-		super(start, stop, nameFile, startType);
+			String resultFile, String raceTime, int laps, String startType, ArrayList<String> driverAttributes) {
+		super(start, stop, nameFile, startType, driverAttributes);
 		this.raceTime = raceTime;
 		this.laps = laps;
 		this.nameFile = nameFile;

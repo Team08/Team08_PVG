@@ -14,7 +14,7 @@ public class TestVarvrace {
 
 	@Before
 	public void setUp() {
-		race = new Varvrace("", "", "", "", "", 0, "");
+		race = new Varvrace("", "", "", "", "", 0, "", null);
 
 	}
 
