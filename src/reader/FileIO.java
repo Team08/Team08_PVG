@@ -8,7 +8,13 @@ import race.Race;
 import util.Time;
 
 /**
- * A file reader that can add riderID and time to the race object.
+ * An abstract class which has a method for reading a file.
+ * Uses the Template Method architecture. Appropriate sub classes will be 
+ * called. 
+ * 
+ * Reads a file and adds the driverID and Time to the database.
+ * 
+ * @author Team08
  */
 public abstract class FileIO {
 	protected Race race;
@@ -30,7 +36,8 @@ public abstract class FileIO {
 	}
 
 	/**
-	 * Reads a file and add the time and riderID to the race.
+	 * Reads a file and add the time and driverID via the race object,
+	 * which contains the database where all information is stored.
 	 * 
 	 * @throws FileNotFoundException
 	 *             If file not found
@@ -49,18 +56,6 @@ public abstract class FileIO {
 					time = new Time(str[1]);
 					riderID = Integer.parseInt(str[0]);
 					add();
-
-					// What happens
-					// if more than
-					// one finish
-					// time?
-					// A for-loop
-					// should be
-					// added to make
-					// sure that the
-					// entire
-					// vector is
-					// added.
 				}
 
 			} catch (FileNotFoundException e) {// Catch exception if any
