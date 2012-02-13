@@ -91,9 +91,7 @@ public class LapResult extends Result {
 
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
 						tDriver));
-				// nytt
 
-				// Nytt
 			}
 
 
@@ -157,11 +155,7 @@ public class LapResult extends Result {
 	/**
 	 * Check if there are any invalid parameter and returns a result string line
 	 * that contains error-notations if any invalid parameter found.
-<<<<<<< HEAD
 	 * 
-=======
-	 *
->>>>>>> 12106fdeee7b939e25042887df0290a492e1b4da
 	 * @param i
 	 *            The current index
 	 * @param startTime
