@@ -38,7 +38,7 @@ public class TestReadNameFile extends Varvrace {
 		driverTreeMap.put(new Integer(4), new Driver());
 		driverTreeMap.put(new Integer(9), new Driver());
 		varvrace = new Varvrace("", "", testNamePath,"","",0,"");
-
+		namefile = new ReadNameFile(varvrace, testNamePath);
 
 	}
 
