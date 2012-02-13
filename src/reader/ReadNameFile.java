@@ -68,11 +68,19 @@ public class ReadNameFile extends FileIO {
 				}
 
 			} catch (FileNotFoundException e) {
-				// Ska vi vara konsekventa och skriva ut SYSO som på andra
-				// filer?
+				printErrorText();
 				throw new FileNotFoundException();
 			}
 		}
+	}
+
+
+	/**
+	 * Prints the error text if file not found.
+	 */
+	protected void printErrorText() {
+		System.err.println("Hittade inte namnfilen.");
+		
 	}
 
 }

@@ -33,27 +33,6 @@ public abstract class Result {
 	public abstract String checkError(int i, List<Time> startTime,
 			List<Time> finishTime);
 
-	/**
-	 * Check if there are many finish times and appends the time or error to sb.
-	 * 
-	 * @param finshTime
-	 *            the list of finish times
-	 * @param sb
-	 *            the target stringbuilder to append to
-	 */
-	public abstract void checkIfManyFinishTime(List<Time> finishTime,
-			StringBuilder sb);
-
-	/**
-	 * Check if there are many start times and appends the time or error to sb.
-	 * 
-	 * @param startTime
-	 *            the list of start times
-	 * @param sb
-	 *            the target stringbuilder to append to
-	 */
-	public abstract void checkIfManyStartTime(List<Time> startTime,
-			StringBuilder sb);
 
 	/**
 	 * Check if the finish time list contains any finish time.
@@ -63,7 +42,16 @@ public abstract class Result {
 	 * @param sb
 	 *            the StringBuilder to append to
 	 */
-	public abstract void checkFinishTime(List<Time> finishTime, StringBuilder sb);
+
+	public void checkFinishTime(List<Time> finishTime, StringBuilder sb) {
+		if (finishTime.size() == 0) {
+			sb.append("Slut?");
+		} else {
+			sb.append(finishTime.get(0));
+		}
+	}
+	
+
 
 	/**
 	 * Check if the start time list contains any finish time.
@@ -73,7 +61,15 @@ public abstract class Result {
 	 * @param sb
 	 *            the StringBuilder to append to
 	 */
-	public abstract void checkStartTime(List<Time> startTime, StringBuilder sb);
+
+	public void checkStartTime(List<Time> startTime, StringBuilder sb) {
+		if (startTime.size() == 0) {
+			sb.append("Start?; ");
+		} else {
+			sb.append(startTime.get(0) + "; ");
+		}
+	}
+	
 
 	/**
 	 * Check if the finish time list contains any finish time.
@@ -84,13 +80,11 @@ public abstract class Result {
 	 *            the list of finish times to check
 	 * @param sb
 	 *            the StringBuilder to append to
-	 * @param totalCheck
-	 *            the totalcheck
-	 * @return A string of the total time with error-notations if any invalid
-	 *         time was found
+	 * @return A string of the total time with
+	 *         error-notations if any invalid time was found
 	 */
 	public abstract String checkTotaltime(List<Time> startTime,
-			List<Time> finishTime, StringBuilder sb, String totalCheck);
+			List<Time> finishTime, StringBuilder sb);
 
 	/**
 	 * Check if the name is null and appends the name to sb.

@@ -11,19 +11,20 @@ import main.Driver;
 import main.Sorter;
 
 import util.Time;
-import util.Time2;
+
 
 /**
- * An sub class of Result which is used when a Lap Race has been used a parameter
- * to the main class in Enduro.
+ * An sub class of Result which is used when a Lap Race has been used a
+ * parameter to the main class in Enduro.
  * 
- * This class creates the result file after having tested the input files for 
- * invalid parameters. If this is the case the result file still is created,
- * but the file will contain appropriate error messages.
+ * This class creates the result file after having tested the input files for
+ * invalid parameters. If this is the case the result file still is created, but
+ * the file will contain appropriate error messages.
  * 
- *  @author Team08
+ * @author Team08
  */
 public class LapResult extends Result {
+	private Sorter sorter;
 	private HashMap<String, TreeMap<Integer, Driver>> mapOfDiffRaceClasses;
 	int laps;
 	Time raceTime;
@@ -39,7 +40,7 @@ public class LapResult extends Result {
 	 * @param laps
 	 *            how many laps time that will be displayed in the result file
 	 * @param raceTimeString
-	 *            the duration of the race in hours
+	 *            the time a driver needs to get over to have finished the race
 	 * @param resultFile
 	 *            the name of the resultFile that this class will compute the
 	 *            results to
@@ -56,6 +57,7 @@ public class LapResult extends Result {
 	 * Writes the result to the resultFile.
 	 */
 	public void writeResultFile() {
+		sorter = new Sorter();
 		try {
 
 			FileWriter fstream = new FileWriter(resultFile);
@@ -81,55 +83,63 @@ public class LapResult extends Result {
 			sb.append("Mål\n");
 
 			Driver tDriver;
+			
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
+		
+			
+			
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
-				if(tDriver.getName() == null) {
-					tDriver.addClass(nonExistingNbr);
+
+				if(tDriver.getName() == null) {								//
+					tDriver.addClass(nonExistingNbr);						//
+
 				}
-				String classes = tDriver.getClasses();
+				String classes = tDriver.getClasses();						//
 
-				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
-						tDriver));
-				// nytt
+				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,	//Lägger in en treemap
+						tDriver));											//(treemap innehåller idnummer mappade till respektive förare) 
+			}																//i en klass
 
-				// Nytt
-			}
+			ArrayList<Driver> unsortedListOfDriversInAClass;			//arraylist som används för att plocka ut alla förare i en viss klass för att skickas in till sortern.
+			ArrayList<Driver> sortedListOfDriversInAClass;			
+			List<Driver> nonExistingNbrList = null;
 
-			// for (Integer i : register.keySet()) {
-			// tDriver = register.get(i);
-			// out.write(checkError(i, tDriver.startTime(),
-			// tDriver.finishTime()));
-			// }
+			
 
-			TreeMap<Integer, Driver> nonExistingNbrMap = null;
+
 			for (String className : mapOfDiffRaceClasses.keySet()) {
-				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
+				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses			
 						.get(className);
+
+				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());
+				sortedListOfDriversInAClass=sorter.lapSort(unsortedListOfDriversInAClass);	//	//Nu har vi en sorterad arraylist med alla förarna i en klass
+				
 				if(className.equals(nonExistingNbr)) {
-					nonExistingNbrMap = tm;
+					nonExistingNbrList = sortedListOfDriversInAClass;
+
 				} else {
-					out.write(className + "\n");
-					out.write(sb.toString());
-					for (Integer i : tm.keySet()) {
-						tDriver = tm.get(i);
-						out.write(checkError(i, tDriver.startTime(), tDriver
+					out.write(className + "\n");								//Skriver ut klassnamn
+					out.write(sb.toString());									//Skriver ut "linjal"
+					for (Driver driver : sortedListOfDriversInAClass) {								//Skriver varje person som hör till klassen.
+						out.write(checkError(driver.getId(), driver.startTime(), driver	//
 								.finishTime()));
 					}
 				}
 			}
 			
-			if(nonExistingNbrMap != null) {
+			if(nonExistingNbrList != null) {
+
 				out.write(nonExistingNbr + "\n");
 				out.write(sb.toString());
 
-				for (Integer i : nonExistingNbrMap.keySet()) {
-					tDriver = nonExistingNbrMap.get(i);
-					out.write(checkError(i, tDriver.startTime(), tDriver
+				for (Driver driver : nonExistingNbrList) {
+					out.write(checkError(driver.getId(), driver.startTime(), driver
+
 							.finishTime()));
 				}
 			}
-			
+
 			// Close the output stream
 			out.close();
 
@@ -156,7 +166,7 @@ public class LapResult extends Result {
 	/**
 	 * Check if there are any invalid parameter and returns a result string line
 	 * that contains error-notations if any invalid parameter found.
-	 *
+	 * 
 	 * @param i
 	 *            The current index
 	 * @param startTime
@@ -168,7 +178,6 @@ public class LapResult extends Result {
 	 */
 	@Override
 	public String checkError(int i, List<Time> startTime, List<Time> finishTime) {
-
 		StringBuilder sb = new StringBuilder();
 		String totalTimeCheck = "";
 		String totalLapCheck = "";
@@ -177,16 +186,15 @@ public class LapResult extends Result {
 
 		sb.append(index.get(i).getNumberOfLaps() + "; ");
 
-		totalTimeCheck = checkTotaltime(startTime, finishTime, sb,
-				totalTimeCheck);
+		totalTimeCheck = checkTotaltime(startTime, finishTime, sb);
 		if (laps != 0) {
 			if (!(startTime.size() == 0 || finishTime.size() == 0)) {
 				String lapTime = "";
 				for (int j = 0; j < laps; j++) {
 					lapTime = index.get(i).getLapTime(j);
 					Time lap = new Time(lapTime);
-					if(lap.lesserThan(new Time("00.15.00"))){
-						if(!lap.equals(new Time(0))){
+					if (lap.lesserThan(new Time("00.15.00"))) {
+						if (!lap.equals(new Time(0))) {
 							totalLapCheck = " Omöjlig varvtid ";
 						}
 					}
@@ -194,9 +202,6 @@ public class LapResult extends Result {
 				}
 			}
 		}
-//		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
-//			sb.append("; ");
-//		}
 		checkStartTime(startTime, sb);
 		Time timeTemp = new Time(0);
 		if (finishTime.size() != 0 && startTime.size() != 0) {
@@ -211,9 +216,7 @@ public class LapResult extends Result {
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
 			}
-
-			
-			if ((!timeTemp.greaterThan(raceTime))&&check<=laps) {
+			if ((!timeTemp.greaterThan(raceTime)) && check <= laps) {
 				sb.append(finishTime.get(finishTime.size() - 1) + "; ");
 
 			}
@@ -230,7 +233,7 @@ public class LapResult extends Result {
 		}
 
 		sb.append(totalLapCheck);
-		checkIfManyStartTime(startTime ,sb);
+		checkIfManyStartTime(startTime, sb);
 		sb.append(totalTimeCheck);
 		sb.append("\n");
 		System.out.println(sb.toString());
@@ -238,32 +241,13 @@ public class LapResult extends Result {
 	}
 
 	/**
-	 * Check if there are ManyFinishTimes.
-	 * 
-	 * @param finishTime
-	 *            the list of finish times to check
-	 * @param sb
-	 *            the StringBuilder to append to
-	 */
-	@Override
-	public void checkIfManyFinishTime(List<Time> finishTime, StringBuilder sb) {
-		if (finishTime.size() > 1) {
-			sb.append("; Flera måltider?");
-			for (int j = 1; j <= (finishTime.size() - 1); j++) {
-				sb.append(" " + finishTime.get(j));
-			}
-		}
-	}
-
-	/**
-	 * Check if there are ManyStartTimes.
+	 * Check if there are many start times and appends the time or error to sb.
 	 * 
 	 * @param startTime
 	 *            the list of start times to check
 	 * @param sb
-	 *            the StringBuilder to append to
+	 *            the target StringBuilder to append to
 	 */
-	@Override
 	public void checkIfManyStartTime(List<Time> startTime, StringBuilder sb) {
 		if (startTime.size() > 1) {
 			sb.append("; Flera starttider?");
@@ -275,56 +259,27 @@ public class LapResult extends Result {
 	}
 
 	/**
-	 * Check if the finish time list contains any finish time.
-	 * 
-	 * @param finishTime
-	 *            the list of finish times to check
-	 * @param sb
-	 *            the StringBuilder to append to
-	 */
-	@Override
-	public void checkFinishTime(List<Time> finishTime, StringBuilder sb) {
-		if (finishTime.size() == 0) {
-			sb.append("Slut?");
-		} else {
-			sb.append(finishTime.get(0));
-		}
-	}
-
-	/**
-	 * Check if the start time list contains any finish time.
-	 * 
-	 * @param startTime
-	 *            the list of start times to check
-	 * @param sb
-	 *            the StringBuilder to append to
-	 */
-	@Override
-	public void checkStartTime(List<Time> startTime, StringBuilder sb) {
-		if (startTime.size() == 0) {
-			sb.append("Start?; ");
-		} else {
-			sb.append(startTime.get(0) + "; ");
-		}
-	}
-
-	/**
-	 * Check if the finish time list contains any finish time.
+	 * Computes the totaltime if possible and appends it to the stringbuilder.
+	 * If there is no totaltime --.--.-- is appended The method returns a string
+	 * with an error-notation if the totaltime was impossible otherwise an empty
+	 * String
 	 * 
 	 * @param startTime
 	 *            the list of start times to check
 	 * @param finishTime
 	 *            the list of finish times to check
 	 * @param sb
-	 *            the StringBuilder to append to
+	 *            the StringBuilder to append to <<<<<<< HEAD
+	 * @return A string with error-notations if any invalid time was found
+	 *         =======
 	 * @param totalCheck
 	 *            the totalcheck
 	 * @return A string of the total time with error-notations if any invalid
-	 *         time was found
+	 *         time was found >>>>>>> 99c23db0e95b41872459078ea00bd83b53a1be7d
 	 */
 	@Override
 	public String checkTotaltime(List<Time> startTime, List<Time> finishTime,
-			StringBuilder sb, String totalCheck) {
+			StringBuilder sb) {
 		Time totalTime = new Time(0);
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
@@ -334,10 +289,9 @@ public class LapResult extends Result {
 
 			sb.append(totalTime.toString() + "; ");
 			if (totalTime.lesserThan(new Time("0.15.00"))) {
-				totalCheck = "; Omöjlig Totaltid?";
+				return "; Omöjlig Totaltid?";
 			}
-
 		}
-		return totalCheck;
+		return "";
 	}
 }
