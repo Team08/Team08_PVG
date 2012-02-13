@@ -11,7 +11,7 @@ import main.Driver;
 import main.Sorter;
 
 import util.Time;
-import util.Time2;
+
 
 /**
  * An sub class of Result which is used when a Lap Race has been used a
@@ -24,6 +24,7 @@ import util.Time2;
  * @author Team08
  */
 public class LapResult extends Result {
+	private Sorter sorter;
 	private HashMap<String, TreeMap<Integer, Driver>> mapOfDiffRaceClasses;
 	int laps;
 	Time raceTime;
@@ -56,6 +57,7 @@ public class LapResult extends Result {
 	 * Writes the result to the resultFile.
 	 */
 	public void writeResultFile() {
+		sorter = new Sorter();
 		try {
 
 			FileWriter fstream = new FileWriter(resultFile);
@@ -81,50 +83,57 @@ public class LapResult extends Result {
 			sb.append("Mål\n");
 
 			Driver tDriver;
+			
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
+		
+			
+			
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
-				if (tDriver.getName() == null) {
-					tDriver.addClass(nonExistingNbr);
+
+				if(tDriver.getName() == null) {								//
+					tDriver.addClass(nonExistingNbr);						//
+
 				}
-				String classes = tDriver.getClasses();
+				String classes = tDriver.getClasses();						//
 
-				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
-						tDriver));
+				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,	//Lägger in en treemap
+						tDriver));											//(treemap innehåller idnummer mappade till respektive förare) 
+			}																//i en klass
 
-			}
+			ArrayList<Driver> unsortedListOfDriversInAClass;			//arraylist som används för att plocka ut alla förare i en viss klass för att skickas in till sortern.
+			ArrayList<Driver> sortedListOfDriversInAClass;			
+			List<Driver> nonExistingNbrList = null;
 
+			
 
-			// for (Integer i : register.keySet()) {
-			// tDriver = register.get(i);
-			// out.write(checkError(i, tDriver.startTime(),
-			// tDriver.finishTime()));
-			// }
-
-			TreeMap<Integer, Driver> nonExistingNbrMap = null;
 			for (String className : mapOfDiffRaceClasses.keySet()) {
-				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
+				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses			
 						.get(className);
-				if (className.equals(nonExistingNbr)) {
-					nonExistingNbrMap = tm;
+
+				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());
+				sortedListOfDriversInAClass=sorter.lapSort(unsortedListOfDriversInAClass);	//	//Nu har vi en sorterad arraylist med alla förarna i en klass
+				
+				if(className.equals(nonExistingNbr)) {
+					nonExistingNbrList = sortedListOfDriversInAClass;
+
 				} else {
-					out.write(className + "\n");
-					out.write(sb.toString());
-					for (Integer i : tm.keySet()) {
-						tDriver = tm.get(i);
-						out.write(checkError(i, tDriver.startTime(), tDriver
+					out.write(className + "\n");								//Skriver ut klassnamn
+					out.write(sb.toString());									//Skriver ut "linjal"
+					for (Driver driver : sortedListOfDriversInAClass) {								//Skriver varje person som hör till klassen.
+						out.write(checkError(driver.getId(), driver.startTime(), driver	//
 								.finishTime()));
 					}
 				}
 			}
+			
+			if(nonExistingNbrList != null) {
 
-			if (nonExistingNbrMap != null) {
 				out.write(nonExistingNbr + "\n");
 				out.write(sb.toString());
 
-				for (Integer i : nonExistingNbrMap.keySet()) {
-					tDriver = nonExistingNbrMap.get(i);
-					out.write(checkError(i, tDriver.startTime(), tDriver
+				for (Driver driver : nonExistingNbrList) {
+					out.write(checkError(driver.getId(), driver.startTime(), driver
 							.finishTime()));
 				}
 			}
