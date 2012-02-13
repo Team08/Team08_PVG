@@ -1,12 +1,21 @@
 package util;
 
-public class Time {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Time implements Comparable{
 	private int time;
 
 	public Time(int time) {
 		this.time = time;
 	}
 
+	
+	private int time(){
+		return time;
+	}
+	
 	public Time(String representTime) {
 		String[] temp = representTime.split("\\.");
 		time = parseTime(temp);
@@ -92,4 +101,24 @@ public class Time {
 			return t2.getTime() - time;
 		}
 	}
+
+	public int compareTo(Object arg0) {
+		final int SMALLER = -1;
+		final int EQUAL = 0;
+		final int BIGGER = 1;
+
+		if (this.time() == ((Time) arg0).time()) {
+			return EQUAL;
+		}
+		if (this.time() < ((Time) arg0).time()) {
+			return SMALLER;
+		}
+		return BIGGER;
+	}
+
+	public ArrayList<Time> sortArrayInOrder(List<Time> times) {
+		Collections.sort(times);
+		return (ArrayList<Time>) times;
+	}
+
 }
