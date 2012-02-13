@@ -5,23 +5,42 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import main.Sorter;
+
+import main.Enduro;
+
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestAcceptance3 extends Sorter {
+public class TestAcceptance3{
+	private static String testStartPath = "src/test/testfiles/starttider.test";
+	private static String testFinishPath = "src/test/testfiles/maltider.test";
+	private static String testNullPath = "src/test/testfiles/null.test";
+	private static String testResultPath = "src/test/testfiles/result.test";
+	private static String testResultatPath = "src/test/testfiles/resultat.test";
+
+	
+	
 	public TestAcceptance3() {
-		super("src/acceptanstest3/starttider.test", "src/acceptanstest3/maltider.test", "src/acceptanstest3/null.test","varv",0,3, "Enkelstart");
+		//super("src/acceptanstest3/starttider.test", "src/acceptanstest3/maltider.test", "src/acceptanstest3/null.test","varv",0,3);
 	}
 
 	@Before public void setup() {
-		writeResultFile("src/acceptanstest3/result.test");
+		String[] args = new String [7];
+		args[0]= testStartPath;
+		args[1]= testFinishPath;
+		args[2]= testNullPath;
+		args[3]= testResultPath;
+		args[4]= "varv";
+		args[5]= "90";
+		args[6]= "3";
+		
+		new Enduro(args);
 	}
 	
 	@Test public void testThatResultatEqualsResultat(){
 		try {
-			File file1 = new File("src/acceptanstest3/resultat.test");
-			File file2 = new File("src/acceptanstest3/result.test");
+			File file1 = new File(testResultatPath);
+			File file2 = new File(testResultPath);
 			Scanner scan1 = new Scanner(file1);
 			Scanner scan2 = new Scanner(file2);
 			

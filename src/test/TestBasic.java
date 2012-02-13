@@ -7,9 +7,9 @@ import java.io.File;
 import java.util.Scanner;
 
 import main.Driver;
-import main.Time;
+import util.Time;
 import model.Register;
-import main.Sorter;
+
 
 import org.junit.After;
 import org.junit.Before;

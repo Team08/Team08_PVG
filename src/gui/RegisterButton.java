@@ -5,21 +5,23 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import main.Time;
+import util.Time;
+
 import model.Register;
 
 public class RegisterButton extends JButton implements ActionListener {
 	private BasicGUI gui;
 	private Register register;
 
+
 	/**
 	 * The constructor which creates a RegisterButton
 	 * 
 	 * @param gui
-	 *            the basicGUI
+	 *          the basicGUI
 	 * @param register
-	 *            the target register
-	 */
+	 * 			the target register
+	 */	
 	public RegisterButton(BasicGUI gui, Register register) {
 		super("Registrera förare");
 		this.gui = gui;
@@ -28,70 +30,35 @@ public class RegisterButton extends JButton implements ActionListener {
 	}
 
 	/**
-	 * The actionlistener of RegisterButton, updates the GUI
+	 * The actionlistener of RegisterButton
 	 * 
 	 * @param arg0
-	 *            the ActionEvent
-	 */
+	 * 			the ActionEvent
+	 */	
 	public void actionPerformed(ActionEvent arg0) {
-		pushedButton();
-
-	}
-
-	protected void pushedButton(){
-		String id = gui.getDriverID();
+		String name = gui.getDriverText();
 		String[] times = Time.makeTimeList();
-		if (gui.getDriverID().length() == 0) {
+		if (gui.getDriverText().length() != 0) {
+			regDriverToFile(name, times);
+
+		} else {
 			try {
 
 				String driverID = JOptionPane.showInputDialog(null,
 						"Den registrerade tiden är : " + times[0] + "."
 								+ times[1] + "." + times[2]
 								+ " \n Förarnummer: ");
+
 				if (!driverID.equals(JOptionPane.OK_OPTION)) {
-					if(driverID.length() == 0){
-						wrongID();
-					}else {
-					try {
-						int idcheck = Integer.parseInt(driverID);
-						if (idcheck < 0){
-							wrongID();
-						}else{
-						
-							regDriverToFile(driverID, times);
-
-						
-						}
-					} catch (NumberFormatException e) {
-						wrongID();
-					}
-					
-				}}
-
+					if (driverID.length() > 0)
+					regDriverToFile(driverID, times);
+				}
 			} catch (NullPointerException e) {
 			}
-		} else {
-			try {
-				int idcheck = Integer.parseInt(id);
-				if (idcheck<0){
-					wrongID();
-				}else{
-				if (gui.getDriverID().length() != 0) {
-					regDriverToFile(id, times);
 
-				}
-				}
-			} catch (NumberFormatException e) {
-				wrongID();
-			}
 		}
 	}
-	private void wrongID(){
-		gui.makeTextFieldEmpty();
-		JOptionPane.showMessageDialog(null,
-				"IDnumret får bara vara positiva heltal");
-	}
-	
+
 	private void regDriverToFile(String name, String[] times) {
 		register.registerDriver(name);
 		gui.writeInScrollPane(times[0], times[1], times[2], name);

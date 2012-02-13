@@ -3,6 +3,8 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.Time;
+
 public class Driver {
 	private String name;
 	private List<String> startTime = new ArrayList<String>();
@@ -33,13 +35,25 @@ public class Driver {
 	}
 
 	/**
-	 * Adds a new start time
+	 * Inserts a new start time The current start time is replaced by the new
+	 * time
 	 * 
 	 * @param time
 	 *            The start time
 	 */
 	public void addStartTime(String time) {
 		startTime.add(time);
+
+	}
+
+	/**
+	 * Inserts a new finish time
+	 * 
+	 * @param time
+	 *            The new time that replaces the old one
+	 */
+	public void addFinishTime(String time) {
+		finishTime.add(time);
 
 	}
 
@@ -62,17 +76,6 @@ public class Driver {
 	}
 
 	/**
-	 * Adds a new finish time
-	 * 
-	 * @param time
-	 *            The new time
-	 */
-	public void addFinishTime(String time) {
-		finishTime.add(time);
-
-	}
-
-	/**
 	 * Set the name of the driver. The current name is replaced.
 	 * 
 	 * @param name
@@ -86,7 +89,7 @@ public class Driver {
 	 * Returns the time from last registered time to the lap i
 	 * 
 	 * @param i
-	 *            The lap number, starting from 0
+	 *            The lapnumber, starting from 0
 	 * @return The time as a String
 	 */
 	public String getLapTime(int i) {
@@ -102,10 +105,9 @@ public class Driver {
 	}
 
 	/**
-	 * Adds a new class to the list classes
+	 * Inserts a new class to the list classes
 	 * 
 	 * @param c
-	 *            The class
 	 * 
 	 */
 	public void addClass(String c) {
