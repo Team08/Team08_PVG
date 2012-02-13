@@ -11,7 +11,6 @@ import main.Enduro;
 import org.junit.Before;
 import org.junit.Test;
 
-import race.Varvrace;
 
 public class TestAcceptance13{
 	private static String testStartPath = "src/test/testfiles/accep13_starttimes.test";

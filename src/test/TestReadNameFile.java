@@ -6,19 +6,19 @@ import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
 import java.util.TreeMap;
 import main.Driver;
-import race.Varvrace;
+import race.LapRace;
 import reader.ReadNameFile;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
  
-public class TestReadNameFile extends Varvrace {
+public class TestReadNameFile extends LapRace {
 	private ReadNameFile namefile;
 	private TreeMap<Integer, Driver> driverTreeMap;
 	private static String testNamePath = "src/test/testfiles/namnfil.test";
 
 
-	private Varvrace varvrace;
+	private LapRace varvrace;
 	
 	public TestReadNameFile() {
 		super("", "", testNamePath,"","",0,"");
@@ -32,7 +32,7 @@ public class TestReadNameFile extends Varvrace {
 		driverTreeMap.put(new Integer(1), new Driver());
 		driverTreeMap.put(new Integer(4), new Driver());
 		driverTreeMap.put(new Integer(9), new Driver());
-		varvrace = new Varvrace("", "", testNamePath,"","",0,"");
+		varvrace = new LapRace("", "", testNamePath,"","",0,"");
 		namefile = new ReadNameFile(varvrace, testNamePath);
 	}
 

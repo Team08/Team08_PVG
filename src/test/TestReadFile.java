@@ -6,14 +6,14 @@ import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
-import race.Varvrace;
+import race.LapRace;
 import reader.ReadFinishFile;
 import reader.ReadStartFile;
 
 
 import org.junit.Test;
 
-public class TestReadFile extends Varvrace {
+public class TestReadFile extends LapRace {
 	
 	private static String testStartPath = "src/test/testfiles/TestStart.test";
 	private static String testFinishPath = "src/test/testfiles/TestFinish.test";
@@ -23,8 +23,8 @@ public class TestReadFile extends Varvrace {
 
 	public TestReadFile() {
 		super("TestStart.test", "TestStart.test", "","","",0,"");
-		 startfFile = new ReadStartFile(new Varvrace(testStartPath, testFinishPath, "","","",0,""), testStartPath);
-		 finishFile = new ReadFinishFile(new Varvrace(testStartPath, testFinishPath, "","","",0,""), testFinishPath);
+		 startfFile = new ReadStartFile(new LapRace(testStartPath, testFinishPath, "","","",0,""), testStartPath);
+		 finishFile = new ReadFinishFile(new LapRace(testStartPath, testFinishPath, "","","",0,""), testFinishPath);
 	}
 
 	@Test

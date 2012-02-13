@@ -15,7 +15,7 @@ import util.Time;
  * @author Team08
  * 
  */
-public class Varvrace extends Race {
+public class LapRace extends Race {
 	LapResult result;
 	String raceTime;
 	int laps;
@@ -33,7 +33,7 @@ public class Varvrace extends Race {
 	 * @param laps	the number of laps which are to be written to the file
 	 * @param startType the type of start (masstart e.g.)
 	 */
-	public Varvrace(String start, String stop, String nameFile,
+	public LapRace(String start, String stop, String nameFile,
 			String resultFile, String raceTime, int laps, String startType) {
 		super(start, stop, nameFile, startType);
 		this.raceTime = raceTime;
