@@ -14,7 +14,11 @@ import javax.swing.JTextField;
 
 
 import model.Register;
-
+/** 
+ * The GUI class which creates the graphics of the Register program.
+ * @author Team08
+ *
+ */
 public class BasicGUI extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private static int WIDTH = 1920;
@@ -115,14 +119,25 @@ public class BasicGUI extends JFrame implements ActionListener{
 		makeTextFieldEmpty();
 	}
 
+	/**
+	 * Makes the text field in the GUI empty
+	 */
 	public void makeTextFieldEmpty() {
 		driverID.setText("");
 	}
 
+	/**
+	 * Returns a driver ID from the JTextField
+	 * @return the registered time and start number
+	 */
 	protected String getDriverID() {
 		return driverID.getText();
 	}
 
+	/**
+	 * Sees if an action is performed in the GUI (e.g. if the
+	 * register button is pushed)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		registerButton.pushedButton();
