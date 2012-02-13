@@ -75,21 +75,16 @@ public class LapResult extends Result {
 
 			Driver tDriver;
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
-			ArrayList<Driver> notSortedDrivers = new ArrayList<Driver>();
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
 				String classes = tDriver.getClasses();
-				
+
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
 						tDriver));
-				//nytt
-				notSortedDrivers.add(tDriver);
-				
-				//Nytt
+				// nytt
+
+				// Nytt
 			}
-			Sorter sorter = new Sorter();
-			sorter.lapSort(notSortedDrivers);
-			
 
 			// for (Integer i : register.keySet()) {
 			// tDriver = register.get(i);
@@ -97,18 +92,26 @@ public class LapResult extends Result {
 			// tDriver.finishTime()));
 			// }
 
+			ArrayList<Driver> tempDrivers = new ArrayList<Driver>();
+
 			for (String className : mapOfDiffRaceClasses.keySet()) {
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
 						.get(className);
 				out.write(sb.toString());
 				out.write(className + "\n");
 				for (Integer i : tm.keySet()) {
-					tDriver = tm.get(i);
-					out.write(checkError(i, tDriver.startTime(), tDriver
-							.finishTime()));
+					// tDriver = tm.get(i);
+					// out.write(checkError(i, tDriver.startTime(), tDriver
+					// .finishTime()));
+					tempDrivers.add(tm.get(i));
 				}
-
+				Sorter sorter = new Sorter();
+				tempDrivers = sorter.lapSort(tempDrivers);
+				for (Driver d: tempDrivers) {
+					out.write(checkError(tempDrivers.indexOf(d) , d.startTime(), d.finishTime()));
+				}
 			}
+			
 			// Close the output stream
 			out.close();
 
@@ -134,8 +137,9 @@ public class LapResult extends Result {
 
 	/**
 	 * Check if there are any invalid parameter and returns a result string line
-	 * that contains error-notations if any invalid parameter found.
-	 * <<<<<<< HEAD
+	 * that contains error-notations if any invalid parameter found. <<<<<<<
+	 * HEAD
+	 * 
 	 * @param i
 	 *            The current index
 	 * @param startTime
@@ -169,7 +173,7 @@ public class LapResult extends Result {
 		}
 		checkStartTime(startTime, sb);
 		Time timeTemp = new Time(0);
-		if(finishTime.size() != 0 && startTime.size() != 0){
+		if (finishTime.size() != 0 && startTime.size() != 0) {
 			timeTemp = new Time(startTime.get(0).timeDiff(
 					finishTime.get(finishTime.size() - 1)));
 		}
@@ -181,15 +185,15 @@ public class LapResult extends Result {
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
 			}
-			
-			if ((!timeTemp.greaterThan(raceTime))&&check<=laps) {
+
+			if ((!timeTemp.greaterThan(raceTime)) && check <= laps) {
 				sb.append(finishTime.get(finishTime.size() - 1));
 			}
 		}
 		for (int b = finishTime.size() - 1; b < laps - 2; b++) {
 			sb.append("; ");
 		}
-			
+
 		if (timeTemp.greaterThan(raceTime)) {
 			sb.append(finishTime.get(finishTime.size() - 1));
 
@@ -197,7 +201,6 @@ public class LapResult extends Result {
 			sb.append("Slut?");
 		}
 
-		
 		sb.append(totalTimeCheck);
 		sb.append("\n");
 		System.out.println(sb.toString());
@@ -286,8 +289,8 @@ public class LapResult extends Result {
 	 *            the StringBuilder to append to
 	 * @param totalCheck
 	 *            the totalcheck
-	 * @return A string of the total time with
-	 *         error-notations if any invalid time was found
+	 * @return A string of the total time with error-notations if any invalid
+	 *         time was found
 	 */
 	@Override
 	public String checkTotaltime(List<Time> startTime, List<Time> finishTime,
