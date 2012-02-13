@@ -17,7 +17,7 @@ public class TestAcceptance3{
 	private static String testStartPath = "src/test/testfiles/starttider.test";
 	private static String testFinishPath = "src/test/testfiles/maltider.test";
 	private static String testNullPath = "src/test/testfiles/null.test";
-	private static String testResultPath = "src/test/testfiles/result.test";
+	private static String testResultPath = "src/test/testfiles/result.txt";
 	private static String testResultatPath = "src/test/testfiles/resultat.test";
 
 	
