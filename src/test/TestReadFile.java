@@ -28,16 +28,9 @@ public class TestReadFile extends Varvrace {
 	private ReadFinishFile finishFile;
 
 	public TestReadFile() {
-<<<<<<< HEAD
-		
 		super("TestStart.test", "TestStart.test", "","","",0,"");
 		 startfFile = new ReadStartFile(new Varvrace(testStartPath, testFinishPath, "","","",0,""), testStartPath);
 		 finishFile = new ReadFinishFile(new Varvrace(testStartPath, testFinishPath, "","","",0,""), testFinishPath);
-=======
-		super("TestStart.test", "TestStart.test", "","maraton",0,0);
-		 startfFile = new ReadStartFile(new Varvrace(testStartPath, testFinishPath, "","maraton",0,0), testStartPath);
-		 finishFile = new ReadFinishFile(new Varvrace(testStartPath, testFinishPath, "","maraton",0,0), testFinishPath);
->>>>>>> b1ed29e556415c2a7448afa6076641f3560c122b
 	}
 
 	@Test

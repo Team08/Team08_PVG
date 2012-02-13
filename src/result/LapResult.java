@@ -11,13 +11,30 @@ import main.Driver;
 import util.Time;
 import util.Time2;
 
+/**
+ * This class builds the time results for lap races and can write the result to
+ * result file.
+ */
 public class LapResult extends Result {
 	private HashMap<String, TreeMap<Integer, Driver>> mapOfDiffRaceClasses;
 	int laps;
 	Time raceTime;
-
 	String resultFile;
 
+	/**
+	 * Creates LapResult.
+	 * 
+	 * @param index
+	 *            the treeMap that contains essential information to write a
+	 *            result file
+	 * @param laps
+	 *            how many laps time that will be displayed in the result file
+	 * @param raceTimeString
+	 *            the duration of the race in hours
+	 * @param resultFile
+	 *            the name of the resultFile that this class will compute the
+	 *            results to
+	 */
 	public LapResult(TreeMap<Integer, Driver> index, int laps,
 			String raceTimeString, String resultFile) {
 		this.index = index;
@@ -26,6 +43,9 @@ public class LapResult extends Result {
 		this.resultFile = resultFile;
 	}
 
+	/**
+	 * Writes the result to the resultFile.
+	 */
 	public void writeResultFile() {
 		try {
 
@@ -105,6 +125,19 @@ public class LapResult extends Result {
 		return tm;
 	}
 
+	/**
+	 * Check if there are any invalid parameter and returns a result string line
+	 * that contains error-notations if any invalid parameter found.
+	 * 
+	 * @param i
+	 *            The current index
+	 * @param startTime
+	 *            A list of start time
+	 * @param finishTime
+	 *            A list of finish times
+	 * @return The string contains the result time for target driver plus
+	 *         error-notations if there are any
+	 */
 	@Override
 	public String checkError(int i, List<Time> startTime, List<Time> finishTime) {
 
@@ -159,11 +192,13 @@ public class LapResult extends Result {
 		return sb.toString();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Check if there are ManyFinishTimes.
 	 * 
-	 * @see main.Result#checkIfManyFinishTime(java.util.List,
-	 * java.lang.StringBuilder)
+	 * @param finishTime
+	 *            the list of finish times to check
+	 * @param sb
+	 *            the StringBuilder to append to
 	 */
 	@Override
 	public void checkIfManyFinishTime(List<Time> finishTime, StringBuilder sb) {
@@ -175,11 +210,13 @@ public class LapResult extends Result {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Check if there are ManyStartTimes.
 	 * 
-	 * @see main.Result#checkIfManyStartTime(java.util.List,
-	 * java.lang.StringBuilder)
+	 * @param startTime
+	 *            the list of start times to check
+	 * @param sb
+	 *            the StringBuilder to append to
 	 */
 	@Override
 	public void checkIfManyStartTime(List<Time> startTime, StringBuilder sb) {
@@ -192,10 +229,13 @@ public class LapResult extends Result {
 
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Check if the finish time list contains any finish time.
 	 * 
-	 * @see main.Result#checkFinishTime(java.util.List, java.lang.StringBuilder)
+	 * @param finishTime
+	 *            the list of finish times to check
+	 * @param sb
+	 *            the StringBuilder to append to
 	 */
 	@Override
 	public void checkFinishTime(List<Time> finishTime, StringBuilder sb) {
@@ -206,10 +246,13 @@ public class LapResult extends Result {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Check if the start time list contains any finish time.
 	 * 
-	 * @see main.Result#checkStartTime(java.util.List, java.lang.StringBuilder)
+	 * @param startTime
+	 *            the list of start times to check
+	 * @param sb
+	 *            the StringBuilder to append to
 	 */
 	@Override
 	public void checkStartTime(List<Time> startTime, StringBuilder sb) {
@@ -220,6 +263,20 @@ public class LapResult extends Result {
 		}
 	}
 
+	/**
+	 * Check if the finish time list contains any finish time.
+	 * 
+	 * @param startTime
+	 *            the list of start times to check
+	 * @param finishTime
+	 *            the list of finish times to check
+	 * @param sb
+	 *            the StringBuilder to append to
+	 * @param totalCheck
+	 *            the totalcheck
+	 * @return A string of the total time with
+	 *         error-notations if any invalid time was found
+	 */
 	@Override
 	public String checkTotaltime(List<Time> startTime, List<Time> finishTime,
 			StringBuilder sb, String totalCheck) {
