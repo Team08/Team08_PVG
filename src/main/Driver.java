@@ -5,7 +5,14 @@ import java.util.List;
 
 import util.Time;
 import util.Time2;
-
+/**
+ * The Driver class which represents a driver. The driver does not know
+ * his start number. This can be accessed from the database structure instead.
+ * He does know his name, start times, finish times and which classes he's a part of.
+ * 
+ * @author Team08
+ *
+ */
 public class Driver {
 	private String name;
 	private List<Time> startTime = new ArrayList<Time>();
@@ -13,12 +20,16 @@ public class Driver {
 	private String classes = "";
 	private Integer id;
 
+	/**
+	 * The constructor which creates the Driver without a name
+	 *
+	 */
 	public Driver() {
 
 	}
 
 	/**
-	 * The constructor which creates the Driver
+	 * The constructor which creates the Driver 
 	 * 
 	 * @param name
 	 *            the drivers name
@@ -37,11 +48,11 @@ public class Driver {
 	}
 
 	/**
-	 * Inserts a new start time The current start time is replaced by the new
-	 * time
+	 * Inserts a new start time in the list. Multiple start times 
+	 * are allowed.
 	 * 
 	 * @param time
-	 *            The start time
+	 *            New start time
 	 */
 	public void addStartTime(Time time) {
 		startTime.add(time);
@@ -49,10 +60,11 @@ public class Driver {
 	}
 
 	/**
-	 * Inserts a new finish time
+	 * Inserts a new finish time in the list. Multiple finish
+	 * times are allowed
 	 * 
 	 * @param time
-	 *            The new time that replaces the old one
+	 *            New finish time
 	 */
 	public void addFinishTime(Time time) {
 		finishTime.add(time);
@@ -60,9 +72,9 @@ public class Driver {
 	}
 
 	/**
-	 * Returns the driver's classes as a list
+	 * Returns the driver's start times as a list
 	 * 
-	 * @return The classes as a list
+	 * @return The start times as a list
 	 */
 	public List<Time> startTime() {
 		return startTime;
@@ -91,8 +103,8 @@ public class Driver {
 	 * Returns the time from last registered time to the lap i
 	 * 
 	 * @param i
-	 *            The lapnumber, starting from 0
-	 * @return The time as a String
+	 *            The lap number, starting from 0
+	 * @return A time object which represents the lap time
 	 */
 	public String getLapTime(int i) {
 		int laptime;
@@ -107,9 +119,10 @@ public class Driver {
 	}
 
 	/**
-	 * Inserts a new class to the list classes
+	 * The driver is added to a new class. The old class is 
+	 * overwritten
 	 * 
-	 * @param c
+	 * @param c The new class the driver is a part of
 	 * 
 	 */
 	public void addClass(String c) {
@@ -117,10 +130,8 @@ public class Driver {
 	}
 
 	/**
-	 * Returns a list with all classes
-	 * @return 
-	 * 
-	 * @return A list with classes
+	 * Returns the current class the driver is a part of 
+	 * @return A string with the class name
 	 */
 	public String getClasses() {
 		return classes;
@@ -128,7 +139,6 @@ public class Driver {
 
 	/**
 	 * Returns the number of laps
-	 * 
 	 * @return The number of laps as an integer
 	 */
 	public int getNumberOfLaps() {
