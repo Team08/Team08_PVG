@@ -197,4 +197,10 @@ public abstract class Race {
 	public int size() {
 		return index.size();
 	}
+	
+	public void addAttribute(int startNumber, String attribute){
+		Driver driver = getDriver(startNumber);
+		driver.addAttribute(attribute);
+		index.put(startNumber, driver);
+	}
 }

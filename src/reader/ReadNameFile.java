@@ -58,11 +58,15 @@ public class ReadNameFile extends FileIO {
 					String[] str = line.split("; ");
 					if (str.length == 1) {
 						currClass = str[0];
-					} else {
+					} else { 
 						name = str[1];
 						riderID = Integer.parseInt(str[0]);
 						add();
 						race.addClass(riderID, currClass);
+						for (int i = 2; i < str.length; i++) {
+							String attribute = str[i];
+							race.addAttribute(riderID, attribute);
+						}
 					}
 				}
 
