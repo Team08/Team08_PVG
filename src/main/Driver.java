@@ -21,6 +21,7 @@ public class Driver {
 	private List<Time> finishTime = new ArrayList<Time>();
 	private String classes = "";
 	private Integer id;
+	private ArrayList<String> driverAttribute = new ArrayList<String>();
 
 	/**
 	 * The constructor which creates the Driver without a name
@@ -164,5 +165,11 @@ public class Driver {
 
 	public int totalTime() {
 		return startTime.get(0).timeDiff(finishTime.get(finishTime.size() - 1));
+	}
+	public void addAttribute(String attribute){
+		driverAttribute.add(attribute);
+	}
+	public ArrayList<String> getAttributes(){
+		return driverAttribute;
 	}
 }
