@@ -3,7 +3,7 @@ package test;
 
 import java.io.FileNotFoundException;
 
-import race.Varvrace;
+import race.LapRace;
 import reader.ReadFinishFile;
 import reader.ReadStartFile;
 import util.Time;
@@ -18,8 +18,8 @@ public class TestReadFileFromFile {
 	private ReadFinishFile rff;
 	
 	public TestReadFileFromFile() {
-		 rsf = new ReadStartFile(new Varvrace("Unknown", "Unknown", "Unknown","","",0,""), "Unknown");
-		 rff = new ReadFinishFile(new Varvrace("Unknown", "Unknown", "Unknown","","",0,""), "Unknown");
+		 rsf = new ReadStartFile(new LapRace("Unknown", "Unknown", "Unknown","","",0,""), "Unknown");
+		 rff = new ReadFinishFile(new LapRace("Unknown", "Unknown", "Unknown","","",0,""), "Unknown");
 		
 	}
 

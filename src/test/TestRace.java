@@ -6,15 +6,15 @@ import main.Driver;
 
 import org.junit.*;
 
-import race.Varvrace;
+import race.LapRace;
 import util.Time;
 
-public class TestVarvrace {
-	Varvrace race;
+public class TestRace {
+	LapRace race;
 
 	@Before
 	public void setUp() {
-		race = new Varvrace("", "", "", "", "", 0, "");
+		race = new LapRace("", "", "", "", "", 0, "");
 
 	}
 

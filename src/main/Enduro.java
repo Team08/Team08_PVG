@@ -7,7 +7,8 @@ import java.util.Properties;
 import java.util.TreeMap;
 
 import race.Race;
-import race.Varvrace;
+import race.StageRace;
+import race.LapRace;
 
 import util.Time;
 /**
@@ -35,7 +36,7 @@ public class Enduro {
 		String result = "defaultResult";
 		String raceTime = "";
 		String raceType = "";
-		int laps = 0;
+		int distance = 0;
 		String startType = "";
 
 		if (args.length == 0) {
@@ -48,15 +49,13 @@ public class Enduro {
 				result = configFile.getProperty("RESULTFILE");
 				raceTime = configFile.getProperty("RACETIME");
 				raceType = configFile.getProperty("RACETYPE");
-				laps = Integer.parseInt(configFile.getProperty("LAPS"));
-				
+				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));				
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		}
-		else{
+		}else{
 			try {
 				start = args[0];
 				stop = args[1];
@@ -65,18 +64,20 @@ public class Enduro {
 				raceType = args[4];
 				startType = args[5];
 				raceType = raceType.toLowerCase();
+				distance = Integer.parseInt(args[7]);
 				if (raceType.equals("varv")) {
-					raceTime = args[6];
-					laps = Integer.parseInt(args[7]);
-					race = new Varvrace(start, stop, name, result, raceTime, laps,
-							startType);
+					raceTime = args[6];	
 				}
 			} catch (Exception e) {
 				System.out.println("Error: Fel argument");
 			}
 		}
-		race = new Varvrace(start, stop, name, result, raceTime, laps,
+		if (raceType.equals("varv")) {
+			race = new LapRace(start, stop, name, result, raceTime, distance,
 				startType);
+		}else if (raceType.equals("etapp")){
+			race = new StageRace(start, stop, name, result, distance, startType);
+		}
 		race.computeTotalTime();
 	}
 	/**
@@ -85,9 +86,6 @@ public class Enduro {
      * @param the config file
      */
 	public static void main(String[] args) {
-		if (args.length == 0){
-		new Enduro(args);
-		}
-			
+			new Enduro(args);			
 	}
 }

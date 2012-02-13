@@ -32,7 +32,7 @@ public class LapResult extends Result {
 	 * @param laps
 	 *            how many laps time that will be displayed in the result file
 	 * @param raceTimeString
-	 *            the duration of the race in hours
+	 *            the time a driver needs to get over to have finished the race
 	 * @param resultFile
 	 *            the name of the resultFile that this class will compute the
 	 *            results to
@@ -135,7 +135,7 @@ public class LapResult extends Result {
 	/**
 	 * Check if there are any invalid parameter and returns a result string line
 	 * that contains error-notations if any invalid parameter found.
-	 * <<<<<<< HEAD
+	 * 
 	 * @param i
 	 *            The current index
 	 * @param startTime
@@ -156,8 +156,7 @@ public class LapResult extends Result {
 
 		sb.append(index.get(i).getNumberOfLaps() + "; ");
 
-		totalTimeCheck = checkTotaltime(startTime, finishTime, sb,
-				totalTimeCheck);
+		totalTimeCheck = checkTotaltime(startTime, finishTime, sb);
 		if (laps != 0) {
 			if (!(startTime.size() == 0 || finishTime.size() == 0)) {
 				String lapTime = "";
@@ -214,32 +213,13 @@ public class LapResult extends Result {
 	}
 
 	/**
-	 * Check if there are ManyFinishTimes.
-	 * 
-	 * @param finishTime
-	 *            the list of finish times to check
-	 * @param sb
-	 *            the StringBuilder to append to
-	 */
-	@Override
-	public void checkIfManyFinishTime(List<Time> finishTime, StringBuilder sb) {
-		if (finishTime.size() > 1) {
-			sb.append("; Flera måltider?");
-			for (int j = 1; j <= (finishTime.size() - 1); j++) {
-				sb.append(" " + finishTime.get(j));
-			}
-		}
-	}
-
-	/**
-	 * Check if there are ManyStartTimes.
+	 * Check if there are many start times and appends the time or error to sb.
 	 * 
 	 * @param startTime
 	 *            the list of start times to check
 	 * @param sb
-	 *            the StringBuilder to append to
+	 *            the target StringBuilder to append to
 	 */
-	@Override
 	public void checkIfManyStartTime(List<Time> startTime, StringBuilder sb) {
 		if (startTime.size() > 1) {
 			sb.append("; Flera starttider?");
@@ -251,41 +231,8 @@ public class LapResult extends Result {
 	}
 
 	/**
-	 * Check if the finish time list contains any finish time.
-	 * 
-	 * @param finishTime
-	 *            the list of finish times to check
-	 * @param sb
-	 *            the StringBuilder to append to
-	 */
-	@Override
-	public void checkFinishTime(List<Time> finishTime, StringBuilder sb) {
-		if (finishTime.size() == 0) {
-			sb.append("Slut?");
-		} else {
-			sb.append(finishTime.get(0));
-		}
-	}
-
-	/**
-	 * Check if the start time list contains any finish time.
-	 * 
-	 * @param startTime
-	 *            the list of start times to check
-	 * @param sb
-	 *            the StringBuilder to append to
-	 */
-	@Override
-	public void checkStartTime(List<Time> startTime, StringBuilder sb) {
-		if (startTime.size() == 0) {
-			sb.append("Start?; ");
-		} else {
-			sb.append(startTime.get(0) + "; ");
-		}
-	}
-
-	/**
-	 * Check if the finish time list contains any finish time.
+	 * Computes the totaltime if possible and appends it to the stringbuilder. If there is no totaltime --.--.-- is appended
+	 * The method returns a string with an error-notation if the totaltime was impossible otherwise an empty String
 	 * 
 	 * @param startTime
 	 *            the list of start times to check
@@ -293,14 +240,11 @@ public class LapResult extends Result {
 	 *            the list of finish times to check
 	 * @param sb
 	 *            the StringBuilder to append to
-	 * @param totalCheck
-	 *            the totalcheck
-	 * @return A string of the total time with
-	 *         error-notations if any invalid time was found
+	 * @return A string with error-notations if any invalid time was found
 	 */
 	@Override
 	public String checkTotaltime(List<Time> startTime, List<Time> finishTime,
-			StringBuilder sb, String totalCheck) {
+			StringBuilder sb) {
 		Time totalTime = new Time(0);
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
@@ -310,10 +254,9 @@ public class LapResult extends Result {
 
 			sb.append(totalTime.toString() + "; ");
 			if (totalTime.lesserThan(new Time("0.15.00"))) {
-				totalCheck = "; Omöjlig Totaltid?";
+				return "; Omöjlig Totaltid?";
 			}
-
 		}
-		return totalCheck;
+		return "";
 	}
 }
