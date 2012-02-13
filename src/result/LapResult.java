@@ -154,9 +154,9 @@ public class LapResult extends Result {
 				}
 			}
 		}
-		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
-			sb.append("; ");
-		}
+//		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
+//			sb.append("; ");
+//		}
 		checkStartTime(startTime, sb);
 		Time timeTemp = new Time(0);
 		if(finishTime.size() != 0 && startTime.size() != 0){
@@ -176,7 +176,7 @@ public class LapResult extends Result {
 				sb.append(finishTime.get(finishTime.size() - 1));
 			}
 		}
-		for (int b = finishTime.size() - 1; b < laps - 2; b++) {
+		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
 			sb.append("; ");
 		}
 			
