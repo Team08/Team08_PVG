@@ -134,12 +134,9 @@ public class LapResult extends Result {
 				out.write(sb.toString());
 
 				for (Driver driver : nonExistingNbrList) {
-					out.write(checkError(driver.getId(), driver.startTime(), driver
-
-							.finishTime()));
+					out.write(checkError(driver.getId(), driver.startTime(), driver.finishTime()));
 				}
 			}
-
 			// Close the output stream
 			out.close();
 
