@@ -290,13 +290,9 @@ public class LapResult extends Result {
 	 * @param finishTime
 	 *            the list of finish times to check
 	 * @param sb
-	 *            the StringBuilder to append to <<<<<<< HEAD
-	 * @return A string with error-notations if any invalid time was found
-	 *         =======
-	 * @param totalCheck
-	 *            the totalcheck
+	 *            the StringBuilder to append to 
 	 * @return A string of the total time with error-notations if any invalid
-	 *         time was found >>>>>>> 99c23db0e95b41872459078ea00bd83b53a1be7d
+	 *         time was found
 	 */
 	@Override
 	public String checkTotaltime(List<Time> startTime, List<Time> finishTime,
