@@ -64,7 +64,7 @@ public abstract class Race {
 	}
 
 	/**
-	 * Creates a result that creates a result file
+	 * Creates a Result that creates a result file
 	 * 
 	 * @param index
 	 *            the treemap index
