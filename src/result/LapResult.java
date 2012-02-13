@@ -190,7 +190,7 @@ public class LapResult extends Result {
 	 * Check if there are any invalid parameter and returns a result string line
 	 * that contains error-notations if any invalid parameter found.
 	 * 
-	 * @param i
+	 * @param currentIndex
 	 *            The current index
 	 * @param startTime
 	 *            A list of start time
@@ -200,20 +200,20 @@ public class LapResult extends Result {
 	 *         error-notations if there are any
 	 */
 	@Override
-	public String checkError(int i, List<Time> startTime, List<Time> finishTime) {
+	public String checkError(int currentIndex, List<Time> startTime, List<Time> finishTime) {
 		StringBuilder sb = new StringBuilder();
 		String totalTimeCheck = "";
 		String totalLapCheck = "";
-		sb.append(i + "; ");
-		checkName(sb, index.get(i).getName());
+		sb.append(currentIndex + "; ");
+		checkName(sb, index.get(currentIndex).getName());
 
-		sb.append(index.get(i).getNumberOfLaps() + "; ");
+		sb.append(index.get(currentIndex).getNumberOfLaps() + "; ");
 
 		totalTimeCheck = checkTotaltime(startTime, finishTime, sb);
 		if (!(startTime.size() == 0 || finishTime.size() == 0)) {
 			String lapTime = "";
 			for (int j = 0; j < laps; j++) {
-				lapTime = index.get(i).getLapTime(j);
+				lapTime = index.get(currentIndex).getLapTime(j);
 				Time lap = new Time(lapTime);
 				if (lap.lesserThan(new Time("00.15.00"))) {
 					if (!lap.equals(new Time(0))) {
