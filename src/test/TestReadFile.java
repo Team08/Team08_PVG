@@ -6,16 +6,10 @@ import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.TreeMap;
-
-import race.Race;
 import race.Varvrace;
-import reader.FileIO;
 import reader.ReadFinishFile;
 import reader.ReadStartFile;
-import util.Time;
-import main.Driver;
-import main.Sorter;
+
 
 import org.junit.Test;
 

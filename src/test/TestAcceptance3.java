@@ -29,9 +29,13 @@ public class TestAcceptance3{
 	}
 
 	@Before public void setup() {
+<<<<<<< HEAD
 
 		String[] args = new String [8];
 
+=======
+		String[] args = new String [8];
+>>>>>>> 677f8e26394cd1836e73dec2aa68d3f573c230ce
 		args[0]= testStartPath;
 		args[1]= testFinishPath;
 		args[2]= testNullPath;

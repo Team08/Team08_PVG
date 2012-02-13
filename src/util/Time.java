@@ -4,7 +4,12 @@ package util;
  * A time class in milliseconds. It can also compare times and write the time in
  * string.
  */
-public class Time {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Time implements Comparable{
+
 	private int time;
 
 	/**
@@ -17,6 +22,11 @@ public class Time {
 		this.time = time;
 	}
 
+
+	private int time(){
+		return time;
+	}
+	
 	/**
 	 * Creates the Time from a string.
 	 * 
@@ -170,4 +180,24 @@ public class Time {
 			return t2.getTime() - time;
 		}
 	}
+
+	public int compareTo(Object arg0) {
+		final int SMALLER = -1;
+		final int EQUAL = 0;
+		final int BIGGER = 1;
+
+		if (this.time() == ((Time) arg0).time()) {
+			return EQUAL;
+		}
+		if (this.time() < ((Time) arg0).time()) {
+			return SMALLER;
+		}
+		return BIGGER;
+	}
+
+	public ArrayList<Time> sortArrayInOrder(List<Time> times) {
+		Collections.sort(times);
+		return (ArrayList<Time>) times;
+	}
+
 }

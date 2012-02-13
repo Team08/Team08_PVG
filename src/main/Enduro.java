@@ -66,7 +66,11 @@ public class Enduro {
 				startType);
 		race.computeTotalTime();
 	}
-
+	/**
+     * Main program that initiates the Sorter program.
+     *
+     * @param args
+     */
 	public static void main(String[] args) {
 		if (args.length == 0){
 		new Enduro(args);
