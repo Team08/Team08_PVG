@@ -1,5 +1,6 @@
 package race;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import result.LapResult;
@@ -33,9 +34,10 @@ public class LapRace extends Race {
 	 * @param laps	the number of laps which are to be written to the file
 	 * @param startType the type of start (masstart e.g.)
 	 */
+
 	public LapRace(String start, String stop, String nameFile,
-			String resultFile, String raceTime, int laps, String startType) {
-		super(start, stop, nameFile, startType);
+			String resultFile, String raceTime, int laps, String startType, ArrayList<String> driverAttributes) {
+		super(start, stop, nameFile, startType, driverAttributes);
 		this.raceTime = raceTime;
 		this.laps = laps;
 		this.nameFile = nameFile;

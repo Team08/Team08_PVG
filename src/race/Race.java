@@ -1,6 +1,7 @@
 package race;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import main.Driver;
@@ -31,6 +32,7 @@ public abstract class Race {
 	protected String startFile;
 	protected String startType;
 	protected String nameFile;
+	protected ArrayList<String> driverAttributes;
 
 	// Readers
 	private ReadNameFile rnf;
@@ -47,14 +49,15 @@ public abstract class Race {
 	 * @param nameFile
 	 *            the name of the name file
 	 * @param startType
-	 *            the name of the start type (masstart e.g.)
+	 *            the name of the start type (varv, etapp)
 	 */
 	public Race(String startFile, String stopFile, String nameFile,
-			String startType) {
+			String startType, ArrayList<String> driverAttributes) {
 		this.startFile = startFile;
 		this.stopFile = stopFile;
 		this.startType = startType;
 		this.nameFile = nameFile;
+		this.driverAttributes = driverAttributes; 
 
 		rnf = new ReadNameFile(this, nameFile);
 		rsf = new ReadStartFile(this, startFile);
@@ -64,7 +67,7 @@ public abstract class Race {
 	}
 
 	/**
-	 * Creates a Lapresult that creates a result file
+	 * Creates a Result that creates a result file
 	 * 
 	 * @param index
 	 *            the treemap index

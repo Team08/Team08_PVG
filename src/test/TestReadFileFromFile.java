@@ -16,12 +16,11 @@ public class TestReadFileFromFile {
 	private ReadNameFile rnf;
 
 	public TestReadFileFromFile() {
-		rsf = new ReadStartFile(new LapRace("Unknown", "Unknown", "Unknown",
-				"", "", 0, ""), "Unknown");
-		rff = new ReadFinishFile(new LapRace("Unknown", "Unknown", "Unknown",
-				"", "", 0, ""), "Unknown");
+
+		 rsf = new ReadStartFile(new LapRace("Unknown", "Unknown", "Unknown","","",0,"", null), "Unknown");
+		 rff = new ReadFinishFile(new LapRace("Unknown", "Unknown", "Unknown","","",0,"", null), "Unknown");
 		rnf = new ReadNameFile(new LapRace("Unknown", "Unknown", "Unknown",
-				"", "", 0, ""), "Unknown");
+				"", "", 0, "", null), "Unknown");
 	}
 
 	@Before
