@@ -14,14 +14,21 @@ import util.Time;
 import util.Time2;
 
 /**
- * This class builds the time results for lap races and can write the result to
- * result file.
+ * An sub class of Result which is used when a Lap Race has been used a
+ * parameter to the main class in Enduro.
+ * 
+ * This class creates the result file after having tested the input files for
+ * invalid parameters. If this is the case the result file still is created, but
+ * the file will contain appropriate error messages.
+ * 
+ * @author Team08
  */
 public class LapResult extends Result {
 	private HashMap<String, TreeMap<Integer, Driver>> mapOfDiffRaceClasses;
 	int laps;
 	Time raceTime;
 	String resultFile;
+	private String nonExistingNbr = "Icke existerande startnummer";
 
 	/**
 	 * Creates LapResult.
@@ -75,21 +82,19 @@ public class LapResult extends Result {
 
 			Driver tDriver;
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
-			ArrayList<Driver> notSortedDrivers = new ArrayList<Driver>();
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
+				if (tDriver.getName() == null) {
+					tDriver.addClass(nonExistingNbr);
+				}
 				String classes = tDriver.getClasses();
-				
+
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
 						tDriver));
-				//nytt
-				notSortedDrivers.add(tDriver);
-				
-				//Nytt
+				// nytt
+
+				// Nytt
 			}
-			Sorter sorter = new Sorter();
-			sorter.lapSort(notSortedDrivers);
-			
 
 			// for (Integer i : register.keySet()) {
 			// tDriver = register.get(i);
@@ -97,18 +102,34 @@ public class LapResult extends Result {
 			// tDriver.finishTime()));
 			// }
 
+			TreeMap<Integer, Driver> nonExistingNbrMap = null;
 			for (String className : mapOfDiffRaceClasses.keySet()) {
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
 						.get(className);
-				out.write(className + "\n");
+				if (className.equals(nonExistingNbr)) {
+					nonExistingNbrMap = tm;
+				} else {
+					out.write(className + "\n");
+					out.write(sb.toString());
+					for (Integer i : tm.keySet()) {
+						tDriver = tm.get(i);
+						out.write(checkError(i, tDriver.startTime(), tDriver
+								.finishTime()));
+					}
+				}
+			}
+
+			if (nonExistingNbrMap != null) {
+				out.write(nonExistingNbr + "\n");
 				out.write(sb.toString());
-				for (Integer i : tm.keySet()) {
-					tDriver = tm.get(i);
+
+				for (Integer i : nonExistingNbrMap.keySet()) {
+					tDriver = nonExistingNbrMap.get(i);
 					out.write(checkError(i, tDriver.startTime(), tDriver
 							.finishTime()));
 				}
-
 			}
+
 			// Close the output stream
 			out.close();
 
@@ -147,7 +168,6 @@ public class LapResult extends Result {
 	 */
 	@Override
 	public String checkError(int i, List<Time> startTime, List<Time> finishTime) {
-
 		StringBuilder sb = new StringBuilder();
 		String totalTimeCheck = "";
 		String totalLapCheck = "";
@@ -163,8 +183,8 @@ public class LapResult extends Result {
 				for (int j = 0; j < laps; j++) {
 					lapTime = index.get(i).getLapTime(j);
 					Time lap = new Time(lapTime);
-					if(lap.lesserThan(new Time("00.15.00"))){
-						if(!lap.equals(new Time(0))){
+					if (lap.lesserThan(new Time("00.15.00"))) {
+						if (!lap.equals(new Time(0))) {
 							totalLapCheck = " Omöjlig varvtid ";
 						}
 					}
@@ -172,12 +192,9 @@ public class LapResult extends Result {
 				}
 			}
 		}
-//		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
-//			sb.append("; ");
-//		}
 		checkStartTime(startTime, sb);
 		Time timeTemp = new Time(0);
-		if(finishTime.size() != 0 && startTime.size() != 0){
+		if (finishTime.size() != 0 && startTime.size() != 0) {
 			timeTemp = new Time(startTime.get(0).timeDiff(
 					finishTime.get(finishTime.size() - 1)));
 		}
@@ -189,23 +206,24 @@ public class LapResult extends Result {
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
 			}
-			
-			if ((!timeTemp.greaterThan(raceTime))&&check<=laps) {
+			if ((!timeTemp.greaterThan(raceTime)) && check <= laps) {
 				sb.append(finishTime.get(finishTime.size() - 1) + "; ");
+
 			}
 		}
 		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
 			sb.append("; ");
 		}
-			
+
 		if (timeTemp.greaterThan(raceTime)) {
 			sb.append(finishTime.get(finishTime.size() - 1));
 
 		} else {
 			sb.append("Slut?");
 		}
+
 		sb.append(totalLapCheck);
-		checkIfManyStartTime(startTime ,sb);
+		checkIfManyStartTime(startTime, sb);
 		sb.append(totalTimeCheck);
 		sb.append("\n");
 		System.out.println(sb.toString());
@@ -231,16 +249,23 @@ public class LapResult extends Result {
 	}
 
 	/**
-	 * Computes the totaltime if possible and appends it to the stringbuilder. If there is no totaltime --.--.-- is appended
-	 * The method returns a string with an error-notation if the totaltime was impossible otherwise an empty String
+	 * Computes the totaltime if possible and appends it to the stringbuilder.
+	 * If there is no totaltime --.--.-- is appended The method returns a string
+	 * with an error-notation if the totaltime was impossible otherwise an empty
+	 * String
 	 * 
 	 * @param startTime
 	 *            the list of start times to check
 	 * @param finishTime
 	 *            the list of finish times to check
 	 * @param sb
-	 *            the StringBuilder to append to
+	 *            the StringBuilder to append to <<<<<<< HEAD
 	 * @return A string with error-notations if any invalid time was found
+	 *         =======
+	 * @param totalCheck
+	 *            the totalcheck
+	 * @return A string of the total time with error-notations if any invalid
+	 *         time was found >>>>>>> 99c23db0e95b41872459078ea00bd83b53a1be7d
 	 */
 	@Override
 	public String checkTotaltime(List<Time> startTime, List<Time> finishTime,

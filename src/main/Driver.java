@@ -5,13 +5,15 @@ import java.util.List;
 
 import util.Time;
 import util.Time2;
+
 /**
- * The Driver class which represents a driver. The driver does not know
- * his start number. This can be accessed from the database structure instead.
- * He does know his name, start times, finish times and which classes he's a part of.
+ * The Driver class which represents a driver. The driver does not know his
+ * start number. This can be accessed from the database structure instead. He
+ * does know his name, start times, finish times and which classes he's a part
+ * of.
  * 
  * @author Team08
- *
+ * 
  */
 public class Driver {
 	private String name;
@@ -22,14 +24,14 @@ public class Driver {
 
 	/**
 	 * The constructor which creates the Driver without a name
-	 *
+	 * 
 	 */
 	public Driver() {
 
 	}
 
 	/**
-	 * The constructor which creates the Driver 
+	 * The constructor which creates the Driver
 	 * 
 	 * @param name
 	 *            the drivers name
@@ -48,8 +50,7 @@ public class Driver {
 	}
 
 	/**
-	 * Inserts a new start time in the list. Multiple start times 
-	 * are allowed.
+	 * Inserts a new start time in the list. Multiple start times are allowed.
 	 * 
 	 * @param time
 	 *            New start time
@@ -60,8 +61,7 @@ public class Driver {
 	}
 
 	/**
-	 * Inserts a new finish time in the list. Multiple finish
-	 * times are allowed
+	 * Inserts a new finish time in the list. Multiple finish times are allowed
 	 * 
 	 * @param time
 	 *            New finish time
@@ -119,10 +119,10 @@ public class Driver {
 	}
 
 	/**
-	 * The driver is added to a new class. The old class is 
-	 * overwritten
+	 * The driver is added to a new class. The old class is overwritten
 	 * 
-	 * @param c The new class the driver is a part of
+	 * @param c
+	 *            The new class the driver is a part of
 	 * 
 	 */
 	public void addClass(String c) {
@@ -130,7 +130,8 @@ public class Driver {
 	}
 
 	/**
-	 * Returns the current class the driver is a part of 
+	 * Returns the current class the driver is a part of
+	 * 
 	 * @return A string with the class name
 	 */
 	public String getClasses() {
@@ -139,6 +140,7 @@ public class Driver {
 
 	/**
 	 * Returns the number of laps
+	 * 
 	 * @return The number of laps as an integer
 	 */
 	public int getNumberOfLaps() {
@@ -146,7 +148,8 @@ public class Driver {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -160,6 +163,6 @@ public class Driver {
 	}
 
 	public int totalTime() {
-		return startTime.get(0).timeDiff(finishTime.get(finishTime.size()-1));
+		return startTime.get(0).timeDiff(finishTime.get(finishTime.size() - 1));
 	}
 }

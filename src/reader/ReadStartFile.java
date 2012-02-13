@@ -9,7 +9,7 @@ import util.Time;
 
 /**
  * This class can read a start file and add the start time + driverId to the
- * race object.
+ * race object, which contains the database where all information is stored.
  */
 public class ReadStartFile extends FileIO {
 
@@ -27,16 +27,21 @@ public class ReadStartFile extends FileIO {
 
 	/**
 	 * Method is called by readFile() or readFileMassStart() and adds the start
-	 * time and riderID to race object.
+	 * time and driverID to race object, which contains the database where all
+	 * information is stored.
 	 */
 	protected void add() {
 		race.addStartTime(riderID, time);
 	}
 
 	/**
-	 * Reads a file and add the time and riderID to the race.
+	 * Reads a file and add the time and driverID to the race object,
+	 * which contains the database where all information is stored.
+	 * 
+	 * @throws FileNotFoundException
+	 *             If file not found
 	 */
-	public void readFileMassStart() {
+	public void readFileMassStart() throws FileNotFoundException {
 		if (fileName != null) {
 			File file = new File(fileName);
 			Scanner scanner;
@@ -52,10 +57,18 @@ public class ReadStartFile extends FileIO {
 					add();
 				}
 			} catch (FileNotFoundException e) {
-				System.out.println("Hittade inte filen");
+				printErrorText();
+				throw new FileNotFoundException();
 			}
 		}
 
+	}
+
+	/**
+	 * Prints the error text if file not found.
+	 */
+	protected void printErrorText() {
+		System.err.println("Hittade inte startfilen.");
 	}
 
 }

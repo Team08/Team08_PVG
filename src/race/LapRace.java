@@ -23,6 +23,7 @@ public class LapRace extends Race {
 	String resultat;
 
 	/**
+	 * The standard constructor 
 	 * 
 	 * @param start the name of the start file
 	 * @param stop the name of the finish file

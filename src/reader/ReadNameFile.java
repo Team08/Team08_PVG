@@ -8,7 +8,9 @@ import race.Race;
 
 /**
  * This class can read a name file and add the name + driverId to the race
- * object.
+ * object, which contains the database where all information is stored.
+ * 
+ * @author Team08
  */
 public class ReadNameFile extends FileIO {
 	String name;
@@ -34,9 +36,10 @@ public class ReadNameFile extends FileIO {
 	}
 
 	/**
-	 * Reads a name file and add the name and riderID to the race.
+	 * Reads a name file and add the name and driverID to the race object,
+	 * which contains the database where all information is stored.
 	 * 
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException if file is not found
 	 */
 	public void readFile() throws FileNotFoundException {
 		if (fileName != null) {
@@ -62,25 +65,22 @@ public class ReadNameFile extends FileIO {
 						add();
 						race.addClass(riderID, currClass);
 					}
-					// What happens
-					// if more than
-					// one finish
-					// time?
-					// A for-loop
-					// should be
-					// added to make
-					// sure that the
-					// entire
-					// vector is
-					// added.
 				}
 
 			} catch (FileNotFoundException e) {
-				// Ska vi vara konsekventa och skriva ut SYSO som på andra
-				// filer?
+				printErrorText();
 				throw new FileNotFoundException();
 			}
 		}
+	}
+
+
+	/**
+	 * Prints the error text if file not found.
+	 */
+	protected void printErrorText() {
+		System.err.println("Hittade inte namnfilen.");
+		
 	}
 
 }

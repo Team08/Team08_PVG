@@ -4,7 +4,9 @@ import race.Race;
 
 /**
  * This class can read a finish file and add the finish time + driverId to the
- * race object.
+ * race object, which contains the database where all information is stored.
+ * 
+ * @author Team08
  */
 public class ReadFinishFile extends FileIO {
 
@@ -21,11 +23,20 @@ public class ReadFinishFile extends FileIO {
 	}
 
 	/**
-	 * Method is called by readFile() and adds the finish time and riderID to
-	 * race object.
+	 * Method is called by readFile() and adds the finish time and driverID to
+	 * race object, which contains the database where all information is stored.
 	 */
+	@Override
 	protected void add() {
 		race.addFinishTime(riderID, time);
+	}
+
+
+	/**
+	 * Prints the error text if file not found.
+	 */
+	protected void printErrorText() {
+		System.err.println("Hittade inte finishfilen.");
 	}
 
 }

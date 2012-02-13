@@ -19,6 +19,14 @@ import util.Time;
 public class Enduro {
 	protected TreeMap<Integer, Driver> register;
 	private Race race;
+	private String start = "defaultStart";
+	private String stop = "defaultStop";
+	private String name = "defaultName";
+	private String result = "defaultResult";
+	private String raceTime = "";
+	private String raceType = "";
+	private int distance = 0;
+	private String startType = "";
 	
 	/**
 	 * The constructor which creates an Enduro object.
@@ -30,19 +38,12 @@ public class Enduro {
 	 * 				 wanted result
 	 */
 	public Enduro(String[] args) {
-		String start = "defaultStart";
-		String stop = "defaultStop";
-		String name = "defaultName";
-		String result = "defaultResult";
-		String raceTime = "";
-		String raceType = "";
-		int distance = 0;
-		String startType = "";
-
 		if (args.length == 0) {
 			Properties configFile = new Properties();
 			try {
 				configFile.load(new FileInputStream("config.properties"));
+				
+				
 				start = configFile.getProperty("STARTFILE");
 				stop = configFile.getProperty("STOPFILE");
 				name = configFile.getProperty("NAMEFILE");
