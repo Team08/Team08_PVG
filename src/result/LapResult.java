@@ -206,25 +206,21 @@ public class LapResult extends Result {
 		sb.append(index.get(currentIndex).getNumberOfLaps() + "; ");
 
 		totalTimeCheck = checkTotaltime(startTime, finishTime, sb);
-		if (!(startTime.size() == 0 || finishTime.size() == 0)) {
-			String lapTime = "";
-			for (int j = 0; j < laps; j++) {
-				lapTime = index.get(currentIndex).getLapTime(j);
-				Time lap = new Time(lapTime);
-				if (lap.lesserThan(new Time("00.15.00"))) {
-					if (!lap.equals(new Time(0))) {
-						totalLapCheck = " Omöjlig varvtid ";
-					}
-				}
-				sb.append(lapTime + "; ");
-			}
-		}
+		
+		
+		totalLapCheck = printLapTimes(currentIndex, startTime, finishTime, sb,
+				totalLapCheck);
+		
 		checkStartTime(startTime, sb);
+		
+		//Totaltid
 		Time timeTemp = new Time(0);
 		if (finishTime.size() != 0 && startTime.size() != 0) {
 			timeTemp = new Time(startTime.get(0).timeDiff(
 					finishTime.get(finishTime.size() - 1)));
 		}
+		
+		//Kontrollera om totaltid verkligen var en totaltid, annars gör det till en varvtid.
 		if (finishTime.size() != 0) {
 			int check = finishTime.size() - 1;
 			if (check > laps - 1) {
@@ -233,7 +229,7 @@ public class LapResult extends Result {
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
 			}
-			if ((!timeTemp.greaterThan(raceTime)) && check <= laps) {
+			if ((!timeTemp.greaterThan(raceTime))&& !timeTemp.equals(new Time(0)) && check <= laps) {
 				sb.append(finishTime.get(finishTime.size() - 1) + "; ");
 
 			}
@@ -255,6 +251,24 @@ public class LapResult extends Result {
 		sb.append("\n");
 		System.out.println(sb.toString());
 		return sb.toString();
+	}
+
+	private String printLapTimes(int currentIndex, List<Time> startTime,
+			List<Time> finishTime, StringBuilder sb, String totalLapCheck) {
+		if (!(startTime.size() == 0 || finishTime.size() == 0)) {
+			String lapTime = "";
+			for (int j = 0; j < laps; j++) {
+				lapTime = index.get(currentIndex).getLapTime(j);
+				Time lap = new Time(lapTime);
+				if (lap.lesserThan(new Time("00.15.00"))) {
+					if (!lap.equals(new Time(0))) {
+						totalLapCheck = " Omöjlig varvtid ";
+					}
+				}
+				sb.append(lapTime + "; ");
+			}
+		}
+		return totalLapCheck;
 	}
 
 	/**
