@@ -34,9 +34,12 @@ public class Time implements Comparable{
 	 *            the time in string
 	 */
 	public Time(String representTime) {
+		if(representTime.length()==0){
+			time=0;
+		}else{
 		String[] temp = representTime.split("\\.");
 		time = parseTime(temp);
-	}
+	}}
 
 
 	// BORDE EJ BEH�VAS MEN FINNS F�R ATT DE �R S� L�TT ATT IMPLEMENTERA
