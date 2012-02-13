@@ -100,8 +100,8 @@ public class LapResult extends Result {
 			for (String className : mapOfDiffRaceClasses.keySet()) {
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
 						.get(className);
-				out.write(sb.toString());
 				out.write(className + "\n");
+				out.write(sb.toString());
 				for (Integer i : tm.keySet()) {
 					tDriver = tm.get(i);
 					out.write(checkError(i, tDriver.startTime(), tDriver
