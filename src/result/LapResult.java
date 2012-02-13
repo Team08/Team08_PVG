@@ -28,9 +28,6 @@ public class LapResult extends Result {
 
 	public void writeResultFile() {
 		try {
-
-			System.out.println("hej");
-			System.out.println(resultFile);
 			FileWriter fstream = new FileWriter(resultFile);
 
 			StringBuilder sb = new StringBuilder();
