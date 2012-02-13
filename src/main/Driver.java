@@ -3,11 +3,14 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.Time;
+import util.Time2;
+
 public class Driver {
 	private String name;
-	private List<String> startTime = new ArrayList<String>();
-	private List<String> finishTime = new ArrayList<String>();
-	private List<String> classes = new ArrayList<String>();
+	private List<Time> startTime = new ArrayList<Time>();
+	private List<Time> finishTime = new ArrayList<Time>();
+	private String classes = "";
 
 	public Driver() {
 
@@ -33,13 +36,25 @@ public class Driver {
 	}
 
 	/**
-	 * Adds a new start time
+	 * Inserts a new start time The current start time is replaced by the new
+	 * time
 	 * 
 	 * @param time
 	 *            The start time
 	 */
-	public void addStartTime(String time) {
+	public void addStartTime(Time time) {
 		startTime.add(time);
+
+	}
+
+	/**
+	 * Inserts a new finish time
+	 * 
+	 * @param time
+	 *            The new time that replaces the old one
+	 */
+	public void addFinishTime(Time time) {
+		finishTime.add(time);
 
 	}
 
@@ -48,7 +63,7 @@ public class Driver {
 	 * 
 	 * @return The classes as a list
 	 */
-	public List<String> startTime() {
+	public List<Time> startTime() {
 		return startTime;
 	}
 
@@ -57,19 +72,8 @@ public class Driver {
 	 * 
 	 * @return The finish times as a list
 	 */
-	public List<String> finishTime() {
+	public List<Time> finishTime() {
 		return finishTime;
-	}
-
-	/**
-	 * Adds a new finish time
-	 * 
-	 * @param time
-	 *            The new time
-	 */
-	public void addFinishTime(String time) {
-		finishTime.add(time);
-
 	}
 
 	/**
@@ -86,38 +90,38 @@ public class Driver {
 	 * Returns the time from last registered time to the lap i
 	 * 
 	 * @param i
-	 *            The lap number, starting from 0
+	 *            The lapnumber, starting from 0
 	 * @return The time as a String
 	 */
-	public String getLapTime(int i) {
-		String laptime;
+	public Time getLapTime(int i) {
+		int laptime;
 		if (i == 0) {
-			laptime = Time.timeDiff(startTime.get(0), finishTime.get(0));
+			laptime = startTime.get(0).timeDiff(finishTime.get(0));
 		} else if (finishTime.size() > i) {
-			laptime = Time.timeDiff(finishTime.get(i - 1), finishTime.get(i));
+			laptime = finishTime.get(i - 1).timeDiff(finishTime.get(i));
 		} else {
-			laptime = "";
+			laptime = 0;
 		}
-		return laptime;
+		return new Time(laptime);
 	}
 
 	/**
-	 * Adds a new class to the list classes
+	 * Inserts a new class to the list classes
 	 * 
 	 * @param c
-	 *            The class
 	 * 
 	 */
 	public void addClass(String c) {
-		classes.add(c);
+		classes = c;
 	}
 
 	/**
 	 * Returns a list with all classes
+	 * @return 
 	 * 
 	 * @return A list with classes
 	 */
-	public List<String> classes() {
+	public String getClasses() {
 		return classes;
 	}
 

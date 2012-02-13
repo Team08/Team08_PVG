@@ -1,4 +1,6 @@
-package main;
+package reader;
+
+import race.Race;
 
 
 public class ReadFinishFile extends FileIO {
@@ -11,12 +13,13 @@ public class ReadFinishFile extends FileIO {
 	 * @param fileName
 	 * 				the name of finish file           
 	 */
-	public ReadFinishFile(Sorter sorter, String fileName) {
-		super(sorter, fileName);
+	public ReadFinishFile(Race race, String fileName) {
+		super(race, fileName);
 	}
 	
 	protected void add() {
-		sorter.addFinishTime(riderID, name);
+		race.addFinishTime(riderID, time);
 		
 	}
+
 }

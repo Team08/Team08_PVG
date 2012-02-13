@@ -3,8 +3,10 @@ package test;
 
 import java.io.FileNotFoundException;
 
-import main.ReadFinishFile;
-import main.ReadStartFile;
+import race.Varvrace;
+import reader.ReadFinishFile;
+import reader.ReadStartFile;
+import util.Time;
 import main.Sorter;
 
 import org.junit.After;
@@ -16,8 +18,9 @@ public class TestReadFileFromFile {
 	private ReadFinishFile rff;
 	
 	public TestReadFileFromFile() {
-		 rsf = new ReadStartFile(new Sorter("Unknown", "Unknown", "Unknown","maraton",0,0), "Unknown");
-		 rff = new ReadFinishFile(new Sorter("Unknown", "Unknown", "Unknown","maraton",0,0), "Unknown");
+		 rsf = new ReadStartFile(new Varvrace("Unknown", "Unknown", "Unknown","","",0,""), "Unknown");
+		 rff = new ReadFinishFile(new Varvrace("Unknown", "Unknown", "Unknown","","",0,""), "Unknown");
+		
 	}
 
 	@Before

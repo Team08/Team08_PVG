@@ -1,11 +1,11 @@
 package model;
 
 import java.io.*;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-import main.Driver;
-import main.Time;
+
+import util.Time2;
+
+
 
 public class Register {
 
@@ -39,7 +39,7 @@ public class Register {
 	 * 				name of driver
 	 */			
 	public void registerDriver(String name) {
-		String[] times = Time.makeTimeList(); 
+		String[] times = Time2.makeTimeList(); 
 		writeToFile(name, times[0], times[1], times[2]);
 	}
 

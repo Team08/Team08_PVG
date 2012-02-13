@@ -1,12 +1,15 @@
-package main;
+package reader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.IOException;
 
-public class ReadNameFile extends FileIO {
+import race.Race;
 
+
+public class ReadNameFile extends FileIO {
+	String name;
 	/**
 	 * The constructor which takes the file name of the name file as argument
 	 * 
@@ -15,8 +18,8 @@ public class ReadNameFile extends FileIO {
 	 * @param fileName
 	 * 			  the name files name
 	 */
-	public ReadNameFile(Sorter sorter, String fileName) {
-		super(sorter, fileName);
+	public ReadNameFile(Race race, String fileName) {
+		super(race, fileName);
 	}
 
 	/**
@@ -27,6 +30,7 @@ public class ReadNameFile extends FileIO {
 	public void readFile() throws FileNotFoundException {
 		if (fileName != null) {
 			File file = new File(fileName);
+			System.out.println(fileName);
 			Scanner scanner;
 			try {
 				scanner = new Scanner(file);
@@ -45,7 +49,7 @@ public class ReadNameFile extends FileIO {
 						name = str[1];
 						riderID = Integer.parseInt(str[0]);
 						add();
-						sorter.addClass(riderID, currClass);
+						race.addClass(riderID, currClass);
 					}
 					// What happens
 					// if more than
@@ -67,8 +71,8 @@ public class ReadNameFile extends FileIO {
 	}
 	
 	protected void add() {
-		sorter.addName(riderID, name);	
+		race.addName(riderID, name);	
 	}
-			
+
 }
 
