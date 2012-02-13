@@ -47,7 +47,7 @@ public abstract class Race {
 	 * @param nameFile
 	 *            the name of the name file
 	 * @param startType
-	 *            the name of the start type (masstart e.g.)
+	 *            the name of the start type (varv, etapp)
 	 */
 	public Race(String startFile, String stopFile, String nameFile,
 			String startType) {
@@ -64,7 +64,7 @@ public abstract class Race {
 	}
 
 	/**
-	 * Creates a Lapresult that creates a result file
+	 * Creates a result that creates a result file
 	 * 
 	 * @param index
 	 *            the treemap index
