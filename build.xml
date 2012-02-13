@@ -1,6 +1,5 @@
 <project name="build" default="zip">
 	
-	
 	<path id="classpath.base">
 	</path>
 	<path id="classpath.test">
@@ -33,7 +32,7 @@
 		<jar destfile="ReleaseJar/Sorter.jar">
 			<fileset dir="build/Sorter" includes="**/*.class" />
 			<manifest>
-				<attribute name="Main-Class" value="main/Sorter" />
+				<attribute name="Main-Class" value="main/Enduro" />
 			</manifest>
 		</jar>
 		
