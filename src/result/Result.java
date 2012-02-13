@@ -8,15 +8,20 @@ import main.Driver;
 import util.Time;
 
 /**
- * This class builds the result with strings.
+ * An abstract class. Uses the template method-architecture. Appropriate sub
+ * classes will be called based on what kind of Result should be printed, e.g.
+ * Lapresult. The sub classes writes the files, and checks for errors.
+ * 
+ * This class almost only contains the methods which all sub classes should
+ * contain.
  */
 public abstract class Result {
-	protected TreeMap<Integer, Driver> index;	
-	
+	protected TreeMap<Integer, Driver> index;
+
 	/**
 	 * Check if any error and returns a String.
 	 * 
-
+	 * 
 	 * @param i
 	 *            the index
 	 * @param startTime
@@ -58,8 +63,7 @@ public abstract class Result {
 	 * @param sb
 	 *            the StringBuilder to append to
 	 */
-	public abstract void checkFinishTime(List<Time> finishTime,
-			StringBuilder sb);
+	public abstract void checkFinishTime(List<Time> finishTime, StringBuilder sb);
 
 	/**
 	 * Check if the start time list contains any finish time.
@@ -82,8 +86,8 @@ public abstract class Result {
 	 *            the StringBuilder to append to
 	 * @param totalCheck
 	 *            the totalcheck
-	 * @return A string of the total time with
-	 *         error-notations if any invalid time was found
+	 * @return A string of the total time with error-notations if any invalid
+	 *         time was found
 	 */
 	public abstract String checkTotaltime(List<Time> startTime,
 			List<Time> finishTime, StringBuilder sb, String totalCheck);
