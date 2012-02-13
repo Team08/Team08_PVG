@@ -45,7 +45,7 @@ public class Enduro {
 		String attributeString = "";
 		ArrayList<String> driverAttributes = new ArrayList<String>();
 
-if (args.length == 0) {
+		if (args.length == 0) {
 			Properties configFile = new Properties();
 			try {
 				configFile.load(new FileInputStream("config.properties"));
@@ -68,7 +68,6 @@ if (args.length == 0) {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-
 		}else{
 			try {
 				start = args[0];
@@ -80,7 +79,6 @@ if (args.length == 0) {
 				raceType = raceType.toLowerCase();
 				distance = Integer.parseInt(args[7]);
 				if (raceType.equals("varv")) {
-
 					raceTime = args[6];	
 				}
 			} catch (Exception e) {
