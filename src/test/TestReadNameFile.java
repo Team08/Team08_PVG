@@ -80,5 +80,16 @@ public class TestReadNameFile extends LapRace {
 		assertEquals("Incorrect name of driver, should be Erik Esson, was" + varvrace.size(), "Erik Esson", varvrace.getDriver(103).getName());
 	}
 	
+	@Test
+	public void testCorrectAttributes() {
+		try {
+				namefile.readFile();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		assertEquals("Vargarna", varvrace.getDriver(2).getAttributes().get(0));
+		assertEquals("Harley", varvrace.getDriver(103).getAttributes().get(0));
+	}
+	
 
 }
