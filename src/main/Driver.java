@@ -21,6 +21,7 @@ public class Driver {
 	private List<Time> finishTime = new ArrayList<Time>();
 	private String classes = "";
 	private Integer id;
+	private ArrayList<String> driverAttribute = new ArrayList<String>();
 
 	/**
 	 * The constructor which creates the Driver without a name
