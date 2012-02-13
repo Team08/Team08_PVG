@@ -95,22 +95,22 @@ public class LapResult extends Result {
 				String classes = tDriver.getClasses(); //
 
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i, // Lägger
-																			// in
-																			// en
-																			// treemap
+						// in
+						// en
+						// treemap
 						tDriver)); // (treemap innehåller idnummer mappade till
-									// respektive förare)
+				// respektive förare)
 			} // i en klass
 
 			ArrayList<Driver> unsortedListOfDriversInAClass; // arraylist som
-																// används för
-																// att plocka ut
-																// alla förare
-																// i en viss
-																// klass för
-																// att skickas
-																// in till
-																// sortern.
+			// används för
+			// att plocka ut
+			// alla förare
+			// i en viss
+			// klass för
+			// att skickas
+			// in till
+			// sortern.
 			ArrayList<Driver> sortedListOfDriversInAClass;
 			List<Driver> nonExistingNbrList = null;
 
@@ -122,13 +122,13 @@ public class LapResult extends Result {
 						.values());
 				sortedListOfDriversInAClass = sorter
 						.lapSort(unsortedListOfDriversInAClass); // //Nu har vi
-																	// en
-																	// sorterad
-																	// arraylist
-																	// med alla
-																	// förarna
-																	// i en
-																	// klass
+				// en
+				// sorterad
+				// arraylist
+				// med alla
+				// förarna
+				// i en
+				// klass
 
 				if (className.equals(nonExistingNbr)) {
 					nonExistingNbrList = sortedListOfDriversInAClass;
@@ -137,12 +137,12 @@ public class LapResult extends Result {
 					out.write(className + "\n"); // Skriver ut klassnamn
 					out.write(sb.toString()); // Skriver ut "linjal"
 					for (Driver driver : sortedListOfDriversInAClass) { // Skriver
-																		// varje
-																		// person
-																		// som
-																		// hör
-																		// till
-																		// klassen.
+						// varje
+						// person
+						// som
+						// hör
+						// till
+						// klassen.
 						out.write(checkError(driver.getId(),
 								driver.startTime(), driver //
 										.finishTime()));
@@ -156,7 +156,8 @@ public class LapResult extends Result {
 				out.write(sb.toString());
 
 				for (Driver driver : nonExistingNbrList) {
-					out.write(checkError(driver.getId(), driver.startTime(), driver.finishTime()));
+					out.write(checkError(driver.getId(), driver.startTime(),
+							driver.finishTime()));
 				}
 			}
 			// Close the output stream
@@ -196,7 +197,8 @@ public class LapResult extends Result {
 	 *         error-notations if there are any
 	 */
 	@Override
-	public String checkError(int currentIndex, List<Time> startTime, List<Time> finishTime) {
+	public String checkError(int currentIndex, List<Time> startTime,
+			List<Time> finishTime) {
 		StringBuilder sb = new StringBuilder();
 		String totalTimeCheck = "";
 		String totalLapCheck = "";
@@ -206,41 +208,44 @@ public class LapResult extends Result {
 		sb.append(index.get(currentIndex).getNumberOfLaps() + "; ");
 
 		totalTimeCheck = checkTotaltime(startTime, finishTime, sb);
-		
-		
+
 		totalLapCheck = printLapTimes(currentIndex, startTime, finishTime, sb);
-		
+
 		checkStartTime(startTime, sb);
-		
-		//Totaltid
+
+		// Totaltid
 		Time timeTemp = new Time(0);
 		if (finishTime.size() != 0 && startTime.size() != 0) {
 			timeTemp = new Time(startTime.get(0).timeDiff(
 					finishTime.get(finishTime.size() - 1)));
 		}
-		
-		
+
 		if (finishTime.size() != 0) {
-			int check = finishTime.size() - 1;	//Check = antalet måltider i finishTimeListan i respektive Driver
+			int check = finishTime.size() - 1; // Check = antalet måltider i
+												// finishTimeListan i respektive
+												// Driver
 			if (check > laps - 1) {
 				check = laps - 1;
 			}
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
-			}//Kontrollera om totaltid verkligen var en totaltid, annars gör det till en varvtid.
-			if ((!timeTemp.greaterThan(raceTime))&& !timeTemp.equals(new Time(0)) && check <= laps) {
+			}// Kontrollera om totaltid verkligen var en totaltid, annars gör
+				// det till en varvtid.
+			if ((!timeTemp.greaterThan(raceTime))
+					&& !timeTemp.equals(new Time(0)) && check <= laps) {
 				sb.append(finishTime.get(finishTime.size() - 1) + "; ");
 
 			}
-		}//Om semikolon saknas, pga för få varv, skriv ut nya semikolon.
+		}// Om semikolon saknas, pga för få varv, skriv ut nya semikolon.
 		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
 			sb.append("; ");
 		}//
 
-		if (timeTemp.greaterThan(raceTime)) {//Lägg till sluttid, om det är sluttid
+		if (timeTemp.greaterThan(raceTime)) {// Lägg till sluttid, om det är
+												// sluttid
 			sb.append(finishTime.get(finishTime.size() - 1));
 
-		} else {//Om sluttid ej finns, skriv "Slut?".
+		} else {// Om sluttid ej finns, skriv "Slut?".
 			sb.append("Slut?");
 		}
 
@@ -300,9 +305,10 @@ public class LapResult extends Result {
 	 * @param finishTime
 	 *            the list of finish times to check
 	 * @param sb
-	 *            the StringBuilder to append to 
+	 *            the StringBuilder to append to
+	 * 
 	 * @return A string with error-notations if any invalid time was found
-	 *       
+	 * 
 	 */
 	@Override
 	public String checkTotaltime(List<Time> startTime, List<Time> finishTime,
