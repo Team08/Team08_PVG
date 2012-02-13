@@ -208,8 +208,7 @@ public class LapResult extends Result {
 		totalTimeCheck = checkTotaltime(startTime, finishTime, sb);
 		
 		
-		totalLapCheck = printLapTimes(currentIndex, startTime, finishTime, sb,
-				totalLapCheck);
+		totalLapCheck = printLapTimes(currentIndex, startTime, finishTime, sb);
 		
 		checkStartTime(startTime, sb);
 		
@@ -220,28 +219,28 @@ public class LapResult extends Result {
 					finishTime.get(finishTime.size() - 1)));
 		}
 		
-		//Kontrollera om totaltid verkligen var en totaltid, annars gör det till en varvtid.
+		
 		if (finishTime.size() != 0) {
-			int check = finishTime.size() - 1;
+			int check = finishTime.size() - 1;	//Check = antalet måltider i finishTimeListan i respektive Driver
 			if (check > laps - 1) {
 				check = laps - 1;
 			}
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
-			}
+			}//Kontrollera om totaltid verkligen var en totaltid, annars gör det till en varvtid.
 			if ((!timeTemp.greaterThan(raceTime))&& !timeTemp.equals(new Time(0)) && check <= laps) {
 				sb.append(finishTime.get(finishTime.size() - 1) + "; ");
 
 			}
-		}
+		}//Om semikolon saknas, pga för få varv, skriv ut nya semikolon.
 		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
 			sb.append("; ");
-		}
+		}//
 
-		if (timeTemp.greaterThan(raceTime)) {
+		if (timeTemp.greaterThan(raceTime)) {//Lägg till sluttid, om det är sluttid
 			sb.append(finishTime.get(finishTime.size() - 1));
 
-		} else {
+		} else {//Om sluttid ej finns, skriv "Slut?".
 			sb.append("Slut?");
 		}
 
@@ -254,7 +253,8 @@ public class LapResult extends Result {
 	}
 
 	private String printLapTimes(int currentIndex, List<Time> startTime,
-			List<Time> finishTime, StringBuilder sb, String totalLapCheck) {
+			List<Time> finishTime, StringBuilder sb) {
+		String totalLapCheck = "";
 		if (!(startTime.size() == 0 || finishTime.size() == 0)) {
 			String lapTime = "";
 			for (int j = 0; j < laps; j++) {
