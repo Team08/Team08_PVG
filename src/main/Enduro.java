@@ -41,8 +41,6 @@ public class Enduro {
 			Properties configFile = new Properties();
 			try {
 				configFile.load(new FileInputStream("config.properties"));
-				
-				
 				start = configFile.getProperty("STARTFILE");
 				stop = configFile.getProperty("STOPFILE");
 				name = configFile.getProperty("NAMEFILE");

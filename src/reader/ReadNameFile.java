@@ -44,7 +44,6 @@ public class ReadNameFile extends FileIO {
 	public void readFile() throws FileNotFoundException {
 		if (fileName != null) {
 			File file = new File(fileName);
-			System.out.println(fileName);
 			Scanner scanner;
 			try {
 				scanner = new Scanner(file);
