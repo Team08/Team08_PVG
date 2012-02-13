@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import util.Time;
+import util.Time2;
 import model.Register;
 
 public class RegisterButton extends JButton implements ActionListener {
@@ -44,7 +44,7 @@ public class RegisterButton extends JButton implements ActionListener {
 
 	protected void pushedButton(){
 		String id = gui.getDriverID();
-		String[] times = Time.makeTimeList();
+		String[] times = Time2.makeTimeList();
 		if (gui.getDriverID().length() == 0) {
 			try {
 

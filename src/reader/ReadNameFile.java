@@ -5,10 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.IOException;
 
-import main.Race;
+import race.Race;
+
 
 public class ReadNameFile extends FileIO {
-
+	String name;
 	/**
 	 * The constructor which takes the file name of the name file as argument
 	 * 

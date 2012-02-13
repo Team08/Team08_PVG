@@ -8,24 +8,26 @@ import java.io.IOException;
 import java.util.TreeMap;
 
 import main.Driver;
-import main.Varvrace;
+import race.Varvrace;
 import reader.ReadNameFile;
+import util.Time;
 import main.Sorter;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestReadNameFile {
+public class TestReadNameFile extends Varvrace {
 	private ReadNameFile namefile;
 	private TreeMap<Integer, Driver> driverTreeMap;
-	private Varvrace race;
+	private static String testNamePath = "src/test/testfiles/namnfil.test";
 
-	private Sorter sorter;
+
+	private Varvrace varvrace;
 	
 	public TestReadNameFile() {
-		race = new VarvRace("", "", "src/namnfil.test",0,0);
-		super("", "", "src/namnfil.test","maraton",0,0);
+		super("", "", testNamePath,"","",0,"");
+		
 	}
 
 	
@@ -36,8 +38,8 @@ public class TestReadNameFile {
 		driverTreeMap.put(new Integer(1), new Driver());
 		driverTreeMap.put(new Integer(4), new Driver());
 		driverTreeMap.put(new Integer(9), new Driver());
-		sorter = new Sorter("", "", "src/namnfil.test","maraton",0,0);
-		namefile = new ReadNameFile(sorter, "src/namnfil.test");
+		varvrace = new Varvrace("", "", testNamePath,"","",0,"");
+		namefile = new ReadNameFile(varvrace , testNamePath);
 
 	}
 
@@ -52,7 +54,7 @@ public class TestReadNameFile {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		assertEquals("Incorrect number of drivers, should be 5, was" + sorter.size(), 5, sorter.size());
+		assertEquals("Incorrect number of drivers, should be 5, was " + varvrace.size(), 5, varvrace.size());
 	}
 	
 	
@@ -65,8 +67,8 @@ public class TestReadNameFile {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		assertEquals("Incorrect class should be SENIOR, was" + sorter.getDriver(2).classes().get(0), "SENIOR", sorter.getDriver(2).classes().get(0));
-		assertEquals("Incorrect class should be JUNIOR, was" + sorter.getDriver(103).classes().get(0), "JUNIOR", sorter.getDriver(103).classes().get(0));
+		assertEquals("Incorrect class should be SENIOR, was" + varvrace.getDriver(2).getClasses(), "SENIOR", varvrace.getDriver(2).getClasses());
+		assertEquals("Incorrect class should be JUNIOR, was" + varvrace.getDriver(103).getClasses(), "JUNIOR", varvrace.getDriver(103).getClasses());
 	}
 	
 	@Test
@@ -76,8 +78,8 @@ public class TestReadNameFile {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		assertEquals("Incorrect name of driver, should be Bengt Bsson, was" + sorter.size(), "Bengt Bsson", sorter.getDriver(2).getName());
-		assertEquals("Incorrect name of driver, should be Erik Esson, was" + sorter.size(), "Erik Esson", sorter.getDriver(103).getName());
+		assertEquals("Incorrect name of driver, should be Bengt Bsson, was" + varvrace.size(), "Bengt Bsson", varvrace.getDriver(2).getName());
+		assertEquals("Incorrect name of driver, should be Erik Esson, was" + varvrace.size(), "Erik Esson", varvrace.getDriver(103).getName());
 	}
 	
 

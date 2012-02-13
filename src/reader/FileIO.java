@@ -4,13 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import main.Race;
+import race.Race;
+import util.Time;
+
 
 public abstract class FileIO {
 	protected Race race;
 	protected String fileName;
 	protected int riderID;
-	protected String name;
+	protected Time time;
 
 	protected FileIO(Race race, String fileName) {
 		this.race = race;
@@ -33,7 +35,7 @@ public abstract class FileIO {
 				while (scanner.hasNextLine()) {
 					line = scanner.nextLine();
 					String[] str = line.split("; ");
-					name = str[1];
+					time = new Time(str[1]);
 					riderID = Integer.parseInt(str[0]);
 					add(); 
 					

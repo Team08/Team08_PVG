@@ -2,6 +2,11 @@ package main;
 
 import java.util.TreeMap;
 
+import race.Race;
+import race.Varvrace;
+
+import util.Time;
+
 
 public class Enduro {
 	protected TreeMap<Integer, Driver> register;
@@ -13,7 +18,7 @@ public class Enduro {
 			String stop = "defaultStop";
 			String name = "defaultName";
 			String result = "defaultResult";
-			int raceTime = 0;
+			String raceTime = "";
 			String raceType = "";
 			int laps = 0;
 			String startType = "";
@@ -27,7 +32,7 @@ public class Enduro {
 				startType = args[5];
 				raceType = raceType.toLowerCase();
 				if(raceType.equals("varv")){
-					raceTime = Integer.parseInt(args[6]);
+					raceTime = args[6];
 					laps = Integer.parseInt(args[7]);
 					race = new Varvrace(start, stop, name, result, raceTime, laps, startType);
 				}

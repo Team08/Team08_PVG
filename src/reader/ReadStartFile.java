@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import main.Race;
+import race.Race;
+import util.Time;
+
 
 public class ReadStartFile extends FileIO {
 	/**
@@ -22,7 +24,7 @@ public class ReadStartFile extends FileIO {
 	
 	
 	protected void add() {
-		race.addStartTime(riderID, name);
+		race.addStartTime(riderID, time);
 	}
 
 
@@ -38,7 +40,7 @@ public class ReadStartFile extends FileIO {
 				int index = Integer.parseInt(str[0]);
 				for (int i = 1; i<= index; i++){
 					riderID = i;
-					name = str[1];
+					time = new Time(str[1]);
 					add();
 				}
 

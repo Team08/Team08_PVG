@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.Scanner;
 
 import main.Driver;
-import util.Time;
+import util.Time2;
 import model.Register;
 
 
@@ -25,7 +25,7 @@ private Register register;
 	
 	@Test public void  testThatRaceTimeIsGreaterThanZero(){
 		register.registerDriver("Hanna");
-		assertTrue("Time was not greater than zero", Time.makeTimeList().length > 0);
+		assertTrue("Time was not greater than zero", Time2.makeTimeList().length > 0);
 	}
 	
 	@Test public void testDriversName(){

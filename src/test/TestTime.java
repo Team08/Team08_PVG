@@ -1,17 +1,14 @@
 package test;
 
-
 import static org.junit.Assert.*;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-import main.Driver;
-import util.Time;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import util.Time;
 
 public class TestTime {
 	
@@ -25,93 +22,118 @@ public class TestTime {
 	}
 	
 	@Test
-	public void testAddZeroToStringWhenNeeded() {
-		assertEquals("09", Time.addZero(9));
+	public void creatingTimeObjectInt() {
+		Time time = new Time(1000);
+		assertEquals(1000, time.getTime());
 	}
 	
 	@Test
-	public void testAddZeroToStringWhenNotNeeded() {
-		assertEquals("11", Time.addZero(11));
+	public void creatingTimeObjectString() {
+		Time time = new Time("05.00.00");
+		assertEquals(18000, time.getTime());
+	}
+	
+//	@Test
+//	public void creatingFalseTimeObjectString() {
+//		Time time = new Time("07.00.00");
+//		//assert
+//	}
+	
+	@Test
+	public void settingTimeObjectInt() {
+		Time time = new Time(1000);
+		time.setTime(5000);
+		assertEquals(5000, time.getTime());
 	}
 	
 	@Test
-	public void testAddZeroWhenLastDigitIsZero() {
-		assertEquals("10", Time.addZero(10));
-	}
-	
-	@Test(expected=NumberFormatException.class)
-	public void testAddZeroWhenDigitIsNegative() {
-		Time.addZero(-1);
+	public void settingTimeObjectString() {
+		Time time = new Time("05.00.00");
+		time.setTime("10.00.00");
+		assertEquals(36000, time.getTime());
 	}
 	
 	@Test
-	public void testAddZeroWhenDigitIsZero() {
-		assertEquals("00", Time.addZero(0));
+	public void toStringTest() {
+		Time time = new Time("05.00.00");
+		time.setTime(36000);
+		assertEquals("10.00.00", time.toString());
 	}
 	
 	@Test
-	public void testTimeDiffWhenDiffIsZero() {
-		assertEquals("0.00.00", Time.timeDiff("00.00.00", "00.00.00"));
+	public void testEquals() {
+		Time time = new Time("08.00.00");
+		Time time2 = new Time("08.00.00");
+		assertEquals(true, time.equals(time2));
 	}
 	
 	@Test
-	public void testTimeDiffWhenTwoDifferentNumbers() {
-		assertEquals("0.45.00", Time.timeDiff("13.15.00", "14.00.00"));
-	}
-	
-	@Test (expected = NumberFormatException.class)
-	public void testTimeDiffWhenStartIsLargerThanFinish() {
-		Time.timeDiff("00.16.00", "00.15.00");
+	public void testFalseEquals() {
+		Time time = new Time("08.00.00");
+		Time time2 = new Time("03.00.00");
+		assertEquals(false, time.equals(time2));
 	}
 	
 	@Test
-	public void timeDiffShouldBeZero() {
-		assertEquals("0.00.00", Time.timeDiff("00.15.00", "00.15.00"));
-	}
-	
-	@Test (expected = NumberFormatException.class) 
-	public void testTimeDiffWhenStartIsNegative() {
-		Time.timeDiff("-1.15.15", "1.00.00");
-	}
-	
-	@Test (expected = NumberFormatException.class)
-	public void testTimeDiffWhenFinishIsNegative() {
-		Time.timeDiff("00.00.00", "0.-15.00");
-	}
-	
-	@Test (expected = NumberFormatException.class) 
-	public void testTimeDiffWhenBothNegative() {
-		Time.timeDiff("-1.00.00", "-1.00.00");
-	}
-	
-	@Test (expected = NumberFormatException.class)
-	public void testTimeDiffWhenStartLargerThanFinishAndFinishIsNegative() {
-		Time.timeDiff("12.15.00", "-10.00.00");
-	}
-	
-	@Test (expected = NumberFormatException.class)
-	public void testTimeDiffWhenInputIsLetters() {
-		Time.timeDiff("a.b.c", "a.b.c");
-	}
-	
-	@Test (expected = NumberFormatException.class)
-	public void testTimeDiffWhenWrongInputFormat() {
-		Time.timeDiff("36.00", "00.00.00");
-		
+	public void testGreater() {
+		Time time = new Time("14.00.00");
+		Time time2 = new Time("12.00.00");
+		assertEquals(true, time.greaterThan(time2));
 	}
 	
 	@Test
-	public void testGetCurrentTime() {
-		String[] currTime = Time.makeTimeList();
-		GregorianCalendar calendar = new GregorianCalendar();
-		int hours = calendar.get(Calendar.HOUR_OF_DAY);
-		int minutes = calendar.get(Calendar.MINUTE);
-		int seconds = calendar.get(Calendar.SECOND);
-		String[] currTime2 = {Integer.toString(hours), Time.addZero(minutes), Time.addZero(seconds)};
-		
-		assertArrayEquals(currTime, currTime2);
-		
-		
+	public void testFalseGreater() {
+		Time time = new Time("08.00.00");
+		Time time2 = new Time("18.00.00");
+		assertEquals(false, time.greaterThan(time2));
 	}
+	
+	@Test
+	public void testGreaterMoreDigits() {
+		Time time = new Time("14.48.36");
+		Time time2 = new Time("12.50.40");
+		assertEquals(true, time.greaterThan(time2));
+	}
+	
+	@Test
+	public void testFalseGreaterMoreDigits() {
+		Time time = new Time("02.12.13");
+		Time time2 = new Time("03.13.14");
+		assertEquals(false, time.greaterThan(time2));
+	}
+	
+	//Varf�r g�r de inte igenom??? Kolla upp
+	@Test
+	public void testLesser() {
+		Time time2 = new Time("17.00.00");
+		Time time = new Time("14.00.00");
+		assertEquals(true, time.lesserThan(time2));
+	}
+	
+	@Test
+	public void testFalseLesser() {
+		Time time2 = new Time("18.00.00");
+		Time time = new Time("08.00.00");
+		assertEquals(false, time.greaterThan(time2));
+	}
+	
+	@Test
+	public void testLesserMoreDigits() {
+		Time time2 = new Time("12.50.40");
+		Time time = new Time("14.48.36");
+		assertEquals(true, time.greaterThan(time2));
+	}
+	
+	@Test
+	public void testFalseLesserMoreDigits() {
+		Time time2 = new Time("03.13.14");
+		Time time = new Time("02.12.13");
+		assertEquals(false, time.greaterThan(time2));
+	}
+	
+	
+	
+	
+	//Add test code to test ParseTime och addZero. Kan dessa skrivas om?
 	
 }

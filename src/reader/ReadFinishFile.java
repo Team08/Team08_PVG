@@ -1,6 +1,6 @@
 package reader;
 
-import main.Race;
+import race.Race;
 
 
 public class ReadFinishFile extends FileIO {
@@ -18,7 +18,7 @@ public class ReadFinishFile extends FileIO {
 	}
 	
 	protected void add() {
-		race.addFinishTime(riderID, name);
+		race.addFinishTime(riderID, time);
 		
 	}
 
