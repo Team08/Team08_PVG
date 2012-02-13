@@ -1,8 +1,15 @@
 package util;
 
 /**
- * A time class in milliseconds. It can also compare times and write the time in
- * string.
+ * A time class which can either take a String or an int as an input.
+ * When the int is used the time should be in seconds, whereas when
+ * the string is used, it should be on the format "hh.mm.ss".
+ * 
+ * It can also compare times and convert an int in seconds
+ * to a String on the format "hh.mm.ss"-
+ * 
+ * @author Team08
+ * 
  */
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,10 +22,10 @@ public class Time implements Comparable{
 	private int time;
 
 	/**
-	 * Creates the Time in milliseconds.
+	 * Creates a Time object with seconds as an input parameter.
 	 * 
 	 * @param time
-	 *            the time in milliseconds
+	 *            the time in seconds
 	 */
 	public Time(int time) {
 		this.time = time;
@@ -30,24 +37,29 @@ public class Time implements Comparable{
 	}
 	
 	/**
-	 * Creates the Time from a string.
+	 * Creates the Time based on a string on the format
+	 * "hh.mm.ss".
 	 * 
 	 * @param time
-	 *            the time in string
+	 *            the time in string on the format (hh.mm.ss)
 	 */
 	public Time(String representTime) {
+		if(representTime.length()==0){
+			time=0;
+		}else{
 		String[] temp = representTime.split("\\.");
 		time = parseTime(temp);
-	}
+
+	}}
 
 
 	// BORDE EJ BEH�VAS MEN FINNS F�R ATT DE �R S� L�TT ATT IMPLEMENTERA
 
 	/**
-	 * Sets the time in milliseconds.
+	 * Sets the time in seconds.
 	 * 
 	 * @param time
-	 *            the time in milliseconds
+	 *            the time in seconds
 	 */
 
 	public void setTime(int time) {
@@ -59,7 +71,7 @@ public class Time implements Comparable{
 	 * Sets the time (string).
 	 * 
 	 * @param time
-	 *            the time in string
+	 *            the time in string on the format (hh.mm.ss)
 	 */
 
 	public void setTime(String time) {
@@ -70,7 +82,7 @@ public class Time implements Comparable{
 	/**
 	 * Returns the time.
 	 * 
-	 * @return The time in milliseconds
+	 * @return The time in seconds
 	 */
 	public int getTime() {
 		return time;
@@ -90,10 +102,18 @@ public class Time implements Comparable{
 
 	// EJ TESTADE
 	/**
-	 * Return a string representation of minutes.
+	 * Adds a zero if minutes < 10, otherwise just returns the same
+	 * number that was used as the input parameter.
+	 * 
+	 * E.g. if "9" is used as an input parameter, the method should
+	 * return "09", whereas if the input parameter is "11" the method
+	 * should return "11". 
+	 * 
+	 * That is, no zeroes should be added if minutes > 9
+	 * Only positive numbers are allowed.
 	 * 
 	 * @param minutes
-	 *            the minutes
+	 *            the minutes, adds a
 	 * @throws NumberFormatException
 	 *             If minutes < 0
 	 */
@@ -114,8 +134,8 @@ public class Time implements Comparable{
 	 * 
 	 * @param t2
 	 *            the time
-	 * @return <CODE>true</CODE> if both time is the same:
-	 *         <CODE>time - t2.getTime() == 0 </CODE>, <CODE>false</CODE>
+	 * @return true if both time is the same:
+	 *         time - t2.getTime() == 0 , false
 	 *         otherwise
 	 */
 	public boolean equals(Time t2) {
@@ -130,8 +150,8 @@ public class Time implements Comparable{
 	 * 
 	 * @param t2
 	 *            the time
-	 * @return <CODE>true</CODE> if this.time is greater than t2:
-	 *         <CODE>time > t2.getTime() </CODE>, <CODE>false</CODE> otherwise
+	 * @return true if this.time is greater than t2:
+	 *        time > t2.getTime() , false otherwise
 	 */
 	public boolean greaterThan(Time t2) {
 		if (!(time > t2.getTime())) {
@@ -145,8 +165,8 @@ public class Time implements Comparable{
 	 * 
 	 * @param t2
 	 *            the time
-	 * @return <CODE>true</CODE> if this.time is greater than t2:
-	 *         <CODE>time < t2.getTime() </CODE>, <CODE>false</CODE> otherwise
+	 * @return true if this.time is greater than t2:
+	 *         time < t2.getTime() , false otherwise
 	 */
 	public boolean lesserThan(Time time2) {
 		if (!(time < time2.getTime())) {
@@ -187,6 +207,7 @@ public class Time implements Comparable{
 		}
 	}
 
+	
 	public int compareTo(Object arg0) {
 		final int SMALLER = -1;
 		final int EQUAL = 0;
@@ -206,9 +227,11 @@ public class Time implements Comparable{
 	}
 	
 	/**
-	 * Returns a list of three strings, [0]hours, [1]minutes and [2]seconds
+	 * Creates a Gregorian Calender object and returns the time
+	 * as a string vector where [0]hours, [1]minutes and [2]seconds
 	 * 
-	 * @return the list with strings
+	 * @return A string vector with the current time,
+	 *         [0] hours, [1] minutes, [2] seconds
 	 *
 	 */
 	public static String[] makeTimeList(){
