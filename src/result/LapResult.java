@@ -2,11 +2,13 @@ package result;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
 import main.Driver;
+import main.Sorter;
 
 import util.Time;
 import util.Time2;
@@ -73,14 +75,21 @@ public class LapResult extends Result {
 
 			Driver tDriver;
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
+			ArrayList<Driver> notSortedDrivers = new ArrayList<Driver>();
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
 				String classes = tDriver.getClasses();
-
+				
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
 						tDriver));
-
+				//nytt
+				notSortedDrivers.add(tDriver);
+				
+				//Nytt
 			}
+			Sorter sorter = new Sorter();
+			sorter.lapSort(notSortedDrivers);
+			
 
 			// for (Integer i : register.keySet()) {
 			// tDriver = register.get(i);

@@ -5,16 +5,22 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class Sorter {
+	private ArrayList<Driver> driverList;
+	
 	public Sorter(){
 		
 	}
 	
 	public ArrayList<Driver> lapSort(ArrayList<Driver> old){
-		ArrayList<Driver> temp = old;
-		Collections.sort(temp, new lapSortComparator());
-		
-		return temp;
+		driverList = old;
+		Collections.sort(driverList, new lapSortComparator());
+	
+		return driverList;
 	}
+
+
+	
+	
 	
 	private class lapSortComparator implements Comparator<Driver>{
 
