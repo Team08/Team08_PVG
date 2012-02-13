@@ -31,4 +31,12 @@ public class ReadFinishFile extends FileIO {
 		race.addFinishTime(riderID, time);
 	}
 
+
+	/**
+	 * Prints the error text if file not found.
+	 */
+	protected void printErrorText() {
+		System.err.println("Hittade inte finishfilen.");
+	}
+
 }

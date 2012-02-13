@@ -57,11 +57,18 @@ public class ReadStartFile extends FileIO {
 					add();
 				}
 			} catch (FileNotFoundException e) {
-				System.out.println("Hittade inte filen");
+				printErrorText();
 				throw new FileNotFoundException();
 			}
 		}
 
+	}
+
+	/**
+	 * Prints the error text if file not found.
+	 */
+	protected void printErrorText() {
+		System.err.println("Hittade inte startfilen.");
 	}
 
 }
