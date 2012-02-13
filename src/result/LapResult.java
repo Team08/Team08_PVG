@@ -133,15 +133,14 @@ public class LapResult extends Result {
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
 			}
-			for (int b = finishTime.size() - 1; b < laps - 1; b++) {
+			for (int b = finishTime.size() - 1; b < laps - 2; b++) {
 				sb.append("; ");
 			}
 			
 			
 			Time timeTemp = new Time(startTime.get(0).timeDiff(
 					finishTime.get(finishTime.size() - 1)));
-			if (timeTemp.lesserThan(raceTime)) {
-
+			if (timeTemp.greaterThan(raceTime)) {
 				sb.append(finishTime.get(finishTime.size() - 1));
 
 			} else {

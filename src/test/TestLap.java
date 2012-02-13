@@ -28,7 +28,7 @@ public class TestLap {
 		time = new Time("12.30.00");
 		driver.addFinishTime(time);
 
-		assertEquals("0.30.00", driver.getLapTime(0).toString());
+		assertEquals("0.30.00", driver.getLapTime(0));
 	}
 
 	@Test
@@ -42,9 +42,9 @@ public class TestLap {
 		time = new Time("13.00.01");
 		driver.addFinishTime(time);
 
-		assertEquals("0.29.00", driver.getLapTime(0).toString());
-		assertEquals("0.31.00", driver.getLapTime(1).toString());
-		assertEquals("0.00.01", driver.getLapTime(2).toString());
+		assertEquals("0.29.00", driver.getLapTime(0));
+		assertEquals("0.31.00", driver.getLapTime(1));
+		assertEquals("0.00.01", driver.getLapTime(2));
 	}
 
 	@Test
@@ -54,8 +54,8 @@ public class TestLap {
 		time = new Time("12.29.00");
 		driver.addFinishTime(time);
 
-		assertEquals("0.29.00", driver.getLapTime(0).toString());
-		assertEquals("0.00.00", driver.getLapTime(1).toString());
+		assertEquals("0.29.00", driver.getLapTime(0));
+		assertEquals("0.00.00", driver.getLapTime(1));
 
 	}
 
