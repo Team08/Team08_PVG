@@ -85,7 +85,7 @@ public class LapResult extends Result {
 			ArrayList<Driver> notSortedDrivers = new ArrayList<Driver>();
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
-				if(tDriver.getName() == null) {
+				if (tDriver.getName() == null) {
 					tDriver.addClass(nonExistingNbr);
 				}
 				String classes = tDriver.getClasses();
@@ -109,7 +109,7 @@ public class LapResult extends Result {
 			for (String className : mapOfDiffRaceClasses.keySet()) {
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
 						.get(className);
-				if(className.equals(nonExistingNbr)) {
+				if (className.equals(nonExistingNbr)) {
 					nonExistingNbrMap = tm;
 				} else {
 					out.write(className + "\n");
@@ -121,8 +121,8 @@ public class LapResult extends Result {
 					}
 				}
 			}
-			
-			if(nonExistingNbrMap != null) {
+
+			if (nonExistingNbrMap != null) {
 				out.write(nonExistingNbr + "\n");
 				out.write(sb.toString());
 				for (Integer i : nonExistingNbrMap.keySet()) {
@@ -131,7 +131,7 @@ public class LapResult extends Result {
 							.finishTime()));
 				}
 			}
-			
+
 			// Close the output stream
 			out.close();
 
@@ -170,7 +170,6 @@ public class LapResult extends Result {
 	 */
 	@Override
 	public String checkError(int i, List<Time> startTime, List<Time> finishTime) {
-
 		StringBuilder sb = new StringBuilder();
 		String totalTimeCheck = "";
 		String totalLapCheck = "";
@@ -181,24 +180,19 @@ public class LapResult extends Result {
 
 		totalTimeCheck = checkTotaltime(startTime, finishTime, sb,
 				totalTimeCheck);
-		if (laps != 0) {
-			if (!(startTime.size() == 0 || finishTime.size() == 0)) {
-				String lapTime = "";
-				for (int j = 0; j < laps; j++) {
-					lapTime = index.get(i).getLapTime(j);
-					Time lap = new Time(lapTime);
-					if (lap.lesserThan(new Time("00.15.00"))) {
-						if (!lap.equals(new Time(0))) {
-							totalLapCheck = " Omöjlig varvtid ";
-						}
+		if (!(startTime.size() == 0 || finishTime.size() == 0)) {
+			String lapTime = "";
+			for (int j = 0; j < laps; j++) {
+				lapTime = index.get(i).getLapTime(j);
+				Time lap = new Time(lapTime);
+				if (lap.lesserThan(new Time("00.15.00"))) {
+					if (!lap.equals(new Time(0))) {
+						totalLapCheck = " Omöjlig varvtid ";
 					}
-					sb.append(lapTime + "; ");
 				}
+				sb.append(lapTime + "; ");
 			}
 		}
-		// for (int b = finishTime.size() - 1; b < laps - 1; b++) {
-		// sb.append("; ");
-		// }
 		checkStartTime(startTime, sb);
 		Time timeTemp = new Time(0);
 		if (finishTime.size() != 0 && startTime.size() != 0) {
