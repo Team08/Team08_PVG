@@ -186,7 +186,7 @@ public class LapResult extends Result {
 	 * Check if there are any invalid parameter and returns a result string line
 	 * that contains error-notations if any invalid parameter found.
 	 * 
-	 * @param i
+	 * @param currentIndex
 	 *            The current index
 	 * @param startTime
 	 *            A list of start time
@@ -196,56 +196,51 @@ public class LapResult extends Result {
 	 *         error-notations if there are any
 	 */
 	@Override
-	public String checkError(int i, List<Time> startTime, List<Time> finishTime) {
+	public String checkError(int currentIndex, List<Time> startTime, List<Time> finishTime) {
 		StringBuilder sb = new StringBuilder();
 		String totalTimeCheck = "";
 		String totalLapCheck = "";
-		sb.append(i + "; ");
-		checkName(sb, index.get(i).getName());
+		sb.append(currentIndex + "; ");
+		checkName(sb, index.get(currentIndex).getName());
 
-		sb.append(index.get(i).getNumberOfLaps() + "; ");
+		sb.append(index.get(currentIndex).getNumberOfLaps() + "; ");
 
 		totalTimeCheck = checkTotaltime(startTime, finishTime, sb);
-		if (!(startTime.size() == 0 || finishTime.size() == 0)) {
-			String lapTime = "";
-			for (int j = 0; j < laps; j++) {
-				lapTime = index.get(i).getLapTime(j);
-				Time lap = new Time(lapTime);
-				if (lap.lesserThan(new Time("00.15.00"))) {
-					if (!lap.equals(new Time(0))) {
-						totalLapCheck = " Omöjlig varvtid ";
-					}
-				}
-				sb.append(lapTime + "; ");
-			}
-		}
+		
+		
+		totalLapCheck = printLapTimes(currentIndex, startTime, finishTime, sb);
+		
 		checkStartTime(startTime, sb);
+		
+		//Totaltid
 		Time timeTemp = new Time(0);
 		if (finishTime.size() != 0 && startTime.size() != 0) {
 			timeTemp = new Time(startTime.get(0).timeDiff(
 					finishTime.get(finishTime.size() - 1)));
 		}
+		
+		
 		if (finishTime.size() != 0) {
-			int check = finishTime.size() - 1;
+			int check = finishTime.size() - 1;	//Check = antalet måltider i finishTimeListan i respektive Driver
 			if (check > laps - 1) {
 				check = laps - 1;
 			}
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
-			}
-			if ((!timeTemp.greaterThan(raceTime)) && check <= laps) {
+			}//Kontrollera om totaltid verkligen var en totaltid, annars gör det till en varvtid.
+			if ((!timeTemp.greaterThan(raceTime))&& !timeTemp.equals(new Time(0)) && check <= laps) {
 				sb.append(finishTime.get(finishTime.size() - 1) + "; ");
 
 			}
-		}
+		}//Om semikolon saknas, pga för få varv, skriv ut nya semikolon.
 		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
 			sb.append("; ");
-		}
+		}//
 
-		if (timeTemp.greaterThan(raceTime)) {
+		if (timeTemp.greaterThan(raceTime)) {//Lägg till sluttid, om det är sluttid
 			sb.append(finishTime.get(finishTime.size() - 1));
 
-		} else {
+		} else {//Om sluttid ej finns, skriv "Slut?".
 			sb.append("Slut?");
 		}
 
@@ -255,6 +250,25 @@ public class LapResult extends Result {
 		sb.append("\n");
 		System.out.println(sb.toString());
 		return sb.toString();
+	}
+
+	private String printLapTimes(int currentIndex, List<Time> startTime,
+			List<Time> finishTime, StringBuilder sb) {
+		String totalLapCheck = "";
+		if (!(startTime.size() == 0 || finishTime.size() == 0)) {
+			String lapTime = "";
+			for (int j = 0; j < laps; j++) {
+				lapTime = index.get(currentIndex).getLapTime(j);
+				Time lap = new Time(lapTime);
+				if (lap.lesserThan(new Time("00.15.00"))) {
+					if (!lap.equals(new Time(0))) {
+						totalLapCheck = " Omöjlig varvtid ";
+					}
+				}
+				sb.append(lapTime + "; ");
+			}
+		}
+		return totalLapCheck;
 	}
 
 	/**
@@ -286,13 +300,9 @@ public class LapResult extends Result {
 	 * @param finishTime
 	 *            the list of finish times to check
 	 * @param sb
-	 *            the StringBuilder to append to <<<<<<< HEAD
+	 *            the StringBuilder to append to 
 	 * @return A string with error-notations if any invalid time was found
-	 *         =======
-	 * @param totalCheck
-	 *            the totalcheck
-	 * @return A string of the total time with error-notations if any invalid
-	 *         time was found >>>>>>> 99c23db0e95b41872459078ea00bd83b53a1be7d
+	 *       
 	 */
 	@Override
 	public String checkTotaltime(List<Time> startTime, List<Time> finishTime,
