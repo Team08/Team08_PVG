@@ -11,6 +11,8 @@ import main.Enduro;
 import org.junit.Before;
 import org.junit.Test;
 
+import race.Varvrace;
+
 public class TestAcceptance3{
 	private static String testStartPath = "src/test/testfiles/starttider.test";
 	private static String testFinishPath = "src/test/testfiles/maltider.test";
@@ -21,18 +23,25 @@ public class TestAcceptance3{
 	
 	
 	public TestAcceptance3() {
-		//super("src/acceptanstest3/starttider.test", "src/acceptanstest3/maltider.test", "src/acceptanstest3/null.test","varv",0,3);
+		//super(testStartPath, testFinishPath, testNullPath,testResultPath,0,3,"");
+		
+		 
 	}
 
 	@Before public void setup() {
+<<<<<<< HEAD
+		String[] args = new String [8];
+=======
 		String[] args = new String [7];
+>>>>>>> b1ed29e556415c2a7448afa6076641f3560c122b
 		args[0]= testStartPath;
 		args[1]= testFinishPath;
 		args[2]= testNullPath;
 		args[3]= testResultPath;
 		args[4]= "varv";
-		args[5]= "90";
-		args[6]= "3";
+		args[5]= "enkelstart";
+		args[6]= "10.40";
+		args[7]= "3";
 		
 		new Enduro(args);
 	}

@@ -8,8 +8,9 @@ import java.io.IOException;
 import java.util.TreeMap;
 
 import main.Driver;
-import main.Varvrace;
+import race.Varvrace;
 import reader.ReadNameFile;
+import util.Time;
 import main.Sorter;
 
 import org.junit.After;
@@ -25,7 +26,12 @@ public class TestReadNameFile extends Varvrace {
 	private Varvrace varvrace;
 	
 	public TestReadNameFile() {
+<<<<<<< HEAD
+		super("", "", testNamePath,"","",0,"");
+		
+=======
 		super("", "", testNamePath,"maraton",0,0);
+>>>>>>> b1ed29e556415c2a7448afa6076641f3560c122b
 	}
 
 	
@@ -36,7 +42,11 @@ public class TestReadNameFile extends Varvrace {
 		driverTreeMap.put(new Integer(1), new Driver());
 		driverTreeMap.put(new Integer(4), new Driver());
 		driverTreeMap.put(new Integer(9), new Driver());
+<<<<<<< HEAD
+		varvrace = new Varvrace("", "", testNamePath,"","",0,"");
+=======
 		varvrace = new Varvrace("", "", testNamePath,"maraton",0,0);
+>>>>>>> b1ed29e556415c2a7448afa6076641f3560c122b
 		namefile = new ReadNameFile(varvrace , testNamePath);
 
 	}
@@ -65,8 +75,8 @@ public class TestReadNameFile extends Varvrace {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		assertEquals("Incorrect class should be SENIOR, was" + varvrace.getDriver(2).classes().get(0), "SENIOR", varvrace.getDriver(2).classes().get(0));
-		assertEquals("Incorrect class should be JUNIOR, was" + varvrace.getDriver(103).classes().get(0), "JUNIOR", varvrace.getDriver(103).classes().get(0));
+		assertEquals("Incorrect class should be SENIOR, was" + varvrace.getDriver(2).getClasses(), "SENIOR", varvrace.getDriver(2).getClasses());
+		assertEquals("Incorrect class should be JUNIOR, was" + varvrace.getDriver(103).getClasses(), "JUNIOR", varvrace.getDriver(103).getClasses());
 	}
 	
 	@Test

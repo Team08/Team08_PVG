@@ -1,20 +1,45 @@
 package util;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-
 public class Time {
+	private int time;
 
-	/**
-	 * Adds a leading zero to input if input is less than 10
-	 * 
-	 * @param minutes
-	 *            The number to add a zero to if needed
-	 * @return A string with a leading zero if input less than 10
-	 * @throws NumberFormatException
-	 *             If illegal number format
-	 */
+	public Time(int time) {
+		this.time = time;
+	}
+
+	public Time(String representTime) {
+		String[] temp = representTime.split("\\.");
+		time = parseTime(temp);
+	}
+
+	// BORDE EJ BEHÖVAS MEN FINNS FÖR ATT DE ÄR SÅ LÄTT ATT IMPLEMENTERA
+	public void setTime(int time) {
+		this.time = time;
+	}
+
+	// BORDE EJ BEHÖVAS MEN FINNS FÖR ATT DE ÄR SÅ LÄTT ATT IMPLEMENTERA
+	public void setTime(String time) {
+		String[] temp = time.split("\\.");
+		this.time = parseTime(temp);
+	}
+
+	public int getTime() {
+		return time;
+	}
+
+	// EJ TESTADE
+	private int parseTime(String[] temp) throws NumberFormatException {
+		int hour = Integer.parseInt(temp[0]);
+		int minute = Integer.parseInt(temp[1]);
+		int second = Integer.parseInt(temp[2]);
+		if (hour < 0 || minute < 0 || second < 0) {
+			throw new NumberFormatException();
+		}
+		int start = 3600 * hour + 60 * minute + second;
+		return start;
+	}
+
+	// EJ TESTADE
 	public static String addZero(int minutes) throws NumberFormatException {
 		if (minutes < 0)
 			throw new NumberFormatException("No negative numbers are allowed");
@@ -27,79 +52,44 @@ public class Time {
 		return min;
 	}
 
-	/**
-	 * Returns the difference between two times. finishTime must be greater than
-	 * startTime
-	 * 
-	 * @param startTime
-	 *            The start time
-	 * @param finishTime
-	 *            The finish time
-	 * @return Time difference as a string
-	 * @throws NumberFormatException
-	 *             Thrown if illegal number format
-	 */
-	public static String timeDiff(String startTime, String finishTime)
-	throws NumberFormatException {
-		String[] temp = startTime.split("\\.");
-
-		if (temp.length != 3) {
-			throw new NumberFormatException();
+	public boolean equals(Time t2) {
+		if (time - t2.getTime() != 0) {
+			return false;
 		}
-		int start = parseTime(temp);
+		return true;
+	}
 
-		temp = finishTime.split("\\.");
-		int finish = parseTime(temp);
-
-		int totalInt = finish - start;
-
-		if (totalInt < 0) {
-			throw new NumberFormatException();
+	public boolean greaterThan(Time t2) {
+		if (!(time > t2.getTime())) {
+			return false;
 		}
-		int minutes = (totalInt % 3600) / 60;
+		return true;
+	}
+
+	public boolean lesserThan(Time time2) {
+		if (!(time < time2.getTime())) {
+			return false;
+		}
+		return true;
+	}
+
+	public String toString() {
+		int minutes = (time % 3600) / 60;
 		String min = addZero(minutes);
 
-		int seconds = (totalInt % 3600) % 60;
+		int seconds = (time % 3600) % 60;
 		String sec = addZero(seconds);
 
-		String total = totalInt / 3600 + "." + min + "." + sec;
+		String total = time / 3600 + "." + min + "." + sec;
 
 		return total;
-
 	}
-	
-	private static int parseTime(String[] temp) throws NumberFormatException {
-		int hour = Integer.parseInt(temp[0]);
-		int minute = Integer.parseInt(temp[1]);
-		int second = Integer.parseInt(temp[2]);
-		if (hour < 0 || minute < 0 || second < 0) {
-			throw new NumberFormatException();
+
+	public int timeDiff(Time t2) {
+		if (time > t2.getTime()) {
+			return time - t2.getTime();
+		}else{
+			return t2.getTime() - time;
 		}
-		int start = 3600 * hour + 60 * minute + second;
-		return start;
 	}
-	
-	/**
-	 * Returns a list of three strings, [0]hours, [1]minutes and [2]seconds
-	 * 
-	 * @return the list with strings
-	 *
-	 */
-	public static String[] makeTimeList(){
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		int hours = calendar.get(Calendar.HOUR_OF_DAY);
-		int minutes = calendar.get(Calendar.MINUTE);
-		int seconds = calendar.get(Calendar.SECOND);
-		String[] times = new String[3];
-		String stringMinutes = Time.addZero(minutes);
-		String stringSeconds = Time.addZero(seconds);
-
-		times[0] = Integer.toString(hours);
-		times[1] = stringMinutes;
-		times[2] = stringSeconds;
-
-		return times;
-	}
-
 }

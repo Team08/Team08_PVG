@@ -1,15 +1,19 @@
-package main;
+package race;
 
 import java.io.FileNotFoundException;
 import java.util.TreeMap;
 
+import main.Driver;
+
 import reader.ReadFinishFile;
 import reader.ReadNameFile;
 import reader.ReadStartFile;
+import result.Result;
+import util.Time;
 
 
 public abstract class Race {
-	protected TreeMap<Integer, Driver> index;
+	public TreeMap<Integer, Driver> index;
 	
 	//Result
 	Result result;
@@ -17,16 +21,22 @@ public abstract class Race {
 	//Sorter
 	
 	// Variables
-	private String stopFile;
-	private String startFile;
-	
+	protected String stopFile;
+	protected String startFile;
+	protected String startType;
+	protected String nameFile;
 
 	// Readers
 	private ReadNameFile rnf;
 	private ReadStartFile rsf;
 	private ReadFinishFile rff;
 	
-	public Race(String startFile, String stopFile, String nameFile, int raceTime, int laps){
+	public Race(String startFile, String stopFile, String nameFile, String startType){
+		this.startFile= startFile;
+		this.stopFile=stopFile;
+		this.startType=startType;
+		this.nameFile = nameFile;
+		
 		rnf = new ReadNameFile(this, nameFile);
 		rsf = new ReadStartFile(this, startFile);
 		rff = new ReadFinishFile(this, stopFile);
@@ -38,11 +48,15 @@ public abstract class Race {
 	public abstract void getResult(TreeMap<Integer, Driver> index);
 	
 	public void computeTotalTime() {
-		System.out.println("Syns jag h�r");
 		// Names are put in the TreeMap from the name file
 					try {
 						rnf.readFile();
+						//1 = MassStart
+						if(startType.equals("Masstart")){
+						rsf.readFileMassStart();
+						}else{
 						rsf.readFile();
+						}
 						rff.readFile();
 					} catch (FileNotFoundException e) {
 						// TODO Auto-generated catch block
@@ -54,14 +68,14 @@ public abstract class Race {
 					
 	}
 
-	public void addStartTime(Integer startNumber, String time) {
+	public void addStartTime(Integer startNumber, Time time) {
 		Driver driver = getDriver(startNumber);
 		driver.addStartTime(time);
 		index.put(startNumber, driver);
 
 	}
 
-	public void addFinishTime(Integer startNumber, String time) {
+	public void addFinishTime(Integer startNumber, Time time) {
 		Driver driver = getDriver(startNumber);
 		driver.addFinishTime(time);
 		index.put(startNumber, driver);
