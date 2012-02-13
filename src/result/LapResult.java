@@ -28,6 +28,7 @@ public class LapResult extends Result {
 	int laps;
 	Time raceTime;
 	String resultFile;
+	private String nonExistingNbr = "Icke existerande startnummer";
 
 	/**
 	 * Creates LapResult.
@@ -83,6 +84,9 @@ public class LapResult extends Result {
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
+				if(tDriver.getName() == null) {
+					tDriver.addClass(nonExistingNbr);
+				}
 				String classes = tDriver.getClasses();
 
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
@@ -98,23 +102,31 @@ public class LapResult extends Result {
 			// tDriver.finishTime()));
 			// }
 
-			ArrayList<Driver> tempDrivers = new ArrayList<Driver>();
-
+			TreeMap<Integer, Driver> nonExistingNbrMap = null;
 			for (String className : mapOfDiffRaceClasses.keySet()) {
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
 						.get(className);
-				out.write(className + "\n");
-				out.write(sb.toString());
-				for (Integer i : tm.keySet()) {
-					// tDriver = tm.get(i);
-					// out.write(checkError(i, tDriver.startTime(), tDriver
-					// .finishTime()));
-					tempDrivers.add(tm.get(i));
+				if(className.equals(nonExistingNbr)) {
+					nonExistingNbrMap = tm;
+				} else {
+					out.write(className + "\n");
+					out.write(sb.toString());
+					for (Integer i : tm.keySet()) {
+						tDriver = tm.get(i);
+						out.write(checkError(i, tDriver.startTime(), tDriver
+								.finishTime()));
+					}
 				}
-				Sorter sorter = new Sorter();
-				tempDrivers = sorter.lapSort(tempDrivers);
-				for (Driver d: tempDrivers) {
-					out.write(checkError(tempDrivers.indexOf(d) , d.startTime(), d.finishTime()));
+			}
+			
+			if(nonExistingNbrMap != null) {
+				out.write(nonExistingNbr + "\n");
+				out.write(sb.toString());
+
+				for (Integer i : nonExistingNbrMap.keySet()) {
+					tDriver = nonExistingNbrMap.get(i);
+					out.write(checkError(i, tDriver.startTime(), tDriver
+							.finishTime()));
 				}
 			}
 			
