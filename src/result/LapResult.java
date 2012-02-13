@@ -158,6 +158,11 @@ public class LapResult extends Result {
 			sb.append("; ");
 		}
 		checkStartTime(startTime, sb);
+		Time timeTemp = new Time(0);
+		if(finishTime.size() != 0 && startTime.size() != 0){
+			timeTemp = new Time(startTime.get(0).timeDiff(
+					finishTime.get(finishTime.size() - 1)));
+		}
 		if (finishTime.size() != 0) {
 			int check = finishTime.size() - 1;
 			if (check > laps - 1) {
@@ -166,21 +171,22 @@ public class LapResult extends Result {
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
 			}
-			for (int b = finishTime.size() - 1; b < laps - 2; b++) {
-				sb.append("; ");
-			}
 			
-			
-			Time timeTemp = new Time(startTime.get(0).timeDiff(
-					finishTime.get(finishTime.size() - 1)));
-			if (timeTemp.greaterThan(raceTime)) {
+			if ((!timeTemp.greaterThan(raceTime))&&check<=laps) {
 				sb.append(finishTime.get(finishTime.size() - 1));
-
-			} else {
-				sb.append("Slut?");
 			}
-
 		}
+		for (int b = finishTime.size() - 1; b < laps - 2; b++) {
+			sb.append("; ");
+		}
+			
+		if (timeTemp.greaterThan(raceTime)) {
+			sb.append(finishTime.get(finishTime.size() - 1));
+
+		} else {
+			sb.append("Slut?");
+		}
+
 		
 		sb.append(totalTimeCheck);
 		sb.append("\n");

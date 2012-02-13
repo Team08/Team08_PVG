@@ -55,7 +55,7 @@ public class TestLap {
 		driver.addFinishTime(time);
 
 		assertEquals("0.29.00", driver.getLapTime(0));
-		assertEquals("0.00.00", driver.getLapTime(1));
+		assertEquals("", driver.getLapTime(1));
 
 	}
 
