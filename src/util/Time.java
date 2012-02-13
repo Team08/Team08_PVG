@@ -201,9 +201,8 @@ public class Time implements Comparable{
 		return BIGGER;
 	}
 
-	public ArrayList<Time> sortArrayInOrder(List<Time> times) {
+	public void sortArrayInOrder(List<Time> times) {
 		Collections.sort(times);
-		return (ArrayList<Time>) times;
 	}
 	
 	/**

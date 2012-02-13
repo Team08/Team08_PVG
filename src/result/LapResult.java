@@ -2,11 +2,13 @@ package result;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
 import main.Driver;
+import main.Sorter;
 
 import util.Time;
 import util.Time2;
@@ -48,6 +50,7 @@ public class LapResult extends Result {
 	 */
 	public void writeResultFile() {
 		try {
+
 			FileWriter fstream = new FileWriter(resultFile);
 
 			StringBuilder sb = new StringBuilder();
@@ -72,14 +75,21 @@ public class LapResult extends Result {
 
 			Driver tDriver;
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
+			ArrayList<Driver> notSortedDrivers = new ArrayList<Driver>();
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
 				String classes = tDriver.getClasses();
-
+				
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
 						tDriver));
-
+				//nytt
+				notSortedDrivers.add(tDriver);
+				
+				//Nytt
 			}
+			Sorter sorter = new Sorter();
+			sorter.lapSort(notSortedDrivers);
+			
 
 			// for (Integer i : register.keySet()) {
 			// tDriver = register.get(i);
@@ -90,8 +100,8 @@ public class LapResult extends Result {
 			for (String className : mapOfDiffRaceClasses.keySet()) {
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
 						.get(className);
-				out.write(className + "\n");
 				out.write(sb.toString());
+				out.write(className + "\n");
 				for (Integer i : tm.keySet()) {
 					tDriver = tm.get(i);
 					out.write(checkError(i, tDriver.startTime(), tDriver

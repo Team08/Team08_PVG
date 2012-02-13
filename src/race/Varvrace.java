@@ -8,16 +8,33 @@ import main.Driver;
 
 import util.Time;
 
-
-public class Varvrace extends Race{
+/**
+ * A sub class of the abstract Race class. This class will be used when a lap
+ * race is used in the sorter.
+ * 
+ * @author Team08
+ * 
+ */
+public class Varvrace extends Race {
 	LapResult result;
 	String raceTime;
 	int laps;
 	protected String nameFile;
 	String resultat;
 
-	public Varvrace(String start, String stop, String nameFile,String resultFile, String raceTime, int laps, String startType) {
-		super(start, stop, nameFile,startType);
+	/**
+	 * 
+	 * @param start the name of the start file
+	 * @param stop the name of the finish file
+	 * @param nameFile the name of the name file
+	 * @param resultFile the name of the result file
+	 * @param raceTime	The total time the race is ongoing (hh.mm)
+	 * @param laps	the number of laps which are to be written to the file
+	 * @param startType the type of start (masstart e.g.)
+	 */
+	public Varvrace(String start, String stop, String nameFile,
+			String resultFile, String raceTime, int laps, String startType) {
+		super(start, stop, nameFile, startType);
 		this.raceTime = raceTime;
 		this.laps = laps;
 		this.nameFile = nameFile;
@@ -25,18 +42,15 @@ public class Varvrace extends Race{
 	}
 
 	/**
-	 * Creates a Lapresult that creates a result file
+	 * Creates a Lapresult that creates and writes the result file.
 	 * 
 	 * @param index
-	 * 			   the treemap index        
+	 *            the treemap index
 	 */
 	public void getResult(TreeMap<Integer, Driver> index) {
-		result = new LapResult(index, laps, raceTime,resultat);
+		result = new LapResult(index, laps, raceTime, resultat);
 		result.writeResultFile();
-		
+
 	}
 
-	
-
 }
-
