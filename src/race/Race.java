@@ -44,9 +44,17 @@ public abstract class Race {
 	
 	
 	}
-	
+	/**
+	 * Creates a Lapresult that creates a result file
+	 * 
+	 * @param index
+	 * 			   the treemap index        
+	 */
 	public abstract void getResult(TreeMap<Integer, Driver> index);
-	
+	/**
+	 * Computes the totaltime from the start/stop-files and puts it in the treemap index.
+	 * 
+	 */
 	public void computeTotalTime() {
 		// Names are put in the TreeMap from the name file
 					try {
@@ -67,7 +75,14 @@ public abstract class Race {
 					getResult(index);
 					
 	}
-
+	/**
+	 * Creates a driver and adds a starttime to it and puts the created driver in the treemap index
+	 * 
+	 * @param startnumber
+	 *            The registered startnumber
+	 * @param time 
+	 * 			the registered time.
+	 */
 	public void addStartTime(Integer startNumber, Time time) {
 		Driver driver = getDriver(startNumber);
 		driver.setId(startNumber);
@@ -75,37 +90,75 @@ public abstract class Race {
 		index.put(startNumber, driver);
 
 	}
-
+	/**
+	 * Creates a driver and adds a finishtime to it and puts the created driver in the treemap index
+	 * 
+	 * @param startnumber
+	 *            The registered startnumber
+	 * @param time 
+	 * 			the registered time.
+	 */
 	public void addFinishTime(Integer startNumber, Time time) {
 		Driver driver = getDriver(startNumber);
 		driver.addFinishTime(time);
 		index.put(startNumber, driver);
 
 	}
-
+	/**
+	 * Creates a driver and adds a name to it and puts the created driver in the treemap index
+	 * 
+	 * @param startnumber
+	 *            The registered startnumber
+	 * @param name 
+	 * 			the drivers name.
+	 */
 	public void addName(Integer startNumber, String name) {
 		Driver driver = getDriver(startNumber);
 		driver.setName(name);
 		index.put(startNumber, driver);
 
 	}
-
+	/**
+	 * Creates a driver and adds a class to it and puts the created driver in the treemap index
+	 * 
+	 * @param startnumber
+	 *            The registered startnumber
+	 * @param c 
+	 * 			the drivers class.
+	 */
 	public void addClass(Integer startNumber, String c) {
 		Driver driver = getDriver(startNumber);
 		driver.addClass(c);
 		index.put(startNumber, driver);
 
 	}
-
+	/**
+	 * return a driver with key "key"
+	 * 
+	 * @param key
+	 * 			   the driver key       
+	 * @return driver
+	 *            The searched driver 
+	 */
 	public Driver getDriver(Integer key) {
 		return index.containsKey(key) ? index.get(key) : new Driver();
 	}
-
+	/**
+	 * return the size of treemap index
+	 *  
+	 * @return int
+	 *            The list index's size 
+	 */
 	public int size() {
 		return index.size();
 	}
 	
-	
+	/**
+	 * Writes a result-file with name "name"
+	 * 
+	 * @param name
+	 * 			   the result-files name
+	 */
 	public void writeResultFile(String name){
 		//sorter.sort();
 	}

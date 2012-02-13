@@ -3,27 +3,38 @@ package reader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.io.IOException;
 
 import race.Race;
 
-
+/**
+ * This class can read a name file and add the name + driverId to the race
+ * object.
+ */
 public class ReadNameFile extends FileIO {
 	String name;
+
 	/**
-	 * The constructor which takes the file name of the name file as argument
+	 * Creates the ReadNameFile.
 	 * 
-	 * @param sorter
-	 *            the target sorter
+	 * @param race
+	 *            The race that the files belongs to
 	 * @param fileName
-	 * 			  the name files name
+	 *            The name of the file
 	 */
 	public ReadNameFile(Race race, String fileName) {
 		super(race, fileName);
 	}
 
 	/**
-	 * Reads a name file and adds it to the internal structure, if file not found throws exception.
+	 * Method is called by readFile() and adds the name and riderID to race
+	 * object.
+	 */
+	protected void add() {
+		race.addName(riderID, name);
+	}
+
+	/**
+	 * Reads a name file and add the name and riderID to the race.
 	 * 
 	 * @throws FileNotFoundException
 	 */
@@ -35,15 +46,15 @@ public class ReadNameFile extends FileIO {
 			try {
 				scanner = new Scanner(file);
 				String line;
-				if(scanner.hasNextLine()) {
+				if (scanner.hasNextLine()) {
 					scanner.nextLine();
 				}
 				String currClass = "";
 				while (scanner.hasNextLine()) {
 					line = scanner.nextLine();
-												
+
 					String[] str = line.split("; ");
-					if(str.length == 1) {
+					if (str.length == 1) {
 						currClass = str[0];
 					} else {
 						name = str[1];
@@ -64,15 +75,12 @@ public class ReadNameFile extends FileIO {
 					// added.
 				}
 
-			} catch (FileNotFoundException e) {// Catch exception if any
+			} catch (FileNotFoundException e) {
+				// Ska vi vara konsekventa och skriva ut SYSO som på andra
+				// filer?
 				throw new FileNotFoundException();
 			}
 		}
 	}
-	
-	protected void add() {
-		race.addName(riderID, name);	
-	}
 
 }
-

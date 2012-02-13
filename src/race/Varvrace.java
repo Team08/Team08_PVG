@@ -24,7 +24,12 @@ public class Varvrace extends Race{
 		this.resultat = resultFile;
 	}
 
-	@Override
+	/**
+	 * Creates a Lapresult that creates a result file
+	 * 
+	 * @param index
+	 * 			   the treemap index        
+	 */
 	public void getResult(TreeMap<Integer, Driver> index) {
 		result = new LapResult(index, laps, raceTime,resultat);
 		result.writeResultFile();

@@ -4,19 +4,14 @@ package test;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.TreeMap;
-
 import main.Driver;
 import race.Varvrace;
 import reader.ReadNameFile;
-import util.Time;
-import main.Sorter;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
+ 
 public class TestReadNameFile extends Varvrace {
 	private ReadNameFile namefile;
 	private TreeMap<Integer, Driver> driverTreeMap;
@@ -39,7 +34,6 @@ public class TestReadNameFile extends Varvrace {
 		driverTreeMap.put(new Integer(9), new Driver());
 		varvrace = new Varvrace("", "", testNamePath,"","",0,"");
 		namefile = new ReadNameFile(varvrace, testNamePath);
-
 	}
 
 	@After

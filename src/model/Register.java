@@ -12,6 +12,18 @@ public class Register {
 	public Register() {
 		
 	}
+	/**
+	 * Writes registered time and starnumber to file
+	 * 
+	 * @param startnumber
+	 *            The registered startnumber
+	 * @param hours
+	 *            The registered hours
+	 * @param minutes
+	 *            The registered minutes
+	 * @param seconds
+	 *            The registered seconds
+	 */
 
 	private void writeToFile(String name, String hours, String minutes,
 			String seconds) {
