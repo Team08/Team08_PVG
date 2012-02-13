@@ -3,12 +3,22 @@ package model;
 import java.io.*;
 
 
-import util.Time2;
+import util.Time;
 
-
+/**
+ * This is the model class in the MVC-architecture. Handles the
+ * registrations to the actual file. I.e. it prints the registered
+ * time and start number to a file.
+ * 
+ * @author Team08
+ *
+ */
 
 public class Register {
 
+	/**
+	 * Standard constructor
+	 */
 	public Register() {
 		
 	}
@@ -45,13 +55,13 @@ public class Register {
 	
 	
 	/**
-	 * Writes driver to file
-	 * 
+	 * Creates a new time object and write the time
+	 * and the driver to the file
 	 * @param name
 	 * 				name of driver
 	 */			
 	public void registerDriver(String name) {
-		String[] times = Time2.makeTimeList(); 
+		String[] times = Time.makeTimeList(); 
 		writeToFile(name, times[0], times[1], times[2]);
 	}
 
