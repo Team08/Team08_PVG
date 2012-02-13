@@ -37,7 +37,6 @@ public class ReadStartFile extends FileIO {
 	/**
 	 * Reads a file and add the time and driverID to the race object,
 	 * which contains the database where all information is stored.
-	 * @throws FileNotFoundException 
 	 * 
 	 * @throws FileNotFoundException
 	 *             If file not found
