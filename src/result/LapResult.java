@@ -82,7 +82,6 @@ public class LapResult extends Result {
 
 			Driver tDriver;
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
-			ArrayList<Driver> notSortedDrivers = new ArrayList<Driver>();
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
 				if (tDriver.getName() == null) {
@@ -93,18 +92,17 @@ public class LapResult extends Result {
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
 						tDriver));
 				// nytt
-				notSortedDrivers.add(tDriver);
 
 				// Nytt
 			}
-			Sorter sorter = new Sorter();
-			sorter.lapSort(notSortedDrivers);
+
 
 			// for (Integer i : register.keySet()) {
 			// tDriver = register.get(i);
 			// out.write(checkError(i, tDriver.startTime(),
 			// tDriver.finishTime()));
 			// }
+
 			TreeMap<Integer, Driver> nonExistingNbrMap = null;
 			for (String className : mapOfDiffRaceClasses.keySet()) {
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
@@ -125,6 +123,7 @@ public class LapResult extends Result {
 			if (nonExistingNbrMap != null) {
 				out.write(nonExistingNbr + "\n");
 				out.write(sb.toString());
+
 				for (Integer i : nonExistingNbrMap.keySet()) {
 					tDriver = nonExistingNbrMap.get(i);
 					out.write(checkError(i, tDriver.startTime(), tDriver
@@ -158,7 +157,11 @@ public class LapResult extends Result {
 	/**
 	 * Check if there are any invalid parameter and returns a result string line
 	 * that contains error-notations if any invalid parameter found.
+<<<<<<< HEAD
 	 * 
+=======
+	 *
+>>>>>>> 12106fdeee7b939e25042887df0290a492e1b4da
 	 * @param i
 	 *            The current index
 	 * @param startTime
@@ -207,9 +210,9 @@ public class LapResult extends Result {
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
 			}
-
 			if ((!timeTemp.greaterThan(raceTime)) && check <= laps) {
 				sb.append(finishTime.get(finishTime.size() - 1) + "; ");
+
 			}
 		}
 		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
@@ -222,6 +225,7 @@ public class LapResult extends Result {
 		} else {
 			sb.append("Slut?");
 		}
+
 		sb.append(totalLapCheck);
 		checkIfManyStartTime(startTime, sb);
 		sb.append(totalTimeCheck);
