@@ -97,8 +97,6 @@ public class LapResult extends Result {
 				}
 				String classes = tDriver.getClasses();						//
 
-
-
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,	//Lägger in en treemap
 						tDriver));											//(treemap innehåller idnummer mappade till respektive förare) 
 			}																//i en klass
