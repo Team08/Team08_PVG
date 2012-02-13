@@ -154,6 +154,7 @@ public class LapResult extends Result {
 
 		StringBuilder sb = new StringBuilder();
 		String totalTimeCheck = "";
+		String totalLapCheck = "";
 		sb.append(i + "; ");
 		checkName(sb, index.get(i).getName());
 
@@ -163,8 +164,16 @@ public class LapResult extends Result {
 				totalTimeCheck);
 		if (laps != 0) {
 			if (!(startTime.size() == 0 || finishTime.size() == 0)) {
+				String lapTime = "";
 				for (int j = 0; j < laps; j++) {
-					sb.append(index.get(i).getLapTime(j) + "; ");
+					lapTime = index.get(i).getLapTime(j);
+					Time lap = new Time(lapTime);
+					if(lap.lesserThan(new Time("00.15.00"))){
+						if(!lap.equals(new Time(0))){
+							totalLapCheck = " Omöjlig varvtid ";
+						}
+					}
+					sb.append(lapTime + "; ");
 				}
 			}
 		}
@@ -186,8 +195,10 @@ public class LapResult extends Result {
 				sb.append(finishTime.get(e) + "; ");
 			}
 
-			if ((!timeTemp.greaterThan(raceTime)) && check <= laps) {
-				sb.append(finishTime.get(finishTime.size() - 1));
+			
+			if ((!timeTemp.greaterThan(raceTime))&&check<=laps) {
+				sb.append(finishTime.get(finishTime.size() - 1) + "; ");
+
 			}
 		}
 		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
@@ -201,6 +212,8 @@ public class LapResult extends Result {
 			sb.append("Slut?");
 		}
 
+		sb.append(totalLapCheck);
+		checkIfManyStartTime(startTime ,sb);
 		sb.append(totalTimeCheck);
 		sb.append("\n");
 		System.out.println(sb.toString());
