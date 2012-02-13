@@ -28,6 +28,7 @@ public class LapResult extends Result {
 	int laps;
 	Time raceTime;
 	String resultFile;
+	private String nonExistingNbr = "Icke existerande startnummer";
 
 	/**
 	 * Creates LapResult.
@@ -84,6 +85,9 @@ public class LapResult extends Result {
 			ArrayList<Driver> notSortedDrivers = new ArrayList<Driver>();
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
+				if(tDriver.getName() == null) {
+					tDriver.addClass(nonExistingNbr);
+				}
 				String classes = tDriver.getClasses();
 
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
@@ -101,19 +105,33 @@ public class LapResult extends Result {
 			// out.write(checkError(i, tDriver.startTime(),
 			// tDriver.finishTime()));
 			// }
-
+			TreeMap<Integer, Driver> nonExistingNbrMap = null;
 			for (String className : mapOfDiffRaceClasses.keySet()) {
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
 						.get(className);
-				out.write(className + "\n");
+				if(className.equals(nonExistingNbr)) {
+					nonExistingNbrMap = tm;
+				} else {
+					out.write(className + "\n");
+					out.write(sb.toString());
+					for (Integer i : tm.keySet()) {
+						tDriver = tm.get(i);
+						out.write(checkError(i, tDriver.startTime(), tDriver
+								.finishTime()));
+					}
+				}
+			}
+			
+			if(nonExistingNbrMap != null) {
+				out.write(nonExistingNbr + "\n");
 				out.write(sb.toString());
-				for (Integer i : tm.keySet()) {
-					tDriver = tm.get(i);
+				for (Integer i : nonExistingNbrMap.keySet()) {
+					tDriver = nonExistingNbrMap.get(i);
 					out.write(checkError(i, tDriver.startTime(), tDriver
 							.finishTime()));
 				}
-
 			}
+			
 			// Close the output stream
 			out.close();
 
