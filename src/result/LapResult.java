@@ -100,8 +100,8 @@ public class LapResult extends Result {
 			for (String className : mapOfDiffRaceClasses.keySet()) {
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
 						.get(className);
-				out.write(sb.toString());
 				out.write(className + "\n");
+				out.write(sb.toString());
 				for (Integer i : tm.keySet()) {
 					tDriver = tm.get(i);
 					out.write(checkError(i, tDriver.startTime(), tDriver
@@ -173,9 +173,9 @@ public class LapResult extends Result {
 				}
 			}
 		}
-		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
-			sb.append("; ");
-		}
+//		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
+//			sb.append("; ");
+//		}
 		checkStartTime(startTime, sb);
 		Time timeTemp = new Time(0);
 		if(finishTime.size() != 0 && startTime.size() != 0){
@@ -195,7 +195,7 @@ public class LapResult extends Result {
 				sb.append(finishTime.get(finishTime.size() - 1) + "; ");
 			}
 		}
-		for (int b = finishTime.size() - 1; b < laps - 2; b++) {
+		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
 			sb.append("; ");
 		}
 			
