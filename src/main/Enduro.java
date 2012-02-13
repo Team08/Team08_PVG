@@ -22,9 +22,6 @@ import util.Time;
 public class Enduro {
 	protected TreeMap<Integer, Driver> register;
 	private Race race;
-<<<<<<< HEAD
-
-=======
 	private String start = "defaultStart";
 	private String stop = "defaultStop";
 	private String name = "defaultName";
@@ -34,7 +31,7 @@ public class Enduro {
 	private int distance = 0;
 	private String startType = "";
 	
->>>>>>> e4ca9a8d567f44a195bf2749f3246f0b725af636
+
 	/**
 	 * The constructor which creates an Enduro object. Enter a config file in
 	 * order to make the sorter function as wanted. E.g. if there has been a lap
@@ -44,7 +41,6 @@ public class Enduro {
 	 *            file which the user creates before starting the sorter program
 	 *            in order for it to produce the wanted result
 	 */
-<<<<<<< HEAD
 	public Enduro(String[] args) {
 		String start = "defaultStart";
 		String stop = "defaultStop";
@@ -57,22 +53,16 @@ public class Enduro {
 		String attributeString = "";
 		ArrayList<String> driverAttributes = new ArrayList<String>();
 
-=======
-	public Enduro(String[] args) {
->>>>>>> e4ca9a8d567f44a195bf2749f3246f0b725af636
-		if (args.length == 0) {
+if (args.length == 0) {
 			Properties configFile = new Properties();
 			try {
 				configFile.load(new FileInputStream("config.properties"));
-				
-				
 				start = configFile.getProperty("STARTFILE");
 				stop = configFile.getProperty("STOPFILE");
 				name = configFile.getProperty("NAMEFILE");
 				result = configFile.getProperty("RESULTFILE");
 				raceTime = configFile.getProperty("RACETIME");
 				raceType = configFile.getProperty("RACETYPE");
-<<<<<<< HEAD
 				laps = Integer.parseInt(configFile.getProperty("LAPS"));
 				attributeString = configFile.getProperty("DRIVER_ATTRIBUTES");
 				String[] attributeArray = attributeString.split(";");
@@ -81,19 +71,15 @@ public class Enduro {
 					driverAttributes.add(attributeArray[i]);
 				}
 
-=======
-				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));				
->>>>>>> e4ca9a8d567f44a195bf2749f3246f0b725af636
+				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));	
+				
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-<<<<<<< HEAD
-		} else {
-=======
+
 		}else{
->>>>>>> e4ca9a8d567f44a195bf2749f3246f0b725af636
 			try {
 				start = args[0];
 				stop = args[1];
@@ -104,30 +90,20 @@ public class Enduro {
 				raceType = raceType.toLowerCase();
 				distance = Integer.parseInt(args[7]);
 				if (raceType.equals("varv")) {
-<<<<<<< HEAD
-					raceTime = args[6];
-					laps = Integer.parseInt(args[7]);
-					race = new Varvrace(start, stop, name, result, raceTime,
-							laps, startType, driverAttributes);
-=======
+
 					raceTime = args[6];	
->>>>>>> e4ca9a8d567f44a195bf2749f3246f0b725af636
 				}
 			} catch (Exception e) {
 				System.out.println("Error: Fel argument");
 			}
 		}
-<<<<<<< HEAD
-		race = new Varvrace(start, stop, name, result, raceTime, laps,
-				startType, driverAttributes);
-=======
+
 		if (raceType.equals("varv")) {
 			race = new LapRace(start, stop, name, result, raceTime, distance,
-				startType);
+				startType, driverAttributes);
 		}else if (raceType.equals("etapp")){
-			race = new StageRace(start, stop, name, result, distance, startType);
+			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes);
 		}
->>>>>>> e4ca9a8d567f44a195bf2749f3246f0b725af636
 		race.computeTotalTime();
 	}
 
@@ -138,13 +114,7 @@ public class Enduro {
 	 *            config file
 	 */
 	public static void main(String[] args) {
-<<<<<<< HEAD
-		if (args.length == 0) {
-			new Enduro(args);
-		}
 
-=======
 			new Enduro(args);			
->>>>>>> e4ca9a8d567f44a195bf2749f3246f0b725af636
 	}
 }

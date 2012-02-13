@@ -14,11 +14,8 @@ public class TestRace {
 
 	@Before
 	public void setUp() {
-<<<<<<< HEAD
-		race = new Varvrace("", "", "", "", "", 0, "", null);
-=======
-		race = new LapRace("", "", "", "", "", 0, "");
->>>>>>> e4ca9a8d567f44a195bf2749f3246f0b725af636
+
+		race = new LapRace("", "", "", "", "", 0, "", null);
 
 	}
 
