@@ -111,5 +111,26 @@ public class TestDriver {
 		driver.addClass(specClass);
 		assertEquals(specClass, driver.getClasses());
 	}
-	
+	@Test
+	public void testSizeAfterAddAttribute() {
+		driver.addAttribute("Vargarna");
+		assertEquals(driver.getAttributes().size(), 1);
+	}
+	@Test
+	public void testAddAttribute() {
+		driver.addAttribute("Vargarna");
+		assertEquals(driver.getAttributes().get(0), "Vargarna");
+	}
+	@Test
+	public void testAddAttributeWithEmptyAttribute() {
+		driver.addAttribute("");
+		assertEquals(driver.getAttributes().get(0), "");
+	}
+	@Test
+	public void testAddTwoAttributes() {
+		driver.addAttribute("Vargarna");
+		driver.addAttribute("Harley Davidsson");
+		assertEquals(driver.getAttributes().get(0), "Vargarna");
+		assertEquals(driver.getAttributes().get(1), "Harley Davidsson");
+	}
 }
