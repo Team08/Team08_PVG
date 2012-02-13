@@ -207,7 +207,13 @@ public class Time implements Comparable{
 		}
 	}
 
-	
+	/**
+	 * Compares the current object with the object in the input parameter,
+	 * based on seconds.
+	 * 
+	 *  @return -1, if this time is smaller, 0 if they are equal, or 1
+	 *           if this time is bigger
+	 */
 	public int compareTo(Object arg0) {
 		final int SMALLER = -1;
 		final int EQUAL = 0;
