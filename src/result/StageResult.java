@@ -182,9 +182,10 @@ public class StageResult extends Result{
 		Time totalTime = new Time(0);
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
-		} else {
-			
 		}
+//		} else {
+//			
+//		}
 
 		return null;
 	}
