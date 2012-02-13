@@ -8,6 +8,15 @@ import javax.swing.JOptionPane;
 import util.Time2;
 import model.Register;
 
+/**
+ * A button namned "Registrera" in the GUI. Listens to the button
+ * and when it's pushed calls a method in Register.java that
+ * writes the actual time to the file. 
+ * 
+ * Also updates the GUI.
+ * @author Team08
+ *
+ */
 public class RegisterButton extends JButton implements ActionListener {
 	/**
 	 * 
@@ -41,7 +50,16 @@ public class RegisterButton extends JButton implements ActionListener {
 		pushedButton();
 
 	}
-
+	/**
+	 * Registers a new time in the GUI and at the same time
+	 * calls the Register.java which writes the registered time
+	 * to file.
+	 * 
+	 * If no start number is entered there will be a popup
+	 * which you can enter the start number in later. This is
+	 * used when the start plate is too dirty to read instantly.
+	 * 
+	 */
 	protected void pushedButton(){
 		String id = gui.getDriverID();
 		String[] times = Time2.makeTimeList();
