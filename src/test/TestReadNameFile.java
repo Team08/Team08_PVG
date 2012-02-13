@@ -66,7 +66,11 @@ public class TestReadNameFile extends Varvrace {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+				
+		assertEquals("Incorrect class should be SENIOR, was" + varvrace.getDriver(1).getClasses(), "SENIOR", varvrace.getDriver(1).getClasses());
 		assertEquals("Incorrect class should be SENIOR, was" + varvrace.getDriver(2).getClasses(), "SENIOR", varvrace.getDriver(2).getClasses());
+		assertEquals("Incorrect class should be JUNIOR, was" + varvrace.getDriver(101).getClasses(), "JUNIOR", varvrace.getDriver(101).getClasses());
+		assertEquals("Incorrect class should be JUNIOR, was" + varvrace.getDriver(102).getClasses(), "JUNIOR", varvrace.getDriver(102).getClasses());
 		assertEquals("Incorrect class should be JUNIOR, was" + varvrace.getDriver(103).getClasses(), "JUNIOR", varvrace.getDriver(103).getClasses());
 	}
 	

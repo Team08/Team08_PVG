@@ -40,7 +40,6 @@ public class TestReadFile extends Varvrace {
 		try {
 
 			startfFile.readFile();
-
 			File file = new File(testStartPath);
 			Set<Integer> driverSet = index.keySet();
 			Scanner scan;

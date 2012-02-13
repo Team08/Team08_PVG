@@ -143,7 +143,7 @@ public class LapResult extends Result {
 			
 			Time timeTemp = new Time(startTime.get(0).timeDiff(
 					finishTime.get(finishTime.size() - 1)));
-			if (timeTemp.lesserThan(raceTime)) {
+			if (timeTemp.greaterThan(raceTime)) {
 
 				sb.append(finishTime.get(finishTime.size() - 1));
 
