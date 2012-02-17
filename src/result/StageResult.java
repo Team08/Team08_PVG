@@ -65,7 +65,7 @@ public class StageResult extends Result{
 			ArrayList<Driver> notSortedDrivers = new ArrayList<Driver>();
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
-				String classes = tDriver.getClasses();
+				String classes = tDriver.getRaceClass();
 				
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
 						tDriver));
