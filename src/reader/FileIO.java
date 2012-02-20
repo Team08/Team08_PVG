@@ -44,7 +44,7 @@ public abstract class FileIO {
 	 */
 	public void readFile() throws FileNotFoundException {
 		if (fileName != null) {
-			File file = new File(fileName);
+			File file = new File(fileName.trim());
 			Scanner scanner;
 			try {
 				scanner = new Scanner(file);
