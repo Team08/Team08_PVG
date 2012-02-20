@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 import result.LapResult;
+import result.Result;
+import result.SpecialDistanceResult;
 import result.StageResult;
 
 import main.Driver;
 
 public class StageRace extends Race{
-	StageResult result;
+	Result result;
 	int stages;
 	protected String nameFile;
 	String resultat;
@@ -31,11 +33,12 @@ public class StageRace extends Race{
 
 	public void getResult(TreeMap<Integer, Driver> index) {
 		if (specialDistancesSplit.length > 0) {
-			result = new SpecialDistanceResult(index, stages, resultat, specialDistancesSplit, factor);
+			result = new SpecialDistanceResult(index, stages, resultat, nameFile, specialDistancesSplit, factor);
 		} else {
 			result = new StageResult(index, stages, resultat);
 		}
 		result.writeResultFile();
+
 	}
 	
 	private void splitSpecialDistances() {
@@ -45,5 +48,8 @@ public class StageRace extends Race{
 			specialDistancesSplit = new String[0];
 		}
 	}
+	
+	
+	
 
 }
