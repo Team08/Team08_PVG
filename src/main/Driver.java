@@ -181,4 +181,41 @@ public class Driver {
 		return lapTimes;
 	}
 	
+	public String getStageTime(int i) {
+		//Kolla så det finns någon tid för etappen i
+		if (i > startTime().size()-1 || i > finishTime().size()-1) {
+			return("--.--.--");
+		//Annars returnera tiden etappen i
+		} else {
+			return(new Time(finishTime().get(i).timeDiff(startTime().get(i))).toString());
+		}
+	}
+	
+	
+	
+	private int addStageTime(int i) {
+		if (i > startTime().size()-1 || i > finishTime().size()-1) {
+			return 0;
+		} else {
+			return(finishTime().get(i).timeDiff(startTime().get(i)));
+		}
+	}
+	
+	
+	public String getTotStageTime() {
+		int sum = 0;
+		for(int i = 0; i < startTime.size(); i++){
+			sum += addStageTime(i);
+		}
+		return new Time(sum).toString();
+	}
+
+	public String getNbrOfStages() {
+		String s = Integer.toString(finishTime.size());
+		if(startTime.size() < finishTime.size()){
+			s =  Integer.toString(startTime.size());
+		}
+		return s;
+	}
+	
 }
