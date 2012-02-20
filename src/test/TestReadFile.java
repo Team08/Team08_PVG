@@ -10,11 +10,10 @@ import race.LapRace;
 import reader.ReadFinishFile;
 import reader.ReadStartFile;
 
-
 import org.junit.Test;
 
 public class TestReadFile extends LapRace {
-	
+
 	private static String testStartPath = "src/test/testfiles/TestStart.test";
 	private static String testFinishPath = "src/test/testfiles/TestFinish.test";
 
@@ -22,9 +21,11 @@ public class TestReadFile extends LapRace {
 	private ReadFinishFile finishFile;
 
 	public TestReadFile() {
-		super("TestStart.test", "TestStart.test", "","","",0,"", null);
-		 startfFile = new ReadStartFile(new LapRace(testStartPath, testFinishPath, "","","",0,"", null), testStartPath);
-		 finishFile = new ReadFinishFile(new LapRace(testStartPath, testFinishPath, "","","",0,"", null), testFinishPath);
+		super("TestStart.test", "TestStart.test", "", "", "", 0, "", null);
+		startfFile = new ReadStartFile(new LapRace(testStartPath,
+				testFinishPath, "", "", "", 0, "", null), testStartPath);
+		finishFile = new ReadFinishFile(new LapRace(testStartPath,
+				testFinishPath, "", "", "", 0, "", null), testFinishPath);
 	}
 
 	@Test
@@ -74,7 +75,7 @@ public class TestReadFile extends LapRace {
 					Integer j = itr.next();
 					Integer startNumber = Integer.parseInt(str[0]);
 					assertEquals(startNumber.toString(), j.toString());
-					
+
 					assertEquals(str[1], index.get(j).finishTime().get(0));
 				}
 			} catch (FileNotFoundException e) {
@@ -83,6 +84,7 @@ public class TestReadFile extends LapRace {
 		} catch (FileNotFoundException e) {
 		}
 	}
+
 	@Test
 	public void TestReadFinishFileMultipleFinishTimes() {
 		try {
@@ -100,8 +102,9 @@ public class TestReadFile extends LapRace {
 					line = scan.nextLine();
 					str = line.split("; ");
 					Integer j = itr.next();
-					for(int x = 0; x < index.get(j).finishTime().size();x++){
-						assertEquals(str[x + 1], index.get(j).finishTime().get(x));
+					for (int x = 0; x < index.get(j).finishTime().size(); x++) {
+						assertEquals(str[x + 1], index.get(j).finishTime().get(
+								x));
 					}
 				}
 			} catch (FileNotFoundException e) {
@@ -110,6 +113,7 @@ public class TestReadFile extends LapRace {
 		} catch (FileNotFoundException e) {
 		}
 	}
-
+	
+	
 
 }
