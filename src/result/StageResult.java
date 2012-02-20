@@ -20,6 +20,7 @@ public class StageResult extends Result {
 	private HashMap<String, TreeMap<Integer, Driver>> mapOfDiffRaceClasses;
 	int stages;
 	String resultFile;
+	private ArrayList<String> driverAttributes;
 
 
 	/**
@@ -35,10 +36,11 @@ public class StageResult extends Result {
 	 *            results to
 	 */
 	public StageResult(TreeMap<Integer, Driver> index, int stages,
-			String resultFile) {
+			String resultFile, ArrayList<String> driverAttributes) {
 		this.index = index;
 		this.stages = stages;
 		this.resultFile = resultFile;
+		this.driverAttributes = driverAttributes;
 	}
 
 	/**
@@ -50,6 +52,11 @@ public class StageResult extends Result {
 			StringBuilder sb = new StringBuilder();
 			BufferedWriter out = new BufferedWriter(fstream);
 			sb.append("StartNr; Namn; ");
+			if(!driverAttributes.isEmpty()){
+				for(int i = 0; i < driverAttributes.size(); i++){
+						sb.append(driverAttributes.get(i) + "; ");
+				}
+			}
 			sb.append("Totaltid; ");
 			sb.append("#Etapper; ");
 			for (int i = 0; i < stages; i++) {
@@ -145,8 +152,9 @@ public class StageResult extends Result {
 			if (finishTemp.get(i) != null) {
 				sb.append(finishTemp.get(i).toString());
 			}
-			sb.append("; ");
-
+			if(i != stages-1){
+				sb.append("; ");
+			}
 		}
 		return sb.toString();
 

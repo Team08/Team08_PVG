@@ -31,6 +31,7 @@ public class SpecialDistanceResult extends Result {
 	private String[] specialDistances;
 	private int factor;
 	private Time totalTime = new Time(0);
+	private ArrayList<String> driverAttributes;
 
 	/**
 	 * Creates LapResult.
@@ -46,12 +47,13 @@ public class SpecialDistanceResult extends Result {
 	 *            the name of the resultFile that this class will compute the
 	 *            results to
 	 */
-	public SpecialDistanceResult(TreeMap<Integer, Driver> index, int laps, String resultFile, String[] specialDistances, int factor) {
+	public SpecialDistanceResult(TreeMap<Integer, Driver> index, int laps, String resultFile, ArrayList<String> driverAttributes, String[] specialDistances, int factor) {
 		this.index = index;
 		this.stages = laps;
 		this.resultFile = resultFile;
 		this.specialDistances = specialDistances;
 		this.factor = factor;
+		this.driverAttributes = driverAttributes;
 		
 		
 	}
@@ -68,21 +70,26 @@ public class SpecialDistanceResult extends Result {
 			StringBuilder sb = new StringBuilder();
 			BufferedWriter out = new BufferedWriter(fstream);
 			sb.append("StartNr; Namn; ");
+			
+			if(!driverAttributes.isEmpty()){
+				for(int i = 0; i < driverAttributes.size(); i++){
+						sb.append(driverAttributes.get(i) + "; ");
+				}
+			}
 
 			sb.append("#Etapper; ");
 
 			sb.append("Totaltid; ");
 
 			for (int i = 0; i < stages; i++) {
-				checkAndAppendStagesToHeader(sb, i);
+				checkAndAppendStagesToHeader(sb, i+1);
 			}
-			sb.append("Start; ");
 			
 
 			for (int i = 0; i < stages-1; i++) {
 				sb.append("Start" + (i + 1) + "; Mål" + (i + 1) + "; ");
 			}
-			sb.append("Start" + (stages) + "; Mål"+stages);
+			sb.append("Start" + (stages) + "; Mål"+stages +"\n");
 
 
 			Driver tDriver;
@@ -179,17 +186,18 @@ public class SpecialDistanceResult extends Result {
 	
 	private String generateNewLine(Driver driver) {
 		StringBuilder sb = new StringBuilder();
-		Time totalTime = new Time(0);
-		sb.append(driver.getId() + "; " + driver.getName()); //Adds ID and name to line
+		this.totalTime = new Time(0);
+		sb.append(driver.getId() + "; " + driver.getName() + "; "); //Adds ID and name to line
 		sb.append(generateAttributeLine(driver));
-		sb.append(driver.getNumberOfLaps());
+		sb.append(driver.getNbrOfStages() +"; ");
 		StringBuilder temp = new StringBuilder();
 		for (int i = 0; i < stages; i++) {
-			temp.append(generateStageTime(driver, i));
+			temp.append(generateStageTime(driver, i) + "; ");
 		}
-		sb.append(generateTotalTime(driver));
+		sb.append(generateTotalTime(driver) + "; ");
 		sb.append(temp.toString());
-		sb.append(getTimes(driver));
+		sb.append(getTimes(driver) + "\n");
+		this.totalTime = new Time(0);
 		return sb.toString();
 		
 	}
@@ -212,7 +220,11 @@ public class SpecialDistanceResult extends Result {
 	private String generateStageTime(Driver driver, int i) {
 		String s = driver.getStageTime(i);
 		Time t = new Time(s);
-		t = t.multiplyTimeBy(factor, t);
+		for (int k = 0; k < specialDistances.length; k++) {
+			if (Integer.parseInt(specialDistances[k]) == i+1) {
+				t = t.multiplyTimeBy(factor, t);
+			} 
+		}
 		this.totalTime = totalTime.addToTime(t);
 		return t.toString();
 	}
@@ -243,7 +255,10 @@ public class SpecialDistanceResult extends Result {
 			if (finishTemp.get(i) != null) {
 				sb.append(finishTemp.get(i).toString());
 			}
-			sb.append("; ");
+			if(i != stages-1){
+				sb.append("; ");
+			}
+			
 
 		}
 		return sb.toString();

@@ -128,7 +128,6 @@ public class LapResult extends Result {
 					out.write(className + "\n"); 
 					out.write(sb.toString());
 					for (Driver driver : sortedListOfDriversInAClass) { 
-						System.out.println(driver.getId() + " " + driver.startTime()+ " " + driver.finishTime() + " " + driver.getName());
 						out.write(checkError(driver.getId(), driver.startTime(), driver.finishTime()));
 					}
 				}

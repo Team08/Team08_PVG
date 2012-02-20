@@ -33,9 +33,9 @@ public class StageRace extends Race{
 
 	public void getResult(TreeMap<Integer, Driver> index) {
 		if (specialDistancesSplit.length > 0) {
-			result = new SpecialDistanceResult(index, stages, resultat, specialDistancesSplit, factor);
+			result = new SpecialDistanceResult(index, stages, resultat,driverAttributes,specialDistancesSplit, factor);
 		} else {
-			result = new StageResult(index, stages, resultat);
+			result = new StageResult(index, stages, resultat,driverAttributes);
 		}
 		result.writeResultFile();
 
