@@ -20,7 +20,7 @@ public class StageResult extends Result{
 	private HashMap<String, TreeMap<Integer, Driver>> mapOfDiffRaceClasses;
 	int stages;
 	String resultFile;
-	
+
 	
 	/**
 	 * Creates StageResult.
