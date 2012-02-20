@@ -17,7 +17,7 @@ public class TestAttributes {
 	private static String testFinishPath = "src/test/testfiles/Stoptider.test";
 	private static String testNamefilePath = "src/test/testfiles/newNamefile.test";
 	private static String testResultPath = "src/test/testfiles/testAttribute.txt";
-	private static String testExpResultPath = "src/test/testfiles/expTestAttribute";
+	private static String testExpResultPath = "src/test/testfiles/expTestAttribute.test";
 	
 	@Before
 	public void setUp() throws Exception {
