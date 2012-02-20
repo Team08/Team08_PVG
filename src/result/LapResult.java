@@ -9,7 +9,6 @@ import java.util.TreeMap;
 
 import main.Driver;
 import main.Sorter;
-
 import util.Time;
 
 /**
@@ -74,6 +73,7 @@ public class LapResult extends Result {
 
 			}
 			sb.append("Start; ");
+			
 
 			for (int i = 0; i < laps - 1; i++) {
 				sb.append("Varvning" + (i + 1) + "; ");
@@ -84,7 +84,6 @@ public class LapResult extends Result {
 			Driver tDriver;
 
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
-
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
 
@@ -92,36 +91,36 @@ public class LapResult extends Result {
 					tDriver.addClass(nonExistingNbr); 
 
 				}
-				String classes = tDriver.getClasses(); 
 
-				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
-						tDriver)); 
-			}
+				String classes = tDriver.getRaceClass(); //
 
+				
+				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i, tDriver)); 
+			} 
+			
+			
 			ArrayList<Driver> unsortedListOfDriversInAClass; 
 			ArrayList<Driver> sortedListOfDriversInAClass;
 			List<Driver> nonExistingNbrList = null;
-
 			for (String className : mapOfDiffRaceClasses.keySet()) {
-				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
-						.get(className);
 
-				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm
-						.values());
-				sortedListOfDriversInAClass = sorter
-						.lapSort(unsortedListOfDriversInAClass); 
+				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses.get(className);
+				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());	
+				sortedListOfDriversInAClass = sorter.lapSort(unsortedListOfDriversInAClass); 
+				
 				if (className.equals(nonExistingNbr)) {
 					nonExistingNbrList = sortedListOfDriversInAClass;
 
 				} else {
+
 					out.write(className + "\n"); 
-					out.write(sb.toString()); 
+					out.write(sb.toString());
 					for (Driver driver : sortedListOfDriversInAClass) { 
-						out.write(checkError(driver.getId(),
-								driver.startTime(), driver //
-										.finishTime()));
+						System.out.println(driver.getId() + " " + driver.startTime()+ " " + driver.finishTime() + " " + driver.getName());
+						out.write(checkError(driver.getId(),driver.startTime(), driver.finishTime()));
 					}
 				}
+				
 			}
 
 			if (nonExistingNbrList != null) {
@@ -135,12 +134,15 @@ public class LapResult extends Result {
 				}
 			}
 			out.close();
+			
 
 		} catch (Exception e) {
 			System.err.println("Error: Misslyckades med att skriva resultat filen");
+
 			System.exit(1);
 		}
-
+		SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps);
+		sorted.writeToFile();
 	}
 
 	private TreeMap<Integer, Driver> addTreeMap(String className, Integer i,
@@ -170,8 +172,7 @@ public class LapResult extends Result {
 	 *         error-notations if there are any
 	 */
 	@Override
-	public String checkError(int currentIndex, List<Time> startTime,
-			List<Time> finishTime) {
+	public String checkError(int currentIndex, List<Time> startTime,List<Time> finishTime) {
 		StringBuilder sb = new StringBuilder();
 		String totalTimeCheck = "";
 		String totalLapCheck = "";
@@ -222,7 +223,6 @@ public class LapResult extends Result {
 		checkIfManyStartTime(startTime, sb);
 		sb.append(totalTimeCheck);
 		sb.append("\n");
-		System.out.println(sb.toString());
 		return sb.toString();
 	}
 

@@ -25,6 +25,7 @@ public class Sorter {
 	private class lapSortComparator implements Comparator<Driver>{
 
 		public int compare(Driver o1, Driver o2) {
+			
 			if(o1.getNumberOfLaps() < o2.getNumberOfLaps()){
 				return 1;
 			}

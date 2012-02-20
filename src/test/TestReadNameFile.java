@@ -62,11 +62,11 @@ public class TestReadNameFile extends LapRace {
 			e.printStackTrace();
 		}
 				
-		assertEquals("Incorrect class should be SENIOR, was" + varvrace.getDriver(1).getClasses(), "SENIOR", varvrace.getDriver(1).getClasses());
-		assertEquals("Incorrect class should be SENIOR, was" + varvrace.getDriver(2).getClasses(), "SENIOR", varvrace.getDriver(2).getClasses());
-		assertEquals("Incorrect class should be JUNIOR, was" + varvrace.getDriver(101).getClasses(), "JUNIOR", varvrace.getDriver(101).getClasses());
-		assertEquals("Incorrect class should be JUNIOR, was" + varvrace.getDriver(102).getClasses(), "JUNIOR", varvrace.getDriver(102).getClasses());
-		assertEquals("Incorrect class should be JUNIOR, was" + varvrace.getDriver(103).getClasses(), "JUNIOR", varvrace.getDriver(103).getClasses());
+		assertEquals("Incorrect class should be SENIOR, was" + varvrace.getDriver(1).getRaceClass(), "SENIOR", varvrace.getDriver(1).getRaceClass());
+		assertEquals("Incorrect class should be SENIOR, was" + varvrace.getDriver(2).getRaceClass(), "SENIOR", varvrace.getDriver(2).getRaceClass());
+		assertEquals("Incorrect class should be JUNIOR, was" + varvrace.getDriver(101).getRaceClass(), "JUNIOR", varvrace.getDriver(101).getRaceClass());
+		assertEquals("Incorrect class should be JUNIOR, was" + varvrace.getDriver(102).getRaceClass(), "JUNIOR", varvrace.getDriver(102).getRaceClass());
+		assertEquals("Incorrect class should be JUNIOR, was" + varvrace.getDriver(103).getRaceClass(), "JUNIOR", varvrace.getDriver(103).getRaceClass());
 	}
 	
 	@Test

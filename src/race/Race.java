@@ -46,8 +46,7 @@ public abstract class Race {
 	 * @param startType
 	 *            the name of the start type (varv, etapp)
 	 */
-	public Race(String startFile, String stopFile, String nameFile,
-			String startType, ArrayList<String> driverAttributes) {
+	public Race(String startFile, String stopFile, String nameFile, String startType, ArrayList<String> driverAttributes) {
 		this.startFile = startFile;
 		this.stopFile = stopFile;
 		this.startType = startType;
@@ -78,7 +77,7 @@ public abstract class Race {
 	public void computeTotalTime() {
 		try {
 			rnf.readFile();
-			if (startType.equals("Masstart")) {
+			if (startType.equals("masstart")) {
 				rsf.readFileMassStart();
 			} else {
 				rsf.readFile();
@@ -88,6 +87,7 @@ public abstract class Race {
 			e.printStackTrace();
 		}
 		getResult(index);
+
 
 	}
 
@@ -125,6 +125,7 @@ public abstract class Race {
 	 */
 	public void addFinishTime(Integer startNumber, Time time) {
 		Driver driver = getDriver(startNumber);
+		driver.setId(startNumber);
 		driver.addFinishTime(time);
 		index.put(startNumber, driver);
 
@@ -144,6 +145,8 @@ public abstract class Race {
 	 */
 	public void addName(Integer startNumber, String name) {
 		Driver driver = getDriver(startNumber);
+		// driver . set ID nummer måste finnas på dessa metoder.
+		driver.setId(startNumber);
 		driver.setName(name);
 		index.put(startNumber, driver);
 

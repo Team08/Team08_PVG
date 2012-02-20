@@ -30,7 +30,10 @@ public class Enduro {
 	private String raceType = "";
 	private int distance = 0;
 	private String startType = "";
-	
+	private String[] attributeArray;
+	private String attributeString = "";
+	private ArrayList<String> driverAttributes = new ArrayList<String>();
+
 
 	/**
 	 * The constructor which creates an Enduro object. Enter a config file in
@@ -42,8 +45,6 @@ public class Enduro {
 	 *            in order for it to produce the wanted result
 	 */
 	public Enduro(String[] args) {
-		String attributeString = "";
-		ArrayList<String> driverAttributes = new ArrayList<String>();
 
 		if (args.length == 0) {
 			Properties configFile = new Properties();
@@ -54,11 +55,13 @@ public class Enduro {
 				name = configFile.getProperty("NAMEFILE");
 				result = configFile.getProperty("RESULTFILE");
 				raceTime = configFile.getProperty("RACETIME");
-				raceType = configFile.getProperty("RACETYPE");
-				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));
+				raceType = configFile.getProperty("RACETYPE");	
+				startType = configFile.getProperty("STARTTYPE");				
+				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));				
 				attributeString = configFile.getProperty("DRIVER_ATTRIBUTES");
+				
 				String[] attributeArray = attributeString.split(";");
-
+				
 				for (int i = 0; i < attributeArray.length; i++) {
 					driverAttributes.add(attributeArray[i]);
 				}
@@ -69,15 +72,19 @@ public class Enduro {
 			} catch (IOException e1) {
 				System.err.println("");
 				e1.printStackTrace();
+
 			}
+
 		}else{
 			try {
+				System.out.println(2);
 				start = args[0];
 				stop = args[1];
 				name = args[2];
 				result = args[3];
 				raceType = args[4];
 				startType = args[5];
+				startType = startType.toLowerCase();//senast tillagd.
 				raceType = raceType.toLowerCase();
 				distance = Integer.parseInt(args[7]);
 				if (raceType.equals("varv")) {
@@ -86,11 +93,11 @@ public class Enduro {
 			} catch (Exception e) {
 				System.err.println("Error: Fel inmatning av argument");
 			}
+
 		}
 
 		if (raceType.equals("varv")) {
-			race = new LapRace(start, stop, name, result, raceTime, distance,
-				startType, driverAttributes);
+			race = new LapRace(start, stop, name, result, raceTime, distance, startType, driverAttributes);
 		}else if (raceType.equals("etapp")){
 			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes);
 		}
@@ -103,6 +110,7 @@ public class Enduro {
 	 * @param the
 	 *            config file
 	 */
+
 	public static void main(String[] args) {
 
 			new Enduro(args);			
