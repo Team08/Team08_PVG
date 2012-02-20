@@ -13,15 +13,14 @@ import main.Sorter;
 import util.Time;
 
 /**
- * This class builds the time results for stage races and can write the result to
- * result file.
+ * This class builds the time results for stage races and can write the result
+ * to result file.
  */
-public class StageResult extends Result{
+public class StageResult extends Result {
 	private HashMap<String, TreeMap<Integer, Driver>> mapOfDiffRaceClasses;
 	int stages;
 	String resultFile;
-	
-	
+
 	/**
 	 * Creates StageResult.
 	 * 
@@ -34,12 +33,13 @@ public class StageResult extends Result{
 	 *            the name of the resultFile that this class will compute the
 	 *            results to
 	 */
-	public StageResult(TreeMap<Integer, Driver> index, int stages, String resultFile) {
+	public StageResult(TreeMap<Integer, Driver> index, int stages,
+			String resultFile) {
 		this.index = index;
 		this.stages = stages;
 		this.resultFile = resultFile;
 	}
-	
+
 	/**
 	 * Writes the result to the resultFile.
 	 */
@@ -54,34 +54,30 @@ public class StageResult extends Result{
 			for (int i = 0; i < stages; i++) {
 				sb.append("Etapp" + (i + 1) + "; ");
 			}
-			for (int i = 0; i < stages-1; i++) {
+			for (int i = 0; i < stages - 1; i++) {
 				sb.append("Start" + (i + 1) + "; Mål" + (i + 1) + "; ");
 			}
-			sb.append("Start" + (stages) + "; Mål"+stages);
-			
+			sb.append("Start" + (stages) + "; Mål" + stages);
+
+			// Vi antar att vi har alla starttime och finishtime för alla
+			// ettapper i index TreeMap.
+			// dvs finishtime[0] - starttime[0] = etapp[1], finishtime[1] -
+			// starttime[1] = etapp[2], Mål = etapp[0]+etapp[1]...
 			Driver tDriver;
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
 			ArrayList<Driver> notSortedDrivers = new ArrayList<Driver>();
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
 				String classes = tDriver.getRaceClass();
-				
+
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
 						tDriver));
 				notSortedDrivers.add(tDriver);
-				
-				
+
 			}
-//			Sorter sorter = new Sorter();
-//			sorter.lapSort(notSortedDrivers);
-//			
-//
-//			// for (Integer i : register.keySet()) {
-//			// tDriver = register.get(i);
-//			// out.write(checkError(i, tDriver.startTime(),
-//			// tDriver.finishTime()));
-//			// }
-//
+			
+			//Skriver ut till fil
+			//Hämtar TreeMap med className som key så att vi får ut alla som tillhör klassen.
 			for (String className : mapOfDiffRaceClasses.keySet()) {
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
 						.get(className);
@@ -89,8 +85,7 @@ public class StageResult extends Result{
 				out.write(sb.toString());
 				for (Integer i : tm.keySet()) {
 					tDriver = tm.get(i);
-					out.write(checkError(i, tDriver.startTime(), tDriver
-							.finishTime()));
+					out.write(checkErrorStageRace(i, tDriver));
 				}
 
 			}
@@ -100,6 +95,59 @@ public class StageResult extends Result{
 			System.err.println("Error: Misslyckades med att skriva resultat filen");
 			System.exit(1);
 		}
+
+	}
+
+	public String checkErrorStageRace(int i, Driver driver) {
+		StringBuilder sb = new StringBuilder();
+		// StartNR
+		sb.append(i + "; ");
+		// Namn
+		sb.append(driver.getName() + "; ");
+		// KlubbOmFinns Hämta ATTRIBUTERNA
+		// sb.append(getDriverAttributes(driver));
+		// Totaltid för alla genomförda etapper
+		sb.append(driver.getTotStageTime() + "; ");
+		// # ANTAL Etapper som driver har genomfört.
+		sb.append(driver.getNbrOfStages() + "; ");
+		// totaltid för etapp1
+		sb.append(getStageTime(driver));
+		// Starttid för etapp1;
+		sb.append(getTimes(driver));
+
+		return sb.toString();
+	}
+
+	public String getDriverAttributes(Driver driver) {
+		return "EJIMPMLEMENTERD";
+	}
+
+	public String getStageTime(Driver driver) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < stages; i++) {
+			sb.append(driver.getStageTime(i) + "; ");
+		}
+		return sb.toString();
+	}
+
+	public String getTimes(Driver driver) {
+		StringBuilder sb = new StringBuilder();
+		List<Time> startTemp = driver.startTime();
+		List<Time> finishTemp = driver.finishTime();
+		for (int i = 0; i < stages; i++) {
+
+			if (startTemp.get(i) != null) {
+				sb.append(startTemp.get(i).toString());
+			}
+			sb.append("; ");
+
+			if (finishTemp.get(i) != null) {
+				sb.append(finishTemp.get(i).toString());
+			}
+			sb.append("; ");
+
+		}
+		return sb.toString();
 
 	}
 
@@ -114,33 +162,7 @@ public class StageResult extends Result{
 			tm.put(i, tDriver);
 		}
 		return tm;
-}
-		
-		
-		
-		
-	
-	
-	/**
-	 * Check if there are any invalid parameter and returns a result string line
-	 * that contains error-notations if any invalid parameter found.
-	 * 
-	 * @param i
-	 *            The current index
-	 * @param startTime
-	 *            A list of start time
-	 * @param finishTime
-	 *            A list of finish times
-	 * @return The string contains the result time for target driver plus
-	 *         error-notations if there are any
-	 */
-	@Override
-	public String checkError(int i, List<Time> startTime, List<Time> finishTime) {
-
-		return null;
 	}
-
-	
 
 	/**
 	 * Check if there are ManyFinishTimes.
@@ -159,10 +181,11 @@ public class StageResult extends Result{
 		}
 	}
 
-
 	/**
-	 * Computes the totaltime if possible and appends it to the stringbuilder. If there is no totaltime --.--.-- is appended
-	 * The method returns a string with an error-notation if the totaltime was impossible otherwise an empty String
+	 * Computes the totaltime if possible and appends it to the stringbuilder.
+	 * If there is no totaltime --.--.-- is appended The method returns a string
+	 * with an error-notation if the totaltime was impossible otherwise an empty
+	 * String
 	 * 
 	 * @param startTime
 	 *            the list of start times to check
@@ -179,10 +202,15 @@ public class StageResult extends Result{
 		if (startTime.size() == 0 || finishTime.size() == 0) {
 			sb.append("--.--.--; ");
 		}
-//		} else {
-//			
-//		}
+		// } else {
+		//			
+		// }
 
+		return null;
+	}
+
+	@Override
+	public String checkError(int i, List<Time> startTime, List<Time> finishTime) {
 		return null;
 	}
 

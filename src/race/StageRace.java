@@ -26,7 +26,9 @@ public class StageRace extends Race{
 	public void getResult(TreeMap<Integer, Driver> index) {
 		result = new StageResult(index, stages, resultat);
 		result.writeResultFile();
-
 	}
+	
+	
+	
 
 }
