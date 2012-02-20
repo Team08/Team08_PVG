@@ -127,7 +127,7 @@ public class Enduro {
 
 			race = new LapRace(start, stop, name, result, raceTime, distance, startType, driverAttributes);
 		}else if (raceType.equals("etapp")){
-			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes, specialDistances, factor);
+			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes, specialDistances, factor, raceTime);
 
 		}
 		race.computeTotalTime();
