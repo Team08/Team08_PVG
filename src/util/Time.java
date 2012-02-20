@@ -43,7 +43,7 @@ public class Time implements Comparable {
 	 */
 	public Time(String representTime) {
 
-		if (representTime.length() == 0) {
+		if (representTime.length() == 0 || representTime == " ") {
 			time = 0;
 		} else {
 			String[] temp = representTime.split("\\.");
