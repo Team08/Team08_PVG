@@ -151,8 +151,11 @@ public class LapResult extends Result {
 			System.err.println("Error: " + e.getMessage());
 			System.exit(1);
 		}
-		SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps);
-		sorted.writeToFile();
+		
+		
+			SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps);
+			sorted.writeToFile();
+		
 	}
 
 	private TreeMap<Integer, Driver> addTreeMap(String className, Integer i,
