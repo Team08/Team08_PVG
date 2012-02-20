@@ -1,6 +1,6 @@
-<project name="build" default="zip">
+<project name="build" default="tar">
 	
-	
+
 	<path id="classpath.base">
 	</path>
 	<path id="classpath.test">
@@ -65,7 +65,7 @@
 	    </javadoc>
 	</target>
 	
-	<target name="zip" depends="javadoc">
+	<target name="tar" depends="javadoc">
 		<delete dir="Release" />
 		<mkdir dir="Release" />
 		<mkdir dir="ReleaseJar/Manual" />
@@ -73,7 +73,8 @@
 		<copy file="README.odt" todir="ReleaseJar" />
 		<copydir src="manual" dest="ReleaseJar/Manual" />
 		<copydir src="javadoc" dest="ReleaseJar/JavaDoc" />
-		<zip destfile="Release/release.zip" basedir="ReleaseJar" />
+		<tar destfile="ReleaseJar/src.tar" basedir="src" />
+		<tar destfile="Release/release.tar" basedir="ReleaseJar" />
 		<delete dir = "ReleaseJar" />
 		<delete dir = "build" />
 		<delete dir = "javadoc" />
