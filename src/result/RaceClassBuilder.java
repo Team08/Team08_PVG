@@ -16,19 +16,6 @@ public class RaceClassBuilder {
 	private ArrayList<Driver> driverList;
 	ArrayList<String> lapTimes;
 
-	/**
-	 * Denna klass fungerar på följande vis: 1. Man skapar ett objekt, då läggs
-	 * automatiskt en header till, man bestämmer också max antal varv som ska
-	 * visas i filen 2. man kallar på metoden writeResult() för varje klasslista
-	 * som ska skrivas till fil
-	 * 
-	 * 
-	 * Funderingar: 1. Hur ska vi göra designen? Ska detta ligga i denna
-	 * klassen? 2. Vi bör tänka på att även etapplopp ska kunna använda sig av
-	 * denna klass, drf bör vi kanske försöka att skriva så att man lätt kan
-	 * skriva ut snarlika filer.
-	 * 
-	 */
 
 	public RaceClassBuilder(int nbrOfLaps) {
 		maxNbrOfLaps = nbrOfLaps;
