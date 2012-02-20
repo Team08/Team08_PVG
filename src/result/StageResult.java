@@ -21,6 +21,7 @@ public class StageResult extends Result {
 	int stages;
 	String resultFile;
 
+
 	/**
 	 * Creates StageResult.
 	 * 

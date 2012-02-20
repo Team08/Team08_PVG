@@ -28,7 +28,8 @@ public class TestAcceptance13{
 	}
 
 	@Before public void setup() {
-		String[] args = new String [9];
+		String[] args = new String [11];
+
 		args[0]= testStartPath;
 		args[1]= testFinishPath;
 		args[2]= testNamefilePath;
@@ -38,6 +39,9 @@ public class TestAcceptance13{
 		args[6]= "0.15";
 		args[7]= "3";
 		args[8]= "";
+		args[9]= "2";
+		args[10]= "5";
+
 System.out.println(args[0]);
 System.out.println(args[1]);
 System.out.println(args[2]);

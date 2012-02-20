@@ -129,7 +129,7 @@ public class LapResult extends Result {
 					out.write(sb.toString());
 					for (Driver driver : sortedListOfDriversInAClass) { 
 						System.out.println(driver.getId() + " " + driver.startTime()+ " " + driver.finishTime() + " " + driver.getName());
-						out.write(checkError(driver.getId(),driver.startTime(), driver.finishTime()));
+						out.write(checkError(driver.getId(), driver.startTime(), driver.finishTime()));
 					}
 				}
 				
@@ -190,7 +190,12 @@ public class LapResult extends Result {
 		String totalLapCheck = "";
 		sb.append(currentIndex + "; ");
 		checkName(sb, index.get(currentIndex).getName());
-
+		ArrayList<String> attributes = index.get(currentIndex).getAttributes();
+		for(int i = 0; i < attributes.size(); i++){
+			sb.append(attributes.get(i) + "; ");
+		}
+		 sb.toString();
+	
 		sb.append(index.get(currentIndex).getNumberOfLaps() + "; ");
 
 		totalTimeCheck = checkTotaltime(startTime, finishTime, sb);

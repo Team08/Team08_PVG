@@ -33,6 +33,8 @@ public class Enduro {
 	private String[] attributeArray;
 	private String attributeString = "";
 	private ArrayList<String> driverAttributes = new ArrayList<String>();
+	private String specialDistances;
+	private int factor;
 
 	/**
 	 * The constructor which creates an Enduro object. Enter a config file in
@@ -59,8 +61,11 @@ public class Enduro {
 				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));
 				attributeString = configFile.getProperty("DRIVER_ATTRIBUTES");
 
+				specialDistances = configFile.getProperty(("SPECIAL_DISTANCES"));
+				factor = Integer.parseInt(configFile.getProperty(("FACTOR")));
+				
 				String[] attributeArray = attributeString.split("; ");
-
+				
 				for (int i = 0; i < attributeArray.length; i++) {
 					driverAttributes.add(attributeArray[i]);
 				}
@@ -86,6 +91,7 @@ public class Enduro {
 				startType = startType.toLowerCase();
 				raceType = raceType.toLowerCase();
 				distance = Integer.parseInt(args[7]);
+
 				attributeString = args[8];
 				
 				String[] attributeArray = args[8].split("; ");
@@ -94,6 +100,10 @@ public class Enduro {
 					driverAttributes.add(attributeArray[i]);
 				}
 				
+
+				specialDistances = args[9]; 
+				factor = Integer.parseInt(args[10]);
+
 				if (raceType.equals("varv")) {
 					raceTime = args[6];
 				}
@@ -104,11 +114,11 @@ public class Enduro {
 		}
 
 		if (raceType.equals("varv")) {
-			race = new LapRace(start, stop, name, result, raceTime, distance,
-					startType, driverAttributes);
-		} else if (raceType.equals("etapp")) {
-			race = new StageRace(start, stop, name, result, distance,
-					startType, driverAttributes);
+
+			race = new LapRace(start, stop, name, result, raceTime, distance, startType, driverAttributes);
+		}else if (raceType.equals("etapp")){
+			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes, specialDistances, factor);
+
 		}
 		race.computeTotalTime();
 	}
