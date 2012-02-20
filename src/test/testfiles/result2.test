@@ -1,0 +1,11 @@
+SENIORER
+StartNr; Namn; #Varv; Totaltid; Varv1; Varv2; Varv3; Start; Varvning1; Varvning2; Mål
+1; Anders Asson; 1; 2.30.06; 2.30.06; ; ; 12.00.00; 14.30.06; ; ; Slut?
+JUNIORER
+StartNr; Namn; #Varv; Totaltid; Varv1; Varv2; Varv3; Start; Varvning1; Varvning2; Mål
+5; Erik Esson; 1; 0.27.07; 0.27.07; ; ; 12.03.00; 12.30.07; ; ; Slut?
+3; Chris Csson; 1; 1.03.06; 1.03.06; ; ; 12.02.00; 13.05.06; ; ; Slut?
+4; David Dsson; 1; 1.09.07; 1.09.07; ; ; 12.03.00; 13.12.07; ; ; Slut?; Flera starttider? 12.12.00
+Icke existerande startnummer
+StartNr; Namn; #Varv; Totaltid; Varv1; Varv2; Varv3; Start; Varvning1; Varvning2; Mål
+2; Namn?; 1; --.--.--; Start?; ; ; Slut?
