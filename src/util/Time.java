@@ -259,5 +259,13 @@ public class Time implements Comparable {
 
 		return times;
 	}
+	
+	public Time multiplyTimeBy(int factor, Time time) {
+		return new Time(factor*time.time);
+	}
+	
+	public Time addToTime(Time time) {
+		return new Time(this.time + time.time);
+	}
 
 }

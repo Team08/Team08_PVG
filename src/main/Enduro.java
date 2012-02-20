@@ -33,6 +33,8 @@ public class Enduro {
 	private String[] attributeArray;
 	private String attributeString = "";
 	private ArrayList<String> driverAttributes = new ArrayList<String>();
+	private String specialDistances;
+	private int factor;
 
 
 	/**
@@ -60,6 +62,8 @@ public class Enduro {
 				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));		
 				attributeString = configFile.getProperty("DRIVER_ATTRIBUTES");
 				attributeArray = attributeString.split(";");
+				specialDistances = configFile.getProperty(("SPECIAL_DISTANCES"));
+				factor = Integer.parseInt(configFile.getProperty(("FACTOR")));
 				
 //				for (int i = 0; i < attributeArray.length; i++) {
 //							driverAttributes.add(attributeArray[i]);
@@ -85,6 +89,8 @@ public class Enduro {
 				startType = startType.toLowerCase();//senast tillagd.
 				raceType = raceType.toLowerCase();
 				distance = Integer.parseInt(args[7]);
+				specialDistances = args[8]; // In i dokumentation
+				factor = Integer.parseInt(args[9]);
 				if (raceType.equals("varv")) {
 					raceTime = args[6];	
 				}
@@ -97,7 +103,7 @@ public class Enduro {
 		if (raceType.equals("varv")) {
 			race = new LapRace(start, stop, name, result, raceTime, distance, startType, driverAttributes);
 		}else if (raceType.equals("etapp")){
-			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes);
+			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes, specialDistances, factor);
 		}
 		race.computeTotalTime();
 	}

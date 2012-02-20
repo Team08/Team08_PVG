@@ -102,4 +102,7 @@ public abstract class Result {
 		}
 	}
 
+
+	public abstract void writeResultFile();
+
 }
