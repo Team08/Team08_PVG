@@ -30,7 +30,7 @@ public class Enduro {
 	private String raceType = "";
 	private int distance = 0;
 	private String startType = "";
-	private String[] attributeArray;
+	private String[] attributeArray = null;
 	private String attributeString = "";
 	private ArrayList<String> driverAttributes = new ArrayList<String>();
 
@@ -55,15 +55,14 @@ public class Enduro {
 				result = configFile.getProperty("RESULTFILE");
 				raceTime = configFile.getProperty("RACETIME");
 				raceType = configFile.getProperty("RACETYPE");	
-				startType = configFile.getProperty("STARTTYPE");				
-				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));				
+				startType = configFile.getProperty("STARTTYPE");
+				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));		
 				attributeString = configFile.getProperty("DRIVER_ATTRIBUTES");
+				attributeArray = attributeString.split(";");
 				
-				String[] attributeArray = attributeString.split(";");
-				
-				for (int i = 0; i < attributeArray.length; i++) {
-					driverAttributes.add(attributeArray[i]);
-				}
+//				for (int i = 0; i < attributeArray.length; i++) {
+//							driverAttributes.add(attributeArray[i]);
+//				}
 				
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
@@ -72,7 +71,6 @@ public class Enduro {
 			} 
 		}else{
 			try {
-				System.out.println(2);
 				start = args[0];
 				stop = args[1];
 				name = args[2];
