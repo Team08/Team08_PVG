@@ -6,8 +6,6 @@ import java.util.List;
 import util.Time;
 import util.Time2;
 
-
-//ÄNDRA I MANUALEN, GÅR EJ HA FILNAMN MED å ä ö.
 /**
  * The Driver class which represents a driver. The driver does not know his
  * start number. This can be accessed from the database structure instead. He

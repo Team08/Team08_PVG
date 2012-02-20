@@ -34,7 +34,6 @@ public class Enduro {
 	private String attributeString = "";
 	private ArrayList<String> driverAttributes = new ArrayList<String>();
 
-
 	/**
 	 * The constructor which creates an Enduro object. Enter a config file in
 	 * order to make the sorter function as wanted. E.g. if there has been a lap
@@ -55,19 +54,20 @@ public class Enduro {
 				name = configFile.getProperty("NAMEFILE");
 				result = configFile.getProperty("RESULTFILE");
 				raceTime = configFile.getProperty("RACETIME");
-				raceType = configFile.getProperty("RACETYPE");	
-				startType = configFile.getProperty("STARTTYPE");				
-				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));				
+				raceType = configFile.getProperty("RACETYPE");
+				startType = configFile.getProperty("STARTTYPE");
+				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));
 				attributeString = configFile.getProperty("DRIVER_ATTRIBUTES");
-				
-				String[] attributeArray = attributeString.split(";");
-				
+
+				String[] attributeArray = attributeString.split("; ");
+
 				for (int i = 0; i < attributeArray.length; i++) {
 					driverAttributes.add(attributeArray[i]);
 				}
-				
+
 			} catch (FileNotFoundException e1) {
-				System.err.println("Misslyckades med att läsa konfigurationsfilen");
+				System.err
+						.println("Misslyckades med att läsa konfigurationsfilen");
 				e1.printStackTrace();
 			} catch (IOException e1) {
 				System.err.println("");
@@ -75,20 +75,27 @@ public class Enduro {
 
 			}
 
-		}else{
+		} else {
 			try {
-				System.out.println(2);
 				start = args[0];
 				stop = args[1];
 				name = args[2];
 				result = args[3];
 				raceType = args[4];
 				startType = args[5];
-				startType = startType.toLowerCase();//senast tillagd.
+				startType = startType.toLowerCase();
 				raceType = raceType.toLowerCase();
 				distance = Integer.parseInt(args[7]);
+				attributeString = args[8];
+				
+				String[] attributeArray = args[8].split("; ");
+
+				for (int i = 0; i < attributeArray.length; i++) {
+					driverAttributes.add(attributeArray[i]);
+				}
+				
 				if (raceType.equals("varv")) {
-					raceTime = args[6];	
+					raceTime = args[6];
 				}
 			} catch (Exception e) {
 				System.err.println("Error: Fel inmatning av argument");
@@ -97,9 +104,11 @@ public class Enduro {
 		}
 
 		if (raceType.equals("varv")) {
-			race = new LapRace(start, stop, name, result, raceTime, distance, startType, driverAttributes);
-		}else if (raceType.equals("etapp")){
-			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes);
+			race = new LapRace(start, stop, name, result, raceTime, distance,
+					startType, driverAttributes);
+		} else if (raceType.equals("etapp")) {
+			race = new StageRace(start, stop, name, result, distance,
+					startType, driverAttributes);
 		}
 		race.computeTotalTime();
 	}
@@ -113,6 +122,6 @@ public class Enduro {
 
 	public static void main(String[] args) {
 
-			new Enduro(args);			
+		new Enduro(args);
 	}
 }

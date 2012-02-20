@@ -28,7 +28,7 @@ public class LapResult extends Result {
 	Time raceTime;
 	String resultFile;
 	private String nonExistingNbr = "Icke existerande startnummer";
-
+	private ArrayList<String> driverAttributes;
 	/**
 	 * Creates LapResult.
 	 * 
@@ -44,11 +44,13 @@ public class LapResult extends Result {
 	 *            results to
 	 */
 	public LapResult(TreeMap<Integer, Driver> index, int laps,
-			String raceTimeString, String resultFile) {
+			String raceTimeString, String resultFile, ArrayList<String> driverAttributes) {
 		this.index = index;
 		this.laps = laps;
 		this.raceTime = new Time(raceTimeString + ".00");
 		this.resultFile = resultFile;
+		this.driverAttributes = driverAttributes;
+		
 	}
 
 	/**
@@ -63,7 +65,18 @@ public class LapResult extends Result {
 			StringBuilder sb = new StringBuilder();
 			BufferedWriter out = new BufferedWriter(fstream);
 			sb.append("StartNr; Namn; ");
-
+			
+			if(!driverAttributes.isEmpty()){
+				for(int i = 0; i < driverAttributes.size(); i++){
+					if(i < driverAttributes.size()-1){
+						sb.append(driverAttributes.get(i) + "; ");
+					}else{
+						sb.append(driverAttributes.get(i));
+					}
+					
+				}
+			}
+			
 			sb.append("#Varv; ");
 
 			sb.append("Totaltid; ");
@@ -92,7 +105,7 @@ public class LapResult extends Result {
 
 				}
 
-				String classes = tDriver.getRaceClass(); //
+				String classes = tDriver.getRaceClass();
 
 				
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i, tDriver)); 
