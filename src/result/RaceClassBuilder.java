@@ -14,7 +14,7 @@ public class RaceClassBuilder {
 	private String raceClass;
 	private StringBuilder sb;
 	private ArrayList<Driver> driverList;
-	ArrayList<String> lapTimes;
+	private ArrayList<String> lapTimes;
 
 
 	public RaceClassBuilder(int nbrOfLaps) {

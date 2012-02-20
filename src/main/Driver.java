@@ -110,11 +110,12 @@ public class Driver {
 	public String getLapTime(int i) {
 		int laptime;
 		if (i == 0) {
+			
 			laptime = startTime.get(0).timeDiff(finishTime.get(0));
 		} else if (finishTime.size() > i) {
 			laptime = finishTime.get(i - 1).timeDiff(finishTime.get(i));
 		} else {
-			return "";
+			return " ";
 		}
 		return new Time(laptime).toString();
 	}
