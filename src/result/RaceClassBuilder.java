@@ -37,7 +37,7 @@ public class RaceClassBuilder {
 			// #################EXAMPLE##########################
 			// Plac; StartNr; Namn; #Varv; Totaltid; Varv1; Varv2
 
-			// CheckError checkError = new CheckError(driver); ////HÄR MÅSTE
+			// //ANVÄNDS INTE LÄNGRE, VAR TÄNKT TILL DEN NYA DESIGNEN: CheckError checkError = new CheckError(driver); ////HÄR MÅSTE
 			// ALLA EVENTUELLA FEL FIXAS!
 			sb.append(plac + "; ");
 			plac++;
