@@ -37,7 +37,6 @@ public class Enduro {
 	private int factor;
 	private GenerateConfig genCon;
 
-
 	/**
 	 * The constructor which creates an Enduro object. Enter a config file in
 	 * order to make the sorter function as wanted. E.g. if there has been a lap
@@ -67,7 +66,7 @@ public class Enduro {
 					specialDistances = configFile.getProperty(("SPECIAL_DISTANCES"));
 					factor = Integer.parseInt(configFile.getProperty(("FACTOR")));
 				
-					String[] attributeArray = attributeString.split(";");
+					String[] attributeArray = attributeString.split("; ");
 				
 					for (int i = 0; i < attributeArray.length; i++) {
 					driverAttributes.add(attributeArray[i]);
@@ -76,7 +75,7 @@ public class Enduro {
 				}else{
 					System.err.println("Misslyckades med att läsa konfigurationsfilen");
 				}
-				
+
 			} catch (FileNotFoundException e1) {
 				System.err.println("Misslyckades med att läsa konfigurationsfilen, en ny har autogenerats");
 				genCon.autogenerateConfig();
@@ -86,7 +85,7 @@ public class Enduro {
 
 			}
 
-		}else{
+		} else {
 			try {
 				start = args[0];
 				stop = args[1];
@@ -94,20 +93,30 @@ public class Enduro {
 				result = args[3];
 				raceType = args[4];
 				startType = args[5];
-				startType = startType.toLowerCase();//senast tillagd.
+				startType = startType.toLowerCase();
 				raceType = raceType.toLowerCase();
 				distance = Integer.parseInt(args[7]);
-				specialDistances = args[8]; // In i dokumentation
-				factor = Integer.parseInt(args[9]);
+
+				attributeString = args[8];
+				
+				String[] attributeArray = args[8].split("; ");
+
+				for (int i = 0; i < attributeArray.length; i++) {
+					driverAttributes.add(attributeArray[i]);
+				}
+				
+
+				specialDistances = args[9]; 
+				factor = Integer.parseInt(args[10]);
+
 				if (raceType.equals("varv")) {
-					raceTime = args[6];	
+					raceTime = args[6];
 				}
 				createRace();
 			} catch (Exception e) {
 				System.err.println("Error: Fel inmatning av argument");
-			}
 
-		}
+			}}
 		
 		
 	}
@@ -115,9 +124,11 @@ public class Enduro {
 	
 	private void createRace(){
 		if (raceType.equals("varv")) {
+
 			race = new LapRace(start, stop, name, result, raceTime, distance, startType, driverAttributes);
 		}else if (raceType.equals("etapp")){
 			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes, specialDistances, factor);
+
 		}
 		race.computeTotalTime();
 	}
@@ -132,6 +143,6 @@ public class Enduro {
 
 	public static void main(String[] args) {
 
-			new Enduro(args);			
+		new Enduro(args);
 	}
 }
