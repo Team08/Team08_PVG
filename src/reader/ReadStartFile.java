@@ -63,7 +63,6 @@ public class ReadStartFile extends FileIO {
 				throw new FileNotFoundException();
 			}
 		}
-
 	}
 
 	/**

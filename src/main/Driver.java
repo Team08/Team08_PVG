@@ -110,6 +110,7 @@ public class Driver {
 	public String getLapTime(int i) {
 		int laptime;
 		if (i == 0) {
+			
 			laptime = startTime.get(0).timeDiff(finishTime.get(0));
 		} else if (finishTime.size() > i) {
 			laptime = finishTime.get(i - 1).timeDiff(finishTime.get(i));
@@ -184,7 +185,7 @@ public class Driver {
 	public String getStageTime(int i) {
 		//Kolla så det finns någon tid för etappen i
 		if (i > startTime().size()-1 || i > finishTime().size()-1) {
-			return("--.--.--");
+			return("");
 		//Annars returnera tiden etappen i
 		} else {
 			return(new Time(finishTime().get(i).timeDiff(startTime().get(i))).toString());

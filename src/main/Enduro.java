@@ -96,9 +96,7 @@ public class Enduro {
 				startType = startType.toLowerCase();
 				raceType = raceType.toLowerCase();
 				distance = Integer.parseInt(args[7]);
-
 				attributeString = args[8];
-				
 				String[] attributeArray = args[8].split("; ");
 
 				for (int i = 0; i < attributeArray.length; i++) {
@@ -127,8 +125,7 @@ public class Enduro {
 
 			race = new LapRace(start, stop, name, result, raceTime, distance, startType, driverAttributes);
 		}else if (raceType.equals("etapp")){
-			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes, specialDistances, factor, raceTime);
-
+			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes, specialDistances, factor);
 		}
 		race.computeTotalTime();
 	}

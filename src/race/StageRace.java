@@ -18,15 +18,13 @@ public class StageRace extends Race{
 	private String specialDistances;
 	private String[] specialDistancesSplit;
 	private int factor;
-	private String raceTime;
 	
 	public StageRace(String startFile, String stopFile, String nameFile, String resultFile, int stages,
-			String startType, ArrayList<String> driverAttributes, String specialDistances, int factor, String raceTime) {
+			String startType, ArrayList<String> driverAttributes, String specialDistances, int factor) {
 		super(startFile, stopFile, nameFile, startType, driverAttributes);
 		this.nameFile = nameFile;
 		this.resultat = resultFile;
 		this.stages = stages;
-		this.raceTime = raceTime;
 		this.specialDistances = specialDistances;
 		splitSpecialDistances();
 		this.factor = factor;
@@ -35,11 +33,10 @@ public class StageRace extends Race{
 	
 	
 	public void getResult(TreeMap<Integer, Driver> index) {
-		if (specialDistancesSplit.length > 0) {
-			// BEHÖVER FIXAS!!! EJ KLAR.
-			result = new SpecialDistanceResult(index, stages, raceTime, resultat, specialDistancesSplit, factor);
+		if (specialDistancesSplit.length > 1) {
+			result = new SpecialDistanceResult(index, stages, resultat,driverAttributes,specialDistancesSplit, factor);
 		} else {
-			result = new StageResult(index, stages, resultat);
+			result = new StageResult(index, stages, resultat, driverAttributes);
 		}
 		result.writeResultFile();
 	}
