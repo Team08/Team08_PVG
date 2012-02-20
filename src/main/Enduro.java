@@ -54,9 +54,11 @@ public class Enduro {
 				name = configFile.getProperty("NAMEFILE");
 				result = configFile.getProperty("RESULTFILE");
 				raceTime = configFile.getProperty("RACETIME");
-				raceType = configFile.getProperty("RACETYPE");				
+				raceType = configFile.getProperty("RACETYPE");	
+				startType = configFile.getProperty("STARTTYPE");				
 				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));				
 				attributeString = configFile.getProperty("DRIVER_ATTRIBUTES");
+				
 				String[] attributeArray = attributeString.split(";");
 				
 				for (int i = 0; i < attributeArray.length; i++) {
@@ -77,6 +79,7 @@ public class Enduro {
 				result = args[3];
 				raceType = args[4];
 				startType = args[5];
+				startType = startType.toLowerCase();//senast tillagd.
 				raceType = raceType.toLowerCase();
 				distance = Integer.parseInt(args[7]);
 				if (raceType.equals("varv")) {

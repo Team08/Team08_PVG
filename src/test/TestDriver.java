@@ -109,7 +109,7 @@ public class TestDriver {
 	public void testAddClassToDriverAndFetch() {
 		String specClass = "KLASS";
 		driver.addClass(specClass);
-		assertEquals(specClass, driver.getClasses());
+		assertEquals(specClass, driver.getRaceClass());
 	}
 	@Test
 	public void testSizeAfterAddAttribute() {

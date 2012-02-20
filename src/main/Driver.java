@@ -137,7 +137,7 @@ public class Driver {
 	 * 
 	 * @return A string with the class name
 	 */
-	public String getClasses() {
+	public String getRaceClass() {
 		return classes;
 	}
 
@@ -174,4 +174,13 @@ public class Driver {
 	public ArrayList<String> getAttributes(){
 		return driverAttribute;
 	}
+	
+	public ArrayList<String> listOfLapTimes(){
+		ArrayList<String> lapTimes = new ArrayList<String>();
+		for(int i = 0; i < finishTime.size(); i++){
+			lapTimes.add(getLapTime(i));
+		}
+		return lapTimes;
+	}
+	
 }

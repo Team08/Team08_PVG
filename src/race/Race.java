@@ -83,7 +83,7 @@ public abstract class Race {
 		// Names are put in the TreeMap from the name file
 		try {
 			rnf.readFile();
-			if (startType.equals("Masstart")) {
+			if (startType.equals("masstart")) {
 				rsf.readFileMassStart();
 			} else {
 				rsf.readFile();

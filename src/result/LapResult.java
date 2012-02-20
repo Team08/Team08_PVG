@@ -91,13 +91,14 @@ public class LapResult extends Result {
 					tDriver.addClass(nonExistingNbr); //
 
 				}
-				String classes = tDriver.getClasses(); //
+				String classes = tDriver.getRaceClass(); //
 
 				// Lägger in en treemap
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i, tDriver)); // (treemap innehåller idnummer mappade till
 				// respektive förare)
 			} // i en klass
-
+			
+			
 			ArrayList<Driver> unsortedListOfDriversInAClass; // arraylist som
 			
 			// används för
@@ -143,13 +144,15 @@ public class LapResult extends Result {
 			}
 			// Close the output stream
 			out.close();
+			
 
 		} catch (Exception e) {
 			System.out.println("fel vid writeResultFile");
 			System.err.println("Error: " + e.getMessage());
 			System.exit(1);
 		}
-
+		SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps);
+		sorted.writeToFile();
 	}
 
 	private TreeMap<Integer, Driver> addTreeMap(String className, Integer i,
