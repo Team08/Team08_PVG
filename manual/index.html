@@ -1,14 +1,185 @@
-<html>
-<title> Enduro - Manual</title>
+<html lang="sv">
 <head>
+
 <style type="text/css">
+
+
+
+<!--
+html, body  { 
+padding-top: 5px;
+padding-bottom: 0px;
+padding-left: 5px;
+padding-right: 0px;
+margin: 0px;
+font: 16px Verdana, Arial, Helvetica, sans-serif;
+
+background-color: #eee;
+background-attachment: fixed;
+}
+
+a:link {color: #0000ee; text-decoration: none; }
+a:active {color: #0000ee; text-decoration: none; }
+a:visited {color: #0000aa; text-decoration: none; }
+a:hover {color: #000000; text-decoration: none; }
+
+h1 {
+font-size: 17px;
+font-family: "Tahoma", serif;
+color:#555555;
+margin-bottom:0;
+margin-top:0;
+padding-bottom: 0px;
+}
+
+-->
 </style>
 </head>
+<html>
+<A NAME="Topp"></A>
+<h2>Enduro - Manual</h2><hr>
 
-<frameset cols="210,*"  frameborder="0" framespacing="0">
-  <frame src="menu.html" name="menu" />
-  <frame src="manual/sida1.0.html" name="mainframe" />
-</frameset>
+<a href="#Programinfo">1.0 Programinformation</A><br>
+<a href="#Programinfo">1.1 Namnfil</A><br>
+<a href="#StartaReg">1.2 Starta Registreringsprogrammet</A><br>
+<a href="#Starta">1.3 Starta Resultatprogrammet</A><br>
+<a href="#Utveckling">Utveckling</A><br>
+
+
+<A NAME="Programinfo"><h2> 1.0 Programinformation </h2></A>
+
+<p>
+<b>Program som ingår:</b> <br>Registreringsprogram, Resultatprogram
+<br><br>
+<b>Hur körs dom:</b> <br> 
+Registreringsprogrammet är grafiskt, medan Resultatprogrammet körs från terminalen.<br>
+Båda programmen är jar-filer. (För att starta en .jar fil behöver Java Runtime Environment vara installerad)<br>
+För att starta Registreringsprogrammet räcker det med att dubbelklicka på programmets ikon, medan du måste gå in i terminalen för att kunna öppna resultatprogrammet. Till Resultatprogrammet kan man antingen manuellt mata in parametrar i terminalfönstret eller använda sig av en tillhörande konfigurationsfil där man fyller i de parametrar man vill att programmet ska använda när det körs. Inga av filnamnen får innehålla bokstäverna å, ä eller ö. Mer information om detta finns under <a href="#Starta">1.3 Starta Resultatprogrammet</A><br><br>
+<a href="#Topp">Återvänd till topp</A>
+<br><br>
+
+<A NAME="Programinfo"><h2> 1.1 Namnfil </h2></A>
+Namnfilen måste skapas i förväg. I den bör förarnas startnummer, namn och klass finnas med (se exempel nedan)<br>
+</p>
+Exempel på hur en namnfil bör se ut:<br>
+</p>
+<pre>
+StartNr; Namn
+SENIORER
+1; Anders Asson
+2; Berit Bsson
+JUNIORER
+3; Carin Csson
+</pre>
+Startnummer som inte förekommer i namnfilen fast finns med i start och/eller målfil kommer att visas längst ner på resultatlistan som "Icke existerande startnummer".
+
+
+<A NAME="StartaReg"><h2> 1.2 Starta Registreringsprogrammet </h2></A>
+Starta programmet genom att dubbelklicka på Main.jar-filen. Programmet ska se ut ungefär som bild 1.
+<p> Bild 1 - En bild på registreringsprogrammet</p>
+<img src="pic/ScreenshotRegister.png" alt="GUI" width="600" height="400"/><br>
+
+<br>
+<h2> Enkelstart/Masstart </h2>
+<h1> Enkelstart </h1>
+Parametern Starttype i konfigurationsfilen ska i det här fallet vara given som Enkelstart.
+Skriv in startnummret på föraren och tryck Registrera förare eller tryck enter. Tillåtna startnummer är alla tal större/lika med 0 (men om de inte finns med i namnfilen så kommer de stå som icke-existerande i resultatfilen). I bild 1 illusteras denna sortens registrering - förare 1 och 2 är registrerade och förare 3 är påväg att bli registrerad. <br><br>
+Om man vill spara tiden och skriva in förarens startnummer lite senare så trycker man på Registrera förare utan att skriva in något startnummer. Då kommer det upp en dialogruta där förarens nummer kan skrivas in (se bild 2 nedan), tiden från då Registrera förare-knappen trycktes lagras då i filen.  <br><br>
+
+<p> Bild 2 - En bild på registrering i efterhand</p>
+<img src="pic/ScreenshotRegister2.png" alt="GUI" width="600" height="400"/><br>
+<br>
+
+<h1> Masstart </h1>
+Parametern Starttype i konfigurationsfilen ska i det här fallet vara given som Masstart.
+Masstart fungerar på så sätt att man istället för startnummer anger hur många deltagare som startar och klickar på Registrera förare. Har man då fyllt i masstart i konfigurationsfilen så komemr siffran man skrivit in att innebära att det var det antalet förare som startade vid den tidpunkten. Även här fungerar det att spara tiden och skriva in antalet förare lite senare. Man fyller då i antalet i dialogrutan som kommer upp.<br><br> 
+
+<h2> Efter färdig registrering </h2>
+När man har registrerat färdigt så har det skapats en fil som heter Register.txt. Denna bör döpas om till förslagsvis starttid/maltid, annars kommer filen fyllas på med fler tider om du startar programmet och registrerar fler förare. Observera att man inte får använda å, ä eller ö i några filnamn.
+<br>
+
+<br>
+<hr>
+<A NAME="Starta"><h2> 1.3 Starta Resultatprogrammet </h2></A>
+<p>
+Det finns två sätt att starta resultatprogrammet:<br>
+<li>Inmatning med konfigurationsfil.</li>
+<li>Manuell inmatning av parameter.</li><br>
+
+Resultatfilen skapas av Reultatprogrammet (Om tidigare resultatfiler ska finnas kvar måste de döpas om).<br><br>
+
+<b>1: Inmatning med konfigurationsfil "config.properties"</b><br>
+A. Öppna config.properties filen med en texteditor.<br>
+B. Ändra värdena i config.properties till önskat värde enligt exempel1 och spara därefter.<br>
+C. Kör programmet!
+<br>
+<br>
+
+<pre>
+
+Exempel1: ändra i en konfig-fil
+
+# Initial variables
+# <"key">=<"value">
+
+#Sökväg till filerna
+DIRECTORY=
+
+#Filnamn plus deras exakta sökväg.
+STARTFILE=src/ex/starttider/EXstart1.txt
+STOPFILE=src/ex/stoptider/EXfinish1.txt
+NAMEFILE=src/ex/namnfil/EXnamnfil.txt
+RESULTFILE=ChangeMe.txt
+
+</pre>
+
+<br>
+
+<b>2: Manuell inmatning av parameter:</b><br>
+Starta Terminalen och navigera till mappen där Resultatprogrammet finns. När Resultatprogrammet startas från terminalen behöver det åtta parametrar. Namnet på starttidsfilen, måltidsfilen, namnfilen, resultatsfilen, tävlingsformen, starttyp (Enkelstart eller Masstart), stipulerade tiden i timmar och minuter (skrivs 05.43) som ska överstigas samt antalet varv som ska visas i resultatfilen.<br>
+Tävlingsformerna bestäms genom att skriva in namnet på tävlingsformen (Existerande tävlingsformer: Varv (maraton är en sorts varvlopp)).
+<br><br>
+Exempel på hur man startar sorteringsprogrammet vid enkelstart användandes manuell inmatning:
+java -jar Enduro.jar starttider.txt maltider.txt namnfil.txt result.txt Varv Enkelstart 03.00 3
+
+<br><br>
+<a href="#Topp">Återvänd till topp</A>
+
+<br>
+<br>
+<hr>
+
+<A NAME="Utveckling"><h2> Utveckling </h2></A>
+<h2>Implementerade stories</h2>
+
+<li>3 - Enkel resultatlista</li>
+<li>4 - Personuppgifter</li>
+<li>5 - Totaltid</li>
+<li>6 - Felaktiga registreringar</li>
+<li>7 - GUI för registrering</li>
+<li>8 - Registrering av tider</li>
+<li>9 - Varvlopp</li>
+<li>11- Enkel Masstart </li>
+<li>12 - Målgång där nummerplåten inte kan läsas i förväg</li>
+<li>13 - Hantera klasser</li>
+<li>14 - Användarmanual</li>
+<li>15 - Hantera felaktiga tidsdata</li>
+<li>16 - Hantera registreringar med otillåtna startnummer</li>
+<li>25 - Stöd för konfiguration</li>
+<li>31 - Teknisk dokumentation</li>
+<li>E1 - Refaktorisering av Sorteringsprogrammet</li>
+<li>E2 - Refaktorisering av Registreringsprogrammet</li>
+<li>E3 - Refaktorisering av Tidsrepresentaion</li>
+<li>E4 - Release</li>
+<li>E5 - Kundönskemål</li>
+
+
+<br><br>
+
+<a href="#Topp">Återvänd till topp</A>
+
+<br><br><br>
+
 
 </html>
 

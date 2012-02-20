@@ -45,20 +45,19 @@ public class StageResult extends Result{
 	 */
 	public void writeResultFile() {
 		try {
-
 			FileWriter fstream = new FileWriter(resultFile);
-
 			StringBuilder sb = new StringBuilder();
 			BufferedWriter out = new BufferedWriter(fstream);
 			sb.append("StartNr; Namn; ");
-			sb.append("#Etapper; ");
 			sb.append("Totaltid; ");
+			sb.append("#Etapper; ");
 			for (int i = 0; i < stages; i++) {
 				sb.append("Etapp" + (i + 1) + "; ");
 			}
-			for (int i = 0; i < stages; i++) {
+			for (int i = 0; i < stages-1; i++) {
 				sb.append("Start" + (i + 1) + "; Mål" + (i + 1) + "; ");
 			}
+			sb.append("Start" + (stages) + "; Mål"+stages);
 			
 			Driver tDriver;
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
@@ -84,40 +83,39 @@ public class StageResult extends Result{
 //			// tDriver.finishTime()));
 //			// }
 //
-//			for (String className : mapOfDiffRaceClasses.keySet()) {
-//				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
-//						.get(className);
-//				out.write(className + "\n");
-//				out.write(sb.toString());
-//				for (Integer i : tm.keySet()) {
-//					tDriver = tm.get(i);
-//					out.write(checkError(i, tDriver.startTime(), tDriver
-//							.finishTime()));
-//				}
-//
-//			}
-//			// Close the output stream
-//			out.close();
-//
+			for (String className : mapOfDiffRaceClasses.keySet()) {
+				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
+						.get(className);
+				out.write(className + "\n");
+				out.write(sb.toString());
+				for (Integer i : tm.keySet()) {
+					tDriver = tm.get(i);
+					out.write(checkError(i, tDriver.startTime(), tDriver
+							.finishTime()));
+				}
+
+			}
+			// Close the output stream
+			out.close();
+
 		} catch (Exception e) {
-//			System.err.println("Error: " + e.getMessage());
-//			System.exit(1);
+			System.err.println("Error: " + e.getMessage());
+			System.exit(1);
 		}
 //
 	}
 //
 	private TreeMap<Integer, Driver> addTreeMap(String className, Integer i,
 			Driver tDriver) {
-//		TreeMap<Integer, Driver> tm;
-//		if (mapOfDiffRaceClasses.containsKey(className)) {
-//			tm = mapOfDiffRaceClasses.get(className);
-//			tm.put(i, tDriver);
-//		} else {
-//			tm = new TreeMap<Integer, Driver>();
-//			tm.put(i, tDriver);
-//		}
-//		return tm;
-		return null;
+		TreeMap<Integer, Driver> tm;
+		if (mapOfDiffRaceClasses.containsKey(className)) {
+			tm = mapOfDiffRaceClasses.get(className);
+			tm.put(i, tDriver);
+		} else {
+			tm = new TreeMap<Integer, Driver>();
+			tm.put(i, tDriver);
+		}
+		return tm;
 }
 		
 		
