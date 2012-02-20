@@ -115,7 +115,7 @@ public class Driver {
 		} else if (finishTime.size() > i) {
 			laptime = finishTime.get(i - 1).timeDiff(finishTime.get(i));
 		} else {
-			return " ";
+			return "";
 		}
 		return new Time(laptime).toString();
 	}
