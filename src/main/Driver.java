@@ -6,6 +6,8 @@ import java.util.List;
 import util.Time;
 import util.Time2;
 
+
+//ÄNDRA I MANUALEN, GÅR EJ HA FILNAMN MED å ä ö.
 /**
  * The Driver class which represents a driver. The driver does not know his
  * start number. This can be accessed from the database structure instead. He
@@ -20,7 +22,7 @@ public class Driver {
 	private List<Time> startTime = new ArrayList<Time>();
 	private List<Time> finishTime = new ArrayList<Time>();
 	private String classes = "";
-	private Integer id;
+	private int id;
 	private ArrayList<String> driverAttribute = new ArrayList<String>();
 
 	/**

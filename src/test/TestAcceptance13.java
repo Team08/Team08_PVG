@@ -37,18 +37,35 @@ public class TestAcceptance13{
 		args[5]= "enkelstart";
 		args[6]= "0.15";
 		args[7]= "3";
+System.out.println(args[0]);
+System.out.println(args[1]);
+System.out.println(args[2]);
+System.out.println(args[3]);
+System.out.println(args[4]);
+System.out.println(args[5]);
+System.out.println(args[6]);
+System.out.println(args[7]);
+
+
+		
 		new Enduro(args);
 	}
 	
 	@Test public void testResult(){
 		try {
+			System.out.println("ASD");
 			File file1 = new File(testExpResultPath);
 			File file2 = new File(testResultPath);
 			Scanner scan1 = new Scanner(file1);
 			Scanner scan2 = new Scanner(file2);
-			
+			String scantext1;
+			String scantext2;
 			while (scan1.hasNext() || scan2.hasNext()){
-				assertEquals(scan1.nextLine(),
+				
+				scantext1 = scan1.nextLine();
+				scantext2 = scan2.nextLine();
+				System.out.println(scantext1 + " = " + scantext2);
+				assertEquals("scan1 =! scan2 ", scan1.nextLine(),
 						scan2.nextLine());
 			}
 		} catch (FileNotFoundException e) {

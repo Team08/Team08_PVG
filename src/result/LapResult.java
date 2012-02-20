@@ -9,7 +9,6 @@ import java.util.TreeMap;
 
 import main.Driver;
 import main.Sorter;
-
 import util.Time;
 
 /**
@@ -74,6 +73,7 @@ public class LapResult extends Result {
 
 			}
 			sb.append("Start; ");
+			
 
 			for (int i = 0; i < laps - 1; i++) {
 				sb.append("Varvning" + (i + 1) + "; ");
@@ -84,7 +84,6 @@ public class LapResult extends Result {
 			Driver tDriver;
 
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
-
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
 
@@ -94,15 +93,13 @@ public class LapResult extends Result {
 				}
 				String classes = tDriver.getClasses(); //
 
-				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i, // Lägger
-						// in
-						// en
-						// treemap
-						tDriver)); // (treemap innehåller idnummer mappade till
+				// Lägger in en treemap
+				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i, tDriver)); // (treemap innehåller idnummer mappade till
 				// respektive förare)
 			} // i en klass
 
 			ArrayList<Driver> unsortedListOfDriversInAClass; // arraylist som
+			
 			// används för
 			// att plocka ut
 			// alla förare
@@ -113,22 +110,12 @@ public class LapResult extends Result {
 			// sortern.
 			ArrayList<Driver> sortedListOfDriversInAClass;
 			List<Driver> nonExistingNbrList = null;
-
 			for (String className : mapOfDiffRaceClasses.keySet()) {
-				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
-						.get(className);
-
-				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm
-						.values());
-				sortedListOfDriversInAClass = sorter
-						.lapSort(unsortedListOfDriversInAClass); // //Nu har vi
-				// en
-				// sorterad
-				// arraylist
-				// med alla
-				// förarna
-				// i en
-				// klass
+				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses.get(className);
+				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());	
+				sortedListOfDriversInAClass = sorter.lapSort(unsortedListOfDriversInAClass); 
+				
+				// Nu har vi en sorterad arraylist med alla förarna i en klass
 
 				if (className.equals(nonExistingNbr)) {
 					nonExistingNbrList = sortedListOfDriversInAClass;
@@ -136,18 +123,12 @@ public class LapResult extends Result {
 				} else {
 					out.write(className + "\n"); // Skriver ut klassnamn
 					out.write(sb.toString()); // Skriver ut "linjal"
-					for (Driver driver : sortedListOfDriversInAClass) { // Skriver
-						// varje
-						// person
-						// som
-						// hör
-						// till
-						// klassen.
-						out.write(checkError(driver.getId(),
-								driver.startTime(), driver //
-										.finishTime()));
+					for (Driver driver : sortedListOfDriversInAClass) { 
+						System.out.println(driver.getId() + " " + driver.startTime()+ " " + driver.finishTime() + " " + driver.getName());
+						out.write(checkError(driver.getId(),driver.startTime(), driver.finishTime()));
 					}
 				}
+				
 			}
 
 			if (nonExistingNbrList != null) {
@@ -164,6 +145,7 @@ public class LapResult extends Result {
 			out.close();
 
 		} catch (Exception e) {
+			System.out.println("fel vid writeResultFile");
 			System.err.println("Error: " + e.getMessage());
 			System.exit(1);
 		}
@@ -197,12 +179,13 @@ public class LapResult extends Result {
 	 *         error-notations if there are any
 	 */
 	@Override
-	public String checkError(int currentIndex, List<Time> startTime,
-			List<Time> finishTime) {
+	public String checkError(int currentIndex, List<Time> startTime,List<Time> finishTime) {
 		StringBuilder sb = new StringBuilder();
 		String totalTimeCheck = "";
 		String totalLapCheck = "";
 		sb.append(currentIndex + "; ");
+		
+		//currentIndex stämmer inte med drivernsID
 		checkName(sb, index.get(currentIndex).getName());
 
 		sb.append(index.get(currentIndex).getNumberOfLaps() + "; ");
@@ -253,7 +236,6 @@ public class LapResult extends Result {
 		checkIfManyStartTime(startTime, sb);
 		sb.append(totalTimeCheck);
 		sb.append("\n");
-		System.out.println(sb.toString());
 		return sb.toString();
 	}
 

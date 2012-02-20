@@ -51,8 +51,7 @@ public abstract class Race {
 	 * @param startType
 	 *            the name of the start type (varv, etapp)
 	 */
-	public Race(String startFile, String stopFile, String nameFile,
-			String startType, ArrayList<String> driverAttributes) {
+	public Race(String startFile, String stopFile, String nameFile, String startType, ArrayList<String> driverAttributes) {
 		this.startFile = startFile;
 		this.stopFile = stopFile;
 		this.startType = startType;
@@ -98,6 +97,7 @@ public abstract class Race {
 		// Finish file is read, and finish times are put in the register
 		getResult(index);
 
+
 	}
 
 	/**
@@ -134,6 +134,7 @@ public abstract class Race {
 	 */
 	public void addFinishTime(Integer startNumber, Time time) {
 		Driver driver = getDriver(startNumber);
+		driver.setId(startNumber);
 		driver.addFinishTime(time);
 		index.put(startNumber, driver);
 
@@ -153,6 +154,8 @@ public abstract class Race {
 	 */
 	public void addName(Integer startNumber, String name) {
 		Driver driver = getDriver(startNumber);
+		// driver . set ID nummer måste finnas på dessa metoder.
+		driver.setId(startNumber);
 		driver.setName(name);
 		index.put(startNumber, driver);
 

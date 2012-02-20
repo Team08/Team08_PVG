@@ -21,8 +21,8 @@ import model.Register;
  */
 public class BasicGUI extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
-	private static int WIDTH = 1920;
-	private static int HEIGHT = 1080;
+	private static int WIDTH = 600;
+	private static int HEIGHT = 800;
 	private Register register;
 	private JTextArea textArea;
 	private JTextField driverID;
@@ -89,10 +89,10 @@ public class BasicGUI extends JFrame implements ActionListener{
 	// Sets the bigger fonts for all components
 	private void setFonts() {
 		Font newTextFont = new Font(textArea.getFont().getName(), textArea
-				.getFont().getStyle(), 70);
+				.getFont().getStyle(), 40);
 
 		Font newBigTextFont = new Font(textArea.getFont().getName(), textArea
-				.getFont().getStyle(), 90);
+				.getFont().getStyle(), 40);
 
 		textArea.setFont(newTextFont);
 		registerButton.setFont(newBigTextFont);
