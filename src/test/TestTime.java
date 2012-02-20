@@ -131,6 +131,29 @@ public class TestTime {
 		assertEquals(false, time.greaterThan(time2));
 	}
 	
+	@Test
+	public void testMultiplyTimeByPosNbrNotZero() {
+		Time t1 = new Time("01.05.04");
+		assertEquals(new Time("3.15.12").toString(), t1.multiplyTimeBy(3, t1).toString());
+	}
+	
+	@Test
+	public void testMultiplyTimeByZero() {
+		Time t1 = new Time("01.05.04");
+		assertEquals(new Time("0.00.00").toString(), t1.multiplyTimeBy(0, t1).toString());
+	}
+	
+	@Test(expected=NumberFormatException.class)
+	public void testMultiplyTimeByNegNbrNotZero() {
+		Time t1 = new Time("01.05.04");
+		assertEquals(new Time("3.15.12").toString(), t1.multiplyTimeBy(-3, t1).toString());
+	}
+	
+	@Test
+	public void testMultiplyTimeByPosNbrNotZeroPass60() {
+		Time t1 = new Time("00.55.00");
+		assertEquals(new Time("02.45.00").toString(), t1.multiplyTimeBy(3, t1).toString());
+	}
 	
 	
 	
