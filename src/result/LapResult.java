@@ -87,43 +87,34 @@ public class LapResult extends Result {
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
 
-				if (tDriver.getName() == null) { //
-					tDriver.addClass(nonExistingNbr); //
+				if (tDriver.getName() == null) { 
+					tDriver.addClass(nonExistingNbr); 
 
 				}
+
 				String classes = tDriver.getRaceClass(); //
 
-				// Lägger in en treemap
-				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i, tDriver)); // (treemap innehåller idnummer mappade till
-				// respektive förare)
-			} // i en klass
+				
+				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i, tDriver)); 
+			} 
 			
 			
-			ArrayList<Driver> unsortedListOfDriversInAClass; // arraylist som
-			
-			// används för
-			// att plocka ut
-			// alla förare
-			// i en viss
-			// klass för
-			// att skickas
-			// in till
-			// sortern.
+			ArrayList<Driver> unsortedListOfDriversInAClass; 
 			ArrayList<Driver> sortedListOfDriversInAClass;
 			List<Driver> nonExistingNbrList = null;
 			for (String className : mapOfDiffRaceClasses.keySet()) {
+
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses.get(className);
 				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());	
 				sortedListOfDriversInAClass = sorter.lapSort(unsortedListOfDriversInAClass); 
 				
-				// Nu har vi en sorterad arraylist med alla förarna i en klass
-
 				if (className.equals(nonExistingNbr)) {
 					nonExistingNbrList = sortedListOfDriversInAClass;
 
 				} else {
-					out.write(className + "\n"); // Skriver ut klassnamn
-					out.write(sb.toString()); // Skriver ut "linjal"
+
+					out.write(className + "\n"); 
+					out.write(sb.toString());
 					for (Driver driver : sortedListOfDriversInAClass) { 
 						System.out.println(driver.getId() + " " + driver.startTime()+ " " + driver.finishTime() + " " + driver.getName());
 						out.write(checkError(driver.getId(),driver.startTime(), driver.finishTime()));
@@ -142,13 +133,12 @@ public class LapResult extends Result {
 							driver.finishTime()));
 				}
 			}
-			// Close the output stream
 			out.close();
 			
 
 		} catch (Exception e) {
-			System.out.println("fel vid writeResultFile");
-			System.err.println("Error: " + e.getMessage());
+			System.err.println("Error: Misslyckades med att skriva resultat filen");
+
 			System.exit(1);
 		}
 		SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps);
@@ -187,8 +177,6 @@ public class LapResult extends Result {
 		String totalTimeCheck = "";
 		String totalLapCheck = "";
 		sb.append(currentIndex + "; ");
-		
-		//currentIndex stämmer inte med drivernsID
 		checkName(sb, index.get(currentIndex).getName());
 
 		sb.append(index.get(currentIndex).getNumberOfLaps() + "; ");
@@ -199,7 +187,7 @@ public class LapResult extends Result {
 
 		checkStartTime(startTime, sb);
 
-		// Totaltid
+	
 		Time timeTemp = new Time(0);
 		if (finishTime.size() != 0 && startTime.size() != 0) {
 			timeTemp = new Time(startTime.get(0).timeDiff(
@@ -207,31 +195,27 @@ public class LapResult extends Result {
 		}
 
 		if (finishTime.size() != 0) {
-			int check = finishTime.size() - 1; // Check = antalet måltider i
-												// finishTimeListan i respektive
-												// Driver
+			int check = finishTime.size() - 1; 
 			if (check > laps - 1) {
 				check = laps - 1;
 			}
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
-			}// Kontrollera om totaltid verkligen var en totaltid, annars gör
-				// det till en varvtid.
+			}
 			if ((!timeTemp.greaterThan(raceTime))
 					&& !timeTemp.equals(new Time(0)) && check <= laps) {
 				sb.append(finishTime.get(finishTime.size() - 1) + "; ");
 
 			}
-		}// Om semikolon saknas, pga för få varv, skriv ut nya semikolon.
+		}
 		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
 			sb.append("; ");
-		}//
+		}
 
-		if (timeTemp.greaterThan(raceTime)) {// Lägg till sluttid, om det är
-												// sluttid
+		if (timeTemp.greaterThan(raceTime)) {
 			sb.append(finishTime.get(finishTime.size() - 1));
 
-		} else {// Om sluttid ej finns, skriv "Slut?".
+		} else {
 			sb.append("Slut?");
 		}
 

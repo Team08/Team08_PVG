@@ -30,9 +30,10 @@ public class Enduro {
 	private String raceType = "";
 	private int distance = 0;
 	private String startType = "";
-	private String[] attributeArray = null;
+	private String[] attributeArray;
 	private String attributeString = "";
 	private ArrayList<String> driverAttributes = new ArrayList<String>();
+
 
 	/**
 	 * The constructor which creates an Enduro object. Enter a config file in
@@ -65,10 +66,14 @@ public class Enduro {
 //				}
 				
 			} catch (FileNotFoundException e1) {
+				System.err.println("Misslyckades med att läsa konfigurationsfilen");
 				e1.printStackTrace();
 			} catch (IOException e1) {
+				System.err.println("");
 				e1.printStackTrace();
-			} 
+
+			}
+
 		}else{
 			try {
 				start = args[0];
@@ -84,9 +89,11 @@ public class Enduro {
 					raceTime = args[6];	
 				}
 			} catch (Exception e) {
-				System.out.println("Error: Fel argument");
+				System.err.println("Error: Fel inmatning av argument");
 			}
+
 		}
+
 		if (raceType.equals("varv")) {
 			race = new LapRace(start, stop, name, result, raceTime, distance, startType, driverAttributes);
 		}else if (raceType.equals("etapp")){
@@ -101,7 +108,9 @@ public class Enduro {
 	 * @param the
 	 *            config file
 	 */
+
 	public static void main(String[] args) {
+
 			new Enduro(args);			
 	}
 }
