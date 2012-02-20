@@ -6,8 +6,6 @@ import java.util.List;
 import util.Time;
 import util.Time2;
 
-
-//ÄNDRA I MANUALEN, GÅR EJ HA FILNAMN MED å ä ö.
 /**
  * The Driver class which represents a driver. The driver does not know his
  * start number. This can be accessed from the database structure instead. He
@@ -112,11 +110,12 @@ public class Driver {
 	public String getLapTime(int i) {
 		int laptime;
 		if (i == 0) {
+			
 			laptime = startTime.get(0).timeDiff(finishTime.get(0));
 		} else if (finishTime.size() > i) {
 			laptime = finishTime.get(i - 1).timeDiff(finishTime.get(i));
 		} else {
-			return "";
+			return " ";
 		}
 		return new Time(laptime).toString();
 	}
