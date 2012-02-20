@@ -36,7 +36,7 @@ public class GenerateConfig {
 		        out.write("#Values for Enduro.java stored as <key>=<value>");
 		        out.write("\n");
 		        out.write("\n");
-		        out.write("#Filnamn" + "\n");
+		        out.write("#Filnamn - vid flera stopfiles så skriver man dem med , mellan" + "\n");
 		        out.write("STARTFILE=" + "\n");
 		        out.write("STOPFILE=" + "\n");
 		        out.write("NAMEFILE=" + "\n");
