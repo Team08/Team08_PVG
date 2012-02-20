@@ -46,11 +46,9 @@ public class SpecialDistanceResult extends Result {
 	 *            the name of the resultFile that this class will compute the
 	 *            results to
 	 */
-	public SpecialDistanceResult(TreeMap<Integer, Driver> index, int laps,
-			String raceTimeString, String resultFile, String[] specialDistances, int factor) {
+	public SpecialDistanceResult(TreeMap<Integer, Driver> index, int laps, String resultFile, String[] specialDistances, int factor) {
 		this.index = index;
 		this.stages = laps;
-		this.raceTime = new Time(raceTimeString + ".00");
 		this.resultFile = resultFile;
 		this.specialDistances = specialDistances;
 		this.factor = factor;
@@ -121,8 +119,9 @@ public class SpecialDistanceResult extends Result {
 
 					out.write(className + "\n"); 
 					out.write(sb.toString());
-					for (Driver driver : sortedListOfDriversInAClass) { 
-						out.write(generateNewLine(driver));
+					for (Driver driver : sortedListOfDriversInAClass) {
+						String s = generateNewLine(driver);
+						out.write(s);
 					}
 				}
 				
@@ -134,7 +133,8 @@ public class SpecialDistanceResult extends Result {
 				out.write(sb.toString());
 
 				for (Driver driver : nonExistingNbrList) {
-					out.write(generateNewLine(driver));
+					String s = generateNewLine(driver);
+					out.write(s);
 				}
 			}
 			out.close();
@@ -229,7 +229,7 @@ public class SpecialDistanceResult extends Result {
 	
 	}
 
-	public String getTimes(Driver driver) {
+	private String getTimes(Driver driver) {
 		StringBuilder sb = new StringBuilder();
 		List<Time> startTemp = driver.startTime();
 		List<Time> finishTemp = driver.finishTime();
