@@ -92,6 +92,7 @@ public class Enduro {
 				raceType = raceType.toLowerCase();
 				distance = Integer.parseInt(args[7]);
 				specialDistances = args[8]; // In i dokumentation
+				factor = Integer.parseInt(args[9]);
 				if (raceType.equals("varv")) {
 					raceTime = args[6];	
 				}
