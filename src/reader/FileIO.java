@@ -58,7 +58,7 @@ public abstract class FileIO {
 					add();
 				}
 
-			} catch (FileNotFoundException e) {// Catch exception if any
+			} catch (FileNotFoundException e) {
 				printErrorText();
 				throw new FileNotFoundException();
 			}

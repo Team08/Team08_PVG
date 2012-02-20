@@ -22,19 +22,14 @@ import util.Time;
 public abstract class Race {
 	public TreeMap<Integer, Driver> index;
 
-	// Result
 	Result result;
 
-	// Sorter
-
-	// Variables
 	protected String stopFile;
 	protected String startFile;
 	protected String startType;
 	protected String nameFile;
 	protected ArrayList<String> driverAttributes;
 
-	// Readers
 	private ReadNameFile rnf;
 	private ReadStartFile rsf;
 	private ReadFinishFile rff;
@@ -81,7 +76,6 @@ public abstract class Race {
 	 * The result file will have been written after this methods ends.
 	 */
 	public void computeTotalTime() {
-		// Names are put in the TreeMap from the name file
 		try {
 			rnf.readFile();
 			if (startType.equals("Masstart")) {
@@ -91,11 +85,8 @@ public abstract class Race {
 			}
 			rff.readFile();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// Start file is read, and start times are put in the register
-		// Finish file is read, and finish times are put in the register
 		getResult(index);
 
 	}

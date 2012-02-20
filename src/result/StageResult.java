@@ -68,10 +68,9 @@ public class StageResult extends Result{
 				
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
 						tDriver));
-				//nytt
 				notSortedDrivers.add(tDriver);
 				
-				//Nytt
+				
 			}
 //			Sorter sorter = new Sorter();
 //			sorter.lapSort(notSortedDrivers);
@@ -95,16 +94,15 @@ public class StageResult extends Result{
 				}
 
 			}
-			// Close the output stream
 			out.close();
 
 		} catch (Exception e) {
-			System.err.println("Error: " + e.getMessage());
+			System.err.println("Error: Misslyckades med att skriva resultat filen");
 			System.exit(1);
 		}
-//
+
 	}
-//
+
 	private TreeMap<Integer, Driver> addTreeMap(String className, Integer i,
 			Driver tDriver) {
 		TreeMap<Integer, Driver> tm;
@@ -138,7 +136,7 @@ public class StageResult extends Result{
 	 */
 	@Override
 	public String checkError(int i, List<Time> startTime, List<Time> finishTime) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 

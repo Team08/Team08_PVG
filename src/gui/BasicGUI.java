@@ -52,25 +52,21 @@ public class BasicGUI extends JFrame implements ActionListener{
 	private void setupLayout() {
 		topPanel.setLayout(new GridLayout(1, 2));
 
-		// FINISHING TOUCHES
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.pack();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
 
-	// Add components
 	private void addComponents() {
 		displayPanel.add(scrollPane);
 		topPanel.add(driverID);
 		topPanel.add(registerButton);
 
-		// ADDS PANELS TO FRAME
 		this.add(topPanel, BorderLayout.NORTH);
 		this.add(displayPanel, BorderLayout.CENTER);
 	}
 
-	// Initialize the components
 	private void init() {
 		displayPanel = new JPanel(new GridLayout(1, 1));
 		topPanel = new JPanel();
@@ -86,7 +82,6 @@ public class BasicGUI extends JFrame implements ActionListener{
 		setFonts();
 	}
 
-	// Sets the bigger fonts for all components
 	private void setFonts() {
 		Font newTextFont = new Font(textArea.getFont().getName(), textArea
 				.getFont().getStyle(), 70);

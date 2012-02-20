@@ -18,9 +18,6 @@ import model.Register;
  *
  */
 public class RegisterButton extends JButton implements ActionListener {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private BasicGUI gui;
 	private Register register;

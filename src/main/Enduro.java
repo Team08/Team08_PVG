@@ -64,8 +64,10 @@ public class Enduro {
 				}
 				
 			} catch (FileNotFoundException e1) {
+				System.err.println("Misslyckades med att läsa konfigurationsfilen");
 				e1.printStackTrace();
 			} catch (IOException e1) {
+				System.err.println("");
 				e1.printStackTrace();
 			}
 		}else{
@@ -82,7 +84,7 @@ public class Enduro {
 					raceTime = args[6];	
 				}
 			} catch (Exception e) {
-				System.out.println("Error: Fel argument");
+				System.err.println("Error: Fel inmatning av argument");
 			}
 		}
 
