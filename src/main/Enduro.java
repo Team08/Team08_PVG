@@ -35,6 +35,7 @@ public class Enduro {
 	private ArrayList<String> driverAttributes = new ArrayList<String>();
 	private String specialDistances;
 	private int factor;
+	private GenerateConfig genCon;
 
 
 	/**
@@ -50,30 +51,36 @@ public class Enduro {
 
 		if (args.length == 0) {
 			Properties configFile = new Properties();
+			genCon = new GenerateConfig(configFile);
 			try {
 				configFile.load(new FileInputStream("config.properties"));
-				start = configFile.getProperty("STARTFILE");
-				stop = configFile.getProperty("STOPFILE");
-				name = configFile.getProperty("NAMEFILE");
-				result = configFile.getProperty("RESULTFILE");
-				raceTime = configFile.getProperty("RACETIME");
-				raceType = configFile.getProperty("RACETYPE");	
-				startType = configFile.getProperty("STARTTYPE");				
-				distance = Integer.parseInt(configFile.getProperty("DISTANCE"));				
-				attributeString = configFile.getProperty("DRIVER_ATTRIBUTES");
-				specialDistances = configFile.getProperty(("SPECIAL_DISTANCES"));
-				factor = Integer.parseInt(configFile.getProperty(("FACTOR")));
+				if(genCon.checkKey()){
+					start = configFile.getProperty("STARTFILE");
+					stop = configFile.getProperty("STOPFILE");
+					name = configFile.getProperty("NAMEFILE");
+					result = configFile.getProperty("RESULTFILE");
+					raceTime = configFile.getProperty("RACETIME");
+					raceType = configFile.getProperty("RACETYPE");	
+					startType = configFile.getProperty("STARTTYPE");				
+					distance = Integer.parseInt(configFile.getProperty("DISTANCE"));				
+					attributeString = configFile.getProperty("DRIVER_ATTRIBUTES");
+					specialDistances = configFile.getProperty(("SPECIAL_DISTANCES"));
+					factor = Integer.parseInt(configFile.getProperty(("FACTOR")));
 				
-				String[] attributeArray = attributeString.split(";");
+					String[] attributeArray = attributeString.split(";");
 				
-				for (int i = 0; i < attributeArray.length; i++) {
+					for (int i = 0; i < attributeArray.length; i++) {
 					driverAttributes.add(attributeArray[i]);
+					}
+					createRace();
+				}else{
+					System.err.println("Misslyckades med att läsa konfigurationsfilen");
 				}
 				
 			} catch (FileNotFoundException e1) {
-				System.err.println("Misslyckades med att läsa konfigurationsfilen");
-				e1.printStackTrace();
-			} catch (IOException e1) {
+				System.err.println("Misslyckades med att läsa konfigurationsfilen, en ny har autogenerats");
+				genCon.autogenerateConfig();
+			} catch (IOException e1) {				
 				System.err.println("");
 				e1.printStackTrace();
 
@@ -81,7 +88,6 @@ public class Enduro {
 
 		}else{
 			try {
-				System.out.println(2);
 				start = args[0];
 				stop = args[1];
 				name = args[2];
@@ -96,12 +102,18 @@ public class Enduro {
 				if (raceType.equals("varv")) {
 					raceTime = args[6];	
 				}
+				createRace();
 			} catch (Exception e) {
 				System.err.println("Error: Fel inmatning av argument");
 			}
 
 		}
-
+		
+		
+	}
+	
+	
+	private void createRace(){
 		if (raceType.equals("varv")) {
 			race = new LapRace(start, stop, name, result, raceTime, distance, startType, driverAttributes);
 		}else if (raceType.equals("etapp")){
@@ -109,6 +121,7 @@ public class Enduro {
 		}
 		race.computeTotalTime();
 	}
+	
 
 	/**
 	 * Main program that initiates the Sorter program.
