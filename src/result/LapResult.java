@@ -73,7 +73,6 @@ public class LapResult extends Result {
 					}else{
 						sb.append(driverAttributes.get(i));
 					}
-					
 				}
 			}
 			
