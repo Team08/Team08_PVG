@@ -114,7 +114,7 @@ public class LapResult extends Result {
 			for (String className : mapOfDiffRaceClasses.keySet()) {
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses.get(className);
 				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());	
-				sortedListOfDriversInAClass = sorter.lapSort(unsortedListOfDriversInAClass); 
+				sortedListOfDriversInAClass = sorter.lapSort(unsortedListOfDriversInAClass, raceTime); 
 				
 				// Nu har vi en sorterad arraylist med alla förarna i en klass
 
@@ -125,7 +125,6 @@ public class LapResult extends Result {
 					out.write(className + "\n"); // Skriver ut klassnamn
 					out.write(sb.toString()); // Skriver ut "linjal"
 					for (Driver driver : sortedListOfDriversInAClass) { 
-						System.out.println(driver.getId() + " " + driver.startTime()+ " " + driver.finishTime() + " " + driver.getName());
 						out.write(checkError(driver.getId(),driver.startTime(), driver.finishTime()));
 					}
 				}
@@ -153,7 +152,7 @@ public class LapResult extends Result {
 		}
 		
 		
-			SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps);
+			SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps, raceTime);
 			sorted.writeToFile();
 		
 	}

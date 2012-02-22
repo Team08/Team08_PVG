@@ -62,7 +62,7 @@ public class LapRace extends Race {
 	public void getResult(TreeMap<Integer, Driver> index) {
 		result = new LapResult(index, laps, raceTime, resultat);
 		result.writeResultFile();
-
+		
 	}
 
 }

@@ -9,15 +9,16 @@ import util.Time;
 
 public class RaceClassBuilder {
 
-	private int plac = 0;
 	private int maxNbrOfLaps;
 	private String raceClass;
 	private StringBuilder sb;
 	private ArrayList<Driver> driverList;
+	private Time raceTime;
 	ArrayList<String> lapTimes;
 
 
-	public RaceClassBuilder(int nbrOfLaps) {
+	public RaceClassBuilder(int nbrOfLaps, Time raceTime) {
+		this.raceTime = raceTime;
 		maxNbrOfLaps = nbrOfLaps;
 		sb = new StringBuilder();
 	}
@@ -39,17 +40,39 @@ public class RaceClassBuilder {
 
 			// //ANVÄNDS INTE LÄNGRE, VAR TÄNKT TILL DEN NYA DESIGNEN: CheckError checkError = new CheckError(driver); ////HÄR MÅSTE
 			// ALLA EVENTUELLA FEL FIXAS!
-			sb.append(plac + "; ");
-			plac++;
+			
+			// Hämta ut totaltiden för föraren, returnerar -1 om starttid el sluttid fattas
+			int totalTimeTemp = driver.totalTime();
+
+			// Om totaltiden existerar och uppfyller den stipulerade tiden, skriv ut placering
+			if(totalTimeTemp > -1 && raceTime.lesserThan(new Time(totalTimeTemp))){
+				sb.append(plac + "; ");
+				plac++;
+			}else{
+				sb.append("; ");
+			}
+			
+			
 			sb.append(driver.getId());
 			sb.append("; ");
-			sb.append(driver.getName());
+			
+			if(driver.getName()==null){
+				sb.append("Namn?");
+			}else{
+				sb.append(driver.getName());
+			}
 			sb.append("; ");
 
 			lapTimes = driver.listOfLapTimes();
 			sb.append(lapTimes.size() + 1);
 			sb.append("; ");
-			sb.append(Time.totalTimeString(driver.totalTime()) + "; ");
+			
+			if(totalTimeTemp > -1) {
+				sb.append(Time.totalTimeString(totalTimeTemp) + "; ");
+			} else {
+				sb.append("; ");
+			}
+			
 			printLapTimes();
 			sb.append("\n");
 		}

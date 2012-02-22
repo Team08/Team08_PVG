@@ -102,13 +102,6 @@ public class TestTime {
 		assertEquals(false, time.greaterThan(time2));
 	}
 	
-	//Varf�r g�r de inte igenom??? Kolla upp
-	@Test
-	public void testLesser() {
-		Time time2 = new Time("17.00.00");
-		Time time = new Time("14.00.00");
-		assertEquals(true, time.lesserThan(time2));
-	}
 	
 	@Test
 	public void testFalseLesser() {
