@@ -42,15 +42,14 @@ public class Time implements Comparable {
 	 *            the time in string on the format (hh.mm.ss)
 	 */
 	public Time(String representTime) {
-		if (representTime.length() == 0) {
+
+		if (representTime.length() == 0 || representTime == " ") {
 			time = 0;
 		} else {
 			String[] temp = representTime.split("\\.");
 			time = parseTime(temp);
 		}
 	}
-
-	// BORDE EJ BEH�VAS MEN FINNS F�R ATT DE �R S� L�TT ATT IMPLEMENTERA
 
 	/**
 	 * Sets the time in seconds.
@@ -63,7 +62,6 @@ public class Time implements Comparable {
 		this.time = time;
 	}
 
-	// BORDE EJ BEHÖVAS MEN FINNS FÖR ATT DE ÄR SÅ LÄTT ATT IMPLEMENTERA
 	/**
 	 * Sets the time (string).
 	 * 
@@ -85,7 +83,6 @@ public class Time implements Comparable {
 		return time;
 	}
 
-	// EJ TESTADE
 	private int parseTime(String[] temp) throws NumberFormatException {
 		int hour = Integer.parseInt(temp[0]);
 		int minute = Integer.parseInt(temp[1]);
@@ -97,7 +94,6 @@ public class Time implements Comparable {
 		return start;
 	}
 
-	// EJ TESTADE
 	/**
 	 * Adds a zero if minutes < 10, otherwise just returns the same number that
 	 * was used as the input parameter.
@@ -269,6 +265,14 @@ public class Time implements Comparable {
 		times[2] = stringSeconds;
 
 		return times;
+	}
+	
+	public Time multiplyTimeBy(int factor, Time time) {
+		return new Time(factor*time.time);
+	}
+	
+	public Time addToTime(Time time) {
+		return new Time(this.time + time.time);
 	}
 
 }

@@ -6,8 +6,6 @@ import java.util.List;
 import util.Time;
 import util.Time2;
 
-
-//ÄNDRA I MANUALEN, GÅR EJ HA FILNAMN MED å ä ö.
 /**
  * The Driver class which represents a driver. The driver does not know his
  * start number. This can be accessed from the database structure instead. He
@@ -112,6 +110,7 @@ public class Driver {
 	public String getLapTime(int i) {
 		int laptime;
 		if (i == 0) {
+			
 			laptime = startTime.get(0).timeDiff(finishTime.get(0));
 		} else if (finishTime.size() > i) {
 			laptime = finishTime.get(i - 1).timeDiff(finishTime.get(i));
@@ -184,6 +183,43 @@ public class Driver {
 			lapTimes.add(getLapTime(i));
 		}
 		return lapTimes;
+	}
+	
+	public String getStageTime(int i) {
+		//Kolla så det finns någon tid för etappen i
+		if (i > startTime().size()-1 || i > finishTime().size()-1) {
+			return("");
+		//Annars returnera tiden etappen i
+		} else {
+			return(new Time(finishTime().get(i).timeDiff(startTime().get(i))).toString());
+		}
+	}
+	
+	
+	
+	private int addStageTime(int i) {
+		if (i > startTime().size()-1 || i > finishTime().size()-1) {
+			return 0;
+		} else {
+			return(finishTime().get(i).timeDiff(startTime().get(i)));
+		}
+	}
+	
+	
+	public String getTotStageTime() {
+		int sum = 0;
+		for(int i = 0; i < startTime.size(); i++){
+			sum += addStageTime(i);
+		}
+		return new Time(sum).toString();
+	}
+
+	public String getNbrOfStages() {
+		String s = Integer.toString(finishTime.size());
+		if(startTime.size() < finishTime.size()){
+			s =  Integer.toString(startTime.size());
+		}
+		return s;
 	}
 	
 }

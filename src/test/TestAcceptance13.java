@@ -28,7 +28,8 @@ public class TestAcceptance13{
 	}
 
 	@Before public void setup() {
-		String[] args = new String [8];
+		String[] args = new String [11];
+
 		args[0]= testStartPath;
 		args[1]= testFinishPath;
 		args[2]= testNamefilePath;
@@ -37,7 +38,6 @@ public class TestAcceptance13{
 		args[5]= "enkelstart";
 		args[6]= "0.15";
 		args[7]= "3";
-
 
 
 		

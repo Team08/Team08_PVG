@@ -112,7 +112,8 @@ Resultatfilen skapas av Reultatprogrammet (Om tidigare resultatfiler ska finnas 
 A. Öppna config.properties filen med en texteditor.<br>
 B. Ändra värdena i config.properties till önskat värde enligt exempel1 och spara därefter.<br>
 C. Kör programmet!
-<br>
+<br><br>
+Om man kör programmet utan en konfigurationsfil så autogenereras det en konfigurationsfil som man behöver fylla i innan man startar programmet igen.
 <br>
 
 <pre>
@@ -122,9 +123,6 @@ Exempel1: ändra i en konfig-fil
 # Initial variables
 # <"key">=<"value">
 
-#Sökväg till filerna
-DIRECTORY=
-
 #Filnamn plus deras exakta sökväg.
 STARTFILE=src/ex/starttider/EXstart1.txt
 STOPFILE=src/ex/stoptider/EXfinish1.txt
@@ -132,7 +130,12 @@ NAMEFILE=src/ex/namnfil/EXnamnfil.txt
 RESULTFILE=ChangeMe.txt
 
 </pre>
-
+<b> Flera målfiler </b><br>
+Vid användning av konfigurationsfil så är det möjligt att ha flera måltidsfiler, dessa skrivs då in efter STOPFILE i konfigurationsfilen och separeras med ett , . Detta alternativ är inte möjligt vid manuell inmatning av parametrar.
+<br><br>
+Exempel2: Flera måltidsfiler<br>
+STOPFILE=src/ex/stoptider/EXfinish1.txt, src/ex/stoptider/EXfinish1.txt
+<br><br>
 <br>
 
 <b>2: Manuell inmatning av parameter:</b><br>
@@ -159,6 +162,7 @@ java -jar Enduro.jar starttider.txt maltider.txt namnfil.txt result.txt Varv Enk
 <li>7 - GUI för registrering</li>
 <li>8 - Registrering av tider</li>
 <li>9 - Varvlopp</li>
+<li>10 - Flera skall kunna registrera måltider</li>
 <li>11- Enkel Masstart </li>
 <li>12 - Målgång där nummerplåten inte kan läsas i förväg</li>
 <li>13 - Hantera klasser</li>

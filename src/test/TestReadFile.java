@@ -16,12 +16,13 @@ public class TestReadFile extends LapRace {
 
 	private static String testStartPath = "src/test/testfiles/TestStart.test";
 	private static String testFinishPath = "src/test/testfiles/TestFinish.test";
+	
 
 	private ReadStartFile startfFile;
 	private ReadFinishFile finishFile;
 
 	public TestReadFile() {
-		super("TestStart.test", "TestStart.test", "", "", "", 0, "", null);
+		super("TestStart.test", "TestFinish.test", "", "", "", 0, "", null);
 		startfFile = new ReadStartFile(new LapRace(testStartPath,
 				testFinishPath, "", "", "", 0, "", null), testStartPath);
 		finishFile = new ReadFinishFile(new LapRace(testStartPath,
@@ -113,6 +114,8 @@ public class TestReadFile extends LapRace {
 		} catch (FileNotFoundException e) {
 		}
 	}
+	
+	
 	
 	
 
