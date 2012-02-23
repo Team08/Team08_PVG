@@ -115,7 +115,7 @@ public class Driver {
 		} else if (finishTime.size() > i) {
 			laptime = finishTime.get(i - 1).timeDiff(finishTime.get(i));
 		} else {
-			return " ";
+			return "";
 		}
 		return new Time(laptime).toString();
 	}
@@ -165,7 +165,10 @@ public class Driver {
 	}
 
 	public int totalTime() {
-		return startTime.get(0).timeDiff(finishTime.get(finishTime.size() - 1));
+		if(startTime.size() > 0 && finishTime.size() > 0) {
+			return startTime.get(0).timeDiff(finishTime.get(finishTime.size() - 1));
+		}
+		return -1;
 	}
 	public void addAttribute(String attribute){
 		driverAttribute.add(attribute);
@@ -185,7 +188,7 @@ public class Driver {
 	public String getStageTime(int i) {
 		//Kolla så det finns någon tid för etappen i
 		if (i > startTime().size()-1 || i > finishTime().size()-1) {
-			return("--.--.--");
+			return("");
 		//Annars returnera tiden etappen i
 		} else {
 			return(new Time(finishTime().get(i).timeDiff(startTime().get(i))).toString());

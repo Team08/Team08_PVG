@@ -6,12 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.TreeMap;
-
 import race.Race;
 import race.StageRace;
 import race.LapRace;
 
-import util.Time;
 
 /**
  * The main class which initiates the Sorter program.
@@ -30,7 +28,6 @@ public class Enduro {
 	private String raceType = "";
 	private int distance = 0;
 	private String startType = "";
-	private String[] attributeArray;
 	private String attributeString = "";
 	private ArrayList<String> driverAttributes = new ArrayList<String>();
 	private String specialDistances;
@@ -96,9 +93,7 @@ public class Enduro {
 				startType = startType.toLowerCase();
 				raceType = raceType.toLowerCase();
 				distance = Integer.parseInt(args[7]);
-
 				attributeString = args[8];
-				
 				String[] attributeArray = args[8].split("; ");
 
 				for (int i = 0; i < attributeArray.length; i++) {
@@ -128,7 +123,6 @@ public class Enduro {
 			race = new LapRace(start, stop, name, result, raceTime, distance, startType, driverAttributes);
 		}else if (raceType.equals("etapp")){
 			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes, specialDistances, factor);
-
 		}
 		race.computeTotalTime();
 	}

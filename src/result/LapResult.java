@@ -118,8 +118,12 @@ public class LapResult extends Result {
 
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses.get(className);
 				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());	
-				sortedListOfDriversInAClass = sorter.lapSort(unsortedListOfDriversInAClass); 
+
+				sortedListOfDriversInAClass = sorter.lapSort(unsortedListOfDriversInAClass, raceTime); 
 				
+				// Nu har vi en sorterad arraylist med alla förarna i en klass
+
+
 				if (className.equals(nonExistingNbr)) {
 					nonExistingNbrList = sortedListOfDriversInAClass;
 
@@ -128,8 +132,9 @@ public class LapResult extends Result {
 					out.write(className + "\n"); 
 					out.write(sb.toString());
 					for (Driver driver : sortedListOfDriversInAClass) { 
-						System.out.println(driver.getId() + " " + driver.startTime()+ " " + driver.finishTime() + " " + driver.getName());
-						out.write(checkError(driver.getId(), driver.startTime(), driver.finishTime()));
+
+						out.write(checkError(driver.getId(),driver.startTime(), driver.finishTime()));
+
 					}
 				}
 				
@@ -153,8 +158,11 @@ public class LapResult extends Result {
 
 			System.exit(1);
 		}
-		SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps);
-		sorted.writeToFile();
+		
+		
+			SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps, raceTime);
+			sorted.writeToFile();
+		
 	}
 
 	private TreeMap<Integer, Driver> addTreeMap(String className, Integer i,

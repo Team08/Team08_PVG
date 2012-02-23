@@ -30,15 +30,15 @@ public class StageRace extends Race{
 		this.factor = factor;
 		
 	}
-
+	
+	
 	public void getResult(TreeMap<Integer, Driver> index) {
-		if (specialDistancesSplit.length > 0) {
-			result = new SpecialDistanceResult(index, stages, resultat, nameFile, specialDistancesSplit, factor);
+		if (specialDistancesSplit.length > 1) {
+			result = new SpecialDistanceResult(index, stages, resultat,driverAttributes,specialDistancesSplit, factor);
 		} else {
-			result = new StageResult(index, stages, resultat);
+			result = new StageResult(index, stages, resultat, driverAttributes);
 		}
 		result.writeResultFile();
-
 	}
 	
 	private void splitSpecialDistances() {
