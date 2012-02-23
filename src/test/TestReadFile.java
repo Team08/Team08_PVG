@@ -22,11 +22,11 @@ public class TestReadFile extends LapRace {
 	private ReadFinishFile finishFile;
 
 	public TestReadFile() {
-		super("TestStart.test", "TestFinish.test", "", "", "", 0, "", null);
+		super("TestStart.test", "TestFinish.test", "", "","", "", 0, "", null);
 		startfFile = new ReadStartFile(new LapRace(testStartPath,
-				testFinishPath, "", "", "", 0, "", null), testStartPath);
+				testFinishPath, "", "","", "", 0, "", null), testStartPath);
 		finishFile = new ReadFinishFile(new LapRace(testStartPath,
-				testFinishPath, "", "", "", 0, "", null), testFinishPath);
+				testFinishPath, "", "", "","", 0, "", null), testFinishPath);
 	}
 
 	@Test

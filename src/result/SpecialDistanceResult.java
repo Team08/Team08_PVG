@@ -150,8 +150,8 @@ public class SpecialDistanceResult extends Result {
 
 			System.exit(1);
 		}
-		SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, stages, raceTime);
-		sorted.writeToFile();
+//		SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, stages, raceTime);
+//		sorted.writeToFile();
 	}
 
 	private TreeMap<Integer, Driver> addTreeMap(String className, Integer i,

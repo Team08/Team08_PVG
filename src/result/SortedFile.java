@@ -18,15 +18,17 @@ public class SortedFile {
 	private RaceClassBuilder build;
 	private int maxNbrOfLaps;
 	private Time raceTime;
+	private String sortedFile;
 
 	public SortedFile(HashMap<String, TreeMap<Integer, Driver>> kaosMap,
-			int maxNbrOfLaps, Time raceTime) {
+			int maxNbrOfLaps, Time raceTime, String sortedFile) {
 		this.raceTime = raceTime;
 		this.maxNbrOfLaps = maxNbrOfLaps;
 		this.kaosMap = kaosMap;
 		sort = new Sorter();
 		classSortedMap = new HashMap<String, ArrayList<Driver>>();
 		noClass = new ArrayList<Driver>();
+		this.sortedFile = sortedFile;
 
 	}
 
@@ -34,7 +36,7 @@ public class SortedFile {
 		betterMap();
 		try {
 			FileWriter fstream = new FileWriter(
-					"src/test/testfiles/SortedFile2.txt");
+					sortedFile);
 			BufferedWriter writer = new BufferedWriter(fstream);
 			for (String s : classSortedMap.keySet()) {
 				build = new RaceClassBuilder(maxNbrOfLaps, raceTime);

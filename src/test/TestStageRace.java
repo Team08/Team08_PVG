@@ -1,4 +1,4 @@
-//package test;
+package test;
 //
 //import static org.junit.Assert.assertEquals;
 //
@@ -19,7 +19,7 @@
 //import result.StageResult;
 //import util.Time;
 //
-//public class TestStageRace {
+public class TestStageRace {
 //	//expectedresult är inte rätt formaterade! Ändra detta och radera kommentar!
 //	private static String testResultPath = "src/test/testfiles/ExpectedResultOfStageTest.test";
 //	private static String testActualResultPath = "src/test/testfiles/ResultOfStageTest.txt";
@@ -54,4 +54,4 @@
 //	}
 //	
 //	
-//}
+}

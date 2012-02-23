@@ -1,4 +1,4 @@
-//package test;
+package test;
 //
 //import static org.junit.Assert.assertEquals;
 //
@@ -19,7 +19,7 @@
 //import result.StageResult;
 //import util.Time;
 //
-//public class TestStageResult {
+public class TestStageResult {
 //	private static String testResultPath = "src/test/testfiles/accep19_actualRes_modified.txt";
 //	private static String testActualResultPath = "src/test/testfiles/accep19_actualRes_modified(result).txt";
 //	private static String testStartPath = "src/test/testfiles/accep19_starttimes_modified.test";
@@ -120,4 +120,4 @@
 //	
 //	
 
-//}
+}

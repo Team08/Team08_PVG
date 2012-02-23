@@ -29,6 +29,7 @@ public class LapResult extends Result {
 	String resultFile;
 	private String nonExistingNbr = "Icke existerande startnummer";
 	private ArrayList<String> driverAttributes;
+	String sortedFile;
 	/**
 	 * Creates LapResult.
 	 * 
@@ -44,12 +45,13 @@ public class LapResult extends Result {
 	 *            results to
 	 */
 	public LapResult(TreeMap<Integer, Driver> index, int laps,
-			String raceTimeString, String resultFile, ArrayList<String> driverAttributes) {
+			String raceTimeString, String resultFile, String sortedFile, ArrayList<String> driverAttributes) {
 		this.index = index;
 		this.laps = laps;
 		this.raceTime = new Time(raceTimeString + ".00");
 		this.resultFile = resultFile;
 		this.driverAttributes = driverAttributes;
+		this.sortedFile = sortedFile;
 		
 	}
 
@@ -160,7 +162,7 @@ public class LapResult extends Result {
 		}
 		
 		
-			SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps, raceTime);
+			SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps, raceTime, sortedFile);
 			sorted.writeToFile();
 		
 	}
