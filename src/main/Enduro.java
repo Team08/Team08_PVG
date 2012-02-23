@@ -119,7 +119,6 @@ public class Enduro {
 	
 	private void createRace(){
 		if (raceType.equals("varv")) {
-
 			race = new LapRace(start, stop, name, result, raceTime, distance, startType, driverAttributes);
 		}else if (raceType.equals("etapp")){
 			race = new StageRace(start, stop, name, result, distance, startType, driverAttributes, specialDistances, factor);

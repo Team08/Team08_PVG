@@ -43,7 +43,6 @@ public class RaceClassBuilder {
 			
 			// Hämta ut totaltiden för föraren, returnerar -1 om starttid el sluttid fattas
 			int totalTimeTemp = driver.totalTime();
-
 			// Om totaltiden existerar och uppfyller den stipulerade tiden, skriv ut placering
 			if(totalTimeTemp > -1 && raceTime.lesserThan(new Time(totalTimeTemp))){
 				sb.append(plac + "; ");
@@ -64,7 +63,10 @@ public class RaceClassBuilder {
 			sb.append("; ");
 
 			lapTimes = driver.listOfLapTimes();
-			sb.append(lapTimes.size() + 1);
+			if(lapTimes.size()!=0){
+				sb.append(lapTimes.size());
+			}
+			
 			sb.append("; ");
 			
 			if(totalTimeTemp > -1) {

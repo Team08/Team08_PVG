@@ -24,31 +24,36 @@ public class Sorter {
 
 	public class lapSortComparator implements Comparator<Driver>{
 
-		public int compare(Driver o1, Driver o2) {
+		public int compare(Driver d1, Driver d2) {
+			Integer d1T = (new Time(d1.totalTime()).lesserThan(raceTime)) ? -1 : 0; //-1 om ingen totaltid, 0 annars
+			Integer d2T = (new Time(d2.totalTime()).lesserThan(raceTime)) ? -1 : 0; //-1 om ingen totaltid, 0 annars
 			
-			Integer d1T = (new Time(o1.totalTime()).lesserThan(raceTime)) ? -1 : 0;
-			Integer d2T = (new Time(o2.totalTime()).lesserThan(raceTime)) ? -1 : 0;
+
 			
-			System.out.println(" \n \n " + o1.getId() + " vs " + o2.getId());
-			
-			int c1 = d1T.compareTo(d2T);
-			System.out.println(c1);
-			if(c1 != 0) {
-				return c1;
+			int c1 = d1T.compareTo(d2T); 
+
+			if(c1 == 1) {
+				return -1;
+			}
+			if(c1 == -1) {
+				return 1;
 			}
 			
-			Integer d1Laps = new Integer(o1.getNumberOfLaps());
-			Integer d2Laps = new Integer(o2.getNumberOfLaps());
+			Integer d1Laps = new Integer(d1.getNumberOfLaps());
+			Integer d2Laps = new Integer(d2.getNumberOfLaps());
 			
-			System.out.println(d1Laps + " : " + d2Laps);
+
 			
 			int c2 = d1Laps.compareTo(d2Laps);
-			System.out.println(c2);
+
 			if(c2 != 0) {
 				return c2;
 			}
 			
-			return new Time(o1.totalTime()).compareTo(o2.totalTime());
+			
+			
+
+			return ((Integer)d1.totalTime()).compareTo((Integer)d2.totalTime());
 			
 			
 			

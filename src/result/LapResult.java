@@ -118,6 +118,7 @@ public class LapResult extends Result {
 
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses.get(className);
 				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());	
+				
 
 				sortedListOfDriversInAClass = sorter.lapSort(unsortedListOfDriversInAClass, raceTime); 
 				
@@ -125,15 +126,14 @@ public class LapResult extends Result {
 
 
 				if (className.equals(nonExistingNbr)) {
-					nonExistingNbrList = sortedListOfDriversInAClass;
+					nonExistingNbrList = unsortedListOfDriversInAClass;
 
 				} else {
 
 					out.write(className + "\n"); 
 					out.write(sb.toString());
-					for (Driver driver : sortedListOfDriversInAClass) { 
-
-						out.write(checkError(driver.getId(),driver.startTime(), driver.finishTime()));
+					for (Integer id : tm.keySet()) { 
+						out.write(checkError(id,tm.get(id).startTime(), tm.get(id).finishTime()));
 
 					}
 				}

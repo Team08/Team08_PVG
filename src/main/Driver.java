@@ -179,9 +179,10 @@ public class Driver {
 	
 	public ArrayList<String> listOfLapTimes(){
 		ArrayList<String> lapTimes = new ArrayList<String>();
+		if(startTime.size()!=0){
 		for(int i = 0; i < finishTime.size(); i++){
 			lapTimes.add(getLapTime(i));
-		}
+		}}
 		return lapTimes;
 	}
 	
