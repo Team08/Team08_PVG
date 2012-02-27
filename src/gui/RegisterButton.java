@@ -31,7 +31,7 @@ public class RegisterButton extends JButton implements ActionListener {
 	 *            the target register
 	 */
 	public RegisterButton(BasicGUI gui, Register register) {
-		super("Registrera förare");
+		super("Registrera fÃ¶rare");
 		this.gui = gui;
 		this.register = register;
 		addActionListener(this);
@@ -64,9 +64,9 @@ public class RegisterButton extends JButton implements ActionListener {
 			try {
 
 				String driverID = JOptionPane.showInputDialog(null,
-						"Den registrerade tiden är : " + times[0] + "."
+						"Den registrerade tiden Ã¤r : " + times[0] + "."
 								+ times[1] + "." + times[2]
-								+ " \n Förarnummer: ");
+								+ " \n FÃ¶rarnummer: ");
 				if (!driverID.equals(JOptionPane.OK_OPTION)) {
 					if(driverID.length() == 0){
 						wrongID();

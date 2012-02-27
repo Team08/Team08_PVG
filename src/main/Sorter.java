@@ -27,7 +27,7 @@ public class Sorter {
  * Sorts the list in the correct order
  * 
  * @param old - a list where the drivers are unsorted
- * @param raceTime - the time that the totaltime must be over for the driver to have finished the race
+ * @param raceTime - the time that the total time must be over for the driver to have finished the race
  * @return a list where the drivers are sorted
  */
 	public ArrayList<Driver> lapSort(ArrayList<Driver> old, Time raceTime){
@@ -46,7 +46,8 @@ public class Sorter {
 	public class lapSortComparator implements Comparator<Driver>{
 
 		/**
-		 * Compares the two drivers. First checks if the racetime is met, then by number of laps and then by the totaltime
+		 * Compares the two drivers. First checks if the race time is met, 
+		 * then by number of laps and then by the total time
 		 * @param d1 - a driver to compare
 		 * @param d2 - the other driver to compare
 		 * @return 1 if d1 should be before d2 and -1 if d2 should be before d1 (0 if the drivers are exactly alike)

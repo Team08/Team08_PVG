@@ -10,8 +10,9 @@ import java.io.OutputStream;
 import java.util.Properties;
 
 /**
- * This class can verify keys in a properties files that is pre defined in this class. It can also generates a config.properties file with some default keys and values
- * (This class is used by the Enduro) 
+ * This class can verify keys in a properties files that is pre defined in this class. 
+ * It can also generate a config.properties file with some default keys and values
+ * (This class is used by Enduro) 
  * 
  * @author Team08
  *
@@ -95,7 +96,10 @@ public class GenerateConfig {
 
 	}
 
-	// DESSA NYCKLAR �R OBLIGATORISKA
+	/**
+	 * Checks that the mandatory keys have values
+	 * @return
+	 */
 	public boolean checkKey(){
 		boolean toggle = true;
 	
