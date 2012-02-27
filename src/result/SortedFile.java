@@ -10,6 +10,12 @@ import util.Time;
 import main.Driver;
 import main.Sorter;
 
+/**
+ * The class that takes care of the sorted resultfile
+ * 
+ * @author Team08
+ *
+ */
 public class SortedFile {
 	private ArrayList<Driver> unsorted, sorted, noClass;
 	private HashMap<String, ArrayList<Driver>> classSortedMap;
@@ -20,6 +26,14 @@ public class SortedFile {
 	private Time raceTime;
 	private String sortedFile;
 
+	/**
+	 * The constructor for the sortedfile
+	 * 
+	 * @param kaosMap - the map that contains the information needed to write the file
+	 * @param maxNbrOfLaps - the number of laps that should be written in the resultfile
+	 * @param raceTime - the time that should be met if the driver has fulfilled the race
+	 * @param sortedFile - the name of the sortedfile
+	 */
 	public SortedFile(HashMap<String, TreeMap<Integer, Driver>> kaosMap,
 			int maxNbrOfLaps, Time raceTime, String sortedFile) {
 		this.raceTime = raceTime;
@@ -32,6 +46,9 @@ public class SortedFile {
 
 	}
 
+	/**
+	 * Writes the sorted information to a file
+	 */
 	public void writeToFile() {
 		betterMap();
 		if (!(sortedFile.equals("")|| sortedFile == null)) {
@@ -65,6 +82,9 @@ public class SortedFile {
 
 	}
 
+	/**
+	 * Puts the information in a map that is easier to handle
+	 */
 	private void betterMap() {
 		for (String s : kaosMap.keySet()) {
 			unsorted = new ArrayList<Driver>();

@@ -110,7 +110,7 @@ public class LapResult extends Result {
 				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());	
 				sortedListOfDriversInAClass = sorter.lapSort(unsortedListOfDriversInAClass, raceTime); 
 				
-				// Nu har vi en sorterad arraylist med alla fÃ¶rarna i en klass
+				// Nu har vi en sorterad arraylist med alla förarna i en klass
 
 				if (className.equals(nonExistingNbr)) {
 					nonExistingNbrList = unsortedListOfDriversInAClass;
@@ -317,7 +317,7 @@ public class LapResult extends Result {
 
 			sb.append(totalTime.toString() + "; ");
 			if (totalTime.lesserThan(new Time("0.15.00"))) {
-				return "; OmÃ¶jlig Totaltid?";
+				return "; Omöjlig Totaltid?";
 			}
 		}
 		return "";
