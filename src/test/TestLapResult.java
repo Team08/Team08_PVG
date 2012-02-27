@@ -11,7 +11,6 @@ import java.util.Scanner;
 import main.Driver;
 import result.LapResult;
 import util.Time;
-import util.Time2;
 import model.Register;
 
 

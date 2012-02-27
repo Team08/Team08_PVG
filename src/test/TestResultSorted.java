@@ -88,7 +88,7 @@ public class TestResultSorted {
 			BufferedReader br = new BufferedReader(fr);
 			String line = "Actual";
 
-			// Ladda den fï¿½rvï¿½ntade filen
+			// Ladda den förväntade filen
 			FileReader fr2 = new FileReader(new File(ExpResult2));
 			BufferedReader br2 = new BufferedReader(fr2);
 			String line2 = "Exp";

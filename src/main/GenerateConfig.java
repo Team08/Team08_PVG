@@ -74,6 +74,9 @@ public class GenerateConfig {
 		        out.write("#Vad är den minsta tillåtna totaltid som föraren behöver uppnå för att bli kvalificerad? (format = \"hh.mm\" ) Ex. Om minsta giltiga tid är 1 timme och 30 minuter så ange, \"01:30\"" + "\n");
 		        out.write("RACETIME=" + "\n\n");
 		        
+		        out.write("#Vad �r den minsta till�tna varvtiden? (hh.mm) " + "\n");
+		        out.write("LAPTIME=" + "\n\n");
+		        
 		        out.write("#Hur många varv ska käras? Ex. Om vi ska springa 10 varv så anger vi \"10\"" + "\n");
 		        out.write("LAPS=" + "\n\n");
 		        
