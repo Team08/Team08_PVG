@@ -58,10 +58,10 @@ public class Sorter {
 	
 			int c1 = d1T.compareTo(d2T); 
 
-			if(c1 == 1) {
+			if(c1 > 0) {
 				return -1;
 			}
-			if(c1 == -1) {
+			if(c1 < 0) {
 				return 1;
 			}
 			
@@ -70,8 +70,11 @@ public class Sorter {
 			
 			int c2 = d1Laps.compareTo(d2Laps);
 
-			if(c2 != 0) {
-				return c2;
+			if(c2 > 0) {
+				return -1;
+			}
+			if(c2 < 0) {
+				return 1;
 			}
 
 			return ((Integer)d1.totalTime()).compareTo((Integer)d2.totalTime());		
