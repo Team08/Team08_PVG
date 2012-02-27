@@ -1,10 +1,7 @@
 <html lang="sv">
 <head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
-
-
-
 <!--
 html, body  { 
 padding-top: 5px;
@@ -38,31 +35,32 @@ padding-bottom: 0px;
 <html>
 <A NAME="Topp"></A>
 <h2>Enduro - Manual</h2><hr>
+<br>
 
 <a href="#Programinfo">1.0 Programinformation</A><br>
 <a href="#Programinfo">1.1 Namnfil</A><br>
-<a href="#StartaReg">1.2 Starta Registreringsprogrammet</A><br>
-<a href="#Starta">1.3 Starta Resultatprogrammet</A><br>
+<a href="#StartaReg">1.2 Starta Registreringsprogrammet (GUI.jar) </A><br>
+<a href="#Starta">1.3 Starta Sorteringsprogrammet (Enduro.jar) </A><br>
 <a href="#Utveckling">Utveckling</A><br>
 
 
 <A NAME="Programinfo"><h2> 1.0 Programinformation </h2></A>
 
 <p>
-<b>Program som ing�r:</b> <br>Registreringsprogram, Resultatprogram
+<b>Program som ingår:</b> <br>Registreringsprogram, vilket startas med GUI.jar, samt Sorteringsprogrammet, vilket startas med Enduro.jar
 <br><br>
-<b>Hur k�rs dom:</b> <br> 
-Registreringsprogrammet �r grafiskt, medan Resultatprogrammet k�rs fr�n terminalen.<br>
-B�da programmen �r jar-filer. (F�r att starta en .jar fil beh�ver Java Runtime Environment vara installerad)<br>
-F�r att starta Registreringsprogrammet r�cker det med att dubbelklicka p� programmets ikon, medan du m�ste g� in i terminalen f�r att kunna �ppna resultatprogrammet. Till Resultatprogrammet kan man antingen manuellt mata in parametrar i terminalf�nstret eller anv�nda sig av en tillh�rande konfigurationsfil d�r man fyller i de parametrar man vill att programmet ska anv�nda n�r det k�rs. Inga av filnamnen f�r inneh�lla bokst�verna �, � eller �. Mer information om detta finns under <a href="#Starta">1.3 Starta Resultatprogrammet</A><br><br>
-<a href="#Topp">�terv�nd till topp</A>
+<b>Hur körs de:</b> <br> 
+Registreringsprogrammet är grafiskt, medan Sorteringsprogrammet körs från terminalen.<br>
+Båda programmen är jar-filer. (För att starta en .jar fil behöver Java Runtime Environment vara installerad)<br>
+För att starta Registreringsprogrammet räcker det med att dubbelklicka på programmets ikon, medan du måste gå in i terminalen för att kunna öppna Sorteringsprogrammet. Till Sorteringsprogrammet används en tillhörande konfigurationsfil där man fyller i de parametrar man vill att programmet ska använda när det körs. Inga av filnamnen får innehålla bokstäverna å, ä eller ö. Mer information om detta finns under <a href="#Starta">1.3 Starta Sorteringsprogrammet</A><br> Notera att en konfigurationsfil kommer att autogenereras om sådan saknas vid uppstarten av programmet. Denna måste sedan fyllas i innan programmet kan köras korrekt.<br><br>
+<a href="#Topp">Återvänd till topp</A>
 <br><br>
-
+<hr>
 <A NAME="Programinfo"><h2> 1.1 Namnfil </h2></A>
-Namnfilen m�ste skapas i f�rv�g. I den b�r f�rarnas startnummer, namn och klass finnas med (se exempel nedan)<br>
+Namnfilen måste skapas i förväg. I den ska förarnas startnummer, namn och klass finnas med (se exempel nedan). Programmet stödjer även ett variabelt antal uppgifter om förarna såsom MC eller Sponsring. De extra parametrarna (MC, Sponsring osv) måste anges i konfigurationsfilen, men även i namnfilen. I namnfilen måste även de extra parametrarnas värden anges t.ex. "Susuzki" eller "Axis". Nedan ges ett exempel på en vanlig namnfil utan någon extrainformation om förarna, följt av ett annat exempel där förarna har uppgifter om MC och Sponsring. Uppbyggnaden av konfigurationsfilen behandlas senare i dokumentet. Observera att värdena i namnfilen måste separeras med ett semikolon följt av ett mellanslag "; " (utan citationstecken).<br>
 </p>
-Exempel p� hur en namnfil b�r se ut:<br>
-</p>
+
+Exempel på hur en namnfil ser ut:<br>
 <pre>
 StartNr; Namn
 SENIORER
@@ -71,82 +69,101 @@ SENIORER
 JUNIORER
 3; Carin Csson
 </pre>
-Startnummer som inte f�rekommer i namnfilen fast finns med i start och/eller m�lfil kommer att visas l�ngst ner p� resultatlistan som "Icke existerande startnummer".
 
+<p>
 
+Exempel på hur en namnfil ser ut med extra information om förarna: </p>
+<pre>
+StartNr; Namn; Klubb; MC
+SENIOR
+1; Adam Asson; Aklubb; ATM
+2; Bengt Bsson; ; 
+3; Chris Csson; ; CTM
+4; David Dsson; Dklubb; DTM
+5; Erik Esson; Eklubb; ETM
+</pre>
+OBS! Det måste vara ett mellanslag efter varje semikolon och notera att Bengt Bsson varken har en klubb eller mc uppgift och därför måste ett extra semikolon anges. <br>
+
+Startnummer som inte förekommer i namnfilen fast finns med i start och/eller målfil kommer att visas längst ner på resultatlistan som "Icke existerande startnummer".
+<br><br>
+<hr>
 <A NAME="StartaReg"><h2> 1.2 Starta Registreringsprogrammet </h2></A>
-Starta programmet genom att dubbelklicka p� Main.jar-filen. Programmet ska se ut ungef�r som bild 1.
-<p> Bild 1 - En bild p� registreringsprogrammet</p>
+Starta programmet genom att dubbelklicka på GUI.jar-filen. Programmet ska se ut ungefär som bild 1.
+<p> Bild 1 - En bild på registreringsprogrammet</p>
 <img src="pic/ScreenshotRegister.png" alt="GUI" width="600" height="400"/><br>
 
 <br>
 <h2> Enkelstart/Masstart </h2>
 <h1> Enkelstart </h1>
-Parametern Starttype i konfigurationsfilen ska i det h�r fallet vara given som Enkelstart.
-Skriv in startnummret p� f�raren och tryck Registrera f�rare eller tryck enter. Till�tna startnummer �r alla tal st�rre/lika med 0 (men om de inte finns med i namnfilen s� kommer de st� som icke-existerande i resultatfilen). I bild 1 illusteras denna sortens registrering - f�rare 1 och 2 �r registrerade och f�rare 3 �r p�v�g att bli registrerad. <br><br>
-Om man vill spara tiden och skriva in f�rarens startnummer lite senare s� trycker man p� Registrera f�rare utan att skriva in n�got startnummer. D� kommer det upp en dialogruta d�r f�rarens nummer kan skrivas in (se bild 2 nedan), tiden fr�n d� Registrera f�rare-knappen trycktes lagras d� i filen.  <br><br>
+Parametern Starttype i konfigurationsfilen ska i det här fallet vara given som "enkelstart" (utan citationstecken).
+Skriv in startnummret på föraren och tryck Registrera förare eller tryck enter. Tillåtna startnummer är alla tal större/lika med 0 (men om de inte finns med i namnfilen så kommer de stå som icke-existerande i resultatfilen). I bild 1 illusteras denna sorts registrering - förare 1 och 2 är registrerade och förare 3 är påväg att bli registrerad. <br><br>
+Om man vill spara tiden och skriva in förarens startnummer lite senare så trycker man på Registrera förare utan att skriva in något startnummer. Då kommer det upp en dialogruta där förarens nummer kan skrivas in (se bild 2 nedan), tiden från då Registrera förare-knappen trycktes lagras då i filen.  <br><br>
 
-<p> Bild 2 - En bild p� registrering i efterhand</p>
+<p> Bild 2 - En bild på registrering i efterhand</p>
 <img src="pic/ScreenshotRegister2.png" alt="GUI" width="600" height="400"/><br>
 <br>
 
 <h1> Masstart </h1>
-Parametern Starttype i konfigurationsfilen ska i det h�r fallet vara given som Masstart.
-Masstart fungerar p� s� s�tt att man ist�llet f�r startnummer anger hur m�nga deltagare som startar och klickar p� Registrera f�rare. Har man d� fyllt i masstart i konfigurationsfilen s� komemr siffran man skrivit in att inneb�ra att det var det antalet f�rare som startade vid den tidpunkten. �ven h�r fungerar det att spara tiden och skriva in antalet f�rare lite senare. Man fyller d� i antalet i dialogrutan som kommer upp.<br><br> 
+Parametern Starttype i konfigurationsfilen ska i det här fallet vara given som Masstart.
+Masstart fungerar på så sätt att man istället för startnummer anger hur många deltagare som startar och klickar på Registrera förare. Har man då fyllt i masstart i konfigurationsfilen så kommer siffran man skrivit in att innebära att det var det antalet förare som startade vid den tidpunkten (förarna får startnummer 1 upp till det antalet förare man angivit). Även här fungerar det att spara tiden och skriva in antalet förare lite senare. Man fyller då i antalet i dialogrutan som kommer upp.<br><br> 
 
-<h2> Efter f�rdig registrering </h2>
-N�r man har registrerat f�rdigt s� har det skapats en fil som heter Register.txt. Denna b�r d�pas om till f�rslagsvis starttid/maltid, annars kommer filen fyllas p� med fler tider om du startar programmet och registrerar fler f�rare. Observera att man inte f�r anv�nda �, � eller � i n�gra filnamn.
+<h2> Efter färdig registrering </h2>
+När man har registrerat färdigt så har det skapats en fil som heter Register.txt. Denna bör döpas om till förslagsvis starttid/maltid, annars kommer filen fyllas på med fler tider om du startar programmet och registrerar fler förare. Observera att man inte får använda å, ä eller ö i några filnamn.
 <br>
 
 <br>
 <hr>
-<A NAME="Starta"><h2> 1.3 Starta Resultatprogrammet </h2></A>
+<A NAME="Starta"><h2> 1.3 Starta Sorteringsprogrammet </h2></A>
 <p>
-Det finns tv� s�tt att starta resultatprogrammet:<br>
-<li>Inmatning med konfigurationsfil.</li>
-<li>Manuell inmatning av parameter.</li><br>
+När man startar Sorteringsprogrammet behövs en konfigurationsfil, om det inte finns en så autogenereras det en konfigurationsfil som man behöver fylla i innan man startar programmet igen. Resultatfilen (sorterad efter startnummer) skapas av Sorteringsprogrammet med det filnamn som angetts i konfigurationsfilen och placerar den i samma mapp som programmet.. Om man anger ett värde till nyckeln SORTEDFILE i konfigurationsfilen kommer även en resultatfil sorterad enligt antalet varv och totaltid att skapas.<br><br>
 
-Resultatfilen skapas av Reultatprogrammet (Om tidigare resultatfiler ska finnas kvar m�ste de d�pas om).<br><br>
-
-<b>1: Inmatning med konfigurationsfil "config.properties"</b><br>
-A. �ppna config.properties filen med en texteditor.<br>
-B. �ndra v�rdena i config.properties till �nskat v�rde enligt exempel1 och spara d�refter.<br>
-C. K�r programmet!
-<br><br>
-Om man k�r programmet utan en konfigurationsfil s� autogenereras det en konfigurationsfil som man beh�ver fylla i innan man startar programmet igen.
+<b>Inmatning med konfigurationsfil "config.properties"</b><br>
+A. Öppna config.properties filen med en texteditor.<br>
+B. Ändra värdena i config.properties till önskade värden enligt exempel1 och spara därefter.<br>
+C. Kör programmet!
 <br>
-
+<b>(Fler nycklar och detaljer finns som kommentar i config.properties filen! Läs vidare där!)</b>
+<br>
+<br>
+Som standard placeras resultatfilerna i samma mapp som programmet.
 <pre>
 
-Exempel1: �ndra i en konfig-fil
+Exempel1: Ändra i en konfig-fil
 
 # Initial variables
 # <"key">=<"value">
 
-#Filnamn plus deras exakta s�kv�g.
+#Filnamn plus deras exakta sökväg.
 STARTFILE=src/ex/starttider/EXstart1.txt
 STOPFILE=src/ex/stoptider/EXfinish1.txt
 NAMEFILE=src/ex/namnfil/EXnamnfil.txt
-RESULTFILE=ChangeMe.txt
+RESULTFILE=src/ex/resultatfil/EXresult.txt
+SORTEDFILE=src/ex/resultatfil/EXsortedresult.txt
 
 </pre>
-<b> Flera m�lfiler </b><br>
-Vid anv�ndning av konfigurationsfil s� �r det m�jligt att ha flera m�ltidsfiler, dessa skrivs d� in efter STOPFILE i konfigurationsfilen och separeras med ett , . Detta alternativ �r inte m�jligt vid manuell inmatning av parametrar.
+
+
+<b> Flera målfiler </b><br>
+Vid användning av konfigurationsfil så är det möjligt att ha flera måltidsfiler, dessa skrivs då in efter STOPFILE i konfigurationsfilen och separeras med ett kommatecken "," (utan citationstecken). Detta alternativ är inte möjligt vid manuell inmatning av parametrar.
 <br><br>
-Exempel2: Flera m�ltidsfiler<br>
-STOPFILE=src/ex/stoptider/EXfinish1.txt, src/ex/stoptider/EXfinish1.txt
-<br><br>
+<pre>
+Exempel2: Flera måltidsfiler
+
+STOPFILE=src/ex/stoptider/EXfinish1.txt,src/ex/stoptider/EXfinish1.txt
+</pre>
 <br>
+<b>DRIVER_ATTRIBUTES i konfigurationsfilen</b><br>
+När man i konfigurationsfilen skriver vilka föraruppgifter som ska finnas med måste dessa separeras med ett semikolon ";" (utan citationstecken). Raden ska också avslutas med ett semikolon, se exempel nedan. Om man inte vill ha med några extra uppgifter, ska inget värde alls anges till DRIVER_ATTRIBUTES.
 
-<b>2: Manuell inmatning av parameter:</b><br>
-Starta Terminalen och navigera till mappen d�r Resultatprogrammet finns. N�r Resultatprogrammet startas fr�n terminalen beh�ver det �tta parametrar. Namnet p� starttidsfilen, m�ltidsfilen, namnfilen, resultatsfilen, t�vlingsformen, starttyp (Enkelstart eller Masstart), stipulerade tiden i timmar och minuter (skrivs 05.43) som ska �verstigas samt antalet varv som ska visas i resultatfilen.<br>
-T�vlingsformerna best�ms genom att skriva in namnet p� t�vlingsformen (Existerande t�vlingsformer: Varv (maraton �r en sorts varvlopp)).
-<br><br>
-Exempel p� hur man startar sorteringsprogrammet vid enkelstart anv�ndandes manuell inmatning:
-java -jar Enduro.jar starttider.txt maltider.txt namnfil.txt result.txt Varv Enkelstart 03.00 3
+<pre>
+Exempel
 
-<br><br>
-<a href="#Topp">�terv�nd till topp</A>
+DRIVER_ATTRIBUTES=MC;Klubb;Sponsor;
+</pre>
+
+<br>
+<br>
+<a href="#Topp">Återvänd till topp</A>
 
 <br>
 <br>
@@ -159,29 +176,30 @@ java -jar Enduro.jar starttider.txt maltider.txt namnfil.txt result.txt Varv Enk
 <li>4 - Personuppgifter</li>
 <li>5 - Totaltid</li>
 <li>6 - Felaktiga registreringar</li>
-<li>7 - GUI f�r registrering</li>
+<li>7 - GUI för registrering</li>
 <li>8 - Registrering av tider</li>
 <li>9 - Varvlopp</li>
-<li>10 - Flera skall kunna registrera m�ltider</li>
+<li>10 - Flera skall kunna registrera måltider</li>
 <li>11- Enkel Masstart </li>
-<li>12 - M�lg�ng d�r nummerpl�ten inte kan l�sas i f�rv�g</li>
+<li>12 - Målgång där nummerplåten inte kan lösas i förväg</li>
 <li>13 - Hantera klasser</li>
-<li>14 - Anv�ndarmanual</li>
+<li>14 - Användarmanual</li>
 <li>15 - Hantera felaktiga tidsdata</li>
-<li>16 - Hantera registreringar med otill�tna startnummer</li>
+<li>16 - Hantera registreringar med otillåtna startnummer</li>
 <li>17 - Variabelt antal uppgifter om förarna</li>
-<li>25 - St�d f�r konfiguration</li>
+<li>18 - Sorterad resultatlista</li>
+<li>25 - Stöd för konfiguration</li>
 <li>31 - Teknisk dokumentation</li>
 <li>E1 - Refaktorisering av Sorteringsprogrammet</li>
 <li>E2 - Refaktorisering av Registreringsprogrammet</li>
 <li>E3 - Refaktorisering av Tidsrepresentaion</li>
 <li>E4 - Release</li>
-<li>E5 - Kund�nskem�l</li>
+<li>E5 - Kundönskemål</li>
 
 
 <br><br>
 
-<a href="#Topp">�terv�nd till topp</A>
+<a href="#Topp">Återvänd till topp</A>
 
 <br><br><br>
 

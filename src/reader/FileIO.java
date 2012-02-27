@@ -54,7 +54,7 @@ public abstract class FileIO {
 
 				while (scanner.hasNextLine()) {
 					line = scanner.nextLine();
-					String[] str = line.split("; ");
+					String[] str = line.split(";");
 					time = new Time(str[1].trim());
 					riderID = Integer.parseInt(str[0].trim());
 					add();
