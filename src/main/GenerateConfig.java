@@ -9,7 +9,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Properties;
 
-
+/**
+ * This class can verify keys in a properties files that is pre defined in this class. It can also generates a config.properties file with some default keys and values
+ * (This class is used by the Enduro) 
+ * 
+ * @author Team08
+ *
+ */
 public class GenerateConfig {
 	Properties configFile;
 	String start = "";
@@ -21,11 +27,20 @@ public class GenerateConfig {
 	int distance = 0;
 	String attributeString = "";
 	
+	/**
+	 * Creates the GenerateConfig
+	 * @param configFile
+	 * 					The properties file to read
+	 */
 	public GenerateConfig(Properties configFile){
 		this.configFile = configFile; 
 	}
 	
-	
+	/**
+	 * This method generates a file config.properties
+	 * @param configFile
+	 * 					The properties file to read
+	 */
 	public void autogenerateConfig(){
 		 try {  
 				FileOutputStream createTheFile = new FileOutputStream(new File("config.properties"));
@@ -72,18 +87,18 @@ public class GenerateConfig {
 		        
 		        
 		        
-		        out.write("#________Nycklar som inte används för denna programversion______!" + "\n");
+		        out.write("#________Nycklar som inte anvÃ¤nds fÃ¶r denna programversion______!" + "\n");
 		        out.write("#Vilka resultat vill man ha (med o utan sortering, i vilka format" + "\n");
 		        out.write("RESULT_FORMAT" + "\n");
-		        out.write("#Vilka etapper är specialsträckor? Ange nummer för dessa" + "\n");
-		        out.write("#Ex \"2,3\" om 2 och 3 är specialsträckor" + "\n");
+		        out.write("#Vilka etapper Ã¤r specialstrÃ¤ckor? Ange nummer fÃ¶r dessa" + "\n");
+		        out.write("#Ex \"2,3\" om 2 och 3 Ã¤r specialstrÃ¤ckor" + "\n");
 		        out.write("SPECIAL_DISTANCES=" + "\n");
-		        out.write("#Faktorn som specialsträckor skall multipliceras med" + "\n");
+		        out.write("#Faktorn som specialstrÃ¤ckor skall multipliceras med" + "\n");
 		        out.write("#Ex: 3" + "\n");
 		        out.write("FACTOR=" + "\n");
-		        out.write("#Antal etapper, SpecialSträckor och faktor" + "\n");
+		        out.write("#Antal etapper, SpecialStrÃ¤ckor och faktor" + "\n");
 		        out.write("NBR_ETAPP=" + "\n");
-		        out.write("#________Nycklar som inte används för denna programversion______!" + "\n");
+		        out.write("#________Nycklar som inte anvÃ¤nds fÃ¶r denna programversion______!" + "\n");
 
 		        out.close();  
 		        System.out.println("Autogenerate file: config.properties.");
@@ -94,7 +109,7 @@ public class GenerateConfig {
 
 	}
 
-	// DESSA NYCKLAR ÄR OBLIGATORISKA
+	// DESSA NYCKLAR ï¿½R OBLIGATORISKA
 	public boolean checkKey(){
 		boolean toggle = true;
 	
