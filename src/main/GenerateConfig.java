@@ -38,8 +38,6 @@ public class GenerateConfig {
 	
 	/**
 	 * This method generates a file config.properties
-	 * @param configFile
-	 * 					The properties file to read
 	 */
 	public void autogenerateConfig(){
 		 try {  
@@ -87,18 +85,18 @@ public class GenerateConfig {
 		        
 		        
 		        
-		        out.write("#________Nycklar som inte anvÃ¤nds fÃ¶r denna programversion______!" + "\n");
+		        out.write("#________Nycklar som inte används för denna programversion______!" + "\n");
 		        out.write("#Vilka resultat vill man ha (med o utan sortering, i vilka format" + "\n");
 		        out.write("RESULT_FORMAT" + "\n");
-		        out.write("#Vilka etapper Ã¤r specialstrÃ¤ckor? Ange nummer fÃ¶r dessa" + "\n");
+		        out.write("#Vilka etapper är specialsträckor? Ange nummer för dessa" + "\n");
 		        out.write("#Ex \"2,3\" om 2 och 3 Ã¤r specialstrÃ¤ckor" + "\n");
 		        out.write("SPECIAL_DISTANCES=" + "\n");
-		        out.write("#Faktorn som specialstrÃ¤ckor skall multipliceras med" + "\n");
+		        out.write("#Faktorn som specialsträckor skall multipliceras med" + "\n");
 		        out.write("#Ex: 3" + "\n");
 		        out.write("FACTOR=" + "\n");
-		        out.write("#Antal etapper, SpecialStrÃ¤ckor och faktor" + "\n");
+		        out.write("#Antal etapper, SpecialSträckor och faktor" + "\n");
 		        out.write("NBR_ETAPP=" + "\n");
-		        out.write("#________Nycklar som inte anvÃ¤nds fÃ¶r denna programversion______!" + "\n");
+		        out.write("#________Nycklar som inte används för denna programversion______!" + "\n");
 
 		        out.close();  
 		        System.out.println("Autogenerate file: config.properties.");
@@ -109,7 +107,7 @@ public class GenerateConfig {
 
 	}
 
-	// DESSA NYCKLAR ï¿½R OBLIGATORISKA
+	// DESSA NYCKLAR ÄR OBLIGATORISKA
 	public boolean checkKey(){
 		boolean toggle = true;
 	
