@@ -37,11 +37,11 @@ public class LapRace extends Race {
 	 * @param resultFile
 	 *            the name of the result file
 	 * @param raceTime
-	 *            The total time the race is ongoing (hh.mm)
+	 *            The minimum total time the race is ongoing (hh.mm)
 	 * @param laps
 	 *            the number of laps which are to be written to the file
 	 * @param startType
-	 *            the type of start (masstart e.g.)
+	 *            the type of start (e.g. "masstart")
 	 * @param lapTime - the minimum time of a lap
 	 */
 
@@ -59,10 +59,10 @@ public class LapRace extends Race {
 	}
 
 	/**
-	 * Creates a Lapresult that creates and writes the result file.
+	 * Creates a LapResult that creates and writes the result file.
 	 * 
 	 * @param index
-	 *            the treemap index
+	 *            the treemap index with start numbers and drivers
 	 */
 	public void getResult(TreeMap<Integer, Driver> index) {
 		result = new LapResult(index, laps, raceTime, resultat, sortedFile, driverAttributes, lapTime);

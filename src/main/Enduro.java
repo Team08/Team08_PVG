@@ -38,7 +38,7 @@ public class Enduro {
 
 	/**
 	 * The constructor which creates an Enduro object. Uses a config.properties
-	 * file that the user needs to fill in the values in order to make the sorter 
+	 * file that the user needs enter values into in order to make the sorter 
 	 * function as wanted.
 	 * 
 	 *@param String[] args - argument array used if there are any arguments in it
@@ -138,10 +138,10 @@ public class Enduro {
 	
 	
 	/** 
-	 * Creates a LapRace and calls the method computeTotalTime that will create resultfiles 
+	 * Creates a LapRace and calls the method computeTotalTime that will create result files 
 	 * Prints which files the program has generated
 	 * 
-	 * There is functionality for a StageRace but it is not used
+	 * There is functionality for a StageRace but it is not used.
 	 */
 	private void createRace(){
 		if (raceType.equals("varv")) {

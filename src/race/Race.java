@@ -18,7 +18,6 @@ import util.Time;
  * @author Team08
  * 
  */
-
 public abstract class Race {
 	public TreeMap<Integer, Driver> index;
 
@@ -64,7 +63,7 @@ public abstract class Race {
 	 * Creates a Result that creates a result file
 	 * 
 	 * @param index
-	 *            the treemap index
+	 *            the treemap index with start numbers and drivers
 	 */
 	public abstract void getResult(TreeMap<Integer, Driver> index);
 
@@ -87,13 +86,12 @@ public abstract class Race {
 			e.printStackTrace();
 		}
 		getResult(index);
-
-
 	}
 
 	/**
-	 * Retrieves a driver and adds a start time to it and puts the created driver
-	 * in the treemap index. Multiple start times are allowed.
+	 * Retrieves a driver, adds a start time to it, sets the drivers start number
+	 * and puts the created driver in the treemap index. 
+	 * Multiple start times are allowed.
 	 * 
 	 * The driver does not know his start number, this is stored in the treemap
 	 * instead.
@@ -111,8 +109,9 @@ public abstract class Race {
 	}
 
 	/**
-	 * Retrieves a driver and adds a new finish time to it and puts the created driver
-	 * in the treemap index. Multiple finish times are allowed.
+	 * Retrieves a driver, adds a new finish time, sets the driver's start number 
+	 * and puts the created driver in the treemap index. 
+	 * Multiple finish times are allowed.
 	 * 
 	 * The driver does not know his start number, this is stored in the treemap
 	 * instead.
@@ -131,8 +130,8 @@ public abstract class Race {
 	}
 
 	/**
-	 * Retrieves a driver and adds his/her name and puts the created driver in the
-	 * treemap index
+	 * Retrieves a driver and adds his/her name, and sets the drivers start number
+	 * and puts the created driver in the treemap index
 	 * 
 	 * The driver does not know his start number, this is stored in the treemap
 	 * instead.
@@ -181,7 +180,7 @@ public abstract class Race {
 	}
 
 	/**
-	 * return the size of treemap index
+	 * Return the size of treemap index
 	 * 
 	 * @return int The list index's size
 	 */

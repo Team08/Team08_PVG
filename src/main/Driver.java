@@ -7,14 +7,15 @@ import util.Time;
 
 /**
  * The Driver class which represents a driver. The driver knows his id, his name, start times, 
- * finish times and which classes he's a part of.
+ * finish times and which classes he's a part of. The start times and finish times lists are
+ * sorted in increasing order.
  * 
  * @author Team08
  * 
  */
 public class Driver {
 	private String name;
-	private ArrayList<Time> startTime = new ArrayList<Time>();
+	private ArrayList<Time> startTime = new ArrayList<Time>(); 
 	private ArrayList<Time> finishTime = new ArrayList<Time>();
 	private String classes = "";
 	private int id;
@@ -70,18 +71,18 @@ public class Driver {
 	}
 
 	/**
-	 * Returns the driver's starttimes as a list
+	 * Returns the driver's start times as a list
 	 * 
-	 * @return The starttimes as a list
+	 * @return The start times as a list
 	 */
 	public ArrayList<Time> startTime() {
 		return startTime;
 	}
 
 	/**
-	 * Returns the driver's finishtimes as a list.
+	 * Returns the driver's finish times as a list.
 	 * 
-	 * @return The finishtimes as a list
+	 * @return The finish times as a list
 	 */
 	public ArrayList<Time> finishTime() {
 		return finishTime;
@@ -102,7 +103,7 @@ public class Driver {
 	 * 
 	 * @param i
 	 *            The lap number, starting from 0
-	 * @return A time object which represents the lap time
+	 * @return The lap time as a string
 	 */
 	public String getLapTime(int i) {
 		int laptime;
@@ -142,11 +143,12 @@ public class Driver {
 	 * @return The number of laps as an integer
 	 */
 	public int getNumberOfLaps() {
+		
 		return finishTime.size();
 	}
 
 	/**
-	 * Sets the drivers id=startnumber
+	 * Sets the drivers id=start number
 	 * 
 	 * @param id
 	 *            the id to set
@@ -156,7 +158,7 @@ public class Driver {
 	}
 
 	/**
-	 * Returns the drivers id=startnumber
+	 * Returns the drivers id=start number
 	 * 
 	 * @return the id
 	 */
@@ -165,8 +167,8 @@ public class Driver {
 	}
 	
 	/**
-	 * Returns the totaltime or -1 if no totaltime exists
-	 * @return the totaltime or -1 
+	 * Returns the total time or -1 if no total time exists
+	 * @return the total time or -1 
 	 */
 	public int totalTime() {
 		if(startTime.size() > 0 && finishTime.size() > 0) {
@@ -186,7 +188,7 @@ public class Driver {
 	
 	
 	/**
-	 * Returns the drivers attributes
+	 * Returns the drivers attributes as a list
 	 * @return the attributes
 	 */
 	public ArrayList<String> getAttributes(){
@@ -194,24 +196,33 @@ public class Driver {
 	}
 	
 	/**
-	 * Returns a list of the laptimes that the driver has
-	 * An empty list if there are no laptimes
-	 * @return list of laptimes
+	 * Returns a list of the lap times that the driver has An empty list if
+	 * there are no lap times
+	 * 
+	 * @return list of lap times
 	 */
-	public ArrayList<String> listOfLapTimes(){
+	public ArrayList<String> listOfLapTimes() {
 		ArrayList<String> lapTimes = new ArrayList<String>();
-		if(startTime.size()!=0){
-		for(int i = 0; i < finishTime.size(); i++){
-			lapTimes.add(getLapTime(i));
-		}}
+		if (startTime.size() != 0) {
+			for (int i = 0; i < finishTime.size(); i++) { // Denna metod bÃ¶r ses
+															// Ã¶ver. Om det
+															// finns tvÃ¥ finish
+															// times i listan
+															// men ingen
+				lapTimes.add(getLapTime(i));               // start time kommer vi returnera
+												           // en tom lista, nÃ¤r listan
+												           // egentligen bÃ¶r innehÃ¥lla ett
+												          // varv.
+			}
+		}
 		return lapTimes;
 	}
 
 	/**
-	 * Metod för story 19, etapprace, används dock inte
+	 * This method is used in Story 19, which is NOT implemented. Therefore the method isn't used.
 	 */
 	public String getStageTime(int i) {
-		// Kolla så det finns någon tid för etappen i
+		// Kolla sÃ¥ det finns nÃ¥gon tid fÃ¶r etappen i
 		if (i > startTime().size() - 1 || i > finishTime().size() - 1) {
 			return ("");
 			// Annars returnera tiden etappen i
@@ -230,7 +241,7 @@ public class Driver {
 	}
 
 	/**
-	 * Metod för story 19, etapprace, används dock inte
+	 * This method is used in Story 19, which is NOT implemented. Therefore the method isn't used.
 	 */
 	public String getTotStageTime() {
 		int sum = 0;
@@ -241,7 +252,7 @@ public class Driver {
 	}
 
 	/**
-	 * Metod för story 19, 20, etapprace och specialsträckor, används dock inte
+	 * This method is used in Story 19 and 20, which is NOT implemented. Therefore the method isn't used.
 	 */
 	public String getNbrOfStages() {
 		String s = Integer.toString(finishTime.size());
@@ -250,5 +261,4 @@ public class Driver {
 		}
 		return s;
 	}
-
 }
