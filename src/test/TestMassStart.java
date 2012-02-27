@@ -26,12 +26,12 @@ public class TestMassStart extends LapRace {
 	private static String testMassStartPath = "src/test/testfiles/MassStart.test";
 
 	public TestMassStart() {
-		super("TestStart.test", "", "", "", "", "", 0, "", null);
+		super("TestStart.test", "", "", "", "", "", 0, "", null, null);
 	}
 
 	@Before
 	public void setUp() {
-		race = new LapRace("", "", "", "", "", "", 0, "", null);
+		race = new LapRace("", "", "", "", "", "", 0, "", null, null);
 		fileio = new ReadStartFile(race, testMassStartPath);
 	}
 
