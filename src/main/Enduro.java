@@ -37,13 +37,8 @@ public class Enduro {
 
 	/**
 	 * The constructor which creates an Enduro object. Uses a config.properties
-<<<<<<< HEAD
 	 * file that the user needs enter values into in order to make the sorter 
 	 * function as wanted.
-=======
-	 * file that the user needs to fill in the values in order to make the
-	 * sorter function as wanted.
->>>>>>> 6228cd13b18c60a85d194a6de876abe4ce149588
 	 * 
 	 *@param String
 	 *            [] args - argument array used if there are any arguments in it
