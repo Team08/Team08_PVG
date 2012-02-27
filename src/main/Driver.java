@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import util.Time;
-import util.Time2;
 
 /**
  * The Driver class which represents a driver. The driver does not know his
