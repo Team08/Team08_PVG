@@ -147,6 +147,19 @@ public class LapResult extends Result {
 			sorted.writeToFile();
 	}
 
+	
+	/**
+	 * Creates a TreeMap containing drivers that has no class
+	 * 
+	 * @param className
+	 *            Name of the class
+	 * @param i
+	 *            A int used for index
+	 * @param tDriver
+	 *            driver object to be used
+     * @return The TreeMap contains the drivers with no class
+	 *         
+	 */
 	private TreeMap<Integer, Driver> addTreeMap(String className, Integer i,
 			Driver tDriver) {
 		TreeMap<Integer, Driver> tm;
@@ -231,7 +244,16 @@ public class LapResult extends Result {
 		sb.append("\n");
 		return sb.toString();
 	}
-
+	/**
+	 * Prints the lap times to the result file
+	 * 
+	 * @param currentIndex
+	 *            The current index
+	 * @param sb
+	 *            the StringBuilder to append to
+     * @return The string contains the lap times for target driver plus
+	 *         error-notations if there are any
+	 */
 	private String printLapTimes(int currentIndex, List<Time> startTime,
 			List<Time> finishTime, StringBuilder sb) {
 		String totalLapCheck = "";

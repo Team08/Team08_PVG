@@ -39,7 +39,9 @@ public class Enduro {
 	/**
 	 * The constructor which creates an Enduro object. Uses a config.properties
 	 * file that the user needs to fill in the values in order to make the sorter 
-	 * function as wanted. 	 
+	 * function as wanted.
+	 * 
+	 *@param String[] args - argument array used if there are any arguments in it
 	 */
 	public Enduro(String[] args) {
 
@@ -52,11 +54,11 @@ public class Enduro {
 					readConfigKeys(configFile);
 					createRace();
 				}else{
-					System.err.println("Misslyckades med att l√É‚Ç¨sa konfigurationsfilen");
+					System.err.println("Misslyckades med att l‰sa konfigurationsfilen");
 				}
 
 			} catch (FileNotFoundException e1) {
-				System.err.println("Misslyckades med att l√§sa konfigurationsfilen, en ny har autogenerats.");
+				System.err.println("Misslyckades med att l‰sa konfigurationsfilen, en ny har autogenerats.");
 				System.err.println("Var god och fyll i config.properties filen och starta om programmet.");
 				genCon.autogenerateConfig();
 				System.exit(1);
@@ -72,12 +74,17 @@ public class Enduro {
 				}
 				createRace();
 			} catch (Exception e) {
-				System.err.println("Error: Du m√•ste skriva in alla argument");
+				System.err.println("Error: Du mÂste skriva in alla argument");
 
 			}}
 	}
 
-
+	/**
+	 * Reads the arguments from the array of arguments that is a parameter to the program. 
+	 * This is only used if there are any arguments in the array when the program starts	 
+	 * 
+	 *@param String[] args - argument array used
+	 */
 	private void readKeysfromArgs(String[] args) {
 		start = args[0];
 		stop = args[1];
@@ -100,7 +107,12 @@ public class Enduro {
 		factor = Integer.parseInt(args[10]);
 	}
 
-
+	/**
+	 * Reads the arguments from the configfile that belongs to the program
+	 * This is only used if there are no arguments in the array when the program starts	 
+	 * 
+	 *@param configFile - the configfile that the arguments to the program is read from
+	 */
 	private void readConfigKeys(Properties configFile) {
 		start = configFile.getProperty("STARTFILE").trim();
 		stop = configFile.getProperty("STOPFILE").trim();
@@ -125,6 +137,12 @@ public class Enduro {
 	}
 	
 	
+	/** 
+	 * Creates a LapRace and calls the method computeTotalTime that will create resultfiles 
+	 * Prints which files the program has generated
+	 * 
+	 * There is functionality for a StageRace but it is not used
+	 */
 	private void createRace(){
 		if (raceType.equals("varv")) {
 			race = new LapRace(start, stop, name, result, sorted, raceTime, laps, startType, driverAttributes, lapTime);
