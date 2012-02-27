@@ -111,8 +111,8 @@ public class Enduro {
 		result = configFile.getProperty("RESULTFILE").trim();
 		sorted = configFile.getProperty("SORTEDFILE").trim();
 		raceTime = configFile.getProperty("RACETIME").trim();
-		raceType = configFile.getProperty("RACETYPE").trim();	
-		startType = configFile.getProperty("STARTTYPE").trim();				
+		raceType = configFile.getProperty("RACETYPE").trim().toLowerCase();	
+		startType = configFile.getProperty("STARTTYPE").trim().toLowerCase();				
 		laps = Integer.parseInt(configFile.getProperty("LAPS").trim());	
 		attributeString = configFile.getProperty("DRIVER_ATTRIBUTES").trim();
    if(raceType.equals("etapp")){	
