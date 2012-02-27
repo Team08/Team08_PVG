@@ -17,10 +17,10 @@ public class TestReadFileFromFile {
 
 	public TestReadFileFromFile() {
 
-		 rsf = new ReadStartFile(new LapRace("Unknown", "Unknown", "Unknown","","","",0,"", null), "Unknown");
-		 rff = new ReadFinishFile(new LapRace("Unknown", "Unknown", "Unknown","","","",0,"", null), "Unknown");
+		 rsf = new ReadStartFile(new LapRace("Unknown", "Unknown", "Unknown","","","",0,"", null, null), "Unknown");
+		 rff = new ReadFinishFile(new LapRace("Unknown", "Unknown", "Unknown","","","",0,"", null, null), "Unknown");
 		rnf = new ReadNameFile(new LapRace("Unknown", "Unknown", "Unknown",
-				"", "","", 0, "", null), "Unknown");
+				"", "","", 0, "", null, null), "Unknown");
 	}
 
 	@Before

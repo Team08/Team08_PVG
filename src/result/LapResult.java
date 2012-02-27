@@ -26,7 +26,7 @@ public class LapResult extends Result {
 	private HashMap<String, TreeMap<Integer, Driver>> mapOfDiffRaceClasses;
 	int laps;
 	Time raceTime;
-	String resultFile;
+	String resultFile, lapTime2;
 	private String nonExistingNbr = "Icke existerande startnummer";
 	private ArrayList<String> driverAttributes;
 	String sortedFile;
@@ -43,15 +43,17 @@ public class LapResult extends Result {
 	 * @param resultFile
 	 *            the name of the resultFile that this class will compute the
 	 *            results to
+	 * @param lapTime TODO
 	 */
 	public LapResult(TreeMap<Integer, Driver> index, int laps,
-			String raceTimeString, String resultFile, String sortedFile, ArrayList<String> driverAttributes) {
+			String raceTimeString, String resultFile, String sortedFile, ArrayList<String> driverAttributes, String lapTime) {
 		this.index = index;
 		this.laps = laps;
 		this.raceTime = new Time(raceTimeString + ".00");
 		this.resultFile = resultFile;
 		this.driverAttributes = driverAttributes;
 		this.sortedFile = sortedFile;
+		this.lapTime2 = lapTime;
 	}
 
 	/**
@@ -238,7 +240,8 @@ public class LapResult extends Result {
 			for (int j = 0; j < laps; j++) {
 				lapTime = index.get(currentIndex).getLapTime(j);
 				Time lap = new Time(lapTime);
-				if (lap.lesserThan(new Time("00.15.00"))) {
+				Time minlapTime = new Time(lapTime2 + ".00");
+				if (lap.lesserThan(minlapTime)) {
 					if (!lap.equals(new Time(0))) {
 						totalLapCheck = " Omöjlig varvtid ";
 					}

@@ -15,7 +15,7 @@ public class TestRace {
 	@Before
 	public void setUp() {
 
-		race = new LapRace("", "","", "", "", "", 0, "", null);
+		race = new LapRace("", "","", "", "", "", 0, "", null, null);
 
 	}
 
