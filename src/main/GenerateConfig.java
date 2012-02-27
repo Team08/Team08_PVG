@@ -45,13 +45,15 @@ public class GenerateConfig {
 
 		        BufferedWriter out = new BufferedWriter(new FileWriter("config.properties")); 
 		        out.write("#AUTO GENERATED config.properties\n");
+
 		        out.write("#Konfigurationsfil för Enduro som har vården sparade i formatet <nyckel>=<värde> \n");
-		        out.write("#Fyll i alla värden nedan förutom de som är längst ner eftersom de ej används. \n\n");
+		        out.write("#Fyll i alla värden nedan. \n\n");
 		        
 		        out.write("#Vad heter dina filer och var ligger dem?" + "\n");
 		        out.write("#A1t1. Dina filer ligger i samma mapp som Enduro, då anger vi \"Exempel_startfil.txt\"" + "\n");
 		        out.write("#Alt2. Du har filerna i en mapp som heter [Tider], då anger vi \"Tider/Exempel_startfil.txt\"" + "\n");
 		        out.write("#(OBS)! Undvik svenska specialtecken på filnamnen!" + "\n");
+		        out.write("#För att ange flera stopfiler/måltider så separare med ett kommatecken. Ex \"example_start.txt,example_start2.txt\"");
 		        out.write("STARTFILE=example_start.txt" + "\n");
 		        out.write("STOPFILE=aMapp/example_stop.txt" + "\n");
 		        out.write("NAMEFILE=" + "\n\n");
@@ -69,10 +71,10 @@ public class GenerateConfig {
 		        out.write("#LAPS=3Hur startas tävlingen? Ex. Vid enkelstart så ange:\"enkelstart\", Vid masstart så ändra värdet till:\"masstart\""  + "\n");
 		        out.write("STARTTYPE=enkelstart" + "\n\n");
 		        
-		        out.write("#Hur långe varar hela tävlingen? (format = \"hh.mm\" ) Ex. Om tävlingen varar i 10 timmar och 30 minuter så ange, \"10:30\"" + "\n");
+		        out.write("#Vad är den minsta tillåtna totaltid som föraren behöver uppnå för att bli kvalificerad? (format = \"hh.mm\" ) Ex. Om minsta giltiga tid är 1 timme och 30 minuter så ange, \"01:30\"" + "\n");
 		        out.write("RACETIME=" + "\n\n");
 		        
-		        out.write("#Hur många varv ska köras? Ex. Om vi ska springa 10 varv så anger vi \"10\"" + "\n");
+		        out.write("#Hur många varv ska käras? Ex. Om vi ska springa 10 varv så anger vi \"10\"" + "\n");
 		        out.write("LAPS=" + "\n\n");
 		        
 		        out.write("#ALTERNATIV nyckel som ej behöver fyllas i!" + "\n");
@@ -80,9 +82,6 @@ public class GenerateConfig {
 		        out.write("#Ex: \"Klubb;MC-fabrikat;Sponsor1;Sponsor2;\"" + "\n");
 		        out.write("DRIVER_ATTRIBUTES=" + "\n\n\n\n\n\n\n");
 		        
-		        
-		        
-
 
 		        out.close();  
 		        System.out.println("Autogenerate file: config.properties.");

@@ -30,10 +30,11 @@ public class TestResultSorted {
 		private int laps = 0;
 		private String startType = "enkelstart";
 		private ArrayList<String> driverAttributes = new ArrayList<String>();
+		private String lapTime = "00.15";
 
 		private void createRace(){			
 			if (raceType.equals("varv")) {
-			race = new LapRace(start, stop, name, result, sorted, raceTime, laps, startType, driverAttributes, null);
+			race = new LapRace(start, stop, name, result, sorted, raceTime, laps, startType, driverAttributes, lapTime);
 			}
 			race.computeTotalTime();
 			System.out.println("TestResultSorted har genererat: " + result);
@@ -78,7 +79,7 @@ public class TestResultSorted {
 		@Test
 		public void testExpResultWithsortedResult2(){
 			this.laps = 3;
-			this.raceTime ="10.00";
+			this.raceTime ="00.15";
 			createRace();
 			try{
 

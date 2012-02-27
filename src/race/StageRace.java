@@ -9,7 +9,9 @@ import result.SpecialDistanceResult;
 import result.StageResult;
 
 import main.Driver;
-
+/**
+* NOT USED AT THE MOMENT
+*/
 public class StageRace extends Race{
 	Result result;
 	int stages;
