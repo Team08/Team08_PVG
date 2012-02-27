@@ -10,7 +10,6 @@ import race.Race;
 import race.StageRace;
 import race.LapRace;
 
-
 /**
  * The main class which initiates the Sorter program.
  * 
@@ -38,18 +37,27 @@ public class Enduro {
 
 	/**
 	 * The constructor which creates an Enduro object. Uses a config.properties
+<<<<<<< HEAD
 	 * file that the user needs enter values into in order to make the sorter 
 	 * function as wanted.
+=======
+	 * file that the user needs to fill in the values in order to make the
+	 * sorter function as wanted.
+>>>>>>> 6228cd13b18c60a85d194a6de876abe4ce149588
 	 * 
-	 *@param String[] args - argument array used if there are any arguments in it
+	 *@param String
+	 *            [] args - argument array used if there are any arguments in it
 	 */
 	public Enduro(String[] args) {
-
-		if (args.length == 0) {
+		String cfg = "config.properties";
+		if(args.length == 1){
+			cfg = args[0];
+		}
+		if (args.length == 0 || args.length == 1) {
 			Properties configFile = new Properties();
 			genCon = new GenerateConfig(configFile);
 			try {
-				configFile.load(new FileInputStream("config.properties"));
+				configFile.load(new FileInputStream(cfg));
 				if(genCon.checkKey()){
 					readConfigKeys(configFile);
 					createRace();
@@ -75,15 +83,16 @@ public class Enduro {
 				createRace();
 			} catch (Exception e) {
 				System.err.println("Error: Du måste skriva in alla argument");
-
 			}}
 	}
 
 	/**
-	 * Reads the arguments from the array of arguments that is a parameter to the program. 
-	 * This is only used if there are any arguments in the array when the program starts	 
+	 * Reads the arguments from the array of arguments that is a parameter to
+	 * the program. This is only used if there are any arguments in the array
+	 * when the program starts
 	 * 
-	 *@param String[] args - argument array used
+	 *@param String
+	 *            [] args - argument array used
 	 */
 	private void readKeysfromArgs(String[] args) {
 		start = args[0];
@@ -102,16 +111,19 @@ public class Enduro {
 		for (int i = 0; i < attributeArray.length; i++) {
 			driverAttributes.add(attributeArray[i]);
 		}
-		
-		specialDistances = args[9]; 
+
+		specialDistances = args[9];
 		factor = Integer.parseInt(args[10]);
 	}
 
 	/**
-	 * Reads the arguments from the configfile that belongs to the program
-	 * This is only used if there are no arguments in the array when the program starts	 
+	 * Reads the arguments from the configfile that belongs to the program This
+	 * is only used if there are no arguments in the array when the program
+	 * starts
 	 * 
-	 *@param configFile - the configfile that the arguments to the program is read from
+	 *@param configFile
+	 *            - the configfile that the arguments to the program is read
+	 *            from
 	 */
 	private void readConfigKeys(Properties configFile) {
 		start = configFile.getProperty("STARTFILE").trim();
@@ -122,40 +134,44 @@ public class Enduro {
 		raceTime = configFile.getProperty("RACETIME").trim();
 		raceType = configFile.getProperty("RACETYPE").trim().toLowerCase();
 		lapTime = configFile.getProperty("LAPTIME").trim();
-		startType = configFile.getProperty("STARTTYPE").trim().toLowerCase();				
-		laps = Integer.parseInt(configFile.getProperty("LAPS").trim());	
+		startType = configFile.getProperty("STARTTYPE").trim().toLowerCase();
+		laps = Integer.parseInt(configFile.getProperty("LAPS").trim());
 		attributeString = configFile.getProperty("DRIVER_ATTRIBUTES").trim();
-   if(raceType.equals("etapp")){	
-		specialDistances = configFile.getProperty("SPECIAL_DISTANCES").trim();
-		factor = Integer.parseInt(configFile.getProperty("FACTOR").trim());
-   }
+		if (raceType.equals("etapp")) {
+			specialDistances = configFile.getProperty("SPECIAL_DISTANCES")
+					.trim();
+			factor = Integer.parseInt(configFile.getProperty("FACTOR").trim());
+		}
 		String[] attributeArray = attributeString.split(";");
 		for (int i = 0; i < attributeArray.length; i++) {
-		driverAttributes.add(attributeArray[i].trim());
+			driverAttributes.add(attributeArray[i].trim());
 		}
-		
+
 	}
+
 	
-	
-	/** 
-	 * Creates a LapRace and calls the method computeTotalTime that will create result files 
-	 * Prints which files the program has generated
+
+
+	/**
+	 * Creates a LapRace and calls the method computeTotalTime that will create
+	 * resultfiles Prints which files the program has generated
 	 * 
 	 * There is functionality for a StageRace but it is not used.
 	 */
-	private void createRace(){
+	private void createRace() {
 		if (raceType.equals("varv")) {
-			race = new LapRace(start, stop, name, result, sorted, raceTime, laps, startType, driverAttributes, lapTime);
-		}else if (raceType.equals("etapp")){
-			race = new StageRace(start, stop, name, result, laps, startType, driverAttributes, specialDistances, factor);
+			race = new LapRace(start, stop, name, result, sorted, raceTime,
+					laps, startType, driverAttributes, lapTime);
+		} else if (raceType.equals("etapp")) {
+			race = new StageRace(start, stop, name, result, laps, startType,
+					driverAttributes, specialDistances, factor);
 		}
 		race.computeTotalTime();
 		System.out.println("Programmet har genererat: " + result);
-		if(!sorted.equals("")){
-		System.out.println("Programmet har genererat: " + sorted);
+		if (!sorted.equals("")) {
+			System.out.println("Programmet har genererat: " + sorted);
 		}
 	}
-	
 
 	/**
 	 * Main program that initiates the Sorter program.
