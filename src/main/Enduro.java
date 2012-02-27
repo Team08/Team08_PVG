@@ -36,13 +36,9 @@ public class Enduro {
 	private GenerateConfig genCon;
 
 	/**
-	 * The constructor which creates an Enduro object. Enter a config file in
-	 * order to make the sorter function as wanted. E.g. if there has been a lap
-	 * race or a stage race
-	 * 
-	 * @param config
-	 *            file which the user creates before starting the sorter program
-	 *            in order for it to produce the wanted result
+	 * The constructor which creates an Enduro object. Uses a config.properties
+	 * file that the user needs to fill in the values in order to make the sorter 
+	 * function as wanted. 	 
 	 */
 	public Enduro(String[] args) {
 
@@ -59,7 +55,7 @@ public class Enduro {
 				}
 
 			} catch (FileNotFoundException e1) {
-				System.err.println("Misslyckades med att lÃ€sa konfigurationsfilen, en ny har autogenerats.");
+				System.err.println("Misslyckades med att läsa konfigurationsfilen, en ny har autogenerats.");
 				System.err.println("Var god och fyll i config.properties filen och starta om programmet.");
 				genCon.autogenerateConfig();
 				System.exit(1);
@@ -143,11 +139,7 @@ public class Enduro {
 
 	/**
 	 * Main program that initiates the Sorter program.
-	 * 
-	 * @param the
-	 *            config file
 	 */
-
 	public static void main(String[] args) {
 		new Enduro(args);
 	}

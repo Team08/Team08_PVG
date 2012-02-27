@@ -203,6 +203,9 @@ public class Driver {
 		return lapTimes;
 	}
 
+	/**
+	 * Metod för story 19, etapprace, används dock inte
+	 */
 	public String getStageTime(int i) {
 		// Kolla så det finns någon tid för etappen i
 		if (i > startTime().size() - 1 || i > finishTime().size() - 1) {
@@ -222,6 +225,9 @@ public class Driver {
 		}
 	}
 
+	/**
+	 * Metod för story 19, etapprace, används dock inte
+	 */
 	public String getTotStageTime() {
 		int sum = 0;
 		for (int i = 0; i < startTime.size(); i++) {
@@ -230,6 +236,9 @@ public class Driver {
 		return new Time(sum).toString();
 	}
 
+	/**
+	 * Metod för story 19, 20, etapprace och specialsträckor, används dock inte
+	 */
 	public String getNbrOfStages() {
 		String s = Integer.toString(finishTime.size());
 		if (startTime.size() < finishTime.size()) {
