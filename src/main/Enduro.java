@@ -27,6 +27,7 @@ public class Enduro {
 	private String sorted = "defaultSorted";
 	private String raceTime = "";
 	private String raceType = "";
+	private String lapTime = "00.15";
 	private int laps = 0;
 	private String startType = "";
 	private String attributeString = "";
@@ -119,7 +120,8 @@ public class Enduro {
 		result = configFile.getProperty("RESULTFILE").trim();
 		sorted = configFile.getProperty("SORTEDFILE").trim();
 		raceTime = configFile.getProperty("RACETIME").trim();
-		raceType = configFile.getProperty("RACETYPE").trim().toLowerCase();	
+		raceType = configFile.getProperty("RACETYPE").trim().toLowerCase();
+		lapTime = configFile.getProperty("LAPTIME").trim();
 		startType = configFile.getProperty("STARTTYPE").trim().toLowerCase();				
 		laps = Integer.parseInt(configFile.getProperty("LAPS").trim());	
 		attributeString = configFile.getProperty("DRIVER_ATTRIBUTES").trim();
@@ -127,9 +129,9 @@ public class Enduro {
 		specialDistances = configFile.getProperty("SPECIAL_DISTANCES").trim();
 		factor = Integer.parseInt(configFile.getProperty("FACTOR").trim());
    }
-		String[] attributeArray = attributeString.split("; ");
+		String[] attributeArray = attributeString.split(";");
 		for (int i = 0; i < attributeArray.length; i++) {
-		driverAttributes.add(attributeArray[i]);
+		driverAttributes.add(attributeArray[i].trim());
 		}
 		
 	}
@@ -143,7 +145,7 @@ public class Enduro {
 	 */
 	private void createRace(){
 		if (raceType.equals("varv")) {
-			race = new LapRace(start, stop, name, result, sorted, raceTime, laps, startType, driverAttributes);
+			race = new LapRace(start, stop, name, result, sorted, raceTime, laps, startType, driverAttributes, lapTime);
 		}else if (raceType.equals("etapp")){
 			race = new StageRace(start, stop, name, result, laps, startType, driverAttributes, specialDistances, factor);
 		}

@@ -33,7 +33,7 @@ public class TestResultSorted {
 
 		private void createRace(){			
 			if (raceType.equals("varv")) {
-			race = new LapRace(start, stop, name, result, sorted, raceTime, laps, startType, driverAttributes);
+			race = new LapRace(start, stop, name, result, sorted, raceTime, laps, startType, driverAttributes, null);
 			}
 			race.computeTotalTime();
 			System.out.println("TestResultSorted har genererat: " + result);
@@ -45,7 +45,7 @@ public class TestResultSorted {
 		String ExpResult = "src/test/testfiles/TestResultSortedFiles/ResultSorted_expResult.test";
 		@Test
 		public void testExpResultWithsortedResult(){
-			// Initiala värden;
+			// Initiala vï¿½rden;
 			this.laps = 3;
 			this.raceTime ="00.10";
 			createRace();
@@ -56,7 +56,7 @@ public class TestResultSorted {
 			BufferedReader br = new BufferedReader(fr);
 			String line = "Actual";
 
-			// Ladda den förväntade filen
+			// Ladda den fï¿½rvï¿½ntade filen
 			FileReader fr2 = new FileReader(new File(ExpResult));
 			BufferedReader br2 = new BufferedReader(fr2);
 			String line2 = "Exp";
@@ -64,7 +64,7 @@ public class TestResultSorted {
 			while( (line = br.readLine()) != null && (line2 = br2.readLine()) != null) {
 				System.out.println(line);
 				System.out.println(line2);
-				assertTrue("sortedfilens innehåll stämmer inte med expResult" , line.equals(line2));
+				assertTrue("sortedfilens innehï¿½ll stï¿½mmer inte med expResult" , line.equals(line2));
 			}
 			
 			}catch (Exception e){
@@ -72,13 +72,13 @@ public class TestResultSorted {
 			}
 		}
 		
-		// Jämför "sortedResult.txt med expResult2
-		// Skillnaden mellan result1 och 2 är att raceTime ="10.00" (hh.mm)
+		// Jï¿½mfï¿½r "sortedResult.txt med expResult2
+		// Skillnaden mellan result1 och 2 ï¿½r att raceTime ="10.00" (hh.mm)
 		String ExpResult2 = "src/test/testfiles/TestResultSortedFiles/ResultSorted_expResult2.test";
 		@Test
 		public void testExpResultWithsortedResult2(){
 			this.laps = 3;
-			this.raceTime ="10.00";
+			this.raceTime ="00.15";
 			createRace();
 			try{
 
@@ -87,7 +87,7 @@ public class TestResultSorted {
 			BufferedReader br = new BufferedReader(fr);
 			String line = "Actual";
 
-			// Ladda den förväntade filen
+			// Ladda den fï¿½rvï¿½ntade filen
 			FileReader fr2 = new FileReader(new File(ExpResult2));
 			BufferedReader br2 = new BufferedReader(fr2);
 			String line2 = "Exp";
@@ -95,7 +95,7 @@ public class TestResultSorted {
 			while( (line = br.readLine()) != null && (line2 = br2.readLine()) != null) {
 				System.out.println(line);
 				System.out.println(line2);
-				assertTrue("sortedfilens innehåll stämmer inte med expResult2" , line.equals(line2));
+				assertTrue("sortedfilens innehï¿½ll stï¿½mmer inte med expResult2" , line.equals(line2));
 			}
 			
 			}catch (Exception e){
