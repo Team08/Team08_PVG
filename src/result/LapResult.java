@@ -319,7 +319,7 @@ public class LapResult extends Result {
 					finishTime.get(finishTime.size() - 1)));
 
 			sb.append(totalTime.toString() + "; ");
-			if (totalTime.lesserThan(new Time("0.15.00"))) {
+			if (totalTime.lesserThan(raceTime)) {
 				return "; Omöjlig Totaltid?";
 			}
 		}
