@@ -23,6 +23,7 @@ public class LapRace extends Race {
 	protected String nameFile;
 	String resultat;
 	String sortedFile;
+	String lapTime;
 
 	/**
 	 * The standard constructor
@@ -41,17 +42,20 @@ public class LapRace extends Race {
 	 *            the number of laps which are to be written to the file
 	 * @param startType
 	 *            the type of start (masstart e.g.)
+	 * @param lapTime TODO
+	 * @param lapTime TODO
 	 */
 
 	public LapRace(String start, String stop, String nameFile,
 			String resultFile, String sortedFile, String raceTime, int laps, String startType,
-			ArrayList<String> driverAttributes) {
+			ArrayList<String> driverAttributes, String lapTime) {
 		super(start, stop, nameFile, startType, driverAttributes);
 		this.raceTime = raceTime;
 		this.laps = laps;
 		this.nameFile = nameFile;
 		this.resultat = resultFile;
 		this.sortedFile = sortedFile;
+		this.lapTime = lapTime;
 
 	}
 
@@ -62,7 +66,7 @@ public class LapRace extends Race {
 	 *            the treemap index
 	 */
 	public void getResult(TreeMap<Integer, Driver> index) {
-		result = new LapResult(index, laps, raceTime, resultat, sortedFile, driverAttributes);
+		result = new LapResult(index, laps, raceTime, resultat, sortedFile, driverAttributes, lapTime);
 		result.writeResultFile();
 		
 	}

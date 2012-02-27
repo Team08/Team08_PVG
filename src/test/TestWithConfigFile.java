@@ -39,7 +39,7 @@ public class TestWithConfigFile {
 	
 	@Before public void setup(){
 		race = new LapRace(start,
-				stop, "", result,"", "", 0, "", null);
+				stop, "", result,"", "", 0, "", null, null);
 		try {
 			configFile.load(new FileInputStream(testConfigPath));
 			start = configFile.getProperty("STARTFILE");

@@ -33,7 +33,7 @@ public class TestResultSorted {
 
 		private void createRace(){			
 			if (raceType.equals("varv")) {
-			race = new LapRace(start, stop, name, result, sorted, raceTime, laps, startType, driverAttributes);
+			race = new LapRace(start, stop, name, result, sorted, raceTime, laps, startType, driverAttributes, null);
 			}
 			race.computeTotalTime();
 			System.out.println("TestResultSorted har genererat: " + result);

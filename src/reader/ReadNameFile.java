@@ -55,11 +55,11 @@ public class ReadNameFile extends FileIO {
 				while (scanner.hasNextLine()) {
 					line = scanner.nextLine();
 
-					String[] str = line.split("; ");
+					String[] str = line.split(";");
 					if (str.length == 1) {
 						currClass = str[0];
 					} else { 
-						name = str[1];
+						name = str[1].trim();
 						riderID = Integer.parseInt(str[0]);
 						add();
 						race.addClass(riderID, currClass);
