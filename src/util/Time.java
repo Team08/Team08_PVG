@@ -198,7 +198,6 @@ public class Time implements Comparable {
 		String sec = addZero(seconds);
 
 		String total = time / 3600 + "." + min + "." + sec;
-
 		return total;
 	}
 

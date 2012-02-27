@@ -52,7 +52,6 @@ public class LapResult extends Result {
 		this.resultFile = resultFile;
 		this.driverAttributes = driverAttributes;
 		this.sortedFile = sortedFile;
-		
 	}
 
 	/**
@@ -61,7 +60,6 @@ public class LapResult extends Result {
 	public void writeResultFile() {
 		sorter = new Sorter();
 		try {
-
 			FileWriter fstream = new FileWriter(resultFile);
 
 			StringBuilder sb = new StringBuilder();
@@ -77,9 +75,7 @@ public class LapResult extends Result {
 					}
 				}
 			}
-			
 			sb.append("#Varv; ");
-
 			sb.append("Totaltid; ");
 
 			for (int i = 0; i < laps; i++) {
@@ -87,14 +83,11 @@ public class LapResult extends Result {
 
 			}
 			sb.append("Start; ");
-			
 
 			for (int i = 0; i < laps - 1; i++) {
 				sb.append("Varvning" + (i + 1) + "; ");
 			}
-
 			sb.append("Mål\n");
-
 			Driver tDriver;
 
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
@@ -103,16 +96,11 @@ public class LapResult extends Result {
 
 				if (tDriver.getName() == null) { 
 					tDriver.addClass(nonExistingNbr); 
-
 				}
 
 				String classes = tDriver.getRaceClass();
-
-				
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i, tDriver)); 
 			} 
-			
-			
 			ArrayList<Driver> unsortedListOfDriversInAClass; 
 			ArrayList<Driver> sortedListOfDriversInAClass;
 			List<Driver> nonExistingNbrList = null;
@@ -120,12 +108,9 @@ public class LapResult extends Result {
 
 				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses.get(className);
 				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());	
-				
-
 				sortedListOfDriversInAClass = sorter.lapSort(unsortedListOfDriversInAClass, raceTime); 
 				
 				// Nu har vi en sorterad arraylist med alla förarna i en klass
-
 
 				if (className.equals(nonExistingNbr)) {
 					nonExistingNbrList = unsortedListOfDriversInAClass;
@@ -136,12 +121,9 @@ public class LapResult extends Result {
 					out.write(sb.toString());
 					for (Integer id : tm.keySet()) { 
 						out.write(checkError(id,tm.get(id).startTime(), tm.get(id).finishTime()));
-
 					}
 				}
-				
 			}
-
 			if (nonExistingNbrList != null) {
 
 				out.write(nonExistingNbr + "\n");
@@ -154,17 +136,13 @@ public class LapResult extends Result {
 			}
 			out.close();
 			
-
 		} catch (Exception e) {
-			System.err.println("Error: Misslyckades med att skriva resultat filen");
+			System.err.println("Error: Misslyckades med att skriva resultatfilen för varvlopp.");
 
 			System.exit(1);
 		}
-		
-		
 			SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps, raceTime, sortedFile);
 			sorted.writeToFile();
-		
 	}
 
 	private TreeMap<Integer, Driver> addTreeMap(String className, Integer i,
@@ -220,7 +198,6 @@ public class LapResult extends Result {
 			timeTemp = new Time(startTime.get(0).timeDiff(
 					finishTime.get(finishTime.size() - 1)));
 		}
-
 		if (finishTime.size() != 0) {
 			int check = finishTime.size() - 1; 
 			if (check > laps - 1) {

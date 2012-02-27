@@ -38,7 +38,9 @@ public class TestAcceptance13{
 		args[5]= "enkelstart";
 		args[6]= "0.15";
 		args[7]= "3";
-
+		args[8]= "";
+		args[9]= "";
+		args[10] = "1";
 
 		
 		new Enduro(args);

@@ -31,7 +31,7 @@ public class TestAttributes {
 		args[6] = "0.15";
 		args[7] = "1";
 		args[8] = "Klubb; MC;";
-		args[9] = "1";
+		args[9] = "";
 		args[10] = "1";
 		System.out.println(args[0]);
 		System.out.println(args[1]);
