@@ -44,21 +44,24 @@ public class Enduro {
 	 *@param String[] args - argument array used if there are any arguments in it
 	 */
 	public Enduro(String[] args) {
-
-		if (args.length == 0) {
+		String cfg = "config.properties";
+		if(args.length == 1){
+			cfg = args[0];
+		}
+		if (args.length == 0 || args.length == 1) {
 			Properties configFile = new Properties();
 			genCon = new GenerateConfig(configFile);
 			try {
-				configFile.load(new FileInputStream("config.properties"));
+				configFile.load(new FileInputStream(cfg));
 				if(genCon.checkKey()){
 					readConfigKeys(configFile);
 					createRace();
 				}else{
-					System.err.println("Misslyckades med att läsa konfigurationsfilen");
+					System.err.println("Misslyckades med att lï¿½sa konfigurationsfilen");
 				}
 
 			} catch (FileNotFoundException e1) {
-				System.err.println("Misslyckades med att läsa konfigurationsfilen, en ny har autogenerats.");
+				System.err.println("Misslyckades med att lï¿½sa konfigurationsfilen, en ny har autogenerats.");
 				System.err.println("Var god och fyll i config.properties filen och starta om programmet.");
 				genCon.autogenerateConfig();
 				System.exit(1);
@@ -74,7 +77,7 @@ public class Enduro {
 				}
 				createRace();
 			} catch (Exception e) {
-				System.err.println("Error: Du måste skriva in alla argument");
+				System.err.println("Error: Du mï¿½ste skriva in alla argument");
 
 			}}
 	}
