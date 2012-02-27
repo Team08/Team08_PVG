@@ -78,7 +78,7 @@ public class TestResultSorted {
 		@Test
 		public void testExpResultWithsortedResult2(){
 			this.laps = 3;
-			this.raceTime ="10.00";
+			this.raceTime ="00.15";
 			createRace();
 			try{
 

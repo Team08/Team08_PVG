@@ -21,17 +21,21 @@ public class RaceClassBuilder {
 	private ArrayList<Driver> driverList;
 	private Time raceTime;
 	ArrayList<String> lapTimes;
+	private ArrayList<String> driverAttributes;
+
 
 	/**
 	 * The class that handles the build of the sorted resultfile
 	 * 
 	 * @param nbrOfLaps - the number of laps that should be written in the stringbuilder
 	 * @param raceTime - the time that should be met if the driver has fulfilled the race
+	 * @param driverAttributes - list of the driverattributes
 	 */
-	public RaceClassBuilder(int nbrOfLaps, Time raceTime) {
+	public RaceClassBuilder(int nbrOfLaps, Time raceTime, ArrayList<String> driverAttributes) {
 		this.raceTime = raceTime;
 		maxNbrOfLaps = nbrOfLaps;
 		sb = new StringBuilder();
+		this.driverAttributes = driverAttributes;
 	}
 
 	/**
@@ -74,6 +78,14 @@ public class RaceClassBuilder {
 				sb.append(driver.getName());
 			}
 			sb.append("; ");
+
+			
+			//Attributes
+			ArrayList<String> attributes = driver.getAttributes();
+			for(int i = 0; i < attributes.size(); i++){
+				sb.append(attributes.get(i) + "; ");
+			}
+			
 			lapTimes = driver.listOfLapTimes();
 			if(lapTimes.size()!=0){
 				sb.append(lapTimes.size());
@@ -125,8 +137,18 @@ public class RaceClassBuilder {
 
 		// StartNr; Namn; #Varv; Totaltid; Varv1; Varv2; Varv3; Start;
 		// Varvning1; Varvning2; Mål
-
-		sb.append("Plac; StartNr; Namn; #Varv; Totaltid; ");
+		StringBuilder tempSb = new StringBuilder();
+		if(!driverAttributes.isEmpty()){
+			for(int i = 0; i < driverAttributes.size(); i++){
+				if(i < driverAttributes.size()-1){
+					tempSb.append(driverAttributes.get(i) + "; ");
+				}else{
+					tempSb.append(driverAttributes.get(i));
+				}
+			}
+		}
+		
+		sb.append("Plac; StartNr; Namn; " + tempSb.toString() + "#Varv; Totaltid; ");
 		for (int i = 0; i < maxNbrOfLaps; i++) {
 			sb.append("Varv");
 			sb.append(i + 1 + "; ");

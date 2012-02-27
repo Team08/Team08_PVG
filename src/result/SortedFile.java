@@ -25,6 +25,7 @@ public class SortedFile {
 	private int maxNbrOfLaps;
 	private Time raceTime;
 	private String sortedFile;
+	private ArrayList<String> driverAttributes;
 
 	/**
 	 * The constructor for the sortedfile
@@ -33,9 +34,10 @@ public class SortedFile {
 	 * @param maxNbrOfLaps - the number of laps that should be written in the resultfile
 	 * @param raceTime - the time that should be met if the driver has fulfilled the race
 	 * @param sortedFile - the name of the sortedfile
+	 * @param driverattributes - a list of the driverattributes
 	 */
 	public SortedFile(HashMap<String, TreeMap<Integer, Driver>> kaosMap,
-			int maxNbrOfLaps, Time raceTime, String sortedFile) {
+			int maxNbrOfLaps, Time raceTime, String sortedFile, ArrayList<String> driverAttributes) {
 		this.raceTime = raceTime;
 		this.maxNbrOfLaps = maxNbrOfLaps;
 		this.kaosMap = kaosMap;
@@ -43,6 +45,7 @@ public class SortedFile {
 		classSortedMap = new HashMap<String, ArrayList<Driver>>();
 		noClass = new ArrayList<Driver>();
 		this.sortedFile = sortedFile;
+		this.driverAttributes = driverAttributes;
 
 	}
 
@@ -56,11 +59,11 @@ public class SortedFile {
 				FileWriter fstream = new FileWriter(sortedFile);
 				BufferedWriter writer = new BufferedWriter(fstream);
 				for (String s : classSortedMap.keySet()) {
-					build = new RaceClassBuilder(maxNbrOfLaps, raceTime);
+					build = new RaceClassBuilder(maxNbrOfLaps, raceTime, driverAttributes);
 					build.writeResult(classSortedMap.get(s));
 					writer.write(build.toString());
 				}
-				build = new RaceClassBuilder(maxNbrOfLaps, raceTime);
+				build = new RaceClassBuilder(maxNbrOfLaps, raceTime, driverAttributes);
 
 				if (noClass.size() > 0) {
 					build.writeResult(noClass);
