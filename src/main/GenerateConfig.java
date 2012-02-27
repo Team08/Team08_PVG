@@ -31,51 +31,70 @@ public class GenerateConfig {
 				FileOutputStream createTheFile = new FileOutputStream(new File("config.properties"));
 
 		        BufferedWriter out = new BufferedWriter(new FileWriter("config.properties")); 
-		        out.write("#AUTO GENERATED config.properties");
-		        out.write("\n");
-		        out.write("#Values for Enduro.java stored as <key>=<value>");
-		        out.write("\n");
-		        out.write("\n");
-		        out.write("#Filnamn - vid flera stopfiles sÃ¥ skriver man dem med , mellan" + "\n");
-		        out.write("STARTFILE=" + "\n");
-		        out.write("STOPFILE=" + "\n");
-		        out.write("NAMEFILE=" + "\n");
-		        out.write("RESULTFILE=" + "\n");
+		        out.write("#AUTO GENERATED config.properties\n");
+		        out.write("#Konfigurationsfil för Enduro som har värden sparade i formatet <nyckel>=<värde> \n");
+		        out.write("#Fyll i alla värden nedan förutom de som är längst ner eftersom de ej används. \n\n");
 		        
-		        out.write("#Ex: \"varv\" (Etapplopp EJ implementerad)" + "\n");
-		        out.write("RACETYPE=" + "\n");
-		        out.write("#Ex: \"enkelstart\", \"masstart\", " + "\n");
-		        out.write("STARTTYPE=" + "\n");
-		        out.write("#Antal etapper, SpecialStrÃ¤ckor och faktor" + "\n");
-		        out.write("NBR_ETAPP=" + "\n");
-		        out.write("SPEC_DISTANCES=" + "\n");
-		        out.write("FACTOR=" + "\n");
-		        out.write("#Minimumtid fÃ¶r varv resp etapp (FÃ¶r att hitta orimliga tider)" + "\n");
-		        out.write("MINTIME=" + "\n");
-		        out.write("#Totaltiden fÃ¶r hela racet i timmar (ex: hh.mm )" + "\n");
-		        out.write("RACETIME=" + "\n");
-		        out.write("#Ex: 5" + "\n");
-		        out.write("DISTANCE=0" + "\n");
+		        out.write("#Vad heter dina filer och var ligger dem?" + "\n");
+		        out.write("#A1t1. Dina filer ligger i samma mapp som Enduro, då anger vi \"Exempel_startfil.txt\"" + "\n");
+		        out.write("#Alt2. Du har filerna i en mapp som heter [Tider], då anger vi \"Tider/Exempel_startfil.txt\"" + "\n");
+		        out.write("#(OBS)! Undvik svenska specialtecken på filnamnen!" + "\n");
+		        out.write("STARTFILE=example_start.txt" + "\n");
+		        out.write("STOPFILE=aMapp/example_stop.txt" + "\n");
+		        out.write("NAMEFILE=" + "\n\n");
+		        
+		        out.write("#Var ska resultat och den sorterade filen heta och var ska de genereras?" + "\n");
+		        out.write("#Alt1. De ska genereras i den mapp som Enduro ligger i. Då anger vi \"Exempel_resultat.txt\"" + "\n");
+		        out.write("#Alt2. De ska genereras i mappen [resultat] som ligger i samma mapp som Enduro. Då anger vi \"resultat/Exempel_resultat.txt\"" + "\n");
+		        out.write("#OBS! [resultat] mappen måste skapas först om alternativ 2 ska fungera !" + "\n");
+		        out.write("RESULTFILE=exMyResult.txt" + "\n");
+		        out.write("SORTEDFILE=" + "\n\n");
+		        
+		        out.write("#Vad för sorts tävling är det? Ex. Ett varvlopp blir då = \"varv\"" + "\n");
+		        out.write("RACETYPE=varv" + "\n\n");
+		        
+		        out.write("#LAPS=3Hur startas tävlingen? Ex. Vid enkelstart så ange:\"enkelstart\", Vid massstart så ändra värdet till:\"masstart\""  + "\n");
+		        out.write("STARTTYPE=enkelstart" + "\n\n");
+		        
+		        out.write("#Hur länge varar hela tävlingen? (format = \"hh.mm\" ) Ex. Om tävlingen varar i 10 timmar och 30 minuter så ange, \"10:30\"" + "\n");
+		        out.write("RACETIME=" + "\n\n");
+		        
+		        out.write("#Hur många varv ska köras? Ex. Om vi ska springa 10 varv så anger vi \"10\"" + "\n");
+		        out.write("LAPS=" + "\n\n");
+		        
+		        out.write("#ALTERNATIV nyckel som ej behöver fyllas i!" + "\n");
+		        out.write("#Vad alla deltagare i denna tävlingen behöver ange för information om sig själva, lämnas tomt om inget behöver anges." + "\n");
+		        out.write("#Ex: \"Klubb;MC-fabrikat;Sponsor1;Sponsor2;\"" + "\n");
+		        out.write("DRIVER_ATTRIBUTES=" + "\n\n\n\n\n\n\n");
+		        
+		        
+		        
+		        
+		        
+		        
+		        out.write("#________Nycklar som inte används för denna programversion______!" + "\n");
 		        out.write("#Vilka resultat vill man ha (med o utan sortering, i vilka format" + "\n");
-		        out.write("RESULT_FORMAT=" + "\n");
-		        out.write("#Vad alla deltagare i denna tÃ¤vlingen behÃ¶ver ange fÃ¶r information om sig sjÃ¤lva. Exempel: Klubb;MC-fabrikat;Sponsor1;Sponsor2;(etc...)" + "\n");
-		        out.write("DRIVER_ATTRIBUTES=" + "\n");
-		        out.write("#Vilka etapper Ã¤r specialstrÃ¤ckor? Ange nummer fÃ¶r dessa"+"\n");
-		        out.write("#Ex \"2,3\" om 2 och 3 Ã¤r specialstrÃ¤ckor"+"\n");
-		        out.write("SPECIAL_DISTANCES="+"\n");
-		        out.write("#Faktorn som specialstrÃ¤ckor skall multipliceras med"+"\n");
-		        out.write("#Ex: 3" +"\n");
-		        out.write("FACTOR=");
+		        out.write("RESULT_FORMAT" + "\n");
+		        out.write("#Vilka etapper är specialsträckor? Ange nummer för dessa" + "\n");
+		        out.write("#Ex \"2,3\" om 2 och 3 är specialsträckor" + "\n");
+		        out.write("SPECIAL_DISTANCES=" + "\n");
+		        out.write("#Faktorn som specialsträckor skall multipliceras med" + "\n");
+		        out.write("#Ex: 3" + "\n");
+		        out.write("FACTOR=" + "\n");
+		        out.write("#Antal etapper, SpecialSträckor och faktor" + "\n");
+		        out.write("NBR_ETAPP=" + "\n");
+		        out.write("#________Nycklar som inte används för denna programversion______!" + "\n");
+
 		        out.close();  
 		        System.out.println("Autogenerate file: config.properties.");
 		    } catch (IOException e) {  
-		    	System.out.println("Fail to generate config.properties");
+		    	System.err.println("Failed to generate config.properties");
 		    }  
 		
 
 	}
-	
-	// VILKA KEYS ï¿½R OBLIGATORISKA Fï¿½R VARJE LOPP?
+
+	// DESSA NYCKLAR ÄR OBLIGATORISKA
 	public boolean checkKey(){
 		boolean toggle = true;
 	
@@ -88,23 +107,27 @@ public class GenerateConfig {
 			toggle = false;
 		}
 		if(configFile.getProperty("NAMEFILE").equals("")){
-			System.err.println("the key name not found, check your configfile");
+			System.err.println("the key NAMEFILE not found, check your configfile");
 			toggle = false;
 		}
 		if(configFile.getProperty("RESULTFILE").equals("")){
-			System.err.println("the key result not found, check your configfile");
+			System.err.println("the key RESULTFILE not found, check your configfile");
 			toggle = false;
 		}
 		if(configFile.getProperty("RACETIME").equals("")){
-			System.err.println("the key race not found, check your configfile");
+			System.err.println("the key RACETIME not found, check your configfile");
+			toggle = false;
+		}
+		if(configFile.getProperty("STARTTYPE").equals("")){
+			System.err.println("the key STARTTYPE not found, check your configfile");
 			toggle = false;
 		}
 		if(configFile.getProperty("RACETYPE").equals("")){
-			System.err.println("the key rtype not found, check your configfile");
+			System.err.println("the key RACETYPE not found, check your configfile");
 			toggle = false;
 		}
-		if((configFile.getProperty("DISTANCE")).equals("")){
-			System.err.println("the key distance not found, check your configfile");
+		if((configFile.getProperty("LAPS")).equals("")){
+			System.err.println("the key LAPS not found, check your configfile");
 			toggle = false;
 		}
 		return toggle;

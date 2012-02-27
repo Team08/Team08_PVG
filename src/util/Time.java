@@ -48,7 +48,6 @@ public class Time implements Comparable {
 		} else {
 			String[] temp = representTime.split("\\.");
 			time = parseTime(temp);
-
 		}
 	}
 
@@ -162,6 +161,13 @@ public class Time implements Comparable {
 		}
 		return true;
 	}
+	
+	public boolean greaterOrEqualTo(Time t2) {
+		if (!(time >= t2.getTime())) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Determine if time is lesser than the parameter time.
@@ -172,6 +178,7 @@ public class Time implements Comparable {
 	 *         otherwise
 	 */
 	public boolean lesserThan(Time time2) {
+		
 		if (!(time < time2.getTime())) {
 			return false;
 		}
@@ -191,7 +198,6 @@ public class Time implements Comparable {
 		String sec = addZero(seconds);
 
 		String total = time / 3600 + "." + min + "." + sec;
-
 		return total;
 	}
 

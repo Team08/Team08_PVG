@@ -15,7 +15,7 @@ public class TestResult {
 	private LapResult lr;
 	
 	@Before public void setup(){
-		lr = new LapResult(null, 0, "0.00", null, null);
+		lr = new LapResult(null, 0, "0.00","", null, null);
 	}
 	
 	@Test

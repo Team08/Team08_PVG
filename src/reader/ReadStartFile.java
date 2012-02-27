@@ -37,10 +37,12 @@ public class ReadStartFile extends FileIO {
 	/**
 	 * Reads a file and add the time and driverID to the race object,
 	 * which contains the database where all information is stored.
+	 * 		This method doesn't support STAGERACE!
 	 * 
 	 * @throws FileNotFoundException
 	 *             If file not found
 	 */
+	
 	public void readFileMassStart() throws FileNotFoundException {
 		if (fileName != null) {
 			File file = new File(fileName);
@@ -50,10 +52,10 @@ public class ReadStartFile extends FileIO {
 				String line;
 				line = scanner.nextLine();
 				String[] str = line.split("; ");
-				int index = Integer.parseInt(str[0]);
+				int index = Integer.parseInt(str[0].trim());
 				for (int i = 1; i <= index; i++) {
 					riderID = i;
-					time = new Time(str[1]);
+					time = new Time(str[1].trim());
 					add();
 				}
 			} catch (FileNotFoundException e) {
@@ -61,7 +63,6 @@ public class ReadStartFile extends FileIO {
 				throw new FileNotFoundException();
 			}
 		}
-
 	}
 
 	/**

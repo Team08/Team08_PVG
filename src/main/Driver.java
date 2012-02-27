@@ -17,8 +17,8 @@ import util.Time2;
  */
 public class Driver {
 	private String name;
-	private List<Time> startTime = new ArrayList<Time>();
-	private List<Time> finishTime = new ArrayList<Time>();
+	private ArrayList<Time> startTime = new ArrayList<Time>();
+	private ArrayList<Time> finishTime = new ArrayList<Time>();
 	private String classes = "";
 	private int id;
 	private ArrayList<String> driverAttribute = new ArrayList<String>();
@@ -77,16 +77,16 @@ public class Driver {
 	 * 
 	 * @return The start times as a list
 	 */
-	public List<Time> startTime() {
+	public ArrayList<Time> startTime() {
 		return startTime;
 	}
 
 	/**
-	 * Returns the driver's finish times as a list
+	 * Returns the driver's finish times as a list.
 	 * 
 	 * @return The finish times as a list
 	 */
-	public List<Time> finishTime() {
+	public ArrayList<Time> finishTime() {
 		return finishTime;
 	}
 
@@ -110,12 +110,11 @@ public class Driver {
 	public String getLapTime(int i) {
 		int laptime;
 		if (i == 0) {
-			
 			laptime = startTime.get(0).timeDiff(finishTime.get(0));
 		} else if (finishTime.size() > i) {
 			laptime = finishTime.get(i - 1).timeDiff(finishTime.get(i));
 		} else {
-			return " ";
+			return "";
 		}
 		return new Time(laptime).toString();
 	}
@@ -164,48 +163,73 @@ public class Driver {
 		return id;
 	}
 
+	/**
+	 * Returns the totaltime or -1 if no totaltime exists
+	 * 
+	 * @return the totaltime or -1
+	 */
 	public int totalTime() {
-		return startTime.get(0).timeDiff(finishTime.get(finishTime.size() - 1));
+		if (startTime.size() > 0 && finishTime.size() > 0) {
+			return startTime.get(0).timeDiff(
+					finishTime.get(finishTime.size() - 1));
+		}
+		return -1;
 	}
-	public void addAttribute(String attribute){
+
+	/**
+	 * @param attribute
+	 *            - the attribute to add
+	 */
+	public void addAttribute(String attribute) {
 		driverAttribute.add(attribute);
 	}
-	public ArrayList<String> getAttributes(){
+
+	/**
+	 * Returns the drivers attributes
+	 * 
+	 * @return the attributes
+	 */
+	public ArrayList<String> getAttributes() {
 		return driverAttribute;
 	}
-	
-	public ArrayList<String> listOfLapTimes(){
+
+	/**
+	 * Returns a list of the laptimes that the driver has
+	 * 
+	 * @return list of laptimes
+	 */
+	public ArrayList<String> listOfLapTimes() {
 		ArrayList<String> lapTimes = new ArrayList<String>();
-		for(int i = 0; i < finishTime.size(); i++){
-			lapTimes.add(getLapTime(i));
+		if (startTime.size() != 0) {
+			for (int i = 0; i < finishTime.size(); i++) {
+				lapTimes.add(getLapTime(i));
+			}
 		}
 		return lapTimes;
 	}
-	
+
 	public String getStageTime(int i) {
-		//Kolla så det finns någon tid för etappen i
-		if (i > startTime().size()-1 || i > finishTime().size()-1) {
-			return("--.--.--");
-		//Annars returnera tiden etappen i
+		// Kolla så det finns någon tid för etappen i
+		if (i > startTime().size() - 1 || i > finishTime().size() - 1) {
+			return ("");
+			// Annars returnera tiden etappen i
 		} else {
-			return(new Time(finishTime().get(i).timeDiff(startTime().get(i))).toString());
+			return (new Time(finishTime().get(i).timeDiff(startTime().get(i)))
+					.toString());
 		}
 	}
-	
-	
-	
+
 	private int addStageTime(int i) {
-		if (i > startTime().size()-1 || i > finishTime().size()-1) {
+		if (i > startTime().size() - 1 || i > finishTime().size() - 1) {
 			return 0;
 		} else {
-			return(finishTime().get(i).timeDiff(startTime().get(i)));
+			return (finishTime().get(i).timeDiff(startTime().get(i)));
 		}
 	}
-	
-	
+
 	public String getTotStageTime() {
 		int sum = 0;
-		for(int i = 0; i < startTime.size(); i++){
+		for (int i = 0; i < startTime.size(); i++) {
 			sum += addStageTime(i);
 		}
 		return new Time(sum).toString();
@@ -213,10 +237,10 @@ public class Driver {
 
 	public String getNbrOfStages() {
 		String s = Integer.toString(finishTime.size());
-		if(startTime.size() < finishTime.size()){
-			s =  Integer.toString(startTime.size());
+		if (startTime.size() < finishTime.size()) {
+			s = Integer.toString(startTime.size());
 		}
 		return s;
 	}
-	
+
 }

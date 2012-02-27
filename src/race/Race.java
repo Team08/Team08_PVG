@@ -108,7 +108,6 @@ public abstract class Race {
 		driver.setId(startNumber);
 		driver.addStartTime(time);
 		index.put(startNumber, driver);
-
 	}
 
 	/**
@@ -196,5 +195,9 @@ public abstract class Race {
 		Driver driver = getDriver(startNumber);
 		driver.addAttribute(attribute);
 		index.put(startNumber, driver);
+	}
+	
+	public TreeMap<Integer, main.Driver> getIndex(){
+		return index;
 	}
 }

@@ -22,6 +22,7 @@ public class LapRace extends Race {
 	int laps;
 	protected String nameFile;
 	String resultat;
+	String sortedFile;
 
 	/**
 	 * The standard constructor
@@ -43,13 +44,14 @@ public class LapRace extends Race {
 	 */
 
 	public LapRace(String start, String stop, String nameFile,
-			String resultFile, String raceTime, int laps, String startType,
+			String resultFile, String sortedFile, String raceTime, int laps, String startType,
 			ArrayList<String> driverAttributes) {
 		super(start, stop, nameFile, startType, driverAttributes);
 		this.raceTime = raceTime;
 		this.laps = laps;
 		this.nameFile = nameFile;
 		this.resultat = resultFile;
+		this.sortedFile = sortedFile;
 
 	}
 
@@ -60,9 +62,9 @@ public class LapRace extends Race {
 	 *            the treemap index
 	 */
 	public void getResult(TreeMap<Integer, Driver> index) {
-		result = new LapResult(index, laps, raceTime, resultat, driverAttributes);
+		result = new LapResult(index, laps, raceTime, resultat, sortedFile, driverAttributes);
 		result.writeResultFile();
-
+		
 	}
 
 }

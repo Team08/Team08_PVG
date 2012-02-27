@@ -39,18 +39,9 @@ public class TestAcceptance13{
 		args[6]= "0.15";
 		args[7]= "3";
 		args[8]= "";
-		args[9]= "2";
-		args[10]= "5";
+		args[9]= "";
+		args[10] = "1";
 
-System.out.println(args[0]);
-System.out.println(args[1]);
-System.out.println(args[2]);
-System.out.println(args[3]);
-System.out.println(args[4]);
-System.out.println(args[5]);
-System.out.println(args[6]);
-System.out.println(args[7]);
-System.out.println(args[8]);
 
 		
 		new Enduro(args);
@@ -58,7 +49,6 @@ System.out.println(args[8]);
 	
 	@Test public void testResult(){
 		try {
-			System.out.println("ASD");
 			File file1 = new File(testExpResultPath);
 			File file2 = new File(testResultPath);
 			Scanner scan1 = new Scanner(file1);
@@ -69,7 +59,6 @@ System.out.println(args[8]);
 				
 				scantext1 = scan1.nextLine();
 				scantext2 = scan2.nextLine();
-				System.out.println(scantext1 + " = " + scantext2);
 				assertEquals("scan1 =! scan2 ", scan1.nextLine(),
 						scan2.nextLine());
 			}

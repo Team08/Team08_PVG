@@ -43,8 +43,10 @@ public abstract class FileIO {
 	 *             If file not found
 	 */
 	public void readFile() throws FileNotFoundException {
-		if (fileName != null) {
-			File file = new File(fileName.trim());
+		String[] thefile = fileName.split(", ");
+		for(int i = 0; i < thefile.length; i++){
+		if (thefile[i] != null) {
+			File file = new File(thefile[i].trim());
 			Scanner scanner;
 			try {
 				scanner = new Scanner(file);
@@ -53,15 +55,16 @@ public abstract class FileIO {
 				while (scanner.hasNextLine()) {
 					line = scanner.nextLine();
 					String[] str = line.split("; ");
-					time = new Time(str[1]);
-					riderID = Integer.parseInt(str[0]);
+					time = new Time(str[1].trim());
+					riderID = Integer.parseInt(str[0].trim());
 					add();
 				}
 
-			} catch (FileNotFoundException e) {
+			} catch (FileNotFoundException e) {// Catch exception if any
 				printErrorText();
 				throw new FileNotFoundException();
 			}
+		}
 		}
 	}
 

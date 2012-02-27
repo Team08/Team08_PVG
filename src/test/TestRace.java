@@ -10,12 +10,12 @@ import race.LapRace;
 import util.Time;
 
 public class TestRace {
-	LapRace race;
+	private LapRace race;
 
 	@Before
 	public void setUp() {
 
-		race = new LapRace("", "", "", "", "", 0, "", null);
+		race = new LapRace("", "","", "", "", "", 0, "", null);
 
 	}
 

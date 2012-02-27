@@ -1,0 +1,11 @@
+SENIORER
+Plac; StartNr; Namn; #Varv; Totaltid; Varv1; Varv2; Varv3; 
+1; 1; Anders Asson; 1; 2.30.06; 2.30.06; ; ; 
+JUNIORER
+Plac; StartNr; Namn; #Varv; Totaltid; Varv1; Varv2; Varv3; 
+1; 3; Chris Csson; 1; 1.03.06; 1.03.06; ; ; 
+2; 4; David Dsson; 1; 1.09.07; 1.09.07; ; ; 
+; 5; Erik Esson; 1; 0.27.07; 0.27.07; ; ; 
+Icke existerande startnummer
+Plac; StartNr; Namn; #Varv; Totaltid; Varv1; Varv2; Varv3; 
+; 2; Namn?; ; ; ; ; ; 

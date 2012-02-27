@@ -64,7 +64,7 @@ public class ReadNameFile extends FileIO {
 						add();
 						race.addClass(riderID, currClass);
 						for (int i = 2; i < str.length; i++) {
-							String attribute = str[i];
+							String attribute = str[i].trim();
 							race.addAttribute(riderID, attribute);
 						}
 					}

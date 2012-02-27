@@ -20,6 +20,7 @@ public class StageResult extends Result {
 	private HashMap<String, TreeMap<Integer, Driver>> mapOfDiffRaceClasses;
 	int stages;
 	String resultFile;
+	private ArrayList<String> driverAttributes;
 
 
 	/**
@@ -35,10 +36,11 @@ public class StageResult extends Result {
 	 *            results to
 	 */
 	public StageResult(TreeMap<Integer, Driver> index, int stages,
-			String resultFile) {
+			String resultFile, ArrayList<String> driverAttributes) {
 		this.index = index;
 		this.stages = stages;
 		this.resultFile = resultFile;
+		this.driverAttributes = driverAttributes;
 	}
 
 	/**
@@ -50,6 +52,11 @@ public class StageResult extends Result {
 			StringBuilder sb = new StringBuilder();
 			BufferedWriter out = new BufferedWriter(fstream);
 			sb.append("StartNr; Namn; ");
+			if(!(driverAttributes == null) && !driverAttributes.isEmpty()){
+				for(int i = 0; i < driverAttributes.size(); i++){
+						sb.append(driverAttributes.get(i) + "; ");
+				}
+			}
 			sb.append("Totaltid; ");
 			sb.append("#Etapper; ");
 			for (int i = 0; i < stages; i++) {
@@ -59,7 +66,6 @@ public class StageResult extends Result {
 				sb.append("Start" + (i + 1) + "; Mål" + (i + 1) + "; ");
 			}
 			sb.append("Start" + (stages) + "; Mål" + stages);
-
 			// Vi antar att vi har alla starttime och finishtime för alla
 			// ettapper i index TreeMap.
 			// dvs finishtime[0] - starttime[0] = etapp[1], finishtime[1] -
@@ -74,26 +80,23 @@ public class StageResult extends Result {
 				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i,
 						tDriver));
 				notSortedDrivers.add(tDriver);
-
 			}
 			
 			//Skriver ut till fil
 			//Hämtar TreeMap med className som key så att vi får ut alla som tillhör klassen.
 			for (String className : mapOfDiffRaceClasses.keySet()) {
-				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
-						.get(className);
+				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses.get(className);
 				out.write(className + "\n");
 				out.write(sb.toString());
 				for (Integer i : tm.keySet()) {
 					tDriver = tm.get(i);
 					out.write(checkErrorStageRace(i, tDriver));
 				}
-
 			}
 			out.close();
 
 		} catch (Exception e) {
-			System.err.println("Error: Misslyckades med att skriva resultat filen");
+			System.err.println("Error: Misslyckades med att skriva resultatfilen för etapplopp");
 			System.exit(1);
 		}
 
@@ -114,8 +117,8 @@ public class StageResult extends Result {
 		// totaltid för etapp1
 		sb.append(getStageTime(driver));
 		// Starttid för etapp1;
-		sb.append(getTimes(driver));
-
+		sb.append(getTimes(driver)); // här blir det fel.
+		
 		return sb.toString();
 	}
 
@@ -135,18 +138,20 @@ public class StageResult extends Result {
 		StringBuilder sb = new StringBuilder();
 		List<Time> startTemp = driver.startTime();
 		List<Time> finishTemp = driver.finishTime();
+		System.out.println(123);
+		System.out.println(startTemp.get(0).toString());
+		System.out.println(321);
 		for (int i = 0; i < stages; i++) {
-
 			if (startTemp.get(i) != null) {
 				sb.append(startTemp.get(i).toString());
 			}
 			sb.append("; ");
-
 			if (finishTemp.get(i) != null) {
 				sb.append(finishTemp.get(i).toString());
 			}
-			sb.append("; ");
-
+			if(i != stages-1){
+				sb.append("; ");
+			}
 		}
 		return sb.toString();
 
@@ -197,16 +202,7 @@ public class StageResult extends Result {
 	 * @return A string with error-notations if any invalid time was found
 	 */
 	@Override
-	public String checkTotaltime(List<Time> startTime, List<Time> finishTime,
-			StringBuilder sb) {
-		Time totalTime = new Time(0);
-		if (startTime.size() == 0 || finishTime.size() == 0) {
-			sb.append("--.--.--; ");
-		}
-		// } else {
-		//			
-		// }
-
+	public String checkTotaltime(List<Time> startTime, List<Time> finishTime, StringBuilder sb) {
 		return null;
 	}
 
