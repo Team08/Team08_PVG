@@ -125,7 +125,7 @@ public class RaceClassBuilder {
 			}
 		}
 		
-		sb.append("Plac; StartNr; Namn; " + tempSb.toString() + " #Varv; Totaltid; ");
+		sb.append("Plac; StartNr; Namn; " + tempSb.toString() + "#Varv; Totaltid; ");
 		for (int i = 0; i < maxNbrOfLaps; i++) {
 			sb.append("Varv");
 			sb.append(i + 1 + "; ");

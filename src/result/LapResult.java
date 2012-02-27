@@ -75,7 +75,7 @@ public class LapResult extends Result {
 					}
 				}
 			}
-			sb.append(" #Varv; ");
+			sb.append("#Varv; ");
 			sb.append("Totaltid; ");
 
 			for (int i = 0; i < laps; i++) {
@@ -232,6 +232,7 @@ public class LapResult extends Result {
 			sb.append(finishTime.get(finishTime.size() - 1));
 
 		} else {
+			sb.delete(sb.length() - 2, sb.length() - 1);
 			sb.append("Slut?");
 		}
 
