@@ -75,7 +75,7 @@ public class LapResult extends Result {
 					}
 				}
 			}
-			sb.append("#Varv; ");
+			sb.append(" #Varv; ");
 			sb.append("Totaltid; ");
 
 			for (int i = 0; i < laps; i++) {
@@ -141,7 +141,7 @@ public class LapResult extends Result {
 
 			System.exit(1);
 		}
-			SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps, raceTime, sortedFile);
+			SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps, raceTime, sortedFile, driverAttributes);
 			sorted.writeToFile();
 	}
 
@@ -182,7 +182,6 @@ public class LapResult extends Result {
 		for(int i = 0; i < attributes.size(); i++){
 			sb.append(attributes.get(i) + "; ");
 		}
-		 sb.toString();
 	
 		sb.append(index.get(currentIndex).getNumberOfLaps() + "; ");
 
