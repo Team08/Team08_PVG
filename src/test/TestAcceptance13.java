@@ -42,7 +42,6 @@ public class TestAcceptance13{
 		args[9]= "";
 		args[10] = "1";
 
-
 		
 		new Enduro(args);
 	}

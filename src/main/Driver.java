@@ -109,7 +109,7 @@ public class Driver {
 	 */
 	public String getLapTime(int i) {
 		int laptime;
-		if (i == 0) {
+		if (i == 0) {			
 			laptime = startTime.get(0).timeDiff(finishTime.get(0));
 		} else if (finishTime.size() > i) {
 			laptime = finishTime.get(i - 1).timeDiff(finishTime.get(i));
@@ -162,49 +162,44 @@ public class Driver {
 	public int getId() {
 		return id;
 	}
-
+	
 	/**
 	 * Returns the totaltime or -1 if no totaltime exists
-	 * 
-	 * @return the totaltime or -1
+	 * @return the totaltime or -1 
 	 */
 	public int totalTime() {
-		if (startTime.size() > 0 && finishTime.size() > 0) {
-			return startTime.get(0).timeDiff(
-					finishTime.get(finishTime.size() - 1));
+		if(startTime.size() > 0 && finishTime.size() > 0) {
+			return startTime.get(0).timeDiff(finishTime.get(finishTime.size() - 1));
 		}
 		return -1;
 	}
-
+	
 	/**
-	 * @param attribute
-	 *            - the attribute to add
+	 * @param attribute - the attribute to add
 	 */
-	public void addAttribute(String attribute) {
+	public void addAttribute(String attribute){
 		driverAttribute.add(attribute);
 	}
-
+	
+	
 	/**
 	 * Returns the drivers attributes
-	 * 
 	 * @return the attributes
 	 */
-	public ArrayList<String> getAttributes() {
+	public ArrayList<String> getAttributes(){
 		return driverAttribute;
 	}
-
+	
 	/**
 	 * Returns a list of the laptimes that the driver has
-	 * 
 	 * @return list of laptimes
 	 */
-	public ArrayList<String> listOfLapTimes() {
+	public ArrayList<String> listOfLapTimes(){
 		ArrayList<String> lapTimes = new ArrayList<String>();
-		if (startTime.size() != 0) {
-			for (int i = 0; i < finishTime.size(); i++) {
-				lapTimes.add(getLapTime(i));
-			}
-		}
+		if(startTime.size()!=0){
+		for(int i = 0; i < finishTime.size(); i++){
+			lapTimes.add(getLapTime(i));
+		}}
 		return lapTimes;
 	}
 
