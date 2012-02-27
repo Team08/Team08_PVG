@@ -112,7 +112,7 @@ public class LapResult extends Result {
 				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());	
 				sortedListOfDriversInAClass = sorter.lapSort(unsortedListOfDriversInAClass, raceTime); 
 				
-				// Nu har vi en sorterad arraylist med alla förarna i en klass
+				// Nu har vi en sorterad arraylist med alla f�rarna i en klass
 
 				if (className.equals(nonExistingNbr)) {
 					nonExistingNbrList = unsortedListOfDriversInAClass;
@@ -143,7 +143,7 @@ public class LapResult extends Result {
 
 			System.exit(1);
 		}
-			SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps, raceTime, sortedFile);
+			SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps, raceTime, sortedFile, driverAttributes);
 			sorted.writeToFile();
 	}
 
@@ -197,7 +197,6 @@ public class LapResult extends Result {
 		for(int i = 0; i < attributes.size(); i++){
 			sb.append(attributes.get(i) + "; ");
 		}
-		 sb.toString();
 	
 		sb.append(index.get(currentIndex).getNumberOfLaps() + "; ");
 
@@ -235,6 +234,7 @@ public class LapResult extends Result {
 			sb.append(finishTime.get(finishTime.size() - 1));
 
 		} else {
+			sb.delete(sb.length() - 2, sb.length() - 1);
 			sb.append("Slut?");
 		}
 

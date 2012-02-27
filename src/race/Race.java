@@ -92,7 +92,7 @@ public abstract class Race {
 	}
 
 	/**
-	 * Creates a driver and adds a start time to it and puts the created driver
+	 * Retrieves a driver and adds a start time to it and puts the created driver
 	 * in the treemap index. Multiple start times are allowed.
 	 * 
 	 * The driver does not know his start number, this is stored in the treemap
@@ -111,7 +111,7 @@ public abstract class Race {
 	}
 
 	/**
-	 * Creates a driver and adds a new finish time to it and puts the created driver
+	 * Retrieves a driver and adds a new finish time to it and puts the created driver
 	 * in the treemap index. Multiple finish times are allowed.
 	 * 
 	 * The driver does not know his start number, this is stored in the treemap
@@ -131,7 +131,7 @@ public abstract class Race {
 	}
 
 	/**
-	 * Creates a driver and adds a name to it and puts the created driver in the
+	 * Retrieves a driver and adds his/her name and puts the created driver in the
 	 * treemap index
 	 * 
 	 * The driver does not know his start number, this is stored in the treemap
@@ -144,15 +144,13 @@ public abstract class Race {
 	 */
 	public void addName(Integer startNumber, String name) {
 		Driver driver = getDriver(startNumber);
-		// driver . set ID nummer måste finnas på dessa metoder.
 		driver.setId(startNumber);
 		driver.setName(name);
 		index.put(startNumber, driver);
-
 	}
 
 	/**
-	 * Creates a driver and adds a class to it and puts the created driver in
+	 * Retrieves a driver and adds a class to it and puts the created driver in
 	 * the treemap index. The old class will be overwritten.
 	 * 
 	 * @param startnumber
@@ -191,12 +189,23 @@ public abstract class Race {
 		return index.size();
 	}
 	
+	/**
+	 * Adds an attribute to the driver
+	 * 
+	 * @param startNumber - the drivers startnumber
+	 * @param attribute - the attribute that should be added
+	 */
 	public void addAttribute(int startNumber, String attribute){
 		Driver driver = getDriver(startNumber);
 		driver.addAttribute(attribute);
 		index.put(startNumber, driver);
 	}
 	
+	/**
+	 * Returns the treemap
+	 * 
+	 * @return the treemap that contains the drivers
+	 */
 	public TreeMap<Integer, main.Driver> getIndex(){
 		return index;
 	}

@@ -13,6 +13,8 @@ import main.Sorter;
 import util.Time;
 
 /**
+ * NOT USED AT THE MOMENT
+ * 
  * This class builds the time results for stage races and can write the result
  * to result file.
  */
