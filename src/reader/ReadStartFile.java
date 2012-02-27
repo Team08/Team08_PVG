@@ -52,10 +52,10 @@ public class ReadStartFile extends FileIO {
 				String line;
 				line = scanner.nextLine();
 				String[] str = line.split("; ");
-				int index = Integer.parseInt(str[0]);
+				int index = Integer.parseInt(str[0].trim());
 				for (int i = 1; i <= index; i++) {
 					riderID = i;
-					time = new Time(str[1]);
+					time = new Time(str[1].trim());
 					add();
 				}
 			} catch (FileNotFoundException e) {

@@ -4,21 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import util.Time;
-import util.Time2;
 
 /**
- * The Driver class which represents a driver. The driver does not know his
- * start number. This can be accessed from the database structure instead. He
- * does know his name, start times, finish times and which classes he's a part
- * of.
+ * The Driver class which represents a driver. The driver knows his id, his name, start times, 
+ * finish times and which classes he's a part of.
  * 
  * @author Team08
  * 
  */
 public class Driver {
 	private String name;
-	private List<Time> startTime = new ArrayList<Time>();
-	private List<Time> finishTime = new ArrayList<Time>();
+	private ArrayList<Time> startTime = new ArrayList<Time>();
+	private ArrayList<Time> finishTime = new ArrayList<Time>();
 	private String classes = "";
 	private int id;
 	private ArrayList<String> driverAttribute = new ArrayList<String>();
@@ -32,7 +29,7 @@ public class Driver {
 	}
 
 	/**
-	 * The constructor which creates the Driver
+	 * The constructor which creates the Driver with a name
 	 * 
 	 * @param name
 	 *            the drivers name
@@ -73,25 +70,25 @@ public class Driver {
 	}
 
 	/**
-	 * Returns the driver's start times as a list
+	 * Returns the driver's starttimes as a list
 	 * 
-	 * @return The start times as a list
+	 * @return The starttimes as a list
 	 */
-	public List<Time> startTime() {
+	public ArrayList<Time> startTime() {
 		return startTime;
 	}
 
 	/**
-	 * Returns the driver's finish times as a list
+	 * Returns the driver's finishtimes as a list.
 	 * 
-	 * @return The finish times as a list
+	 * @return The finishtimes as a list
 	 */
-	public List<Time> finishTime() {
+	public ArrayList<Time> finishTime() {
 		return finishTime;
 	}
 
 	/**
-	 * Set the name of the driver. The current name is replaced.
+	 * Sets the name of the driver. The current name is replaced.
 	 * 
 	 * @param name
 	 *            The new name of the driver
@@ -101,7 +98,7 @@ public class Driver {
 	}
 
 	/**
-	 * Returns the time from last registered time to the lap i
+	 * Returns the time of the lap i (starting from 0)
 	 * 
 	 * @param i
 	 *            The lap number, starting from 0
@@ -140,7 +137,7 @@ public class Driver {
 	}
 
 	/**
-	 * Returns the number of laps
+	 * Returns the number of laps the driver has driven
 	 * 
 	 * @return The number of laps as an integer
 	 */
@@ -149,6 +146,8 @@ public class Driver {
 	}
 
 	/**
+	 * Sets the drivers id=startnumber
+	 * 
 	 * @param id
 	 *            the id to set
 	 */
@@ -157,11 +156,14 @@ public class Driver {
 	}
 
 	/**
+	 * Returns the drivers id=startnumber
+	 * 
 	 * @return the id
 	 */
 	public int getId() {
 		return id;
 	}
+	
 	/**
 	 * Returns the totaltime or -1 if no totaltime exists
 	 * @return the totaltime or -1 
@@ -174,11 +176,14 @@ public class Driver {
 	}
 	
 	/**
+	 * Adds an attribute to the driver
+	 * 
 	 * @param attribute - the attribute to add
 	 */
 	public void addAttribute(String attribute){
 		driverAttribute.add(attribute);
 	}
+	
 	
 	/**
 	 * Returns the drivers attributes
@@ -190,6 +195,7 @@ public class Driver {
 	
 	/**
 	 * Returns a list of the laptimes that the driver has
+	 * An empty list if there are no laptimes
 	 * @return list of laptimes
 	 */
 	public ArrayList<String> listOfLapTimes(){
@@ -200,42 +206,49 @@ public class Driver {
 		}}
 		return lapTimes;
 	}
-	
+
+	/**
+	 * Metod för story 19, etapprace, används dock inte
+	 */
 	public String getStageTime(int i) {
-		//Kolla sÃ¥ det finns nÃ¥gon tid fÃ¶r etappen i
-		if (i > startTime().size()-1 || i > finishTime().size()-1) {
-			return("");
-		//Annars returnera tiden etappen i
+		// Kolla så det finns någon tid för etappen i
+		if (i > startTime().size() - 1 || i > finishTime().size() - 1) {
+			return ("");
+			// Annars returnera tiden etappen i
 		} else {
-			return(new Time(finishTime().get(i).timeDiff(startTime().get(i))).toString());
+			return (new Time(finishTime().get(i).timeDiff(startTime().get(i)))
+					.toString());
 		}
 	}
-	
-	
-	
+
 	private int addStageTime(int i) {
-		if (i > startTime().size()-1 || i > finishTime().size()-1) {
+		if (i > startTime().size() - 1 || i > finishTime().size() - 1) {
 			return 0;
 		} else {
-			return(finishTime().get(i).timeDiff(startTime().get(i)));
+			return (finishTime().get(i).timeDiff(startTime().get(i)));
 		}
 	}
-	
-	
+
+	/**
+	 * Metod för story 19, etapprace, används dock inte
+	 */
 	public String getTotStageTime() {
 		int sum = 0;
-		for(int i = 0; i < startTime.size(); i++){
+		for (int i = 0; i < startTime.size(); i++) {
 			sum += addStageTime(i);
 		}
 		return new Time(sum).toString();
 	}
 
+	/**
+	 * Metod för story 19, 20, etapprace och specialsträckor, används dock inte
+	 */
 	public String getNbrOfStages() {
 		String s = Integer.toString(finishTime.size());
-		if(startTime.size() < finishTime.size()){
-			s =  Integer.toString(startTime.size());
+		if (startTime.size() < finishTime.size()) {
+			s = Integer.toString(startTime.size());
 		}
 		return s;
 	}
-	
+
 }

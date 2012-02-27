@@ -146,7 +146,7 @@ public class SpecialDistanceResult extends Result {
 			
 
 		} catch (Exception e) {
-			System.err.println("Error: Misslyckades med att skriva resultat filen");
+			System.err.println("Error: Misslyckades med att skriva resultatfilen för specialsträckor.");
 
 			System.exit(1);
 		}
@@ -256,12 +256,7 @@ public class SpecialDistanceResult extends Result {
 			if(i != stages-1){
 				sb.append("; ");
 			}
-			
-
 		}
 		return sb.toString();
-
 	}
-	
-	
 }

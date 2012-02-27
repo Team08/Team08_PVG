@@ -50,8 +50,6 @@ public abstract class Result {
 			sb.append(finishTime.get(0));
 		}
 	}
-	
-
 
 	/**
 	 * Check if the start time list contains any finish time.
@@ -69,7 +67,6 @@ public abstract class Result {
 			sb.append(startTime.get(0) + "; ");
 		}
 	}
-	
 
 	/**
 	 * Check if the finish time list contains any finish time.
@@ -101,7 +98,6 @@ public abstract class Result {
 			sb.append(name + "; ");
 		}
 	}
-
 
 	public abstract void writeResultFile();
 

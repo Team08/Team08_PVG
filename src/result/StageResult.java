@@ -96,7 +96,7 @@ public class StageResult extends Result {
 			out.close();
 
 		} catch (Exception e) {
-			System.err.println("Error: Misslyckades med att skriva resultat filen");
+			System.err.println("Error: Misslyckades med att skriva resultatfilen för etapplopp");
 			System.exit(1);
 		}
 
@@ -139,7 +139,7 @@ public class StageResult extends Result {
 		List<Time> startTemp = driver.startTime();
 		List<Time> finishTemp = driver.finishTime();
 		System.out.println(123);
-		System.out.println( startTemp.get(0).toString() );
+		System.out.println(startTemp.get(0).toString());
 		System.out.println(321);
 		for (int i = 0; i < stages; i++) {
 			if (startTemp.get(i) != null) {
@@ -203,11 +203,6 @@ public class StageResult extends Result {
 	 */
 	@Override
 	public String checkTotaltime(List<Time> startTime, List<Time> finishTime, StringBuilder sb) {
-		Time totalTime = new Time(0);
-		if (startTime.size() == 0 || finishTime.size() == 0) {
-			sb.append("--.--.--; ");
-		}
-
 		return null;
 	}
 

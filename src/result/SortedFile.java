@@ -34,28 +34,33 @@ public class SortedFile {
 
 	public void writeToFile() {
 		betterMap();
-		try {
-			FileWriter fstream = new FileWriter(
-					sortedFile);
-			BufferedWriter writer = new BufferedWriter(fstream);
-			for (String s : classSortedMap.keySet()) {
+		if (!(sortedFile.equals("")|| sortedFile == null)) {
+			try {
+				FileWriter fstream = new FileWriter(sortedFile);
+				BufferedWriter writer = new BufferedWriter(fstream);
+				for (String s : classSortedMap.keySet()) {
+					build = new RaceClassBuilder(maxNbrOfLaps, raceTime);
+					build.writeResult(classSortedMap.get(s));
+					writer.write(build.toString());
+				}
 				build = new RaceClassBuilder(maxNbrOfLaps, raceTime);
-				build.writeResult(classSortedMap.get(s));
+
+				if (noClass.size() > 0) {
+					build.writeResult(noClass);
+				}
+
 				writer.write(build.toString());
-			}
-			build = new RaceClassBuilder(maxNbrOfLaps, raceTime);
-			
-			if(noClass.size()>0){
-				build.writeResult(noClass);
-			}
-			
-			writer.write(build.toString());
-			writer.close();
+				writer.close();
 
-		} catch (Exception e) {
+			} catch (Exception e) {
 
-			System.err.println("Error: " + e.getMessage());
-			System.exit(1);
+				System.err.println("Error: Misslyckades med att skriva den sorterade filen");
+				e.printStackTrace();
+				System.exit(1);
+			}
+
+		} else {
+
 		}
 
 	}

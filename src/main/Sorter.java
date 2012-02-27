@@ -27,9 +27,7 @@ public class Sorter {
 		public int compare(Driver d1, Driver d2) {
 			Integer d1T = (new Time(d1.totalTime()).lesserThan(raceTime)) ? -1 : 0; //-1 om ingen totaltid, 0 annars
 			Integer d2T = (new Time(d2.totalTime()).lesserThan(raceTime)) ? -1 : 0; //-1 om ingen totaltid, 0 annars
-			
-
-			
+	
 			int c1 = d1T.compareTo(d2T); 
 
 			if(c1 == 1) {
@@ -42,21 +40,14 @@ public class Sorter {
 			Integer d1Laps = new Integer(d1.getNumberOfLaps());
 			Integer d2Laps = new Integer(d2.getNumberOfLaps());
 			
-
-			
 			int c2 = d1Laps.compareTo(d2Laps);
 
 			if(c2 != 0) {
 				return c2;
 			}
-			
-			
-			
 
 			return ((Integer)d1.totalTime()).compareTo((Integer)d2.totalTime());
-			
-			
-			
+		
 //			int o1TotTime = o1.totalTime();
 //			int o2TotTime = o2.totalTime();
 //			
