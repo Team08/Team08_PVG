@@ -46,12 +46,13 @@ public class GenerateConfig {
 		        BufferedWriter out = new BufferedWriter(new FileWriter("config.properties")); 
 		        out.write("#AUTO GENERATED config.properties\n");
 		        out.write("#Konfigurationsfil för Enduro som har vården sparade i formatet <nyckel>=<värde> \n");
-		        out.write("#Fyll i alla värden nedan förutom de som är längst ner eftersom de ej används. \n\n");
+		        out.write("#Fyll i alla värden nedan. \n\n");
 		        
 		        out.write("#Vad heter dina filer och var ligger dem?" + "\n");
 		        out.write("#A1t1. Dina filer ligger i samma mapp som Enduro, då anger vi \"Exempel_startfil.txt\"" + "\n");
 		        out.write("#Alt2. Du har filerna i en mapp som heter [Tider], då anger vi \"Tider/Exempel_startfil.txt\"" + "\n");
 		        out.write("#(OBS)! Undvik svenska specialtecken på filnamnen!" + "\n");
+		        out.write("#För att ange flera stopfiler/måltider så separare med ett kommatecken. Ex \"example_start.txt,example_start2.txt\"");
 		        out.write("STARTFILE=example_start.txt" + "\n");
 		        out.write("STOPFILE=aMapp/example_stop.txt" + "\n");
 		        out.write("NAMEFILE=" + "\n\n");
@@ -80,9 +81,6 @@ public class GenerateConfig {
 		        out.write("#Ex: \"Klubb;MC-fabrikat;Sponsor1;Sponsor2;\"" + "\n");
 		        out.write("DRIVER_ATTRIBUTES=" + "\n\n\n\n\n\n\n");
 		        
-		        
-		        
-
 
 		        out.close();  
 		        System.out.println("Autogenerate file: config.properties.");

@@ -53,11 +53,11 @@ public class Enduro {
 					readConfigKeys(configFile);
 					createRace();
 				}else{
-					System.err.println("Misslyckades med att l‰sa konfigurationsfilen");
+					System.err.println("Misslyckades med att l√§sa konfigurationsfilen");
 				}
 
 			} catch (FileNotFoundException e1) {
-				System.err.println("Misslyckades med att l‰sa konfigurationsfilen, en ny har autogenerats.");
+				System.err.println("Misslyckades med att l√§sa konfigurationsfilen, en ny har autogenerats.");
 				System.err.println("Var god och fyll i config.properties filen och starta om programmet.");
 				genCon.autogenerateConfig();
 				System.exit(1);
@@ -73,7 +73,7 @@ public class Enduro {
 				}
 				createRace();
 			} catch (Exception e) {
-				System.err.println("Error: Du mÂste skriva in alla argument");
+				System.err.println("Error: Du m√•ste skriva in alla argument");
 
 			}}
 	}
