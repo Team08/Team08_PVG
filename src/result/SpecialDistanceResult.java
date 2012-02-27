@@ -12,6 +12,9 @@ import main.Sorter;
 import util.Time;
 
 /**
+ * NOT USED AT THE MOMENT
+ * 
+ * 
  * An sub class of Result which is used when a Lap Race has been used a
  * parameter to the main class in Enduro.
  * 

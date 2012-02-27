@@ -98,7 +98,10 @@ public abstract class Result {
 			sb.append(name + "; ");
 		}
 	}
-
+	
+	/**
+	 * Writes the resultfile 
+	 */
 	public abstract void writeResultFile();
 
 }

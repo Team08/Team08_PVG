@@ -42,8 +42,7 @@ public class LapRace extends Race {
 	 *            the number of laps which are to be written to the file
 	 * @param startType
 	 *            the type of start (masstart e.g.)
-	 * @param lapTime TODO
-	 * @param lapTime TODO
+	 * @param lapTime - the minimum time of a lap
 	 */
 
 	public LapRace(String start, String stop, String nameFile,

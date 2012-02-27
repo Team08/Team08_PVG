@@ -55,7 +55,7 @@ public class Register {
 	
 	
 	/**
-	 * Creates a new time object and write the time
+	 * Creates a new time object and writes the time
 	 * and the driver to the file
 	 * @param name
 	 * 				name of driver
