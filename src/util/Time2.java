@@ -17,7 +17,7 @@ public class Time2 {
 	 */
 	public static String addZero(int minutes) throws NumberFormatException {
 		if (minutes < 0)
-			throw new NumberFormatException("No negative numbers are allowed");
+			throw new NumberFormatException("Negativa tal inte tillåtet");
 		String min;
 		if (minutes < 10) {
 			min = "0" + minutes;

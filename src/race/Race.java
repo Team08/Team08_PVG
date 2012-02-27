@@ -22,19 +22,14 @@ import util.Time;
 public abstract class Race {
 	public TreeMap<Integer, Driver> index;
 
-	// Result
 	Result result;
 
-	// Sorter
-
-	// Variables
 	protected String stopFile;
 	protected String startFile;
 	protected String startType;
 	protected String nameFile;
 	protected ArrayList<String> driverAttributes;
 
-	// Readers
 	private ReadNameFile rnf;
 	private ReadStartFile rsf;
 	private ReadFinishFile rff;
@@ -51,8 +46,7 @@ public abstract class Race {
 	 * @param startType
 	 *            the name of the start type (varv, etapp)
 	 */
-	public Race(String startFile, String stopFile, String nameFile,
-			String startType, ArrayList<String> driverAttributes) {
+	public Race(String startFile, String stopFile, String nameFile, String startType, ArrayList<String> driverAttributes) {
 		this.startFile = startFile;
 		this.stopFile = stopFile;
 		this.startType = startType;
@@ -81,22 +75,19 @@ public abstract class Race {
 	 * The result file will have been written after this methods ends.
 	 */
 	public void computeTotalTime() {
-		// Names are put in the TreeMap from the name file
 		try {
 			rnf.readFile();
-			if (startType.equals("Masstart")) {
+			if (startType.equals("masstart")) {
 				rsf.readFileMassStart();
 			} else {
 				rsf.readFile();
 			}
 			rff.readFile();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// Start file is read, and start times are put in the register
-		// Finish file is read, and finish times are put in the register
 		getResult(index);
+
 
 	}
 
@@ -134,6 +125,7 @@ public abstract class Race {
 	 */
 	public void addFinishTime(Integer startNumber, Time time) {
 		Driver driver = getDriver(startNumber);
+		driver.setId(startNumber);
 		driver.addFinishTime(time);
 		index.put(startNumber, driver);
 
@@ -153,6 +145,8 @@ public abstract class Race {
 	 */
 	public void addName(Integer startNumber, String name) {
 		Driver driver = getDriver(startNumber);
+		// driver . set ID nummer måste finnas på dessa metoder.
+		driver.setId(startNumber);
 		driver.setName(name);
 		index.put(startNumber, driver);
 

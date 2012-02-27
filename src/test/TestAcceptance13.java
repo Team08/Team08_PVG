@@ -28,7 +28,8 @@ public class TestAcceptance13{
 	}
 
 	@Before public void setup() {
-		String[] args = new String [8];
+		String[] args = new String [11];
+
 		args[0]= testStartPath;
 		args[1]= testFinishPath;
 		args[2]= testNamefilePath;
@@ -37,6 +38,9 @@ public class TestAcceptance13{
 		args[5]= "enkelstart";
 		args[6]= "0.15";
 		args[7]= "3";
+
+
+		
 		new Enduro(args);
 	}
 	
@@ -46,9 +50,13 @@ public class TestAcceptance13{
 			File file2 = new File(testResultPath);
 			Scanner scan1 = new Scanner(file1);
 			Scanner scan2 = new Scanner(file2);
-			
+			String scantext1;
+			String scantext2;
 			while (scan1.hasNext() || scan2.hasNext()){
-				assertEquals(scan1.nextLine(),
+				
+				scantext1 = scan1.nextLine();
+				scantext2 = scan2.nextLine();
+				assertEquals("scan1 =! scan2 ", scan1.nextLine(),
 						scan2.nextLine());
 			}
 		} catch (FileNotFoundException e) {

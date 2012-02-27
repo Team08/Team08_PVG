@@ -43,8 +43,10 @@ public abstract class FileIO {
 	 *             If file not found
 	 */
 	public void readFile() throws FileNotFoundException {
-		if (fileName != null) {
-			File file = new File(fileName);
+		String[] thefile = fileName.split(", ");
+		for(int i = 0; i < thefile.length; i++){
+		if (thefile[i] != null) {
+			File file = new File(thefile[i].trim());
 			Scanner scanner;
 			try {
 				scanner = new Scanner(file);
@@ -62,6 +64,7 @@ public abstract class FileIO {
 				printErrorText();
 				throw new FileNotFoundException();
 			}
+		}
 		}
 	}
 

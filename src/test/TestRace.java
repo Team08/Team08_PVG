@@ -15,7 +15,7 @@ public class TestRace {
 	@Before
 	public void setUp() {
 
-		race = new LapRace("", "", "", "", "", 0, "", null);
+		race = new LapRace("", "","", "", "", "", 0, "", null);
 
 	}
 
@@ -95,7 +95,7 @@ public class TestRace {
 		String name = "SENIOR";
 		race.addClass(i, name);
 		Driver driver = race.index.get(i);
-		assertEquals(name, driver.getClasses());
+		assertEquals(name, driver.getRaceClass());
 	}
 	
 	@Test

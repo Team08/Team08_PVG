@@ -1,6 +1,11 @@
 package reader;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import race.Race;
+import util.Time;
 
 /**
  * This class can read a finish file and add the finish time + driverId to the
@@ -38,5 +43,7 @@ public class ReadFinishFile extends FileIO {
 	protected void printErrorText() {
 		System.err.println("Hittade inte finishfilen.");
 	}
+	
+
 
 }

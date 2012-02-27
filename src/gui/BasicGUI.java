@@ -21,8 +21,8 @@ import model.Register;
  */
 public class BasicGUI extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
-	private static int WIDTH = 1920;
-	private static int HEIGHT = 1080;
+	private static int WIDTH = 600;
+	private static int HEIGHT = 800;
 	private Register register;
 	private JTextArea textArea;
 	private JTextField driverID;
@@ -52,25 +52,21 @@ public class BasicGUI extends JFrame implements ActionListener{
 	private void setupLayout() {
 		topPanel.setLayout(new GridLayout(1, 2));
 
-		// FINISHING TOUCHES
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.pack();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
 
-	// Add components
 	private void addComponents() {
 		displayPanel.add(scrollPane);
 		topPanel.add(driverID);
 		topPanel.add(registerButton);
 
-		// ADDS PANELS TO FRAME
 		this.add(topPanel, BorderLayout.NORTH);
 		this.add(displayPanel, BorderLayout.CENTER);
 	}
 
-	// Initialize the components
 	private void init() {
 		displayPanel = new JPanel(new GridLayout(1, 1));
 		topPanel = new JPanel();
@@ -86,13 +82,12 @@ public class BasicGUI extends JFrame implements ActionListener{
 		setFonts();
 	}
 
-	// Sets the bigger fonts for all components
 	private void setFonts() {
 		Font newTextFont = new Font(textArea.getFont().getName(), textArea
-				.getFont().getStyle(), 70);
+				.getFont().getStyle(), 40);
 
 		Font newBigTextFont = new Font(textArea.getFont().getName(), textArea
-				.getFont().getStyle(), 90);
+				.getFont().getStyle(), 40);
 
 		textArea.setFont(newTextFont);
 		registerButton.setFont(newBigTextFont);

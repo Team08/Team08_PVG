@@ -19,7 +19,7 @@ public class Driver {
 	private List<Time> startTime = new ArrayList<Time>();
 	private List<Time> finishTime = new ArrayList<Time>();
 	private String classes = "";
-	private Integer id;
+	private int id;
 	private ArrayList<String> driverAttribute = new ArrayList<String>();
 
 	/**
@@ -108,7 +108,7 @@ public class Driver {
 	 */
 	public String getLapTime(int i) {
 		int laptime;
-		if (i == 0) {
+		if (i == 0) {			
 			laptime = startTime.get(0).timeDiff(finishTime.get(0));
 		} else if (finishTime.size() > i) {
 			laptime = finishTime.get(i - 1).timeDiff(finishTime.get(i));
@@ -134,7 +134,7 @@ public class Driver {
 	 * 
 	 * @return A string with the class name
 	 */
-	public String getClasses() {
+	public String getRaceClass() {
 		return classes;
 	}
 
@@ -161,14 +161,80 @@ public class Driver {
 	public int getId() {
 		return id;
 	}
-
+	/**
+	 * Returns the totaltime or -1 if no totaltime exists
+	 * @return the totaltime or -1 
+	 */
 	public int totalTime() {
-		return startTime.get(0).timeDiff(finishTime.get(finishTime.size() - 1));
+		if(startTime.size() > 0 && finishTime.size() > 0) {
+			return startTime.get(0).timeDiff(finishTime.get(finishTime.size() - 1));
+		}
+		return -1;
 	}
+	
+	/**
+	 * @param attribute - the attribute to add
+	 */
 	public void addAttribute(String attribute){
 		driverAttribute.add(attribute);
 	}
+	
+	/**
+	 * Returns the drivers attributes
+	 * @return the attributes
+	 */
 	public ArrayList<String> getAttributes(){
 		return driverAttribute;
 	}
+	
+	/**
+	 * Returns a list of the laptimes that the driver has
+	 * @return list of laptimes
+	 */
+	public ArrayList<String> listOfLapTimes(){
+		ArrayList<String> lapTimes = new ArrayList<String>();
+		if(startTime.size()!=0){
+		for(int i = 0; i < finishTime.size(); i++){
+			lapTimes.add(getLapTime(i));
+		}}
+		return lapTimes;
+	}
+	
+	public String getStageTime(int i) {
+		//Kolla så det finns någon tid för etappen i
+		if (i > startTime().size()-1 || i > finishTime().size()-1) {
+			return("");
+		//Annars returnera tiden etappen i
+		} else {
+			return(new Time(finishTime().get(i).timeDiff(startTime().get(i))).toString());
+		}
+	}
+	
+	
+	
+	private int addStageTime(int i) {
+		if (i > startTime().size()-1 || i > finishTime().size()-1) {
+			return 0;
+		} else {
+			return(finishTime().get(i).timeDiff(startTime().get(i)));
+		}
+	}
+	
+	
+	public String getTotStageTime() {
+		int sum = 0;
+		for(int i = 0; i < startTime.size(); i++){
+			sum += addStageTime(i);
+		}
+		return new Time(sum).toString();
+	}
+
+	public String getNbrOfStages() {
+		String s = Integer.toString(finishTime.size());
+		if(startTime.size() < finishTime.size()){
+			s =  Integer.toString(startTime.size());
+		}
+		return s;
+	}
+	
 }

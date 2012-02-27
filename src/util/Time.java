@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Time implements Comparable{
+public class Time implements Comparable {
 
 	private int time;
 
@@ -31,29 +31,25 @@ public class Time implements Comparable{
 		this.time = time;
 	}
 
-
-	private int time(){
+	private int time() {
 		return time;
 	}
-	
+
 	/**
-	 * Creates the Time based on a string on the format
-	 * "hh.mm.ss".
+	 * Creates the Time based on a string on the format "hh.mm.ss".
 	 * 
 	 * @param time
 	 *            the time in string on the format (hh.mm.ss)
 	 */
 	public Time(String representTime) {
-		if(representTime.length()==0){
-			time=0;
-		}else{
-		String[] temp = representTime.split("\\.");
-		time = parseTime(temp);
 
-	}}
-
-
-	// BORDE EJ BEH�VAS MEN FINNS F�R ATT DE �R S� L�TT ATT IMPLEMENTERA
+		if (representTime.length() == 0 || representTime == " ") {
+			time = 0;
+		} else {
+			String[] temp = representTime.split("\\.");
+			time = parseTime(temp);
+		}
+	}
 
 	/**
 	 * Sets the time in seconds.
@@ -66,7 +62,6 @@ public class Time implements Comparable{
 		this.time = time;
 	}
 
-	// BORDE EJ BEHÖVAS MEN FINNS FÖR ATT DE ÄR SÅ LÄTT ATT IMPLEMENTERA
 	/**
 	 * Sets the time (string).
 	 * 
@@ -88,7 +83,6 @@ public class Time implements Comparable{
 		return time;
 	}
 
-	// EJ TESTADE
 	private int parseTime(String[] temp) throws NumberFormatException {
 		int hour = Integer.parseInt(temp[0]);
 		int minute = Integer.parseInt(temp[1]);
@@ -100,17 +94,15 @@ public class Time implements Comparable{
 		return start;
 	}
 
-	// EJ TESTADE
 	/**
-	 * Adds a zero if minutes < 10, otherwise just returns the same
-	 * number that was used as the input parameter.
+	 * Adds a zero if minutes < 10, otherwise just returns the same number that
+	 * was used as the input parameter.
 	 * 
-	 * E.g. if "9" is used as an input parameter, the method should
-	 * return "09", whereas if the input parameter is "11" the method
-	 * should return "11". 
+	 * E.g. if "9" is used as an input parameter, the method should return "09",
+	 * whereas if the input parameter is "11" the method should return "11".
 	 * 
-	 * That is, no zeroes should be added if minutes > 9
-	 * Only positive numbers are allowed.
+	 * That is, no zeroes should be added if minutes > 9 Only positive numbers
+	 * are allowed.
 	 * 
 	 * @param minutes
 	 *            the minutes, adds a
@@ -129,13 +121,23 @@ public class Time implements Comparable{
 		return min;
 	}
 
+	public static String totalTimeString(int time) {
+		int minutes = (time % 3600) / 60;
+		String min = addZero(minutes);
+
+		int seconds = (time % 3600) % 60;
+		String sec = addZero(seconds);
+
+		String total = time / 3600 + "." + min + "." + sec;
+		return total;
+	}
+
 	/**
 	 * Determine if the times are the same.
 	 * 
 	 * @param t2
 	 *            the time
-	 * @return true if both time is the same:
-	 *         time - t2.getTime() == 0 , false
+	 * @return true if both time is the same: time - t2.getTime() == 0 , false
 	 *         otherwise
 	 */
 	public boolean equals(Time t2) {
@@ -150,11 +152,18 @@ public class Time implements Comparable{
 	 * 
 	 * @param t2
 	 *            the time
-	 * @return true if this.time is greater than t2:
-	 *        time > t2.getTime() , false otherwise
+	 * @return true if this.time is greater than t2: time > t2.getTime() , false
+	 *         otherwise
 	 */
 	public boolean greaterThan(Time t2) {
 		if (!(time > t2.getTime())) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean greaterOrEqualTo(Time t2) {
+		if (!(time >= t2.getTime())) {
 			return false;
 		}
 		return true;
@@ -165,10 +174,11 @@ public class Time implements Comparable{
 	 * 
 	 * @param t2
 	 *            the time
-	 * @return true if this.time is greater than t2:
-	 *         time < t2.getTime() , false otherwise
+	 * @return true if this.time is greater than t2: time < t2.getTime() , false
+	 *         otherwise
 	 */
 	public boolean lesserThan(Time time2) {
+		
 		if (!(time < time2.getTime())) {
 			return false;
 		}
@@ -202,17 +212,17 @@ public class Time implements Comparable{
 	public int timeDiff(Time t2) {
 		if (time > t2.getTime()) {
 			return time - t2.getTime();
-		}else{
+		} else {
 			return t2.getTime() - time;
 		}
 	}
 
 	/**
-	 * Compares the current object with the object in the input parameter,
-	 * based on seconds.
+	 * Compares the current object with the object in the input parameter, based
+	 * on seconds.
 	 * 
-	 *  @return -1, if this time is smaller, 0 if they are equal, or 1
-	 *           if this time is bigger
+	 * @return -1, if this time is smaller, 0 if they are equal, or 1 if this
+	 *         time is bigger
 	 */
 	public int compareTo(Object arg0) {
 		final int SMALLER = -1;
@@ -231,16 +241,16 @@ public class Time implements Comparable{
 	public void sortArrayInOrder(List<Time> times) {
 		Collections.sort(times);
 	}
-	
+
 	/**
-	 * Creates a Gregorian Calender object and returns the time
-	 * as a string vector where [0]hours, [1]minutes and [2]seconds
+	 * Creates a Gregorian Calender object and returns the time as a string
+	 * vector where [0]hours, [1]minutes and [2]seconds
 	 * 
-	 * @return A string vector with the current time,
-	 *         [0] hours, [1] minutes, [2] seconds
-	 *
+	 * @return A string vector with the current time, [0] hours, [1] minutes,
+	 *         [2] seconds
+	 * 
 	 */
-	public static String[] makeTimeList(){
+	public static String[] makeTimeList() {
 		GregorianCalendar calendar = new GregorianCalendar();
 
 		int hours = calendar.get(Calendar.HOUR_OF_DAY);
@@ -255,6 +265,14 @@ public class Time implements Comparable{
 		times[2] = stringSeconds;
 
 		return times;
+	}
+	
+	public Time multiplyTimeBy(int factor, Time time) {
+		return new Time(factor*time.time);
+	}
+	
+	public Time addToTime(Time time) {
+		return new Time(this.time + time.time);
 	}
 
 }

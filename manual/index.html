@@ -1,14 +1,190 @@
-<html>
-<title> Enduro - Manual</title>
+<html lang="sv">
 <head>
+
 <style type="text/css">
+
+
+
+<!--
+html, body  { 
+padding-top: 5px;
+padding-bottom: 0px;
+padding-left: 5px;
+padding-right: 0px;
+margin: 0px;
+font: 16px Verdana, Arial, Helvetica, sans-serif;
+
+background-color: #eee;
+background-attachment: fixed;
+}
+
+a:link {color: #0000ee; text-decoration: none; }
+a:active {color: #0000ee; text-decoration: none; }
+a:visited {color: #0000aa; text-decoration: none; }
+a:hover {color: #000000; text-decoration: none; }
+
+h1 {
+font-size: 17px;
+font-family: "Tahoma", serif;
+color:#555555;
+margin-bottom:0;
+margin-top:0;
+padding-bottom: 0px;
+}
+
+-->
 </style>
 </head>
+<html>
+<A NAME="Topp"></A>
+<h2>Enduro - Manual</h2><hr>
 
-<frameset cols="210,*"  frameborder="0" framespacing="0">
-  <frame src="menu.html" name="menu" />
-  <frame src="manual/sida1.0.html" name="mainframe" />
-</frameset>
+<a href="#Programinfo">1.0 Programinformation</A><br>
+<a href="#Programinfo">1.1 Namnfil</A><br>
+<a href="#StartaReg">1.2 Starta Registreringsprogrammet</A><br>
+<a href="#Starta">1.3 Starta Resultatprogrammet</A><br>
+<a href="#Utveckling">Utveckling</A><br>
+
+
+<A NAME="Programinfo"><h2> 1.0 Programinformation </h2></A>
+
+<p>
+<b>Program som ing�r:</b> <br>Registreringsprogram, Resultatprogram
+<br><br>
+<b>Hur k�rs dom:</b> <br> 
+Registreringsprogrammet �r grafiskt, medan Resultatprogrammet k�rs fr�n terminalen.<br>
+B�da programmen �r jar-filer. (F�r att starta en .jar fil beh�ver Java Runtime Environment vara installerad)<br>
+F�r att starta Registreringsprogrammet r�cker det med att dubbelklicka p� programmets ikon, medan du m�ste g� in i terminalen f�r att kunna �ppna resultatprogrammet. Till Resultatprogrammet kan man antingen manuellt mata in parametrar i terminalf�nstret eller anv�nda sig av en tillh�rande konfigurationsfil d�r man fyller i de parametrar man vill att programmet ska anv�nda n�r det k�rs. Inga av filnamnen f�r inneh�lla bokst�verna �, � eller �. Mer information om detta finns under <a href="#Starta">1.3 Starta Resultatprogrammet</A><br><br>
+<a href="#Topp">�terv�nd till topp</A>
+<br><br>
+
+<A NAME="Programinfo"><h2> 1.1 Namnfil </h2></A>
+Namnfilen m�ste skapas i f�rv�g. I den b�r f�rarnas startnummer, namn och klass finnas med (se exempel nedan)<br>
+</p>
+Exempel p� hur en namnfil b�r se ut:<br>
+</p>
+<pre>
+StartNr; Namn
+SENIORER
+1; Anders Asson
+2; Berit Bsson
+JUNIORER
+3; Carin Csson
+</pre>
+Startnummer som inte f�rekommer i namnfilen fast finns med i start och/eller m�lfil kommer att visas l�ngst ner p� resultatlistan som "Icke existerande startnummer".
+
+
+<A NAME="StartaReg"><h2> 1.2 Starta Registreringsprogrammet </h2></A>
+Starta programmet genom att dubbelklicka p� Main.jar-filen. Programmet ska se ut ungef�r som bild 1.
+<p> Bild 1 - En bild p� registreringsprogrammet</p>
+<img src="pic/ScreenshotRegister.png" alt="GUI" width="600" height="400"/><br>
+
+<br>
+<h2> Enkelstart/Masstart </h2>
+<h1> Enkelstart </h1>
+Parametern Starttype i konfigurationsfilen ska i det h�r fallet vara given som Enkelstart.
+Skriv in startnummret p� f�raren och tryck Registrera f�rare eller tryck enter. Till�tna startnummer �r alla tal st�rre/lika med 0 (men om de inte finns med i namnfilen s� kommer de st� som icke-existerande i resultatfilen). I bild 1 illusteras denna sortens registrering - f�rare 1 och 2 �r registrerade och f�rare 3 �r p�v�g att bli registrerad. <br><br>
+Om man vill spara tiden och skriva in f�rarens startnummer lite senare s� trycker man p� Registrera f�rare utan att skriva in n�got startnummer. D� kommer det upp en dialogruta d�r f�rarens nummer kan skrivas in (se bild 2 nedan), tiden fr�n d� Registrera f�rare-knappen trycktes lagras d� i filen.  <br><br>
+
+<p> Bild 2 - En bild p� registrering i efterhand</p>
+<img src="pic/ScreenshotRegister2.png" alt="GUI" width="600" height="400"/><br>
+<br>
+
+<h1> Masstart </h1>
+Parametern Starttype i konfigurationsfilen ska i det h�r fallet vara given som Masstart.
+Masstart fungerar p� s� s�tt att man ist�llet f�r startnummer anger hur m�nga deltagare som startar och klickar p� Registrera f�rare. Har man d� fyllt i masstart i konfigurationsfilen s� komemr siffran man skrivit in att inneb�ra att det var det antalet f�rare som startade vid den tidpunkten. �ven h�r fungerar det att spara tiden och skriva in antalet f�rare lite senare. Man fyller d� i antalet i dialogrutan som kommer upp.<br><br> 
+
+<h2> Efter f�rdig registrering </h2>
+N�r man har registrerat f�rdigt s� har det skapats en fil som heter Register.txt. Denna b�r d�pas om till f�rslagsvis starttid/maltid, annars kommer filen fyllas p� med fler tider om du startar programmet och registrerar fler f�rare. Observera att man inte f�r anv�nda �, � eller � i n�gra filnamn.
+<br>
+
+<br>
+<hr>
+<A NAME="Starta"><h2> 1.3 Starta Resultatprogrammet </h2></A>
+<p>
+Det finns tv� s�tt att starta resultatprogrammet:<br>
+<li>Inmatning med konfigurationsfil.</li>
+<li>Manuell inmatning av parameter.</li><br>
+
+Resultatfilen skapas av Reultatprogrammet (Om tidigare resultatfiler ska finnas kvar m�ste de d�pas om).<br><br>
+
+<b>1: Inmatning med konfigurationsfil "config.properties"</b><br>
+A. �ppna config.properties filen med en texteditor.<br>
+B. �ndra v�rdena i config.properties till �nskat v�rde enligt exempel1 och spara d�refter.<br>
+C. K�r programmet!
+<br><br>
+Om man k�r programmet utan en konfigurationsfil s� autogenereras det en konfigurationsfil som man beh�ver fylla i innan man startar programmet igen.
+<br>
+
+<pre>
+
+Exempel1: �ndra i en konfig-fil
+
+# Initial variables
+# <"key">=<"value">
+
+#Filnamn plus deras exakta s�kv�g.
+STARTFILE=src/ex/starttider/EXstart1.txt
+STOPFILE=src/ex/stoptider/EXfinish1.txt
+NAMEFILE=src/ex/namnfil/EXnamnfil.txt
+RESULTFILE=ChangeMe.txt
+
+</pre>
+<b> Flera m�lfiler </b><br>
+Vid anv�ndning av konfigurationsfil s� �r det m�jligt att ha flera m�ltidsfiler, dessa skrivs d� in efter STOPFILE i konfigurationsfilen och separeras med ett , . Detta alternativ �r inte m�jligt vid manuell inmatning av parametrar.
+<br><br>
+Exempel2: Flera m�ltidsfiler<br>
+STOPFILE=src/ex/stoptider/EXfinish1.txt, src/ex/stoptider/EXfinish1.txt
+<br><br>
+<br>
+
+<b>2: Manuell inmatning av parameter:</b><br>
+Starta Terminalen och navigera till mappen d�r Resultatprogrammet finns. N�r Resultatprogrammet startas fr�n terminalen beh�ver det �tta parametrar. Namnet p� starttidsfilen, m�ltidsfilen, namnfilen, resultatsfilen, t�vlingsformen, starttyp (Enkelstart eller Masstart), stipulerade tiden i timmar och minuter (skrivs 05.43) som ska �verstigas samt antalet varv som ska visas i resultatfilen.<br>
+T�vlingsformerna best�ms genom att skriva in namnet p� t�vlingsformen (Existerande t�vlingsformer: Varv (maraton �r en sorts varvlopp)).
+<br><br>
+Exempel p� hur man startar sorteringsprogrammet vid enkelstart anv�ndandes manuell inmatning:
+java -jar Enduro.jar starttider.txt maltider.txt namnfil.txt result.txt Varv Enkelstart 03.00 3
+
+<br><br>
+<a href="#Topp">�terv�nd till topp</A>
+
+<br>
+<br>
+<hr>
+
+<A NAME="Utveckling"><h2> Utveckling </h2></A>
+<h2>Implementerade stories</h2>
+
+<li>3 - Enkel resultatlista</li>
+<li>4 - Personuppgifter</li>
+<li>5 - Totaltid</li>
+<li>6 - Felaktiga registreringar</li>
+<li>7 - GUI f�r registrering</li>
+<li>8 - Registrering av tider</li>
+<li>9 - Varvlopp</li>
+<li>10 - Flera skall kunna registrera m�ltider</li>
+<li>11- Enkel Masstart </li>
+<li>12 - M�lg�ng d�r nummerpl�ten inte kan l�sas i f�rv�g</li>
+<li>13 - Hantera klasser</li>
+<li>14 - Anv�ndarmanual</li>
+<li>15 - Hantera felaktiga tidsdata</li>
+<li>16 - Hantera registreringar med otill�tna startnummer</li>
+<li>17 - Variabelt antal uppgifter om förarna</li>
+<li>25 - St�d f�r konfiguration</li>
+<li>31 - Teknisk dokumentation</li>
+<li>E1 - Refaktorisering av Sorteringsprogrammet</li>
+<li>E2 - Refaktorisering av Registreringsprogrammet</li>
+<li>E3 - Refaktorisering av Tidsrepresentaion</li>
+<li>E4 - Release</li>
+<li>E5 - Kund�nskem�l</li>
+
+
+<br><br>
+
+<a href="#Topp">�terv�nd till topp</A>
+
+<br><br><br>
+
 
 </html>
 

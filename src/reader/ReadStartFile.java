@@ -37,10 +37,12 @@ public class ReadStartFile extends FileIO {
 	/**
 	 * Reads a file and add the time and driverID to the race object,
 	 * which contains the database where all information is stored.
+	 * 		This method doesn't support STAGERACE!
 	 * 
 	 * @throws FileNotFoundException
 	 *             If file not found
 	 */
+	
 	public void readFileMassStart() throws FileNotFoundException {
 		if (fileName != null) {
 			File file = new File(fileName);
@@ -61,7 +63,6 @@ public class ReadStartFile extends FileIO {
 				throw new FileNotFoundException();
 			}
 		}
-
 	}
 
 	/**

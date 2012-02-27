@@ -9,7 +9,6 @@ import java.util.TreeMap;
 
 import main.Driver;
 import main.Sorter;
-
 import util.Time;
 
 /**
@@ -29,7 +28,8 @@ public class LapResult extends Result {
 	Time raceTime;
 	String resultFile;
 	private String nonExistingNbr = "Icke existerande startnummer";
-
+	private ArrayList<String> driverAttributes;
+	String sortedFile;
 	/**
 	 * Creates LapResult.
 	 * 
@@ -45,11 +45,14 @@ public class LapResult extends Result {
 	 *            results to
 	 */
 	public LapResult(TreeMap<Integer, Driver> index, int laps,
-			String raceTimeString, String resultFile) {
+			String raceTimeString, String resultFile, String sortedFile, ArrayList<String> driverAttributes) {
 		this.index = index;
 		this.laps = laps;
 		this.raceTime = new Time(raceTimeString + ".00");
 		this.resultFile = resultFile;
+		this.driverAttributes = driverAttributes;
+		this.sortedFile = sortedFile;
+		
 	}
 
 	/**
@@ -64,7 +67,17 @@ public class LapResult extends Result {
 			StringBuilder sb = new StringBuilder();
 			BufferedWriter out = new BufferedWriter(fstream);
 			sb.append("StartNr; Namn; ");
-
+			
+			if(!driverAttributes.isEmpty()){
+				for(int i = 0; i < driverAttributes.size(); i++){
+					if(i < driverAttributes.size()-1){
+						sb.append(driverAttributes.get(i) + "; ");
+					}else{
+						sb.append(driverAttributes.get(i));
+					}
+				}
+			}
+			
 			sb.append("#Varv; ");
 
 			sb.append("Totaltid; ");
@@ -74,6 +87,7 @@ public class LapResult extends Result {
 
 			}
 			sb.append("Start; ");
+			
 
 			for (int i = 0; i < laps - 1; i++) {
 				sb.append("Varvning" + (i + 1) + "; ");
@@ -84,70 +98,48 @@ public class LapResult extends Result {
 			Driver tDriver;
 
 			mapOfDiffRaceClasses = new HashMap<String, TreeMap<Integer, Driver>>();
-
 			for (Integer i : index.keySet()) {
 				tDriver = index.get(i);
 
-				if (tDriver.getName() == null) { //
-					tDriver.addClass(nonExistingNbr); //
+				if (tDriver.getName() == null) { 
+					tDriver.addClass(nonExistingNbr); 
 
 				}
-				String classes = tDriver.getClasses(); //
 
-				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i, // Lägger
-						// in
-						// en
-						// treemap
-						tDriver)); // (treemap innehåller idnummer mappade till
-				// respektive förare)
-			} // i en klass
+				String classes = tDriver.getRaceClass();
 
-			ArrayList<Driver> unsortedListOfDriversInAClass; // arraylist som
-			// används för
-			// att plocka ut
-			// alla förare
-			// i en viss
-			// klass för
-			// att skickas
-			// in till
-			// sortern.
+				
+				mapOfDiffRaceClasses.put(classes, addTreeMap(classes, i, tDriver)); 
+			} 
+			
+			
+			ArrayList<Driver> unsortedListOfDriversInAClass; 
 			ArrayList<Driver> sortedListOfDriversInAClass;
 			List<Driver> nonExistingNbrList = null;
-
 			for (String className : mapOfDiffRaceClasses.keySet()) {
-				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses
-						.get(className);
 
-				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm
-						.values());
-				sortedListOfDriversInAClass = sorter
-						.lapSort(unsortedListOfDriversInAClass); // //Nu har vi
-				// en
-				// sorterad
-				// arraylist
-				// med alla
-				// förarna
-				// i en
-				// klass
+				TreeMap<Integer, Driver> tm = mapOfDiffRaceClasses.get(className);
+				unsortedListOfDriversInAClass = new ArrayList<Driver>(tm.values());	
+				
+
+				sortedListOfDriversInAClass = sorter.lapSort(unsortedListOfDriversInAClass, raceTime); 
+				
+				// Nu har vi en sorterad arraylist med alla förarna i en klass
+
 
 				if (className.equals(nonExistingNbr)) {
-					nonExistingNbrList = sortedListOfDriversInAClass;
+					nonExistingNbrList = unsortedListOfDriversInAClass;
 
 				} else {
-					out.write(className + "\n"); // Skriver ut klassnamn
-					out.write(sb.toString()); // Skriver ut "linjal"
-					for (Driver driver : sortedListOfDriversInAClass) { // Skriver
-						// varje
-						// person
-						// som
-						// hör
-						// till
-						// klassen.
-						out.write(checkError(driver.getId(),
-								driver.startTime(), driver //
-										.finishTime()));
+
+					out.write(className + "\n"); 
+					out.write(sb.toString());
+					for (Integer id : tm.keySet()) { 
+						out.write(checkError(id,tm.get(id).startTime(), tm.get(id).finishTime()));
+
 					}
 				}
+				
 			}
 
 			if (nonExistingNbrList != null) {
@@ -160,14 +152,19 @@ public class LapResult extends Result {
 							driver.finishTime()));
 				}
 			}
-			// Close the output stream
 			out.close();
+			
 
 		} catch (Exception e) {
-			System.err.println("Error: " + e.getMessage());
+			System.err.println("Error: Misslyckades med att skriva resultat filen");
+
 			System.exit(1);
 		}
-
+		
+		
+			SortedFile sorted = new SortedFile(mapOfDiffRaceClasses, laps, raceTime, sortedFile);
+			sorted.writeToFile();
+		
 	}
 
 	private TreeMap<Integer, Driver> addTreeMap(String className, Integer i,
@@ -197,14 +194,18 @@ public class LapResult extends Result {
 	 *         error-notations if there are any
 	 */
 	@Override
-	public String checkError(int currentIndex, List<Time> startTime,
-			List<Time> finishTime) {
+	public String checkError(int currentIndex, List<Time> startTime,List<Time> finishTime) {
 		StringBuilder sb = new StringBuilder();
 		String totalTimeCheck = "";
 		String totalLapCheck = "";
 		sb.append(currentIndex + "; ");
 		checkName(sb, index.get(currentIndex).getName());
-
+		ArrayList<String> attributes = index.get(currentIndex).getAttributes();
+		for(int i = 0; i < attributes.size(); i++){
+			sb.append(attributes.get(i) + "; ");
+		}
+		 sb.toString();
+	
 		sb.append(index.get(currentIndex).getNumberOfLaps() + "; ");
 
 		totalTimeCheck = checkTotaltime(startTime, finishTime, sb);
@@ -213,7 +214,7 @@ public class LapResult extends Result {
 
 		checkStartTime(startTime, sb);
 
-		// Totaltid
+	
 		Time timeTemp = new Time(0);
 		if (finishTime.size() != 0 && startTime.size() != 0) {
 			timeTemp = new Time(startTime.get(0).timeDiff(
@@ -221,31 +222,27 @@ public class LapResult extends Result {
 		}
 
 		if (finishTime.size() != 0) {
-			int check = finishTime.size() - 1; // Check = antalet måltider i
-												// finishTimeListan i respektive
-												// Driver
+			int check = finishTime.size() - 1; 
 			if (check > laps - 1) {
 				check = laps - 1;
 			}
 			for (int e = 0; e < check; e++) {
 				sb.append(finishTime.get(e) + "; ");
-			}// Kontrollera om totaltid verkligen var en totaltid, annars gör
-				// det till en varvtid.
+			}
 			if ((!timeTemp.greaterThan(raceTime))
 					&& !timeTemp.equals(new Time(0)) && check <= laps) {
 				sb.append(finishTime.get(finishTime.size() - 1) + "; ");
 
 			}
-		}// Om semikolon saknas, pga för få varv, skriv ut nya semikolon.
+		}
 		for (int b = finishTime.size() - 1; b < laps - 1; b++) {
 			sb.append("; ");
-		}//
+		}
 
-		if (timeTemp.greaterThan(raceTime)) {// Lägg till sluttid, om det är
-												// sluttid
+		if (timeTemp.greaterThan(raceTime)) {
 			sb.append(finishTime.get(finishTime.size() - 1));
 
-		} else {// Om sluttid ej finns, skriv "Slut?".
+		} else {
 			sb.append("Slut?");
 		}
 
@@ -253,7 +250,6 @@ public class LapResult extends Result {
 		checkIfManyStartTime(startTime, sb);
 		sb.append(totalTimeCheck);
 		sb.append("\n");
-		System.out.println(sb.toString());
 		return sb.toString();
 	}
 

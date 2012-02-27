@@ -38,17 +38,17 @@ public class Register {
 	private void writeToFile(String name, String hours, String minutes,
 			String seconds) {
 		try {
-			// Create file
+			
 			FileWriter fstream = new FileWriter("Register.txt", true);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(name + "; " + hours + "." + minutes + "." + seconds
 					+ "\n");
 
-			// Close the output stream
+			
 			out.close();
 
-		} catch (Exception e) {// Catch exception if any
-			System.err.println("Error: " + e.getMessage());
+		} catch (Exception e) {
+			System.err.println("Error: Misslyckade med att skriva till fil");
 			System.exit(1);
 		}
 	}
