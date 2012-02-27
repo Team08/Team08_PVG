@@ -10,8 +10,9 @@ import java.io.OutputStream;
 import java.util.Properties;
 
 /**
- * This class can verify keys in a properties files that is pre defined in this class. It can also generates a config.properties file with some default keys and values
- * (This class is used by the Enduro) 
+ * This class can verify keys in a properties files that is pre defined in this class. 
+ * It can also generate a config.properties file with some default keys and values
+ * (This class is used by Enduro) 
  * 
  * @author Team08
  *
@@ -74,6 +75,9 @@ public class GenerateConfig {
 		        out.write("#Vad är den minsta tillåtna totaltid som föraren behöver uppnå för att bli kvalificerad? (format = \"hh.mm\" ) Ex. Om minsta giltiga tid är 1 timme och 30 minuter så ange, \"01:30\"" + "\n");
 		        out.write("RACETIME=" + "\n\n");
 		        
+		        out.write("#Vad �r den minsta till�tna varvtiden? (hh.mm) " + "\n");
+		        out.write("LAPTIME=" + "\n\n");
+		        
 		        out.write("#Hur många varv ska käras? Ex. Om vi ska springa 10 varv så anger vi \"10\"" + "\n");
 		        out.write("LAPS=" + "\n\n");
 		        
@@ -92,7 +96,10 @@ public class GenerateConfig {
 
 	}
 
-	// DESSA NYCKLAR �R OBLIGATORISKA
+	/**
+	 * Checks that the mandatory keys have values
+	 * @return
+	 */
 	public boolean checkKey(){
 		boolean toggle = true;
 	

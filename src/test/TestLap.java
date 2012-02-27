@@ -3,7 +3,6 @@ package test;
 import static org.junit.Assert.*;
 import main.Driver;
 import util.Time;
-import util.Time2;
 
 import org.junit.After;
 import org.junit.Before;

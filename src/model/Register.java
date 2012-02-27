@@ -23,10 +23,10 @@ public class Register {
 		
 	}
 	/**
-	 * Writes registered time and starnumber to file
+	 * Writes registered time and start number to file
 	 * 
 	 * @param startnumber
-	 *            The registered startnumber
+	 *            The registered start number
 	 * @param hours
 	 *            The registered hours
 	 * @param minutes
